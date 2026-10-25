@@ -412,6 +412,7 @@ P/(1-P) = odds        ln(P/(1-P)) = log-odds (logit)</div>
       <tr><td>Train score high, test low</td><td>Overfitting. Simplify the model, add data, reduce features, regularise, cross-validate.</td></tr>
       <tr><td>Features on different scales</td><td>Min-max or z-score, fitted on training data only. Essential for KNN, SVM, neural nets, PCA.</td></tr>
       <tr><td>Hand calculation with a table</td><td>Naive Bayes: priors x likelihoods per class, pick the largest, normalise if asked. Laplace if a count is 0.</td></tr>
+      <tr><td>"Is the independence assumption realistic?"</td><td>Say it is <b>conditional independence given the class</b>, not independence in general. Usually not realistic: name the link (for example a worn bearing raises both heat and noise). Result: probabilities are overconfident, but the ranking is often still correct.</td></tr>
       <tr><td>Many correlated features</td><td>Dimensionality reduction (PCA unsupervised, LDA supervised).</td></tr>
     </table>
     <div class="formula" style="margin-top:10px">Recall = TP/(TP+FN)   Precision = TP/(TP+FP)   Specificity = TN/(TN+FP)

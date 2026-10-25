@@ -1,0 +1,452 @@
+<title>PRS Day 2 Study Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column, one diagram per concept, plain-language text first, exam angle last in each section */
+:root {
+  --bg: #f6f8fa; --fg: #1b2430; --muted: #5b6776; --card: #ffffff; --line: #d7dee6;
+  --a: #1f6feb; --a-soft: #e3eefc; --b: #d9660b; --b-soft: #fdeede;
+  --ok: #1a7f4b; --ok-soft: #e2f4ea; --warn: #b42318; --warn-soft: #fdecea;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; }
+
+body { background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body);
+  padding-block: 24px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: 2rem; } h2 { font-size: 1.45rem; padding-top: 12px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.1rem; margin-top: 8px; }
+p { margin: 0; } ul, ol { margin: 0; padding-left: 1.2em; } li { margin: 4px 0; }
+code, .mono { font-family: var(--f-mono); font-size: .9em; }
+code { background: var(--a-soft); padding: 1px 5px; border-radius: 4px; }
+section { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+.eyebrow { font: 500 .75rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+figcaption { color: var(--muted); font-size: .9rem; }
+svg { max-width: 100%; height: auto; color: var(--fg); }
+svg text { fill: currentColor; font: 12px var(--f-body); }
+svg .small { font-size: 11px; fill: var(--muted); }
+svg .bold { font-weight: 600; }
+svg .ax { stroke: currentColor; stroke-width: 1.2; fill: none; }
+svg .dash { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 5 4; fill: none; }
+svg .ca { fill: var(--a); } svg .cb { fill: var(--b); }
+svg .la { stroke: var(--a); stroke-width: 2.4; fill: none; } svg .lb { stroke: var(--b); stroke-width: 2.4; fill: none; }
+svg .lk { stroke: var(--ok); stroke-width: 2.4; fill: none; }
+svg .box { fill: var(--card); stroke: currentColor; stroke-width: 1.2; }
+svg .leafy { fill: var(--ok-soft); stroke: var(--ok); stroke-width: 1.2; }
+svg .leafn { fill: var(--warn-soft); stroke: var(--warn); stroke-width: 1.2; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+.say { background: var(--a-soft); border-radius: 8px; padding: 12px 16px; }
+.say b, .exam b, .trap b { font-family: var(--f-mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.exam { background: var(--ok-soft); border-radius: 8px; padding: 12px 16px; }
+.trap { background: var(--warn-soft); border-radius: 8px; padding: 12px 16px; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--a-soft); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.formula { font-family: var(--f-mono); font-size: .9rem; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; overflow-x: auto; white-space: pre; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+summary { cursor: pointer; font-weight: 600; }
+summary:focus-visible { outline: 2px solid var(--a); outline-offset: 2px; }
+details[open] summary { margin-bottom: 8px; }
+.sheet { border: 2px solid var(--a); border-radius: 8px; padding: 14px 16px; background: var(--card); }
+</style>
+
+<main>
+<header>
+  <div class="eyebrow">ISY5002 Pattern Recognition Systems · Day 2</div>
+  <h1>Day 2: Decision trees, neural networks and support vector machines</h1>
+  <p class="lede">Three more supervised models. Together with Day 1 they cover most of Question 1 in the sample paper: reading a tree (1a), comparing an SVM and a neural network from confusion matrices (1b), and the ensembles that build on trees (1c, later). Each model gets a plain explanation, a diagram, and an exam angle.</p>
+</header>
+
+<section>
+  <h2>1. Decision trees</h2>
+  <p>A decision tree is a flow chart of yes/no questions. You start at the top and answer one question about your data at each step until you land on a leaf that holds the prediction.</p>
+  <div class="scroll"><table>
+    <tr><th>Part</th><th>What it is</th></tr>
+    <tr><td>Internal node</td><td>a test on one feature (for example "Outlook = ?")</td></tr>
+    <tr><td>Branch</td><td>one outcome of the test</td></tr>
+    <tr><td>Leaf</td><td>the predicted class</td></tr>
+  </table></div>
+  <figure>
+    <svg viewBox="0 0 380 250" width="460" role="img" aria-label="Decision tree for the Play Tennis data: Outlook at the root; sunny goes to a Humidity test, overcast is Yes, rainy goes to a Windy test">
+      <rect class="box" x="140" y="10" width="100" height="32" rx="6"/><text x="190" y="31" text-anchor="middle" class="bold">Outlook?</text>
+      <path class="ax" d="M165 42 L70 92"/><text x="85" y="62" class="small">sunny</text>
+      <path class="ax" d="M190 42 L190 180"/><text x="196" y="130" class="small">overcast</text>
+      <path class="ax" d="M215 42 L310 92"/><text x="278" y="62" class="small">rainy</text>
+      <rect class="box" x="20" y="92" width="100" height="32" rx="6"/><text x="70" y="113" text-anchor="middle" class="bold">Humidity?</text>
+      <rect class="box" x="260" y="92" width="100" height="32" rx="6"/><text x="310" y="113" text-anchor="middle" class="bold">Windy?</text>
+      <path class="ax" d="M45 124 L25 180"/><text x="2" y="150" class="small">high</text>
+      <path class="ax" d="M95 124 L115 180"/><text x="108" y="150" class="small">normal</text>
+      <path class="ax" d="M285 124 L265 180"/><text x="240" y="150" class="small">false</text>
+      <path class="ax" d="M335 124 L355 180"/><text x="350" y="150" class="small">true</text>
+      <rect class="leafn" x="5" y="180" width="60" height="30" rx="6"/><text x="35" y="199" text-anchor="middle" class="bold">No</text>
+      <rect class="leafy" x="90" y="180" width="50" height="30" rx="6"/><text x="115" y="199" text-anchor="middle" class="bold">Yes</text>
+      <rect class="leafy" x="165" y="180" width="50" height="30" rx="6"/><text x="190" y="199" text-anchor="middle" class="bold">Yes</text>
+      <rect class="leafy" x="240" y="180" width="50" height="30" rx="6"/><text x="265" y="199" text-anchor="middle" class="bold">Yes</text>
+      <rect class="leafn" x="330" y="180" width="50" height="30" rx="6"/><text x="355" y="199" text-anchor="middle" class="bold">No</text>
+      <text x="8" y="236" class="small">Sunny + high humidity → No. Overcast → always Yes. Rainy + windy → No.</text>
+    </svg>
+    <figcaption>The finished tree for the 14-day "play tennis?" data in the notes. A new day is classified by following the matching branches to a leaf.</figcaption>
+  </figure>
+
+  <h3>1.1 How the tree decides which question to ask first</h3>
+  <p>Good questions split the data into groups that are as <b>pure</b> as possible (mostly one class). The tree is built top-down: pick the best question, split, then repeat inside each group. The notes use three ways to score a question.</p>
+
+  <h3>Entropy: a number for "how mixed is this group?"</h3>
+  <figure>
+    <svg viewBox="0 0 340 240" width="400" role="img" aria-label="Entropy of a two-class group plotted against the share of one class: zero at 0 and 1, highest at 0.5">
+      <line class="ax" x1="40" y1="20" x2="40" y2="190"/><line class="ax" x1="40" y1="190" x2="310" y2="190"/>
+      <polyline class="lb" points="40,190 66,115 92,74.5 118,49 144,34.6 170,30 196,34.6 222,49 248,74.5 274,115 300,190"/>
+      <line class="dash" x1="170" y1="30" x2="170" y2="190"/>
+      <text x="26" y="34" class="small" text-anchor="end">1</text><text x="26" y="194" class="small" text-anchor="end">0</text>
+      <text x="40" y="208" class="small" text-anchor="middle">0</text><text x="170" y="208" class="small" text-anchor="middle">0.5</text><text x="300" y="208" class="small" text-anchor="middle">1</text>
+      <text x="170" y="228" class="small" text-anchor="middle">share of "Yes" in the group (p)</text>
+      <text x="48" y="16" class="small">entropy</text>
+      <text x="176" y="62" class="bold" style="fill:var(--b)">50/50 mix = maximum</text>
+      <text x="46" y="180" class="small">pure</text><text x="286" y="180" class="small">pure</text>
+    </svg>
+    <figcaption>A pure group (all Yes or all No) has entropy 0. A perfect 50/50 group has entropy 1. Lower entropy means less uncertainty.</figcaption>
+  </figure>
+  <div class="formula">Entropy  E(S) = − Σ p_c · log2(p_c)          (sum over the classes c)
+Two classes:   E = − p+ · log2(p+) − p− · log2(p−)</div>
+
+  <h3>Information gain: how much does a question reduce the mess?</h3>
+  <div class="formula">Gain(S, A) = E(S) − Σ ( |S_v| / |S| ) · E(S_v)
+             before        weighted entropy after splitting on A</div>
+  <p>The attribute with the <b>largest gain</b> goes first. Here it is, step by step, for the notes' weather data (9 Yes, 5 No):</p>
+  <ol>
+    <li><b>Entropy before:</b> p(Yes) = 9/14, p(No) = 5/14. E = −(9/14)·log2(9/14) − (5/14)·log2(5/14) = <b>0.940</b>.</li>
+    <li><b>Split on Outlook:</b> sunny has 5 days (2 Yes, 3 No), entropy 0.971. Overcast has 4 days (4 Yes, 0 No), entropy 0. Rainy has 5 days (3 Yes, 2 No), entropy 0.971.</li>
+    <li><b>Weighted entropy after:</b> (5/14)·0.971 + (4/14)·0 + (5/14)·0.971 = <b>0.693</b>.</li>
+    <li><b>Gain = 0.940 − 0.693 = 0.247.</b></li>
+  </ol>
+  <div class="scroll"><table>
+    <tr><th>Attribute</th><th class="n">Gain</th></tr>
+    <tr><td><b>Outlook</b></td><td class="n"><b>0.247 (largest, becomes the root)</b></td></tr>
+    <tr><td>Humidity</td><td class="n">0.152</td></tr>
+    <tr><td>Windy</td><td class="n">0.048</td></tr>
+    <tr><td>Temperature</td><td class="n">0.029</td></tr>
+  </table></div>
+  <p>Then the tree repeats the process inside each branch. Under "sunny", Humidity has the largest gain (0.970), which is why it appears there. Under "rainy" the split is Windy.</p>
+
+  <h3>Two refinements</h3>
+  <div class="scroll"><table>
+    <tr><th>Problem or variant</th><th>What happens</th><th>Fix or alternative</th></tr>
+    <tr><td>Information gain favours attributes with many values (extreme case: an ID code that splits into 14 pure single-row leaves)</td><td>Gain looks perfect but the tree is useless on new data (overfitting).</td><td><b>Gain ratio</b> (C4.5) divides gain by the "intrinsic information" of the split, which punishes many small branches.</td></tr>
+    <tr><td>Another purity score</td><td>Gini = 1 − Σ p_c². Pure group = 0. The split with the <b>smallest</b> weighted Gini wins.</td><td><b>CART</b> uses Gini and makes binary splits only.</td></tr>
+  </table></div>
+  <p><b>Continuous features</b> (like PageValue): sort the values, try the midpoint between each adjacent pair as a cut, and keep the cut with the highest gain. The result is a test like "PageValue &lt; 1".</p>
+
+  <h3>1.2 Overfitting and pruning</h3>
+  <p>If you let a tree grow until every leaf is pure, it memorises the noise. Two cures:</p>
+  <ul>
+    <li><b>Pre-pruning (early stopping):</b> stop growing when a rule is hit: <code>max_depth</code>, <code>min_samples_split</code> (smallest group still allowed to split), <code>min_samples_leaf</code> (smallest allowed leaf).</li>
+    <li><b>Post-pruning:</b> grow the full tree, then cut back branches that don't help on <b>validation</b> data.</li>
+  </ul>
+  <div class="scroll"><table>
+    <tr><th>Pros</th><th>Cons</th></tr>
+    <tr><td>Easy to read and explain. Little data preparation (no scaling needed). Shows which features matter most.</td><td>Greedy, so not guaranteed to be the best tree. Unstable (small data changes can change the tree). Overfits when deep. Weaker with many classes and small data.</td></tr>
+  </table></div>
+
+  <h3>1.3 Reading a tree: the sample paper's Q1a</h3>
+  <figure>
+    <svg viewBox="0 0 380 270" width="460" role="img" aria-label="Sample exam tree: root FALSE 84 percent; if PageValue below 1 go to leaf FALSE with 96 percent no-purchase covering 78 percent of sessions; otherwise test BounceRate, giving a FALSE leaf at 55 percent for 12 percent of sessions or a TRUE leaf at 74 percent purchase for 10 percent of sessions">
+      <rect class="box" x="130" y="8" width="120" height="44" rx="6"/>
+      <text x="190" y="26" text-anchor="middle" class="bold">All sessions</text><text x="190" y="43" text-anchor="middle" class="small">84% no buy · 16% buy</text>
+      <path class="ax" d="M150 52 L70 120"/><text x="62" y="82" class="small">PageValue &lt; 1</text>
+      <path class="ax" d="M230 52 L290 100"/><text x="262" y="68" class="small">PageValue ≥ 1</text>
+      <rect class="leafn" x="10" y="120" width="120" height="50" rx="6"/>
+      <text x="70" y="140" text-anchor="middle" class="bold">No buy</text><text x="70" y="156" text-anchor="middle" class="small">96% no · 78% of sessions</text>
+      <rect class="box" x="230" y="100" width="120" height="44" rx="6"/>
+      <text x="290" y="118" text-anchor="middle" class="bold">Mixed group</text><text x="290" y="135" text-anchor="middle" class="small">42% no · 58% buy</text>
+      <path class="ax" d="M260 144 L210 190"/><text x="150" y="172" class="small">BounceRate ≥ 0.000081</text>
+      <path class="ax" d="M320 144 L335 190"/><text x="300" y="172" class="small">BounceRate &lt; 0.000081</text>
+      <rect class="leafn" x="150" y="190" width="120" height="50" rx="6"/>
+      <text x="210" y="210" text-anchor="middle" class="bold">No buy</text><text x="210" y="226" text-anchor="middle" class="small">55% no · 12% of sessions</text>
+      <rect class="leafy" x="280" y="190" width="95" height="50" rx="6"/>
+      <text x="327" y="210" text-anchor="middle" class="bold">BUY</text><text x="327" y="226" text-anchor="middle" class="small">74% buy · 10%</text>
+    </svg>
+    <figcaption>Redrawn from the sample paper. Only one leaf predicts "buy", and it covers just 10% of sessions.</figcaption>
+  </figure>
+  <p><b>What it tells you.</b> Buyers are sessions where visited pages have an economic value of at least 1 (PageValue) <i>and</i> an extremely low bounce rate. Sessions with low PageValue (78% of all) are almost never purchases.</p>
+  <p><b>Link to the business.</b> The bookstore wants to target likely buyers with time-limited coupons. These two rules give a simple, explainable way to pick whom to target, and PageValue says which kind of browsing behaviour precedes a purchase.</p>
+  <p><b>A problem with the model.</b> It is built on imbalanced data, and only 10% of sessions are predicted as buyers while 16% actually buy, so it misses buyers. Also the second leaf is only 74% pure, and the tree uses just two features. Fix: rebalance the training data (SMOTE or class weights), tune depth, or move to an ensemble.</p>
+  <p><b>How to judge the improved model.</b> Evaluate on the untouched test set with metrics tied to the business: recall and precision of the buyer class, or better, the extra revenue minus coupon cost from targeting the predicted buyers.</p>
+  <div class="exam"><b>Exam angle</b>For a tree question, answer in four moves: read the path to the "buy" leaf, state the business meaning, name one flaw (imbalance, shallow, overfit), and say how you would measure the improvement on held-out data.</div>
+  <details><summary>Check yourself: why does information gain pick Outlook for the weather data?</summary>
+    <p>Splitting on Outlook gives the biggest reduction in entropy (0.940 down to 0.693, gain 0.247). One branch (overcast) becomes perfectly pure, and the other two are less mixed than the whole.</p></details>
+</section>
+
+<section>
+  <h2>2. Neural networks (NN)</h2>
+  <p>A neural network is built from many tiny units called <b>neurons</b>, loosely inspired by the brain. It learns patterns by adjusting numbers (weights) until its answers match the labels.</p>
+
+  <h3>2.1 One neuron</h3>
+  <figure>
+    <svg viewBox="0 0 400 190" width="460" role="img" aria-label="One artificial neuron: three inputs are multiplied by weights, summed with a bias, and passed through an activation function to give the output">
+      <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+      <circle class="box" cx="30" cy="40" r="16"/><text x="30" y="44" text-anchor="middle" class="bold">x1</text>
+      <circle class="box" cx="30" cy="95" r="16"/><text x="30" y="99" text-anchor="middle" class="bold">x2</text>
+      <circle class="box" cx="30" cy="150" r="16"/><text x="30" y="154" text-anchor="middle" class="bold">x3</text>
+      <path class="ax" d="M46 42 L148 85" marker-end="url(#ar2)"/><text x="82" y="54" class="small">w1</text>
+      <path class="ax" d="M46 95 L148 95" marker-end="url(#ar2)"/><text x="82" y="88" class="small">w2</text>
+      <path class="ax" d="M46 148 L148 105" marker-end="url(#ar2)"/><text x="82" y="140" class="small">w3</text>
+      <circle class="box" cx="170" cy="95" r="22"/><text x="170" y="100" text-anchor="middle" class="bold">Σ + b</text>
+      <path class="ax" d="M192 95 L240 95" marker-end="url(#ar2)"/><text x="196" y="86" class="small">net</text>
+      <rect class="box" x="242" y="76" width="56" height="38" rx="6"/><text x="270" y="100" text-anchor="middle" class="bold">f( )</text>
+      <path class="ax" d="M298 95 L350 95" marker-end="url(#ar2)"/><text x="352" y="99" class="bold">output</text>
+      <text x="100" y="182" class="small">net = x1·w1 + x2·w2 + x3·w3 + b      output = f(net)</text>
+    </svg>
+    <figcaption>Inputs are multiplied by weights and added up (with a bias b). The activation function f then squashes or bends the result.</figcaption>
+  </figure>
+  <p>This is the same maths as logistic regression, with the sigmoid as f. A network is many such units stacked in layers.</p>
+
+  <h3>2.2 Activation functions: why the bend matters</h3>
+  <p>Without f, stacking layers would still only give a straight-line model. The bend lets the network learn curved boundaries.</p>
+  <figure>
+    <svg viewBox="0 0 360 230" width="420" role="img" aria-label="Three activation functions on one chart: sigmoid rises from 0 to 1, tanh rises from -1 to 1, and ReLU is flat at 0 then rises linearly">
+      <line class="ax" x1="40" y1="20" x2="40" y2="200"/><line class="ax" x1="40" y1="110" x2="330" y2="110"/>
+      <polyline class="la" points="40,108.7 75,106.7 110,101.7 145,91.2 162.5,83.5 180,75 197.5,66.5 215,58.8 250,48.3 285,43.3 320,41.3"/>
+      <polyline class="lb" points="40,180 75,179.7 110,177.5 145,163.3 162.5,142.3 180,110 197.5,77.7 215,56.7 250,42.5 285,40.3 320,40"/>
+      <polyline class="lk" points="40,110 180,110 232.5,5"/>
+      <text x="150" y="30" class="bold" style="fill:var(--a)">sigmoid: 0 to 1</text>
+      <text x="236" y="142" class="bold" style="fill:var(--b)">tanh: −1 to 1</text>
+      <text x="238" y="14" class="bold" style="fill:var(--ok)">ReLU</text>
+      <text x="326" y="124" class="small">input</text>
+    </svg>
+    <figcaption>Sigmoid and tanh squash. ReLU is zero for negative inputs and equal to the input for positive ones. The curves are drawn over an input range of −4 to 4.</figcaption>
+  </figure>
+  <div class="scroll"><table>
+    <tr><th>Function</th><th>Formula</th><th>Typical use</th></tr>
+    <tr><td>Sigmoid</td><td>1 / (1 + e<sup>−x</sup>)</td><td>output layer for a <b>two-class</b> problem (a probability)</td></tr>
+    <tr><td>Tanh</td><td>(e<sup>x</sup> − e<sup>−x</sup>) / (e<sup>x</sup> + e<sup>−x</sup>)</td><td>hidden layers in older networks</td></tr>
+    <tr><td>ReLU</td><td>max(0, x)</td><td>hidden layers in modern and deep networks</td></tr>
+    <tr><td>Softmax</td><td>e<sup>x_i</sup> / Σ e<sup>x_j</sup></td><td>output layer for <b>many classes</b> (probabilities that sum to 1)</td></tr>
+  </table></div>
+  <p>Softmax is not on the Day 2 slides but you will need it for the CNN question (Q2a asks for the classifier's activation function).</p>
+
+  <h3>2.3 The multilayer perceptron (MLP)</h3>
+  <figure>
+    <svg viewBox="0 0 380 230" width="440" role="img" aria-label="A multilayer perceptron with 3 input nodes, 4 hidden nodes and 2 output nodes; forward signal flows left to right and error correction flows right to left">
+      <g class="ax"><path d="M60 50 L170 40 M60 50 L170 85 M60 50 L170 130 M60 50 L170 175 M60 105 L170 40 M60 105 L170 85 M60 105 L170 130 M60 105 L170 175 M60 160 L170 40 M60 160 L170 85 M60 160 L170 130 M60 160 L170 175 M170 40 L300 80 M170 40 L300 140 M170 85 L300 80 M170 85 L300 140 M170 130 L300 80 M170 130 L300 140 M170 175 L300 80 M170 175 L300 140" style="stroke-width:.8;opacity:.55"/></g>
+      <g class="box"><circle cx="60" cy="50" r="14"/><circle cx="60" cy="105" r="14"/><circle cx="60" cy="160" r="14"/>
+      <circle cx="170" cy="40" r="14"/><circle cx="170" cy="85" r="14"/><circle cx="170" cy="130" r="14"/><circle cx="170" cy="175" r="14"/>
+      <circle cx="300" cy="80" r="14"/><circle cx="300" cy="140" r="14"/></g>
+      <text x="60" y="206" text-anchor="middle" class="bold">Input layer</text><text x="60" y="220" text-anchor="middle" class="small">one node per feature</text>
+      <text x="170" y="206" text-anchor="middle" class="bold">Hidden layer</text><text x="170" y="220" text-anchor="middle" class="small">learns combinations</text>
+      <text x="300" y="206" text-anchor="middle" class="bold">Output layer</text><text x="300" y="220" text-anchor="middle" class="small">one node per class</text>
+      <text x="115" y="14" class="small" style="fill:var(--ok)">forward: signals →</text>
+      <text x="205" y="14" class="small" style="fill:var(--warn)">← backward: error corrections</text>
+    </svg>
+    <figcaption>Every node connects to every node in the next layer, and every line carries a weight. In the sample paper, "one hidden layer with 10 hidden nodes" means exactly this shape with 10 nodes in the middle column.</figcaption>
+  </figure>
+  <ul>
+    <li>Nodes in the first hidden layer each draw a straight cut through the feature space. The next layer combines those cuts into <b>curved, complex regions</b>.</li>
+    <li>More nodes and layers give more power, but need more data and training time, and overfit more easily.</li>
+  </ul>
+
+  <h3>2.4 How it learns: backpropagation and gradient descent</h3>
+  <p>Training is a loop: guess, measure the error, nudge the weights to reduce it, repeat.</p>
+  <ol>
+    <li>Start with small random weights.</li>
+    <li>Push a training example forward and get an output.</li>
+    <li>Compute the error against the true label with a <b>loss function</b> (mean squared error for numbers, cross-entropy for classes).</li>
+    <li>Send the error backward through the layers (<b>backpropagation</b>) to find how much each weight contributed.</li>
+    <li>Adjust every weight a little in the direction that reduces the error (<b>gradient descent</b>).</li>
+    <li>Repeat until the error is small enough or you hit a stopping rule.</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 340 230" width="400" role="img" aria-label="Error plotted against one weight as a bowl-shaped curve; three numbered steps walk down the slope to the minimum">
+      <line class="ax" x1="40" y1="20" x2="40" y2="195"/><line class="ax" x1="40" y1="195" x2="320" y2="195"/>
+      <polyline class="lb" points="40,30 63,79 87,119 110,150 133,172 157,186 180,190 203,186 227,172 250,150 273,119 297,79 320,30"/>
+      <circle class="ca" cx="63" cy="79" r="5"/><circle class="ca" cx="115" cy="155" r="5"/><circle class="ca" cx="152" cy="184" r="5"/>
+      <text x="70" y="76" class="small">1</text><text x="122" y="152" class="small">2</text><text x="158" y="180" class="small">3</text>
+      <text x="164" y="212" class="small">minimum error</text>
+      <text x="44" y="14" class="small">error</text><text x="250" y="212" class="small">weight →</text>
+    </svg>
+    <figcaption>Each step moves the weight downhill. The <b>learning rate</b> sets the step size: too big overshoots, too small is slow. A momentum term helps push through shallow dips, because the surface can have local minima to get stuck in.</figcaption>
+  </figure>
+
+  <h3>2.5 Overtraining and early stopping</h3>
+  <figure>
+    <svg viewBox="0 0 340 230" width="400" role="img" aria-label="Training error keeps falling with more training cycles while validation error falls then rises; the stop point is at the validation minimum">
+      <line class="ax" x1="40" y1="20" x2="40" y2="195"/><line class="ax" x1="40" y1="195" x2="320" y2="195"/>
+      <path class="la" d="M40 40 C110 120 200 165 320 182"/>
+      <path class="lb" d="M40 48 C100 112 150 140 185 140 C230 140 275 120 320 78"/>
+      <line class="dash" x1="185" y1="30" x2="185" y2="195"/><text x="190" y="44" class="small">stop here</text>
+      <text x="230" y="170" class="bold" style="fill:var(--a)">training error</text><text x="244" y="102" class="bold" style="fill:var(--b)">validation error</text>
+      <text x="44" y="14" class="small">error</text><text x="210" y="212" class="small">training cycles →</text>
+    </svg>
+    <figcaption>After a point the network starts to memorise the training set. Stop at the minimum of the validation error.</figcaption>
+  </figure>
+  <ul>
+    <li><b>Prepare the data:</b> scale inputs (min-max or z-score) and encode categories. Networks are sensitive to feature scale.</li>
+    <li><b>Hyperparameters to tune:</b> number of hidden layers and nodes, learning rate, number of training cycles, batch size, dropout rate.</li>
+    <li><b>Strengths:</b> very flexible, no assumptions about the data, handles numeric and categorical targets, very accurate.</li>
+    <li><b>Weaknesses:</b> needs lots of data, slow to train, a "black box" that is hard to explain.</li>
+  </ul>
+  <div class="exam"><b>Exam angle</b>Q1b says "one hidden layer with 10 hidden nodes". A typical follow-up asks you to say the network may have been trained on unscaled features, or overfitted, or lacks interpretability. Always tie the model to the business: can the bookstore explain why a customer was targeted?</div>
+</section>
+
+<section>
+  <h2>3. Support vector machines (SVM)</h2>
+  <p>An SVM separates two classes with a boundary, and chooses the boundary that leaves the <b>widest possible gap</b> between the classes. A wide gap means the model is less sensitive to small changes and tends to generalise better.</p>
+  <figure>
+    <svg viewBox="0 0 340 230" width="440" role="img" aria-label="Two classes separated by a decision line with parallel margin lines touching the closest points, which are marked as support vectors">
+      <rect class="box" x="4" y="4" width="332" height="222" rx="8"/>
+      <line class="la" x1="150" y1="20" x2="190" y2="200" style="stroke:currentColor"/>
+      <line class="dash" x1="115" y1="20" x2="155" y2="200"/><line class="dash" x1="185" y1="20" x2="225" y2="200"/>
+      <g class="ca"><circle cx="50" cy="50" r="6"/><circle cx="70" cy="100" r="6"/><circle cx="60" cy="160" r="6"/><circle cx="95" cy="190" r="6"/><circle cx="90" cy="70" r="6"/><circle cx="135" cy="110" r="6"/><circle cx="117" cy="30" r="6"/></g>
+      <g class="cb"><rect x="264" y="54" width="12" height="12"/><rect x="284" y="114" width="12" height="12"/><rect x="254" y="164" width="12" height="12"/><rect x="294" y="34" width="12" height="12"/><rect x="244" y="94" width="12" height="12"/><rect x="190" y="64" width="12" height="12"/><rect x="215" y="174" width="12" height="12"/></g>
+      <circle cx="135" cy="110" r="11" fill="none" stroke="var(--ok)" stroke-width="2"/><circle cx="117" cy="30" r="11" fill="none" stroke="var(--ok)" stroke-width="2"/>
+      <circle cx="196" cy="70" r="11" fill="none" stroke="var(--ok)" stroke-width="2"/><circle cx="221" cy="180" r="11" fill="none" stroke="var(--ok)" stroke-width="2"/>
+      <text x="14" y="22" class="bold">Decision boundary (solid)</text>
+      <text x="14" y="38" class="small">Dashed lines = margin edges</text>
+      <text x="14" y="54" class="small" style="fill:var(--ok)">Green rings = support vectors</text>
+      <text x="180" y="218" class="small">margin width = 2 / ‖w‖</text>
+    </svg>
+    <figcaption>Many lines separate the classes. The SVM picks the one with the widest margin. Only the points on the margin, the <b>support vectors</b>, define it. Move any other point and the boundary doesn't change.</figcaption>
+  </figure>
+  <ul>
+    <li>The boundary is the set of points where <code>w·x + b = 0</code>. Class +1 has <code>w·x + b ≥ +1</code> and class −1 has <code>w·x + b ≤ −1</code>.</li>
+    <li>A bigger margin means a smaller <code>‖w‖</code>, so training minimises <code>½ wᵀw</code> subject to every point being on the right side.</li>
+    <li>The model is stored only as the support vectors, so a model with few support vectors generalises well, even with many features.</li>
+  </ul>
+
+  <h3>3.1 When the classes overlap: the soft margin and C</h3>
+  <p>Real data rarely separates perfectly. A <b>soft margin</b> allows some points to sit inside the margin or on the wrong side, each paying a penalty (a slack variable). The setting <b>C</b> controls the price of those mistakes.</p>
+  <div class="scroll"><table>
+    <tr><th>C is...</th><th>Margin</th><th>Training errors</th><th>Risk</th></tr>
+    <tr><td><b>Small</b></td><td>Wide (tolerant)</td><td>More allowed</td><td>Underfitting, too simple</td></tr>
+    <tr><td><b>Large</b></td><td>Narrow (strict)</td><td>Fewer allowed</td><td>Overfitting, follows noise</td></tr>
+    <tr><td>C → ∞</td><td>Hard margin</td><td>None allowed</td><td>Only works if the data is perfectly separable</td></tr>
+  </table></div>
+
+  <h3>3.2 When a straight line is not enough: kernels</h3>
+  <p>If no straight boundary works, <b>map the data into a higher-dimensional space</b> where one does. The notes' example has five points on a line: class A at 1, 2, 6 and class B at 4, 5. No single cut on the line separates them, because B sits in the middle of A.</p>
+  <figure>
+    <svg viewBox="0 0 420 240" width="500" role="img" aria-label="Left: one-dimensional points where class B sits between class A points so no single cut separates them. Right: the same points mapped to x and x squared lie on a curve and a straight line separates them">
+      <text x="10" y="18" class="bold">1-D: no single cut works</text>
+      <line class="ax" x1="20" y1="60" x2="190" y2="60"/>
+      <g class="ca"><circle cx="43" cy="60" r="6"/><circle cx="64" cy="60" r="6"/><circle cx="166" cy="60" r="6"/></g>
+      <g class="cb"><rect x="97" y="54" width="12" height="12"/><rect x="118" y="54" width="12" height="12"/></g>
+      <text x="43" y="82" text-anchor="middle" class="small">1</text><text x="64" y="82" text-anchor="middle" class="small">2</text><text x="103" y="82" text-anchor="middle" class="small">4</text><text x="124" y="82" text-anchor="middle" class="small">5</text><text x="166" y="82" text-anchor="middle" class="small">6</text>
+      <text x="10" y="120" class="small">A B B A pattern: B is trapped in the middle.</text>
+      <text x="215" y="18" class="bold">Map x → (x, x²): a line separates</text>
+      <line class="ax" x1="225" y1="215" x2="225" y2="30"/><line class="ax" x1="225" y1="215" x2="410" y2="215"/>
+      <path class="dash" d="M225 215 C 280 205 340 150 395 40" style="opacity:.6"/>
+      <line class="lk" x1="245" y1="212" x2="398" y2="40"/>
+      <g class="ca"><circle cx="249" cy="213" r="6"/><circle cx="272" cy="208" r="6"/><circle cx="376" cy="68" r="6"/></g>
+      <g class="cb"><rect x="302" y="150" width="12" height="12"/><rect x="326" y="112" width="12" height="12"/></g>
+      <text x="400" y="232" class="small" text-anchor="end">x →</text><text x="232" y="38" class="small">x² ↑</text>
+      <text x="238" y="228" class="small">1</text><text x="268" y="228" class="small">2</text><text x="308" y="178" class="small">4</text><text x="332" y="140" class="small">5</text><text x="354" y="86" class="small">6</text>
+    </svg>
+    <figcaption>After adding the new coordinate x², class A lies above the green line and class B below it, so a straight line works. In the original space this same line becomes a curved boundary.</figcaption>
+  </figure>
+  <p>You never have to compute the mapping directly. A <b>kernel function</b> gives the dot product in the high-dimensional space directly, the "kernel trick". Common choices:</p>
+  <div class="scroll"><table>
+    <tr><th>Kernel</th><th>Boundary shape</th><th>Settings</th></tr>
+    <tr><td>Linear</td><td>straight line or plane</td><td>C</td></tr>
+    <tr><td>Polynomial, e.g. (xi·xj + 1)²</td><td>curved, up to the chosen degree</td><td>C, degree</td></tr>
+    <tr><td>RBF (Gaussian)</td><td>flexible, local blobs</td><td>C, gamma (large gamma = tighter blobs, overfits)</td></tr>
+  </table></div>
+  <p><b>More than two classes:</b> one-vs-rest (one SVM per class, take the highest score) or one-vs-one (one SVM per pair, majority vote).</p>
+  <p><b>In practice:</b> scale the features, pick the kernel, tune C (and gamma) on validation data, then check on the test set.</p>
+  <div class="scroll"><table>
+    <tr><th>Pros</th><th>Cons</th></tr>
+    <tr><td>High accuracy, handles non-linear boundaries, works well in high dimensions, depends only on the support vectors.</td><td>Slow on very large data, needs scaling and tuning (C, kernel, gamma), no direct probabilities, hard to interpret.</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>4. Choosing between the models</h2>
+  <div class="scroll"><table>
+    <tr><th></th><th>Decision tree</th><th>Neural network</th><th>SVM</th></tr>
+    <tr><td>Explainable?</td><td><b>Yes</b>, rules you can read</td><td>No (black box)</td><td>Little</td></tr>
+    <tr><td>Needs scaling?</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+    <tr><td>Non-linear boundary?</td><td>Yes (steps)</td><td>Yes</td><td>Yes (with a kernel)</td></tr>
+    <tr><td>Data needed</td><td>Moderate</td><td>Lots</td><td>Moderate</td></tr>
+    <tr><td>Main overfitting guard</td><td>Prune, limit depth</td><td>Early stop, dropout, fewer nodes</td><td>Lower C, simpler kernel</td></tr>
+    <tr><td>Key settings</td><td>max_depth, min_samples</td><td>layers, nodes, learning rate</td><td>C, kernel, gamma</td></tr>
+  </table></div>
+  <div class="exam"><b>Q1b, now with the tools to answer it</b>For the SVM vs NN question, calculate recall, precision and specificity from each matrix (Day 1). Then say which mistake costs the bookstore more. If wasting a coupon is cheap but missing a buyer is expensive, favour the model with higher recall, which here is the SVM (97.7% against 96.2%), accepting its extra false alarms (312 against 261). Also mention the other trade-offs from this table: the NN is a black box and needs more data, while a linear-kernel SVM is simpler. Remember the possible label swap I flagged in the Day 1 guide.</div>
+</section>
+
+<section>
+  <h2>5. Practice questions (exam style)</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Question A: choose the first split</h3>
+    <p>A bookstore has 10 sessions: 4 ended in a purchase and 6 did not. Two candidate first questions are tested.</p>
+    <div class="scroll"><table>
+      <tr><th>Question</th><th>Answer = yes</th><th>Answer = no</th></tr>
+      <tr><td>1. Viewed 5 or more product pages?</td><td>5 sessions: 4 buy, 1 no buy</td><td>5 sessions: 0 buy, 5 no buy</td></tr>
+      <tr><td>2. Weekend visit?</td><td>4 sessions: 2 buy, 2 no buy</td><td>6 sessions: 2 buy, 4 no buy</td></tr>
+    </table></div>
+    <p style="margin-top:10px">(a) Calculate the information gain of each question and say which one the tree should use first. Hint: E(0.5) = 1, E(0.8) = 0.722, E(1/3) = 0.918, E(0.4) = 0.971. (b) Name one way to stop the finished tree from overfitting. (4 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>Entropy before:</b> p(buy) = 0.4, so E = 0.971.</p>
+    <p><b>Question 1:</b> yes group (4 of 5 buy) has E = 0.722, no group (pure) has E = 0. Weighted = (5/10)·0.722 + (5/10)·0 = 0.361. Gain = 0.971 − 0.361 = <b>0.610</b>.</p>
+    <p><b>Question 2:</b> yes group (2 of 4) has E = 1, no group (2 of 6) has E = 0.918. Weighted = (4/10)·1 + (6/10)·0.918 = 0.951. Gain = 0.971 − 0.951 = <b>0.020</b>.</p>
+    <p><b>Decision:</b> use Question 1 (product pages) first, because its gain is far larger. The weekend question barely changes the mix.</p>
+    <p><b>(b)</b> Limit the depth or the minimum samples per leaf (pre-pruning), or grow the full tree and prune branches that do not improve validation accuracy (post-pruning).</p>
+  </details>
+
+  <div class="card">
+    <h3 style="margin-top:0">Question B: diagnose a model</h3>
+    <p>An SVM with an RBF kernel, C = 1000 and a large gamma gets 100% training accuracy and 72% test accuracy on the bookstore data. (a) What has happened? (b) Give two changes. (c) The same company would prefer a model its marketing team can read. Which of the three Day 2 models fits and why? (4 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> Overfitting. A very large C allows almost no training errors, and a large gamma makes tight local boundaries around individual points, so the model has memorised the training set.</p>
+    <p><b>(b)</b> Lower C (wider, softer margin), lower gamma (smoother boundary), or use a simpler kernel. Choose values by grid search with cross-validation on the training data, then confirm on the test set.</p>
+    <p><b>(c)</b> A decision tree. Each prediction is a short chain of readable rules, such as "PageValue at least 1 and a very low bounce rate", which marketing can turn directly into a targeting policy.</p>
+  </details>
+  <details><summary>Quick recall questions</summary>
+    <ol>
+      <li>What does a leaf node hold? What does an internal node hold?</li>
+      <li>High entropy means high or low uncertainty?</li>
+      <li>Why is an ID-code attribute a bad split even though its information gain is the highest?</li>
+      <li>What is backpropagation doing, in one sentence?</li>
+      <li>In an SVM, what are support vectors?</li>
+      <li>What does raising C do?</li>
+    </ol>
+    <p><b>Answers:</b> (1) A leaf holds a class label, an internal node holds a test on one feature. (2) High. (3) It splits into single-row pure leaves, which memorise the data and do not generalise (gain ratio corrects this). (4) It sends the output error backwards through the layers to tell each weight how to change. (5) The training points closest to the boundary, which alone define the margin. (6) Penalises mistakes more, giving a narrower margin and more risk of overfitting.</p>
+  </details>
+</section>
+
+<section>
+  <h2>6. Day 2 cheat sheet for the open-book exam</h2>
+  <div class="sheet">
+    <table>
+      <tr><th>If the question says</th><th>Write</th></tr>
+      <tr><td>Interpret a decision tree</td><td>Trace the path to the target leaf, quote the leaf's share and purity, state the business meaning, name one flaw (imbalance, depth, overfit), and the metric to judge the improvement.</td></tr>
+      <tr><td>Which split is best?</td><td>The one with the highest information gain (or lowest weighted Gini). Show E before, weighted E after, and the difference.</td></tr>
+      <tr><td>Tree overfits</td><td>Pre-prune (max_depth, min_samples_leaf) or post-prune on validation data.</td></tr>
+      <tr><td>Why a neural network?</td><td>Flexible, learns non-linear patterns, no distribution assumptions. Cost: black box, needs data, tuning, scaling.</td></tr>
+      <tr><td>NN training curve diverges</td><td>Overtraining. Stop at the validation minimum, fewer nodes or layers, dropout, more data.</td></tr>
+      <tr><td>SVM settings</td><td>C: small = wide margin, large = narrow and overfits. Gamma large = tight blobs. Kernel for non-linear data.</td></tr>
+      <tr><td>Need explainability</td><td>Decision tree. NN and non-linear SVM are hard to explain.</td></tr>
+    </table>
+    <div class="formula" style="margin-top:10px">Entropy E = − Σ p·log2(p)       Gini = 1 − Σ p²
+Gain(S,A) = E(S) − Σ (|Sv|/|S|)·E(Sv)
+GainRatio = Gain / IntrinsicInfo
+SVM margin = 2/‖w‖     boundary: w·x + b = 0
+Neuron: output = f( Σ xi·wi + b )</div>
+  </div>
+</section>
+</main>
