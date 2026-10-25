@@ -1,0 +1,397 @@
+<title>PRS Day 1 Study Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column, one diagram per concept, plain-language text first, exam angle last in each section */
+:root {
+  --bg: #f6f8fa; --fg: #1b2430; --muted: #5b6776; --card: #ffffff; --line: #d7dee6;
+  --a: #1f6feb; --a-soft: #e3eefc; --b: #d9660b; --b-soft: #fdeede;
+  --ok: #1a7f4b; --ok-soft: #e2f4ea; --warn: #b42318; --warn-soft: #fdecea;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; }
+
+body { background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body);
+  padding-block: 24px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: 2rem; } h2 { font-size: 1.45rem; padding-top: 12px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.1rem; margin-top: 8px; }
+p { margin: 0; } ul, ol { margin: 0; padding-left: 1.2em; } li { margin: 4px 0; }
+code, .mono { font-family: var(--f-mono); font-size: .9em; }
+code { background: var(--a-soft); padding: 1px 5px; border-radius: 4px; }
+section { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+.eyebrow { font: 500 .75rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+figcaption { color: var(--muted); font-size: .9rem; }
+svg { max-width: 100%; height: auto; color: var(--fg); }
+svg text { fill: currentColor; font: 12px var(--f-body); }
+svg .small { font-size: 11px; fill: var(--muted); }
+svg .bold { font-weight: 600; }
+svg .ax { stroke: currentColor; stroke-width: 1.2; fill: none; }
+svg .dash { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 5 4; fill: none; }
+svg .ca { fill: var(--a); } svg .cb { fill: var(--b); }
+svg .la { stroke: var(--a); stroke-width: 2.4; fill: none; } svg .lb { stroke: var(--b); stroke-width: 2.4; fill: none; }
+svg .box { fill: var(--card); stroke: currentColor; stroke-width: 1.2; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+.say { background: var(--a-soft); border-radius: 8px; padding: 12px 16px; }
+.say b, .exam b, .trap b { font-family: var(--f-mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.exam { background: var(--ok-soft); border-radius: 8px; padding: 12px 16px; }
+.trap { background: var(--warn-soft); border-radius: 8px; padding: 12px 16px; }
+.flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.flow .step { flex: 1 1 130px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .9rem; min-width: 0; }
+.flow .step b { display: block; font-family: var(--f-display); }
+.flow .arr { align-self: center; color: var(--muted); }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--a-soft); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.cm { display: grid; grid-template-columns: auto 1fr 1fr; gap: 4px; max-width: 520px; font-size: .9rem; }
+.cm div { padding: 10px; border-radius: 6px; min-width: 0; }
+.cm .h { color: var(--muted); font-size: .8rem; display: flex; align-items: center; }
+.cm .tp, .cm .tn { background: var(--ok-soft); } .cm .fp, .cm .fn { background: var(--warn-soft); }
+.cm strong { display: block; font-family: var(--f-display); }
+.formula { font-family: var(--f-mono); font-size: .9rem; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; overflow-x: auto; white-space: pre; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+summary { cursor: pointer; font-weight: 600; }
+summary:focus-visible { outline: 2px solid var(--a); outline-offset: 2px; }
+details[open] summary { margin-bottom: 8px; }
+.sheet { border: 2px solid var(--a); border-radius: 8px; padding: 14px 16px; background: var(--card); }
+</style>
+
+<main>
+<header>
+  <div class="eyebrow">ISY5002 Pattern Recognition Systems · Day 1a and 1b</div>
+  <h1>Day 1: What pattern recognition is, and the toolkit you will reuse all week</h1>
+  <p class="lede">Read this top to bottom. Every section ends with the exam angle, so you can see how the idea shows up in the sample paper. Open the "check yourself" boxes only after you have tried to answer.</p>
+</header>
+
+<section>
+  <h2>1. What is pattern recognition?</h2>
+  <p>A <b>pattern</b> is a regularity in data: the stripes of a shirt, the shape of a handwritten 7, the rhythm of a vibration signal. <b>Pattern recognition</b> means getting a computer to find such regularities and act on them, for example "this image is a kettle" or "this session will end in a purchase".</p>
+  <div class="say"><b>One line to remember</b>Pattern recognition is the problem. Machine learning is the solution toolbox.</div>
+  <p>Every pattern is described as a list of numbers called a <b>feature vector</b>, written <code>x = (x1, x2, ..., xd)</code>. For the bookstore case in the sample exam, one visitor session is one vector: pages visited, time on site, bounce rate, and so on. The thing you want to predict is the <b>label</b> <code>y</code> (bought or did not buy).</p>
+
+  <h3>Three ways a machine can learn</h3>
+  <div class="figs">
+    <figure>
+      <svg viewBox="0 0 300 200" role="img" aria-label="Supervised learning: labelled points of two classes separated by a learned boundary, with a new unlabelled point">
+        <rect class="box" x="4" y="4" width="292" height="192" rx="8"/>
+        <circle class="ca" cx="50" cy="60" r="6"/><circle class="ca" cx="80" cy="95" r="6"/><circle class="ca" cx="45" cy="120" r="6"/><circle class="ca" cx="95" cy="55" r="6"/><circle class="ca" cx="70" cy="150" r="6"/>
+        <rect class="cb" x="200" y="50" width="12" height="12"/><rect class="cb" x="235" y="90" width="12" height="12"/><rect class="cb" x="215" y="130" width="12" height="12"/><rect class="cb" x="250" y="60" width="12" height="12"/><rect class="cb" x="190" y="100" width="12" height="12"/>
+        <line class="dash" x1="150" y1="20" x2="150" y2="160"/>
+        <text x="150" y="176" text-anchor="middle" class="small">learned boundary</text>
+        <text x="122" y="118" class="bold" font-size="18">?</text>
+        <text x="14" y="22" class="bold">Every point has a label</text>
+      </svg>
+      <figcaption><b>Supervised.</b> A teacher gives the right answer for each training example. Used for classification and regression. Almost the whole sample exam is this.</figcaption>
+    </figure>
+    <figure>
+      <svg viewBox="0 0 300 200" role="img" aria-label="Unsupervised learning: unlabelled points that form three natural groups">
+        <rect class="box" x="4" y="4" width="292" height="192" rx="8"/>
+        <ellipse class="dash" cx="80" cy="80" rx="48" ry="38"/><ellipse class="dash" cx="210" cy="70" rx="50" ry="34"/><ellipse class="dash" cx="150" cy="150" rx="55" ry="26"/>
+        <g fill="currentColor"><circle cx="60" cy="70" r="5"/><circle cx="90" cy="90" r="5"/><circle cx="75" cy="62" r="5"/><circle cx="100" cy="70" r="5"/>
+        <circle cx="195" cy="60" r="5"/><circle cx="225" cy="80" r="5"/><circle cx="210" cy="55" r="5"/><circle cx="235" cy="62" r="5"/>
+        <circle cx="125" cy="152" r="5"/><circle cx="155" cy="145" r="5"/><circle cx="175" cy="158" r="5"/><circle cx="145" cy="162" r="5"/></g>
+        <text x="14" y="22" class="bold">No labels at all</text>
+      </svg>
+      <figcaption><b>Unsupervised.</b> No answers given. The system finds natural groups by similarity. Clustering (Day 4) is the main example.</figcaption>
+    </figure>
+    <figure>
+      <svg viewBox="0 0 300 200" role="img" aria-label="Reinforcement learning: an agent sends actions to an environment, which returns a new state and a reward">
+        <defs><marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+        <rect class="box" x="4" y="4" width="292" height="192" rx="8"/>
+        <rect class="box" x="30" y="30" width="100" height="46" rx="6"/><text x="80" y="58" text-anchor="middle" class="bold">Agent</text>
+        <rect class="box" x="170" y="124" width="100" height="46" rx="6"/><text x="220" y="152" text-anchor="middle" class="bold">Environment</text>
+        <path class="ax" d="M130 53 H220 V122" marker-end="url(#ar1)"/><text x="150" y="46" class="small">action</text>
+        <path class="ax" d="M170 147 H80 V78" marker-end="url(#ar1)"/><text x="92" y="140" class="small">new state + reward</text>
+      </svg>
+      <figcaption><b>Reinforcement.</b> No right answer, only feedback after each action: a reward or a penalty. Used for robots (Q2b in the sample paper).</figcaption>
+    </figure>
+  </div>
+  <div class="exam"><b>Exam angle</b>Questions often start "which type of learning, and why?". Give the type, then tie it to the data: labels exist (supervised), no labels (unsupervised), or only reward feedback (reinforcement).</div>
+</section>
+
+<section>
+  <h2>2. The pattern recognition pipeline</h2>
+  <p>Any real system is a chain of stages. When an exam asks you to "describe how the model can be built", walk down this chain.</p>
+  <div class="flow" role="list">
+    <div class="step" role="listitem"><b>Sense</b>Collect raw data: camera, sensor, web logs.</div><span class="arr">→</span>
+    <div class="step" role="listitem"><b>Pre-process</b>Remove noise, fix missing values, scale.</div><span class="arr">→</span>
+    <div class="step" role="listitem"><b>Features</b>Turn raw data into useful numbers.</div><span class="arr">→</span>
+    <div class="step" role="listitem"><b>Model</b>Classify or cluster. Train, then test.</div><span class="arr">→</span>
+    <div class="step" role="listitem"><b>Post-process</b>Check confidence, apply business rules.</div>
+  </div>
+  <p>Deep learning shortcuts the middle: the network learns the features itself from raw data ("end to end"). Classical methods need a human to design the features.</p>
+</section>
+
+<section>
+  <h2>3. Preparing the data</h2>
+  <h3>3.1 Scaling features</h3>
+  <p>Many models measure distances or take steps proportional to feature size. If "Product related duration" ranges up to 63,973 and "Bounce rate" only up to 0.2, the big number swamps the small one. Scaling puts them on a comparable footing.</p>
+  <div class="formula">Min-max:  x' = (x - min) / (max - min)        result in [0, 1]
+Z-score:  x' = (x - mean) / std                result has mean 0, std 1</div>
+  <div class="trap"><b>Trap</b>Compute min, max, mean and std from the <u>training set only</u>, then reuse those same numbers on the test set and on new data. Using test data to compute them leaks information.</div>
+
+  <h3>3.2 Splitting the data</h3>
+  <figure>
+    <div class="flow" aria-label="Data split into training, validation and test sets">
+      <div class="step" style="flex:6 1 160px;background:var(--a-soft)"><b>Training (about 60 to 70%)</b>The model learns from this.</div>
+      <div class="step" style="flex:2 1 110px;background:var(--b-soft)"><b>Validation</b>Tune settings.</div>
+      <div class="step" style="flex:2 1 110px;background:var(--ok-soft)"><b>Test</b>Final score, used once.</div>
+    </div>
+    <figcaption>The model never sees the test set while learning. That is what makes the final score honest. In the sample paper, 70% was used for training and the confusion matrices come from the other 30%.</figcaption>
+  </figure>
+  <p><b>Cross-validation</b> repeats this: cut the data into k folds, train on k-1, test on the remaining fold, rotate, then average the k scores. It is useful when data is scarce.</p>
+
+  <h3>3.3 Overfitting: the most important idea of the week</h3>
+  <figure>
+    <svg viewBox="0 0 360 250" width="420" role="img" aria-label="Training error keeps falling as model complexity grows, while test error falls then rises again; the sweet spot is at the minimum of test error">
+      <line class="ax" x1="40" y1="20" x2="40" y2="210"/><line class="ax" x1="40" y1="210" x2="340" y2="210"/>
+      <text x="14" y="20" class="small">error</text><text x="230" y="232" class="small">model complexity →</text>
+      <path class="la" d="M40 70 C120 150 220 190 330 200"/>
+      <path class="lb" d="M40 80 C100 135 150 152 190 152 C245 152 295 115 330 60"/>
+      <line class="dash" x1="180" y1="30" x2="180" y2="210"/>
+      <text x="184" y="44" class="small">sweet spot</text>
+      <text x="215" y="188" class="bold" fill="currentColor" style="fill:var(--a)">training error</text>
+      <text x="250" y="86" class="bold" style="fill:var(--b)">test error</text>
+      <text x="60" y="236" class="small">underfit</text><text x="290" y="248" class="small">overfit</text>
+    </svg>
+    <figcaption>A very complex model memorises the training data (training error near zero) but does worse on new data. Choose the complexity where test error is lowest.</figcaption>
+  </figure>
+  <p><b>Generalisation</b> is how well a model works on data it has not seen. To improve it: get more training data, use a simpler model, or reduce the number of features.</p>
+
+  <h3>3.4 Too many features</h3>
+  <p>The <b>curse of dimensionality</b>: with more features, you need far more data to cover the space, models get slower, and they overfit more easily. Two cures: <b>feature selection</b> (drop useless features) and <b>dimensionality reduction</b> such as PCA (unsupervised) or LDA (uses class labels). PCA gets its own day.</p>
+
+  <h3>3.5 Imbalanced data</h3>
+  <p>The sample bookstore data is 84.5% "no purchase" and 15.5% "purchase". A lazy model that always says "no purchase" scores 84.5% accuracy and finds zero buyers. Fixes from the notes:</p>
+  <ul>
+    <li><b>Oversample</b> the rare class: random oversampling, or <b>SMOTE</b> (invent new rare-class points between existing neighbours).</li>
+    <li><b>Custom loss function</b>: make a missed buyer cost more than a false alarm.</li>
+    <li>For images, augment: flip, rotate, scale, crop. For audio: add noise, shift pitch. Generative models (GAN, VAE, diffusion) can also create synthetic samples.</li>
+    <li>Judge the model by recall, precision, F1 or AUC, not accuracy.</li>
+  </ul>
+  <div class="exam"><b>Exam angle</b>Q1a asks for "one problem with the current model and how to improve it". Class imbalance is the answer the data is practically shouting. Q2c is the extreme case: 3,000 normal and 2 abnormal samples.</div>
+  <details><summary>Check yourself: why is 84.5% accuracy meaningless here?</summary>
+    <p>Because a model that predicts "no purchase" for every visitor already gets 84.5%. Accuracy hides the failure on the minority class, which is the class the business cares about.</p></details>
+</section>
+
+<section>
+  <h2>4. Measuring a classifier</h2>
+  <h3>4.1 The confusion matrix</h3>
+  <p>Pick one class as "positive" (the one you are hunting for, here "will purchase"). Every prediction lands in one of four boxes.</p>
+  <figure>
+    <div class="cm" role="table" aria-label="Confusion matrix">
+      <div class="h"></div><div class="h">Predicted positive</div><div class="h">Predicted negative</div>
+      <div class="h">Actually positive</div><div class="tp"><strong>TP</strong>Said buyer, was buyer</div><div class="fn"><strong>FN (Type II)</strong>Missed a real buyer</div>
+      <div class="h">Actually negative</div><div class="fp"><strong>FP (Type I)</strong>False alarm</div><div class="tn"><strong>TN</strong>Said not buyer, was not</div>
+    </div>
+    <figcaption>Green boxes are correct, red boxes are mistakes. The two mistakes usually have different business costs.</figcaption>
+  </figure>
+  <div class="formula">Accuracy    = (TP + TN) / all
+Recall      = TP / (TP + FN)      "of the real buyers, how many did I catch?"   (= sensitivity)
+Precision   = TP / (TP + FP)      "of the ones I flagged, how many were real?"
+Specificity = TN / (TN + FP)      "of the real non-buyers, how many did I leave alone?"
+F1          = 2 x Precision x Recall / (Precision + Recall)</div>
+  <div class="say"><b>Memory trick</b>Recall and sensitivity look along the top row (all actual positives). Precision looks down the left column (all predicted positives). The denominator always tells you what the question is "out of".</div>
+
+  <h3>4.2 Worked example from the sample paper (Q1b)</h3>
+  <div class="scroll"><table>
+    <tr><th>Metric</th><th class="n">SVM</th><th class="n">NN</th></tr>
+    <tr><td>TP / FN / FP / TN</td><td class="n">3078 / 72 / 312 / 237</td><td class="n">3029 / 121 / 261 / 288</td></tr>
+    <tr><td>Accuracy</td><td class="n">3315 / 3699 = 89.6%</td><td class="n">3317 / 3699 = 89.7%</td></tr>
+    <tr><td>Recall</td><td class="n">3078 / 3150 = 97.7%</td><td class="n">3029 / 3150 = 96.2%</td></tr>
+    <tr><td>Precision</td><td class="n">3078 / 3390 = 90.8%</td><td class="n">3029 / 3290 = 92.1%</td></tr>
+    <tr><td>Specificity</td><td class="n">237 / 549 = 43.2%</td><td class="n">288 / 549 = 52.5%</td></tr>
+  </table></div>
+  <p>Accuracy is almost identical, so it cannot separate the models. The difference is in the type of mistake: the SVM misses fewer positives (72 vs 121) but raises more false alarms (312 vs 261).</p>
+  <div class="trap"><b>Trap in the sample paper</b>The "Actual True" row totals 3,150 of 3,699 test rows (85%). But only 15.5% of sessions were purchases, so the row labelled True looks like the majority "no purchase" class. The table labels may be swapped. In the exam, say which class you treat as positive and why. The business goal decides: if wasted coupons are cheap and a lost sale is expensive, favour recall; if coupons are costly, favour precision.</div>
+
+  <h3>4.3 ROC curve and AUC</h3>
+  <p>Most classifiers output a score, and you choose a cut-off. Move the cut-off and the true positive rate and false positive rate both change. The ROC curve plots that trade-off. <b>AUC</b> is the area under it: 100% is perfect, 50% is a coin flip. Higher AUC means a better model, regardless of the cut-off chosen.</p>
+  <figure>
+    <svg viewBox="0 0 320 300" width="380" role="img" aria-label="ROC plot with a good curve bowing towards the top left, a weaker curve closer to the diagonal, and the diagonal for random guessing">
+      <rect x="40" y="20" width="240" height="240" fill="none" class="ax"/>
+      <line class="dash" x1="40" y1="260" x2="280" y2="20"/>
+      <path class="la" d="M40 260 C50 110 90 45 280 20"/>
+      <path class="lb" d="M40 260 Q100 175 280 20"/>
+      <text x="160" y="286" text-anchor="middle" class="small">False positive rate →</text>
+      <text x="14" y="140" class="small" transform="rotate(-90 14 140)" text-anchor="middle">True positive rate →</text>
+      <text x="108" y="70" style="fill:var(--a)" class="bold">good model (AUC ~ 90%)</text>
+      <text x="170" y="196" style="fill:var(--b)" class="bold">weak (AUC ~ 65%)</text>
+      <text x="62" y="236" class="small" transform="rotate(-45 62 236)">random guess</text>
+    </svg>
+    <figcaption>The closer a curve hugs the top-left corner, the better. The diagonal is a model that guesses.</figcaption>
+  </figure>
+
+  <h3>4.4 Hyperparameters</h3>
+  <p>Hyperparameters are settings you choose before training, not numbers the model learns: <code>k</code> in KNN, <code>C</code>, kernel and gamma in an SVM, learning rate, dropout rate and batch size in a neural network. Find them by grid search (try every combination), random search, or Bayesian optimisation, scoring each on validation data.</p>
+</section>
+
+<section>
+  <h2>5. Four supervised models</h2>
+
+  <h3>5.1 Linear regression (predict a number)</h3>
+  <figure>
+    <svg viewBox="0 0 340 220" width="400" role="img" aria-label="Scatter plot with a fitted straight line and vertical residual segments from each point to the line">
+      <line class="ax" x1="30" y1="10" x2="30" y2="195"/><line class="ax" x1="30" y1="195" x2="330" y2="195"/>
+      <line class="la" x1="40" y1="170" x2="300" y2="50"/>
+      <g stroke="var(--b)" stroke-width="1.6">
+        <line x1="70" y1="150" x2="70" y2="156"/><line x1="110" y1="120" x2="110" y2="138"/><line x1="150" y1="150" x2="150" y2="119"/>
+        <line x1="190" y1="90" x2="190" y2="101"/><line x1="230" y1="95" x2="230" y2="82"/><line x1="270" y1="50" x2="270" y2="64"/></g>
+      <g class="cb"><circle cx="70" cy="150" r="4.5"/><circle cx="110" cy="120" r="4.5"/><circle cx="150" cy="150" r="4.5"/><circle cx="190" cy="90" r="4.5"/><circle cx="230" cy="95" r="4.5"/><circle cx="270" cy="50" r="4.5"/></g>
+      <text x="305" y="46" class="small">fitted line</text><text x="175" y="210" class="small">x (input)</text><text x="8" y="12" class="small">y</text>
+      <text x="112" y="112" class="small" style="fill:var(--b)">residual</text>
+    </svg>
+    <figcaption>Least squares chooses the line that makes the sum of squared residuals (the orange gaps) as small as possible.</figcaption>
+  </figure>
+  <p>Model: <code>y = a·x + b·z + ... + c</code>. <b>R²</b> says how much of the variation in y the line explains: R² = SS<sub>reg</sub> / SS<sub>total</sub>, between 0 and 1.</p>
+
+  <h3>5.2 Logistic regression (predict a probability, then a class)</h3>
+  <p>Despite the name, this is for classification. A straight line can go below 0 or above 1, which is useless for a probability. Logistic regression bends it into an S shape that stays between 0 and 1.</p>
+  <figure>
+    <svg viewBox="0 0 360 230" width="420" role="img" aria-label="S-shaped sigmoid curve rising from 0 to 1 as the input increases, crossing 0.5 at the middle">
+      <line class="ax" x1="30" y1="20" x2="30" y2="195"/><line class="ax" x1="30" y1="190" x2="345" y2="190"/>
+      <line class="dash" x1="30" y1="110" x2="345" y2="110"/>
+      <polyline class="la" points="30,189.6 55,188.9 80,187.1 105,182.5 130,171 142.5,160.9 155,147 167.5,129.5 180,110 192.5,90.5 205,73 217.5,59.1 230,49 255,37.5 280,32.9 305,30.9 330,30.4"/>
+      <text x="34" y="30" class="small">P = 1</text><text x="34" y="184" class="small">P = 0</text>
+      <text x="260" y="104" class="small">cut-off P = 0.5</text><text x="150" y="214" class="small">input (weighted sum of features)</text>
+    </svg>
+    <figcaption>Output is a probability. If it is above the cut-off (often 0.5, but you can move it), predict the positive class.</figcaption>
+  </figure>
+  <div class="formula">ln( P / (1 - P) ) = a + b1·x1 + b2·x2 + ...
+P/(1-P) = odds        ln(P/(1-P)) = log-odds (logit)</div>
+  <p>The right side is a plain linear model. The left side is the log-odds. A positive coefficient means that feature raises the chance of the positive class. Multinomial logistic regression handles more than two classes.</p>
+
+  <h3>5.3 K-nearest neighbours (KNN)</h3>
+  <p>To classify a new point, find the k closest training points and take a majority vote. There is no real training step, which is why KNN is called a <b>lazy learner</b>.</p>
+  <figure>
+    <svg viewBox="0 0 320 240" width="400" role="img" aria-label="Scatter of blue circles and orange squares with a new point marked question mark; a dashed circle around the three nearest neighbours contains one blue and two orange points">
+      <rect class="box" x="4" y="4" width="312" height="232" rx="8"/>
+      <g class="ca"><circle cx="150" cy="135" r="6"/><circle cx="130" cy="150" r="6"/><circle cx="115" cy="115" r="6"/><circle cx="100" cy="170" r="6"/><circle cx="80" cy="140" r="6"/></g>
+      <g class="cb"><rect x="189" y="144" width="12" height="12"/><rect x="194" y="84" width="12" height="12"/><rect x="209" y="119" width="12" height="12"/><rect x="234" y="74" width="12" height="12"/><rect x="254" y="104" width="12" height="12"/></g>
+      <circle class="dash" cx="170" cy="120" r="43"/>
+      <text x="164" y="126" class="bold" font-size="16">?</text>
+      <text x="14" y="24" class="small">k = 1: nearest is a blue circle → blue</text>
+      <text x="14" y="40" class="small">k = 3 (dashed ring): 1 blue + 2 orange → orange</text>
+    </svg>
+    <figcaption>The answer can change with k. Small k follows noise. Large k blurs the boundary by including other classes.</figcaption>
+  </figure>
+  <ul>
+    <li>Needs three things: stored training data, a distance measure (Euclidean or Manhattan), and k. Use an odd k to avoid ties.</li>
+    <li><b>Scale your features first</b>, or the feature with the largest numbers decides everything.</li>
+    <li>Slow at prediction time on big data, because it compares against every stored point.</li>
+  </ul>
+
+  <h3>5.4 Naive Bayes (the one you may need to calculate by hand)</h3>
+  <p>This is the model behind sample Q2d, so learn the recipe well. It uses Bayes' theorem to answer: "given what I observed, which class is most probable?"</p>
+  <div class="formula">P(class | evidence)  =  P(evidence | class) x P(class) / P(evidence)
+  posterior                likelihood        prior        same for all classes → ignore it</div>
+  <p>"Naive" means it assumes the features are independent <i>given the class</i>, so the likelihood becomes a simple product:</p>
+  <div class="formula">P(x1, x2, x3 | class) = P(x1 | class) x P(x2 | class) x P(x3 | class)</div>
+  <h3>The recipe, with a fruit example from the notes</h3>
+  <p>1,000 fruits: 500 banana, 300 orange, 200 other. A new fruit is Long, Sweet and Yellow. Which is it?</p>
+  <figure>
+    <svg viewBox="0 0 560 230" width="640" role="img" aria-label="Naive Bayes calculation: for each class, multiply the prior by the three feature likelihoods and compare the scores; banana scores 0.252, orange 0, other 0.01875">
+      <rect class="box" x="10" y="85" width="110" height="56" rx="6"/>
+      <text x="65" y="108" text-anchor="middle" class="bold">Long, Sweet,</text><text x="65" y="126" text-anchor="middle" class="bold">Yellow</text>
+      <g class="ax">
+        <path d="M120 100 L180 36"/><path d="M120 113 L180 113"/><path d="M120 126 L180 190"/></g>
+      <rect class="box" x="180" y="14" width="250" height="46" rx="6"/>
+      <text x="190" y="33" class="bold">Banana</text><text x="190" y="51" class="small">0.50 x 0.8 x 0.7 x 0.9</text>
+      <rect class="box" x="180" y="90" width="250" height="46" rx="6"/>
+      <text x="190" y="109" class="bold">Orange</text><text x="190" y="127" class="small">0.30 x (0/300) x (150/300) x (0/300)</text>
+      <rect class="box" x="180" y="168" width="250" height="46" rx="6"/>
+      <text x="190" y="187" class="bold">Other</text><text x="190" y="205" class="small">0.20 x (100/200) x (150/200) x (50/200)</text>
+      <text x="440" y="43" class="bold" style="fill:var(--ok)">= 0.252  ← largest</text>
+      <text x="440" y="119" class="bold">= 0</text>
+      <text x="440" y="197" class="bold">= 0.01875</text>
+      <text x="14" y="226" class="small">prior x likelihood of each feature. Pick the biggest score.</text>
+    </svg>
+    <figcaption>Each box is: prior (share of that class), times the chance of each observed feature within that class. The class with the largest product wins.</figcaption>
+  </figure>
+  <ol>
+    <li><b>Priors:</b> P(class) = count of class / total rows.</li>
+    <li><b>Likelihoods:</b> for each observed feature value, P(value | class) = (rows of that class with that value) / (rows of that class).</li>
+    <li><b>Score</b> each class = prior x all likelihoods.</li>
+    <li>(Optional) <b>Normalise</b>: divide each score by the sum of scores to get true probabilities that add to 1.</li>
+    <li>Choose the class with the highest score.</li>
+  </ol>
+  <div class="trap"><b>Zero probability problem</b>Orange scored exactly 0 because no orange was Long. One zero wipes out the whole product. <b>Laplace correction</b>: add 1 to every count (and add the number of possible values to the denominator), so nothing is ever exactly zero. Mention it whenever a count in your table is 0.</div>
+  <p><b>Strengths:</b> fast, works with little data, good for categorical features. <b>Weakness:</b> real features are rarely independent.</p>
+  <details><summary>Check yourself: why can we ignore P(evidence)?</summary>
+    <p>It is the same number for every class, so it cannot change which class has the largest score. It only matters if you want the actual probabilities to add to 1.</p></details>
+</section>
+
+<section>
+  <h2>6. Practice question (exam style)</h2>
+  <p>Try this on paper before opening the answer. It uses the same method as sample Q2d, with a different table.</p>
+  <div class="card">
+    <p>A pump monitoring system records temperature and noise level at the time of a fault. The cause is later found to be <b>Worn</b> bearing or <b>Loose</b> mounting.</p>
+    <div class="scroll"><table>
+      <tr><th>No.</th><th>Temperature</th><th>Noise</th><th>Cause</th></tr>
+      <tr><td>1</td><td>Hot</td><td>Loud</td><td>Worn</td></tr>
+      <tr><td>2</td><td>Hot</td><td>Quiet</td><td>Worn</td></tr>
+      <tr><td>3</td><td>Cool</td><td>Loud</td><td>Loose</td></tr>
+      <tr><td>4</td><td>Hot</td><td>Loud</td><td>Worn</td></tr>
+      <tr><td>5</td><td>Cool</td><td>Quiet</td><td>Loose</td></tr>
+      <tr><td>6</td><td>Cool</td><td>Loud</td><td>Worn</td></tr>
+      <tr><td>7</td><td>Hot</td><td>Quiet</td><td>Loose</td></tr>
+      <tr><td>8</td><td>Cool</td><td>Quiet</td><td>Loose</td></tr>
+    </table></div>
+    <p style="margin-top:10px">(a) Use a Naive Bayes classifier to decide the cause when the pump is <b>Hot</b> and <b>Loud</b>. Show your working. (b) State the independence assumption you relied on and whether it is realistic here. (4 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>Priors:</b> Worn = 4/8 = 0.5 (rows 1, 2, 4, 6). Loose = 4/8 = 0.5 (rows 3, 5, 7, 8).</p>
+    <p><b>Likelihoods for Worn:</b> P(Hot | Worn) = 3/4 (rows 1, 2, 4). P(Loud | Worn) = 3/4 (rows 1, 4, 6).</p>
+    <p><b>Likelihoods for Loose:</b> P(Hot | Loose) = 1/4 (row 7). P(Loud | Loose) = 1/4 (row 3).</p>
+    <p><b>Scores:</b> Worn = 0.5 x 0.75 x 0.75 = 0.28125. Loose = 0.5 x 0.25 x 0.25 = 0.03125.</p>
+    <p><b>Normalise:</b> total = 0.3125, so P(Worn | Hot, Loud) = 0.90 and P(Loose | Hot, Loud) = 0.10.</p>
+    <p><b>Decision:</b> Worn bearing.</p>
+    <p><b>(b)</b> It assumes temperature and noise are independent once the cause is known. That is questionable: a worn bearing raises both heat and noise through the same friction, so the two readings are probably correlated even within one cause. The method may therefore be overconfident, but it usually still ranks the classes correctly. With only 8 records, no count is zero here, so Laplace correction was not needed, but it would be wise with more categories.</p>
+  </details>
+  <details><summary>Quick recall questions</summary>
+    <ol>
+      <li>Which learning type needs labels? Which needs only reward?</li>
+      <li>Why must the scaling parameters come from the training set only?</li>
+      <li>You raise k in KNN from 1 to 25. What happens to noise sensitivity and to the boundary?</li>
+      <li>A model has 95% accuracy on training and 70% on test. What is the problem and name two fixes?</li>
+      <li>Which metric answers "of the real buyers, how many did I find?"</li>
+    </ol>
+    <p><b>Answers:</b> (1) Supervised needs labels, reinforcement needs only reward feedback. (2) Otherwise test information leaks into training and the score is too optimistic. (3) Less sensitive to noise, but a smoother boundary that may blur classes. (4) Overfitting; use more data or a simpler model, or fewer features. (5) Recall.</p>
+  </details>
+</section>
+
+<section>
+  <h2>7. Day 1 cheat sheet for the open-book exam</h2>
+  <div class="sheet">
+    <table>
+      <tr><th>If the question says</th><th>Write</th></tr>
+      <tr><td>Imbalanced classes</td><td>Accuracy misleading. Use recall, precision, F1, AUC. Fix with SMOTE or oversampling, class-weighted loss, or more data of the rare class.</td></tr>
+      <tr><td>Compare two models</td><td>Compute recall, precision, specificity from each matrix. Link the errors (FN vs FP) to business cost. Name a winner and say why.</td></tr>
+      <tr><td>Train score high, test low</td><td>Overfitting. Simplify the model, add data, reduce features, regularise, cross-validate.</td></tr>
+      <tr><td>Features on different scales</td><td>Min-max or z-score, fitted on training data only. Essential for KNN, SVM, neural nets, PCA.</td></tr>
+      <tr><td>Hand calculation with a table</td><td>Naive Bayes: priors x likelihoods per class, pick the largest, normalise if asked. Laplace if a count is 0.</td></tr>
+      <tr><td>Many correlated features</td><td>Dimensionality reduction (PCA unsupervised, LDA supervised).</td></tr>
+    </table>
+    <div class="formula" style="margin-top:10px">Recall = TP/(TP+FN)   Precision = TP/(TP+FP)   Specificity = TN/(TN+FP)
+Accuracy = (TP+TN)/all   F1 = 2PR/(P+R)
+Min-max: (x-min)/(max-min)   Z-score: (x-mean)/std
+Naive Bayes score(C) = P(C) x P(x1|C) x P(x2|C) x ...</div>
+  </div>
+</section>
+</main>
