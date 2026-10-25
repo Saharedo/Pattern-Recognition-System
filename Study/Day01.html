@@ -176,6 +176,32 @@ Z-score:  x' = (x - mean) / std                result has mean 0, std 1</div>
 
   <h3>3.4 Too many features</h3>
   <p>The <b>curse of dimensionality</b>: with more features, you need far more data to cover the space, models get slower, and they overfit more easily. Two cures: <b>feature selection</b> (drop useless features) and <b>dimensionality reduction</b> such as PCA (unsupervised) or LDA (uses class labels). PCA gets its own day.</p>
+  <div class="card">
+    <h3 style="margin-top:0">LDA vs PCA</h3>
+    <p><b>LDA</b> (Linear Discriminant Analysis) combines features into a few new ones chosen to <b>separate the classes</b>. PCA combines them to <b>keep the most overall variance</b> and never looks at labels.</p>
+    <figure>
+      <svg viewBox="0 0 340 200" width="420" role="img" aria-label="Two elongated classes side by side; the PCA axis runs along the long direction where the classes overlap when projected, while the LDA axis runs across them where they separate">
+        <rect class="box" x="4" y="4" width="332" height="192" rx="8"/>
+        <g class="ca"><circle cx="80" cy="100" r="5"/><circle cx="115" cy="82" r="5"/><circle cx="150" cy="66" r="5"/><circle cx="185" cy="48" r="5"/><circle cx="220" cy="32" r="5"/></g>
+        <g class="cb"><rect x="115" y="145" width="10" height="10"/><rect x="150" y="127" width="10" height="10"/><rect x="185" y="111" width="10" height="10"/><rect x="220" y="93" width="10" height="10"/><rect x="255" y="75" width="10" height="10"/></g>
+        <line class="la" x1="50" y1="154" x2="290" y2="29"/>
+        <line class="lb" x1="130" y1="14" x2="212" y2="172"/>
+        <text x="262" y="26" class="bold" style="fill:var(--a)">PCA axis</text>
+        <text x="216" y="180" class="bold" style="fill:var(--b)">LDA axis</text>
+        <text x="14" y="22" class="small">PCA follows the long spread.</text>
+        <text x="14" y="38" class="small">LDA follows the gap between classes.</text>
+      </svg>
+      <figcaption>Both classes stretch along the same direction, so PCA's best axis lines them up on top of each other. LDA picks the cross-direction, where the two classes fall apart cleanly.</figcaption>
+    </figure>
+    <div class="scroll"><table>
+      <tr><th></th><th>PCA</th><th>LDA</th></tr>
+      <tr><td>Uses labels?</td><td>No (unsupervised)</td><td>Yes (supervised)</td></tr>
+      <tr><td>Chooses axes that</td><td>capture the most total variance</td><td>push class averages apart while keeping each class tight</td></tr>
+      <tr><td>Number of new features</td><td>up to the number of original features</td><td>at most (number of classes - 1)</td></tr>
+      <tr><td>Use it to</td><td>explore structure, find underlying factors, compress</td><td>prepare features for a classification task</td></tr>
+    </table></div>
+    <p>Fit LDA on the training set only, like scaling, because it uses the labels.</p>
+  </div>
 
   <h3>3.5 Imbalanced data</h3>
   <p>The sample bookstore data is 84.5% "no purchase" and 15.5% "purchase". A lazy model that always says "no purchase" scores 84.5% accuracy and finds zero buyers. Fixes from the notes:</p>
