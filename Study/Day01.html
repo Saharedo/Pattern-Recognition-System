@@ -247,6 +247,16 @@ F1          = 2 x Precision x Recall / (Precision + Recall)</div>
   <p>Accuracy is almost identical, so it cannot separate the models. The difference is in the type of mistake: the SVM misses fewer positives (72 vs 121) but raises more false alarms (312 vs 261).</p>
   <div class="trap"><b>Trap in the sample paper</b>The "Actual True" row totals 3,150 of 3,699 test rows (85%). But only 15.5% of sessions were purchases, so the row labelled True looks like the majority "no purchase" class. The table labels may be swapped. In the exam, say which class you treat as positive and why. The business goal decides: if wasted coupons are cheap and a lost sale is expensive, favour recall; if coupons are costly, favour precision.</div>
 
+  <div class="card">
+    <h3 style="margin-top:0">No calculator? Compare models without dividing</h3>
+    <ul>
+      <li><b>Same positives, so compare the misses.</b> Both matrices have 3,150 actual positives. Recall = 1 - FN / 3,150, so the model with fewer FN has higher recall. SVM misses 72, NN misses 121, so the SVM has the higher recall with no division.</li>
+      <li><b>Write the rate as 1 minus a small fraction.</b> SVM recall = 1 - 72/3150. Since 72/3150 is about 1/44, or 2.3%, recall is about 97.7%. Precision = 1 - FP / predicted positives = 1 - 312/3390, and 312/3390 is about 9%, so about 91%.</li>
+      <li><b>Round before dividing.</b> Specificity 237/549 is about 240/550, a bit under a half, so about 0.43.</li>
+      <li><b>Say the comparison in words.</b> "The SVM finds more real buyers (72 missed against 121) but raises more false alarms (312 against 261)." The business conclusion is what earns the marks.</li>
+    </ul>
+  </div>
+
   <h3>4.3 ROC curve and AUC</h3>
   <p>Most classifiers output a score, and you choose a cut-off. Move the cut-off and the true positive rate and false positive rate both change. The ROC curve plots that trade-off. <b>AUC</b> is the area under it: 100% is perfect, 50% is a coin flip. Higher AUC means a better model, regardless of the cut-off chosen.</p>
   <figure>
@@ -359,6 +369,16 @@ P/(1-P) = odds        ln(P/(1-P)) = log-odds (logit)</div>
   </ol>
   <div class="trap"><b>Zero probability problem</b>Orange scored exactly 0 because no orange was Long. One zero wipes out the whole product. <b>Laplace correction</b>: add 1 to every count (and add the number of possible values to the denominator), so nothing is ever exactly zero. Mention it whenever a count in your table is 0.</div>
   <p><b>Strengths:</b> fast, works with little data, good for categorical features. <b>Weakness:</b> real features are rarely independent.</p>
+  <div class="card">
+    <h3 style="margin-top:0">No calculator? Naive Bayes with fractions</h3>
+    <ul>
+      <li><b>Keep everything as fractions and cancel the common prior.</b> Pump question: Worn score = (1/2) x (3/4) x (3/4), Loose score = (1/2) x (1/4) x (1/4). The (1/2) is the same in both, so compare 3x3 / 4x4 = 9/16 against 1x1 / 4x4 = 1/16. The ratio is <b>9 : 1</b>, so Worn is 90% and Loose 10%. No decimals needed.</li>
+      <li><b>Multiply as whole numbers.</b> Banana: 0.8 x 0.7 x 0.9 is 8 x 7 x 9 = 504, so 0.504. Then 0.5 x 0.504 = 0.252.</li>
+      <li><b>A zero kills the class at once.</b> Orange has P(Long | Orange) = 0, so its score is 0 with no further work (apply Laplace if the question asks you to fix it).</li>
+      <li><b>Compare sizes roughly.</b> Banana 0.252 against Other 0.01875: one is about a quarter and the other about a fiftieth, so Banana wins clearly.</li>
+      <li><b>Normalise only if asked.</b> Probability = own score / sum of all scores. With scores 9 and 1 that is 9/10 and 1/10.</li>
+    </ul>
+  </div>
   <details><summary>Check yourself: why can we ignore P(evidence)?</summary>
     <p>It is the same number for every class, so it cannot change which class has the largest score. It only matters if you want the actual probabilities to add to 1.</p></details>
 </section>
@@ -411,6 +431,7 @@ P/(1-P) = odds        ln(P/(1-P)) = log-odds (logit)</div>
       <tr><td>Compare two models</td><td>Compute recall, precision, specificity from each matrix. Link the errors (FN vs FP) to business cost. Name a winner and say why.</td></tr>
       <tr><td>Train score high, test low</td><td>Overfitting. Simplify the model, add data, reduce features, regularise, cross-validate.</td></tr>
       <tr><td>Features on different scales</td><td>Min-max or z-score, fitted on training data only. Essential for KNN, SVM, neural nets, PCA.</td></tr>
+      <tr><td>Calculate with no calculator</td><td>Keep fractions, cancel the common prior, compare ratios (for example 9 : 1). For recall, compare FN counts when the positives total is the same, or write rate = 1 - small fraction. Show the formula and substitution first.</td></tr>
       <tr><td>Hand calculation with a table</td><td>Naive Bayes: priors x likelihoods per class, pick the largest, normalise if asked. Laplace if a count is 0.</td></tr>
       <tr><td>"Is the independence assumption realistic?"</td><td>Say it is <b>conditional independence given the class</b>, not independence in general. Usually not realistic: name the link (for example a worn bearing raises both heat and noise). Result: probabilities are overconfident, but the ranking is often still correct.</td></tr>
       <tr><td>Many correlated features</td><td>Dimensionality reduction (PCA unsupervised, LDA supervised).</td></tr>

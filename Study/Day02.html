@@ -144,6 +144,26 @@ Two classes:   E = − p+ · log2(p+) − p− · log2(p−)</div>
   </table></div>
   <p>Then the tree repeats the process inside each branch. Under "sunny", Humidity has the largest gain (0.970), which is why it appears there. Under "rainy" the split is Windy.</p>
 
+  <div class="card">
+    <h3 style="margin-top:0">No calculator? Entropy and gain by estimation</h3>
+    <p>The exam does not allow a calculator, so learn a few landmark values and compare splits by purity instead of computing logarithms.</p>
+    <div class="scroll"><table>
+      <tr><th>Share of one class</th><th class="n">Entropy</th></tr>
+      <tr><td>0 or 1 (pure)</td><td class="n">0</td></tr>
+      <tr><td>1/2 (even mix)</td><td class="n">1</td></tr>
+      <tr><td>1/4 or 3/4</td><td class="n">0.81</td></tr>
+      <tr><td>1/3 or 2/3</td><td class="n">0.92</td></tr>
+      <tr><td>2/5 or 3/5</td><td class="n">0.97</td></tr>
+    </table></div>
+    <ul>
+      <li><b>Anything between 35/65 and 65/35 is about 0.93 to 1.</b> The weather data (9 Yes, 5 No) is 64/36, so E is about 0.94.</li>
+      <li><b>Estimate the weighted entropy with fractions.</b> Outlook gives groups of 5, 4, 5 days with entropies about 0.97, 0, 0.97. That is (10/14) x 0.97, roughly 0.71 x 0.97 = 0.69. Gain = 0.94 - 0.69 = about 0.25 (exact: 0.247).</li>
+      <li><b>Rank splits by eye.</b> The parent entropy is the same for every candidate, so the best split is the one whose child groups are purest. A pure child (overcast) is a big win. A child that is no purer than the parent (Windy = true is 50/50) is a small gain.</li>
+      <li><b>Gini needs only fractions:</b> 1 - (9/14)^2 - (5/14)^2 = 90/196, about 0.46. Use it if the question allows any suitable purity measure.</li>
+      <li><b>Show the setup if you cannot finish the arithmetic:</b> E(S) = -(9/14) log2(9/14) - (5/14) log2(5/14), about 0.94. Useful logs: log2 3 is about 1.58, log2 5 about 2.32, log2 7 about 2.81.</li>
+    </ul>
+  </div>
+
   <h3>Two refinements</h3>
   <div class="scroll"><table>
     <tr><th>Problem or variant</th><th>What happens</th><th>Fix or alternative</th></tr>
@@ -436,6 +456,7 @@ Two classes:   E = − p+ · log2(p+) − p− · log2(p−)</div>
       <tr><th>If the question says</th><th>Write</th></tr>
       <tr><td>Interpret a decision tree</td><td>Trace the path to the target leaf, quote the leaf's share and purity, state the business meaning, name one flaw (imbalance, depth, overfit), and the metric to judge the improvement.</td></tr>
       <tr><td>Which split is best?</td><td>The one with the highest information gain (or lowest weighted Gini). Show E before, weighted E after, and the difference.</td></tr>
+      <tr><td>Calculate entropy or gain with no calculator</td><td>Use landmark values (pure 0, 50/50 = 1, 3/4 = 0.81, 2/3 = 0.92, 3/5 = 0.97). Weighted entropy = sum of (group size / total) x group entropy. Best split = lowest weighted child entropy, so compare purity. Show the formula and substitution even if you only estimate.</td></tr>
       <tr><td>Tree overfits</td><td>Pre-prune (max_depth, min_samples_leaf) or post-prune on validation data.</td></tr>
       <tr><td>Why a neural network?</td><td>Flexible, learns non-linear patterns, no distribution assumptions. Cost: black box, needs data, tuning, scaling.</td></tr>
       <tr><td>NN training curve diverges</td><td>Overtraining. Stop at the validation minimum, fewer nodes or layers, dropout, more data.</td></tr>
