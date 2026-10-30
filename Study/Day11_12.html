@@ -1,0 +1,318 @@
+<title>PRS Days 11 and 12 Study Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column, one diagram per concept, plain-language text first, exam angle last in each section */
+:root {
+  --bg: #f6f8fa; --fg: #1b2430; --muted: #5b6776; --card: #ffffff; --line: #d7dee6;
+  --a: #1f6feb; --a-soft: #e3eefc; --b: #d9660b; --b-soft: #fdeede;
+  --ok: #1a7f4b; --ok-soft: #e2f4ea; --warn: #b42318; --warn-soft: #fdecea;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; }
+
+body { background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body);
+  padding-block: 24px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: 2rem; } h2 { font-size: 1.45rem; padding-top: 12px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.1rem; margin-top: 8px; }
+p { margin: 0; } ul, ol { margin: 0; padding-left: 1.2em; } li { margin: 4px 0; }
+code, .mono { font-family: var(--f-mono); font-size: .9em; }
+code { background: var(--a-soft); padding: 1px 5px; border-radius: 4px; }
+section { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+.eyebrow { font: 500 .75rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+figcaption { color: var(--muted); font-size: .9rem; }
+svg { max-width: 100%; height: auto; color: var(--fg); }
+svg text { fill: currentColor; font: 12px var(--f-body); }
+svg .small { font-size: 11px; fill: var(--muted); }
+svg .bold { font-weight: 600; }
+svg .ax { stroke: currentColor; stroke-width: 1.2; fill: none; }
+svg .dash { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 5 4; fill: none; }
+svg .ca { fill: var(--a); } svg .cb { fill: var(--b); }
+svg .la { stroke: var(--a); stroke-width: 2.4; fill: none; } svg .lb { stroke: var(--b); stroke-width: 2.4; fill: none; }
+svg .box { fill: var(--card); stroke: currentColor; stroke-width: 1.2; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+.say { background: var(--a-soft); border-radius: 8px; padding: 12px 16px; }
+.say b, .exam b, .trap b { font-family: var(--f-mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.exam { background: var(--ok-soft); border-radius: 8px; padding: 12px 16px; }
+.trap { background: var(--warn-soft); border-radius: 8px; padding: 12px 16px; }
+.flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.flow .step { flex: 1 1 130px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .9rem; min-width: 0; }
+.flow .step b { display: block; font-family: var(--f-display); }
+.flow .arr { align-self: center; color: var(--muted); }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--a-soft); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.cm { display: grid; grid-template-columns: auto 1fr 1fr; gap: 4px; max-width: 520px; font-size: .9rem; }
+.cm div { padding: 10px; border-radius: 6px; min-width: 0; }
+.cm .h { color: var(--muted); font-size: .8rem; display: flex; align-items: center; }
+.cm .tp, .cm .tn { background: var(--ok-soft); } .cm .fp, .cm .fn { background: var(--warn-soft); }
+.cm strong { display: block; font-family: var(--f-display); }
+.formula { font-family: var(--f-mono); font-size: .9rem; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; overflow-x: auto; white-space: pre; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+summary { cursor: pointer; font-weight: 600; }
+summary:focus-visible { outline: 2px solid var(--a); outline-offset: 2px; }
+details[open] summary { margin-bottom: 8px; }
+.sheet { border: 2px solid var(--a); border-radius: 8px; padding: 14px 16px; background: var(--card); }
+svg .lk { stroke: var(--ok); stroke-width: 2.4; fill: none; }
+svg .leafy { fill: var(--ok-soft); stroke: var(--ok); stroke-width: 1.2; }
+svg .leafn { fill: var(--warn-soft); stroke: var(--warn); stroke-width: 1.2; }
+svg .cg { fill: var(--ok); }
+.tag { display:inline-block; font:500 .72rem var(--f-mono); letter-spacing:.05em; text-transform:uppercase; background:var(--b-soft); color:var(--b); border-radius:4px; padding:1px 6px; }
+</style>
+
+<main>
+<header>
+  <div class="eyebrow">ISY5002 Pattern Recognition Systems · Days 11 and 12</div>
+  <h1>Days 11 and 12: Signals, transforms and statistical sensing</h1>
+  <p class="lede">Sampling, peaks, dynamic time warping, Fourier and wavelet features, and Bayesian classification of sensor data. These are the building blocks behind sample questions 2c and 2d.</p>
+</header>
+<section>
+  <h2>1. Signals and sensors</h2>
+  <p>A <b>signal</b> is a quantity that varies over time or space and carries information: heart electrical activity (ECG), vibration, temperature, sound, a camera image. A <b>sensor</b> turns a physical quantity into a signal. To a computer a signal is just numbers. <b>Sense making</b> means extracting meaning from them and then acting: <b>predict</b>, <b>take action</b>, or <b>suggest actions</b>.</p>
+  <div class="scroll"><table>
+    <tr><th>Sensor</th><th>Measures</th><th>Used for</th></tr>
+    <tr><td>Temperature</td><td>heat energy</td><td>factory machines, agriculture (soil), air-conditioning</td></tr>
+    <tr><td>Proximity, infrared, LiDAR</td><td>presence or distance of objects without touching</td><td>vehicles, retail motion detection</td></tr>
+    <tr><td>Pressure</td><td>pressure converted to an electrical signal</td><td>maintenance, water systems: spot drops or deviations</td></tr>
+    <tr><td>Water quality</td><td>chlorine, organic carbon, turbidity, pH</td><td>water monitoring</td></tr>
+    <tr><td>Accelerometer, gyroscope</td><td>motion, orientation</td><td>gesture and activity recognition</td></tr>
+    <tr><td>Microphone, camera, EEG</td><td>sound, vision, brain activity</td><td>speech, objects, brain-machine interfaces</td></tr>
+  </table></div>
+  <p>Signals are <b>continuous</b> in the real world but are <b>sampled</b> at set time steps and <b>quantised</b> into digital values (discrete-time, discrete-value). A signal is <b>periodic</b> if f(t + T) = f(t) for all t, <b>even</b> if f(t) = f(−t) (symmetric), <b>odd</b> if f(t) = −f(−t). <b>Superposition and decomposition</b>: complicated signals can be built by scaling and adding simpler ones, and studied by splitting them into simple parts.</p>
+</section>
+
+<section>
+  <h2>2. Sampling and the Nyquist rule</h2>
+  <div class="say"><b>Nyquist-Shannon</b>To capture a signal whose highest frequency is f<sub>max</sub>, sample at <b>at least 2 × f<sub>max</sub></b>. Below that, high frequencies are misrepresented as lower ones (<b>aliasing</b>).</div>
+  <figure>
+    <svg viewBox="0 0 380 210" width="480" role="img" aria-label="A fast 5 hertz cosine sampled only 6 times per second; the samples line up on a slow 1 hertz cosine, so the fast signal is misread as a slow one">
+      <line class="ax" x1="40" y1="100" x2="340" y2="100"/>
+      <polyline fill="none" stroke="var(--muted)" stroke-width="1.2" points="40,40.0 42,41.3 44,45.2 46,51.5 48,59.9 50,70.0 52,81.5 54,93.7 56,106.3 58,118.5 60,130.0 62,140.1 64,148.5 66,154.8 68,158.7 70,160.0 72,158.7 74,154.8 76,148.5 78,140.1 80,130.0 82,118.5 84,106.3 86,93.7 88,81.5 90,70.0 92,59.9 94,51.5 96,45.2 98,41.3 100,40.0 102,41.3 104,45.2 106,51.5 108,59.9 110,70.0 112,81.5 114,93.7 116,106.3 118,118.5 120,130.0 122,140.1 124,148.5 126,154.8 128,158.7 130,160.0 132,158.7 134,154.8 136,148.5 138,140.1 140,130.0 142,118.5 144,106.3 146,93.7 148,81.5 150,70.0 152,59.9 154,51.5 156,45.2 158,41.3 160,40.0 162,41.3 164,45.2 166,51.5 168,59.9 170,70.0 172,81.5 174,93.7 176,106.3 178,118.5 180,130.0 182,140.1 184,148.5 186,154.8 188,158.7 190,160.0 192,158.7 194,154.8 196,148.5 198,140.1 200,130.0 202,118.5 204,106.3 206,93.7 208,81.5 210,70.0 212,59.9 214,51.5 216,45.2 218,41.3 220,40.0 222,41.3 224,45.2 226,51.5 228,59.9 230,70.0 232,81.5 234,93.7 236,106.3 238,118.5 240,130.0 242,140.1 244,148.5 246,154.8 248,158.7 250,160.0 252,158.7 254,154.8 256,148.5 258,140.1 260,130.0 262,118.5 264,106.3 266,93.7 268,81.5 270,70.0 272,59.9 274,51.5 276,45.2 278,41.3 280,40.0 282,41.3 284,45.2 286,51.5 288,59.9 290,70.0 292,81.5 294,93.7 296,106.3 298,118.5 300,130.0 302,140.1 304,148.5 306,154.8 308,158.7 310,160.0 312,158.7 314,154.8 316,148.5 318,140.1 320,130.0 322,118.5 324,106.3 326,93.7 328,81.5 330,70.0 332,59.9 334,51.5 336,45.2 338,41.3 340,40.0"/>
+      <polyline class="lb" points="40,40.0 45,40.3 50,41.3 55,42.9 60,45.2 65,48.0 70,51.5 75,55.4 80,59.9 85,64.7 90,70.0 95,75.6 100,81.5 105,87.5 110,93.7 115,100.0 120,106.3 125,112.5 130,118.5 135,124.4 140,130.0 145,135.3 150,140.1 155,144.6 160,148.5 165,152.0 170,154.8 175,157.1 180,158.7 185,159.7 190,160.0 195,159.7 200,158.7 205,157.1 210,154.8 215,152.0 220,148.5 225,144.6 230,140.1 235,135.3 240,130.0 245,124.4 250,118.5 255,112.5 260,106.3 265,100.0 270,93.7 275,87.5 280,81.5 285,75.6 290,70.0 295,64.7 300,59.9 305,55.4 310,51.5 315,48.0 320,45.2 325,42.9 330,41.3 335,40.3 340,40.0" style="stroke-dasharray:6 4"/>
+      <g class="ca"><circle cx="40" cy="40" r="5"/><circle cx="90" cy="70" r="5"/><circle cx="140" cy="130" r="5"/><circle cx="190" cy="160" r="5"/><circle cx="240" cy="130" r="5"/><circle cx="290" cy="70" r="5"/><circle cx="340" cy="40" r="5"/></g>
+      <text x="14" y="16" class="small">Grey: true signal, 5 Hz. Dots: samples at 6 per second (should be at least 10).</text>
+      <text x="14" y="198" class="bold" style="fill:var(--b)">Orange dashed: what the samples seem to show, a false 1 Hz wave.</text>
+    </svg>
+    <figcaption>Under-sampling. The same effect makes a car's wheel look as if it turns backwards in a film shot at 20 frames per second.</figcaption>
+  </figure>
+  <p><b>Worked examples:</b></p>
+  <ul>
+    <li>Telephone speech with a maximum frequency of 4 kHz must be sampled at 2 × 4 = <b>8 kHz</b>.</li>
+    <li>A signal with bandwidth 10 kHz needs a rate of at least <b>20 kHz</b>.</li>
+    <li><b>Sample paper Q2c link:</b> vibration sampled at 50 Hz can represent frequencies only up to <b>25 Hz</b> (50 / 2). A 4-second sequence has 4 × 50 = <b>200 samples</b>.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>3. Finding peaks and fixing the baseline</h2>
+  <h3>3.1 Peaks and troughs</h3>
+  <p>Peaks are significant events (a heartbeat, a demand spike, a load surge). Troughs are inverted peaks. For a continuous signal a peak is a maximum: the slope f′(x) = 0 and changes from <b>+ to −</b>. A discrete signal has no derivative, so use <b>finite differences</b>:</p>
+  <div class="formula">forward difference  f(x+Δx) − f(x)       backward  f(x) − f(x−Δx)       central  [f(x+Δx) − f(x−Δx)]
+Signal [1, 2, 5, 7, 4, 2]  →  differences [1, 3, 2, −3, −2]
+Sign goes + (+2) to − (−3) between 5, 7, 4:  the peak is the value 7.</div>
+  <p>Finite differences find <b>every</b> small wiggle, including noise. So in practice use a peak finder (<code>scipy.signal.find_peaks</code>) with filters:</p>
+  <div class="scroll"><table>
+    <tr><th>Filter</th><th>Keeps only peaks that...</th><th>Weakness</th></tr>
+    <tr><td><b>height</b></td><td>are above a level</td><td>Signal level varies, so peaks of normal events can be missed</td></tr>
+    <tr><td><b>distance</b></td><td>are at least d samples apart</td><td>Depends on the use case, might pick a smaller peak</td></tr>
+    <tr><td><b>prominence</b></td><td>stand out enough from the surrounding signal</td><td>Needs a sensible threshold; usually the best option</td></tr>
+    <tr><td><b>width</b></td><td>are wide enough (measured at half the prominence)</td><td>Rejects sharp spikes</td></tr>
+  </table></div>
+  <p><b>Prominence</b> = how far a peak rises above the higher of its two bases. Find the peak's two bases by extending a horizontal line left and right until it meets a higher peak (or the edge) and taking the lowest point on each side. The higher of the two bases is the "lowest contour line", and prominence is peak height minus that.</p>
+
+  <h3>3.2 Baseline correction</h3>
+  <p>Sensors <b>drift</b> (temperature, humidity, cheap hardware), so the baseline wanders and spoils peak detection and comparisons. Correct it by estimating the baseline z and subtracting: <b>y<sub>corrected</sub> = y − z</b>.</p>
+  <ul>
+    <li><b>Asymmetric least squares (ALS)</b> finds a smooth z close to y by minimising <code>S = Σ w<sub>i</sub>(y<sub>i</sub> − z<sub>i</sub>)² + λ Σ (Δ²z<sub>i</sub>)²</code>. The first term is fit to the data, the second penalises roughness, and λ sets the balance.</li>
+    <li>The weights are asymmetric: points above the fitted baseline (peaks) get a small weight p and points below get 1 − p, so peaks do not drag the baseline up. Suggested values: 0.001 ≤ p ≤ 0.1, 10² ≤ λ ≤ 10⁹, 5 to 10 iterations.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>4. Comparing signals: Dynamic Time Warping (DTW)</h2>
+  <p><b>Euclidean distance</b> compares point i of one signal with point i of the other. It needs equal lengths, and two identical shapes slightly out of step look very different. <b>DTW</b> stretches or squeezes the time axis to find the best alignment, so similar shapes match even when they are shifted or at different speeds. It is used in speech and signature recognition.</p>
+  <h3>The algorithm</h3>
+  <ol>
+    <li><b>Distance matrix:</b> D(i, j) = (y<sub>i</sub> − x<sub>j</sub>)² for every pair.</li>
+    <li><b>Accumulated cost:</b> A(i, j) = D(i, j) + min( A(i−1, j), A(i, j−1), A(i−1, j−1) ). First row and column just add up along the edge.</li>
+    <li><b>Warping path:</b> trace back from the end to the start. Rules: it <b>starts</b> at (1, 1) and <b>ends</b> at (n, m), it <b>never goes backwards</b> (monotonic), and it has <b>no gaps</b> (continuous steps). The DTW distance is the final A(n, m).</li>
+  </ol>
+  <h3>Worked example</h3>
+  <p>x = [0, 2, 3] (columns), y = [0, 0, 2, 3] (rows). Different lengths, so Euclidean distance is impossible. Same shape, though: y just holds its first value one step longer.</p>
+  <div class="figs">
+    <div><b>Distance D</b><div class="scroll"><table>
+      <tr><th></th><th>x=0</th><th>x=2</th><th>x=3</th></tr>
+      <tr><th>y=0</th><td>0</td><td>4</td><td>9</td></tr>
+      <tr><th>y=0</th><td>0</td><td>4</td><td>9</td></tr>
+      <tr><th>y=2</th><td>4</td><td>0</td><td>1</td></tr>
+      <tr><th>y=3</th><td>9</td><td>1</td><td>0</td></tr></table></div></div>
+    <div><b>Accumulated cost A (green = best path)</b><div class="scroll"><table>
+      <tr><th></th><th>x=0</th><th>x=2</th><th>x=3</th></tr>
+      <tr><th>y=0</th><td style="background:var(--ok-soft)">0</td><td>4</td><td>13</td></tr>
+      <tr><th>y=0</th><td style="background:var(--ok-soft)">0</td><td>4</td><td>13</td></tr>
+      <tr><th>y=2</th><td>4</td><td style="background:var(--ok-soft)">0</td><td>1</td></tr>
+      <tr><th>y=3</th><td>13</td><td>1</td><td style="background:var(--ok-soft)">0</td></tr></table></div></div>
+  </div>
+  <p>Example cell: A(row 3, column x=2) = D(0) + min(A above 4, A left 4, A diagonal 0) = 0 + 0 = 0. The final cell is 0, so the <b>DTW distance is 0</b>: the signals have identical shape. The path (green cells) matches both zeros of y to the single x = 0, then y = 2 to x = 2 and y = 3 to x = 3. Cost grows as n × m, so DTW is slow for long signals.</p>
+</section>
+
+<section>
+  <h2>5. From signal to features (Day 12)</h2>
+  <div class="flow">
+    <div class="step"><b>Capture</b>audio, vision, IoT sensor</div><span class="arr">→</span>
+    <div class="step"><b>Process</b>denoise, filter, augment</div><span class="arr">→</span>
+    <div class="step"><b>Transmit</b>coding, compression</div><span class="arr">→</span>
+    <div class="step"><b>Transform + features</b>deterministic (Fourier, wavelet) or data-driven</div><span class="arr">→</span>
+    <div class="step"><b>Model</b>classify, regress, generate</div>
+  </div>
+  <p>Three ways to represent a signal: (1) <b>hand-designed</b> transforms (today: Fourier, wavelets), (2) <b>adaptive to the input</b>, (3) <b>learned from data</b> (PCA-like bases, autoencoders, next guide).</p>
+
+  <h3>5.1 Fourier transform: what frequencies are present?</h3>
+  <p>Any signal can be split into <b>sinusoids</b> of different frequencies. The Fourier transform gives, for each frequency, how much of it is in the signal. It moves the view from the <b>time domain</b> to the <b>frequency domain</b>.</p>
+  <div class="formula">DFT:  F(u) = Σ f(x) · e^(−i2πux/N),   u = 0 ... N−1        e^(ix) = cos x + i sin x
+Worked example: f = [2, 3, 4, 4]
+  F(0) = 2 + 3 + 4 + 4 = 13                 (the sum, i.e. the average level times N)
+  F(1) = 2 + 3e^(−iπ/2) + 4e^(−iπ) + 4e^(−i3π/2) = 2 − 3i − 4 + 4i = −2 + i
+  F(2) = −1        F(3) = −2 − i
+Magnitude |F(1)| = sqrt((−2)² + 1²) = sqrt(5) ≈ 2.24</div>
+  <div class="trap"><b>Limitation</b>Fourier tells you <u>which frequencies exist but not when</u>. A signal with 5 Hz then 25 Hz one after the other has the same frequency content as one with both at the same time. For signals whose frequency changes (vibration, speech, ECG), use a time-frequency method such as the wavelet transform.</div>
+
+  <h3>5.2 Wavelet transform: which frequencies, and when?</h3>
+  <p>A <b>wavelet</b> is a short wave that goes above and below the axis and has limited duration (unlike a sinusoid, which lasts forever). The signal is passed through two filters, then <b>down-sampled by 2</b>:</p>
+  <ul>
+    <li><b>Low-pass filter</b> (smoothing, averaging) gives <b>approximation</b> coefficients A.</li>
+    <li><b>High-pass filter</b> (differencing) gives <b>detail</b> coefficients D.</li>
+    <li>Repeat on the approximation to get several <b>levels</b> (subbands). Reconstruction reverses the process.</li>
+  </ul>
+  <h3>Worked example: Haar wavelet on [9, 7, 3, 5]</h3>
+  <p>Haar filters: low-pass [1/√2, 1/√2], high-pass [−1/√2, 1/√2] (the notes' convention, which yields second minus first).</p>
+  <div class="scroll"><table>
+    <tr><th>Level</th><th>Pairs</th><th>Approximation (sum / √2)</th><th>Detail ((second − first) / √2)</th></tr>
+    <tr><td>1</td><td>(9, 7)</td><td>16/√2 = 8√2</td><td>(7 − 9)/√2 = −√2</td></tr>
+    <tr><td>1</td><td>(3, 5)</td><td>8/√2 = 4√2</td><td>(5 − 3)/√2 = √2</td></tr>
+    <tr><td>2</td><td>(8√2, 4√2)</td><td>12√2/√2 = <b>12</b></td><td>(4√2 − 8√2)/√2 = <b>−4</b></td></tr>
+  </table></div>
+  <p>Wavelet coefficients: <b>[12, −4, −√2, √2]</b> (final approximation, level-2 detail, then the level-1 details). Check: signal energy 81 + 49 + 9 + 25 = 164 and coefficient energy 144 + 16 + 2 + 2 = 164, so energy is preserved. Most of it sits in the first coefficient: <b>energy compaction</b>.</p>
+  <p><b>Uses of wavelets:</b></p>
+  <ul>
+    <li><b>Feature extraction:</b> decompose, then take <b>statistics of each subband</b> (mean, median, variance, standard deviation) as features. 5 subbands × 4 statistics = <b>20 features</b>, exactly the frequency-domain feature in sample Q2c.</li>
+    <li><b>Denoising:</b> shrink small detail coefficients (noise) and reconstruct. <b>Augmentation</b> in the wavelet domain. <b>Fixed wavelet filters</b> inside CNNs.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>6. Statistical classification of sensor data (sample Q2d)</h2>
+  <p>Given a measurement x and classes ω1, ω2, decide which class is more probable using <b>Bayes' rule</b>:</p>
+  <div class="formula">P(ω | x) = P(x | ω) · P(ω) / P(x)           posterior = likelihood × prior / evidence
+Decision: choose the class with the larger P(ω | x). P(x) is the same for all classes, so compare P(x | ω)·P(ω).</div>
+  <p>With several features, the <b>naive</b> assumption (features independent given the class) lets you multiply likelihoods. For <b>categorical</b> features, estimate each likelihood by counting inside the class. For <b>numeric</b> features, model each class with a Gaussian and learn its mean and variance from the training data:</p>
+  <div class="formula">p(x | class) = 1 / sqrt(2πσ²) · exp( −(x − μ)² / (2σ²) )          μ, σ² estimated per class</div>
+  <h3>Worked example from the notes (play tennis)</h3>
+  <p>Predict Play for <b>x = (Sunny, Cool, High humidity, Strong wind)</b>. Training data: 9 Yes, 5 No.</p>
+  <div class="scroll"><table>
+    <tr><th>Feature value</th><th>P(· | Yes)</th><th>P(· | No)</th></tr>
+    <tr><td>Outlook = Sunny</td><td>2/9</td><td>3/5</td></tr>
+    <tr><td>Temperature = Cool</td><td>3/9</td><td>1/5</td></tr>
+    <tr><td>Humidity = High</td><td>3/9</td><td>4/5</td></tr>
+    <tr><td>Wind = Strong</td><td>3/9</td><td>3/5</td></tr>
+    <tr><td><b>Prior</b></td><td>9/14</td><td>5/14</td></tr>
+  </table></div>
+  <div class="formula">score(Yes) = 2/9 · 3/9 · 3/9 · 3/9 · 9/14 = 54/6561 · 9/14 ≈ 0.0053
+score(No)  = 3/5 · 1/5 · 4/5 · 3/5 · 5/14 = 36/625 · 5/14 ≈ 0.0206
+Decision: No.   Normalised: P(No | x) = 0.0206 / (0.0053 + 0.0206) ≈ 0.80</div>
+  <div class="say"><b>No-calculator tips</b>Keep fractions and compare. Yes: about 0.0082 × 0.64 = 0.0053. No: about 0.0576 × 0.36 = 0.0206. No is about four times bigger, so the decision is clear without exact digits. Normalise only if asked, with ratios (0.0053 : 0.0206 is about 1 : 4, so 20% and 80%).</div>
+  <div class="trap"><b>If a count is zero</b>One zero kills the whole product. Use Laplace smoothing: add 1 to every count and add the number of possible values to the denominator. Always state the independence assumption and comment on it (conditional independence given the cause, often only roughly true).</div>
+  <p><b>For the sample Q2d (conveyor cause: Carryback or Mistracking):</b> count priors for each cause (e.g. cause counts out of 9 records), count likelihoods P(Fair | cause) and P(Low | cause) inside each cause, multiply with the prior, compare. Show every fraction. Try it yourself with the steps above and send me your working to check.</p>
+</section>
+
+<section>
+  <h2>7. When one Gaussian is not enough: mixtures and EM</h2>
+  <p>If the data forms several blobs, one Gaussian fits badly. A <b>Gaussian mixture model (GMM)</b> uses several Gaussians, each with a weight. The problem: you do not know which blob each point came from (a <b>hidden label</b>), and you need the labels to fit the Gaussians. <b>Expectation-Maximisation (EM)</b> solves both at once:</p>
+  <ol>
+    <li><b>Initialise</b> the parameters (guess).</li>
+    <li><b>E-step:</b> for every point compute the probability it belongs to each component (a "soft" label), P(component | x) ∝ P(x | component) · P(component).</li>
+    <li><b>M-step:</b> re-estimate each component's parameters and weight using those soft labels as weights.</li>
+    <li>Repeat 2 and 3 until it stops changing (or a set number of iterations).</li>
+  </ol>
+  <p><b>Dice example from the notes.</b> A caller picks a yellow or blue die at random and announces the roll. Start with guesses P(6 | Yellow) = 0.4, P(6 | Blue) = 0.1 and P(Yellow) = P(Blue) = 0.5. For a roll of 6: Yellow 0.4 × 0.5 = 0.2, Blue 0.1 × 0.5 = 0.05, normalise to P(Yellow | 6) = 0.8 and P(Blue | 6) = 0.2. After doing this for all 18 rolls, the M-step adds up the soft counts (yellow total 7.31 of 18) and sets P(Yellow) = 0.41, P(Blue) = 0.59, and re-computes each die's probabilities (e.g. P(1 | Yellow) = 1.71 / 7.31 = 0.234).</p>
+  <p>K-means is the "hard label" cousin of EM: each point belongs to exactly one cluster. EM gives soft memberships and fits an elliptical shape per cluster. GMM also helps with <b>anomaly detection</b> (points with very low probability under the fitted mixture).</p>
+</section>
+
+<section>
+  <h2>8. Practice questions (exam style)</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Question A: sampling and features</h3>
+    <p>A bearing vibration sensor produces signals with useful content up to 120 Hz. (a) What is the minimum sampling rate? (b) You sample at 100 Hz for 2 seconds. How many samples, and why is this a problem? (c) The signal is not stationary: the frequency changes during the recording. Why is wavelet analysis better than the Fourier transform here? (4 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> At least 2 × 120 = <b>240 Hz</b>.</p>
+    <p><b>(b)</b> 100 × 2 = 200 samples. A rate of 100 Hz is below 240 Hz, so the highest frequencies are aliased (they appear as false lower frequencies) and the real content above 50 Hz is lost.</p>
+    <p><b>(c)</b> The Fourier transform shows which frequencies are present but not when they occur. Wavelets use short, localised waves at several scales, so they show both frequency and time location, which is what a changing signal needs.</p>
+  </details>
+  <div class="card">
+    <h3 style="margin-top:0">Question B: Haar wavelet</h3>
+    <p>Apply a two-level Haar decomposition to [4, 2, 6, 8] using low-pass [1/√2, 1/√2] and high-pass [−1/√2, 1/√2]. Give the coefficients and check the energy. (4 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p>Level 1: (4, 2): approx 6/√2 = 3√2, detail (2 − 4)/√2 = −√2. (6, 8): approx 14/√2 = 7√2, detail (8 − 6)/√2 = √2.</p>
+    <p>Level 2: approximations (3√2, 7√2): approx 10√2/√2 = 10, detail (7√2 − 3√2)/√2 = 4.</p>
+    <p>Coefficients: <b>[10, 4, −√2, √2]</b>. Energy check: original 16 + 4 + 36 + 64 = 120, coefficients 100 + 16 + 2 + 2 = 120. Equal.</p>
+  </details>
+  <div class="card">
+    <h3 style="margin-top:0">Question C: Bayes on sensor states</h3>
+    <p>A pump log (Vibration, Temperature, Cause) has 8 records. Fault (3 records): (High, High), (High, Low), (Low, High). Normal (5 records): (Low, Low), (Low, Low), (High, Low), (Low, High), (Low, Low). (a) Using a naive Bayes classifier, decide the state for Vibration = High and Temperature = Low. (b) What would you do if P(Vibration = High | Fault) were 0? (4 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> Priors: Fault 3/8, Normal 5/8. Fault: P(Vib = High | Fault) = 2/3, P(Temp = Low | Fault) = 1/3. Normal: P(Vib = High | Normal) = 1/5, P(Temp = Low | Normal) = 4/5.</p>
+    <p>Fault score = 3/8 × 2/3 × 1/3 = 6/72 = 1/12 ≈ 0.083. Normal score = 5/8 × 1/5 × 4/5 = 20/200 = 1/10 = 0.10. Normal is larger, so the decision is <b>Normal</b>. Ratio 1/12 : 1/10 = 10 : 12, so P(Normal | x) is 6/11 ≈ 0.55 and P(Fault | x) is 5/11 ≈ 0.45, a close call.</p>
+    <p><b>(b)</b> The zero would force the Fault score to 0 regardless of other evidence. Apply Laplace smoothing: add 1 to each count in the numerator and the number of values (2) to the denominator, so P(Vib = High | Fault) = (0 + 1) / (3 + 2) = 0.2.</p>
+  </details>
+  <details><summary>Quick recall questions</summary>
+    <ol>
+      <li>State the Nyquist sampling rule.</li>
+      <li>What does the DC (first) Fourier coefficient F(0) equal?</li>
+      <li>Which Haar filter gives smoothing and which gives edges?</li>
+      <li>What are the two EM steps?</li>
+      <li>Which peak filter measures how much a peak stands out from its surroundings?</li>
+    </ol>
+    <p><b>Answers:</b> (1) Sample at least twice the highest frequency. (2) The sum of the signal values (average level times N). (3) Low-pass smooths (averages), high-pass gives details (differences). (4) Expectation (estimate hidden labels) and Maximisation (update parameters). (5) Prominence.</p>
+  </details>
+</section>
+
+<section>
+  <h2>9. Days 11 and 12 cheat sheet</h2>
+  <div class="sheet">
+    <div class="formula">Nyquist: fs ≥ 2·fmax          samples = fs × duration          max representable frequency = fs / 2
+DTW: A(i,j) = D(i,j) + min(A(i−1,j), A(i,j−1), A(i−1,j−1)),  D = (y−x)²
+Haar: approx = (a + b)/√2,  detail = (b − a)/√2          5 subbands × 4 stats = 20 features
+Bayes: choose class with max P(x|class)·P(class)          Gaussian: 1/√(2πσ²)·exp(−(x−μ)²/2σ²)</div>
+    <table style="margin-top:10px">
+      <tr><th>If the question says</th><th>Write</th></tr>
+      <tr><td>Choose a sampling rate</td><td>At least twice the highest frequency of interest; mention aliasing and an anti-alias filter.</td></tr>
+      <tr><td>Features from a vibration or ECG signal</td><td>Time-domain statistics or histogram, frequency features (Fourier) or wavelet subband statistics. Wavelets for non-stationary signals.</td></tr>
+      <tr><td>Compare two signals of different speed or length</td><td>DTW instead of Euclidean distance.</td></tr>
+      <tr><td>Detect peaks reliably</td><td>Baseline correction first, then peak finder with prominence (and distance or width).</td></tr>
+      <tr><td>Classify with a table of past cases</td><td>Naive Bayes: priors, likelihoods by counting, multiply, compare, Laplace if zero, state the independence assumption.</td></tr>
+      <tr><td>Data in several blobs, unknown groups</td><td>Gaussian mixture fitted by EM (soft labels). Low-probability points are anomalies.</td></tr>
+    </table>
+  </div>
+</section>
+
+</main>
