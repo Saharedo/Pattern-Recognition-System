@@ -1,0 +1,320 @@
+<title>PRS Day 3 Study Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column, one diagram per concept, plain-language text first, exam angle last in each section */
+:root {
+  --bg: #f6f8fa; --fg: #1b2430; --muted: #5b6776; --card: #ffffff; --line: #d7dee6;
+  --a: #1f6feb; --a-soft: #e3eefc; --b: #d9660b; --b-soft: #fdeede;
+  --ok: #1a7f4b; --ok-soft: #e2f4ea; --warn: #b42318; --warn-soft: #fdecea;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; }
+
+body { background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body);
+  padding-block: 24px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: 2rem; } h2 { font-size: 1.45rem; padding-top: 12px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.1rem; margin-top: 8px; }
+p { margin: 0; } ul, ol { margin: 0; padding-left: 1.2em; } li { margin: 4px 0; }
+code, .mono { font-family: var(--f-mono); font-size: .9em; }
+code { background: var(--a-soft); padding: 1px 5px; border-radius: 4px; }
+section { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+.eyebrow { font: 500 .75rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+figcaption { color: var(--muted); font-size: .9rem; }
+svg { max-width: 100%; height: auto; color: var(--fg); }
+svg text { fill: currentColor; font: 12px var(--f-body); }
+svg .small { font-size: 11px; fill: var(--muted); }
+svg .bold { font-weight: 600; }
+svg .ax { stroke: currentColor; stroke-width: 1.2; fill: none; }
+svg .dash { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 5 4; fill: none; }
+svg .ca { fill: var(--a); } svg .cb { fill: var(--b); }
+svg .la { stroke: var(--a); stroke-width: 2.4; fill: none; } svg .lb { stroke: var(--b); stroke-width: 2.4; fill: none; }
+svg .box { fill: var(--card); stroke: currentColor; stroke-width: 1.2; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+.say { background: var(--a-soft); border-radius: 8px; padding: 12px 16px; }
+.say b, .exam b, .trap b { font-family: var(--f-mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.exam { background: var(--ok-soft); border-radius: 8px; padding: 12px 16px; }
+.trap { background: var(--warn-soft); border-radius: 8px; padding: 12px 16px; }
+.flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.flow .step { flex: 1 1 130px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .9rem; min-width: 0; }
+.flow .step b { display: block; font-family: var(--f-display); }
+.flow .arr { align-self: center; color: var(--muted); }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--a-soft); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.cm { display: grid; grid-template-columns: auto 1fr 1fr; gap: 4px; max-width: 520px; font-size: .9rem; }
+.cm div { padding: 10px; border-radius: 6px; min-width: 0; }
+.cm .h { color: var(--muted); font-size: .8rem; display: flex; align-items: center; }
+.cm .tp, .cm .tn { background: var(--ok-soft); } .cm .fp, .cm .fn { background: var(--warn-soft); }
+.cm strong { display: block; font-family: var(--f-display); }
+.formula { font-family: var(--f-mono); font-size: .9rem; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; overflow-x: auto; white-space: pre; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+summary { cursor: pointer; font-weight: 600; }
+summary:focus-visible { outline: 2px solid var(--a); outline-offset: 2px; }
+details[open] summary { margin-bottom: 8px; }
+.sheet { border: 2px solid var(--a); border-radius: 8px; padding: 14px 16px; background: var(--card); }
+svg .lk { stroke: var(--ok); stroke-width: 2.4; fill: none; }
+svg .leafy { fill: var(--ok-soft); stroke: var(--ok); stroke-width: 1.2; }
+svg .leafn { fill: var(--warn-soft); stroke: var(--warn); stroke-width: 1.2; }
+svg .cg { fill: var(--ok); }
+.tag { display:inline-block; font:500 .72rem var(--f-mono); letter-spacing:.05em; text-transform:uppercase; background:var(--b-soft); color:var(--b); border-radius:4px; padding:1px 6px; }
+</style>
+
+<main>
+<header>
+  <div class="eyebrow">ISY5002 Pattern Recognition Systems · Day 3</div>
+  <h1>Day 3: Reducing features with selection, PCA and LDA</h1>
+  <p class="lede">This is the topic behind sample question 1e. You need to know how to pick the number of components, how to read the loadings table, and when PCA or LDA is the right tool.</p>
+</header>
+<section>
+  <h2>1. Why reduce the number of features?</h2>
+  <p>A dataset with n rows and p columns has dimension p (the number of features). High p causes four problems:</p>
+  <ul>
+    <li><b>Cost:</b> more memory, slower training.</li>
+    <li><b>Redundancy and overfitting:</b> many features repeat each other or only add noise, so the model fits noise.</li>
+    <li><b>Curse of dimensionality:</b> the space gets so large that your data points become sparse. You need far more rows to cover it.</li>
+    <li><b>Distances stop working.</b> In very high dimensions the nearest and farthest points are almost the same distance away, so KNN and clustering lose their power.</li>
+    <li><b>Visualisation:</b> you cannot plot beyond 3 dimensions.</li>
+  </ul>
+  <figure>
+    <svg viewBox="0 0 340 220" width="400" role="img" aria-label="Illustrative curve: the gap between the farthest and nearest point distance shrinks towards zero as the number of dimensions grows">
+      <line class="ax" x1="40" y1="20" x2="40" y2="190"/><line class="ax" x1="40" y1="190" x2="320" y2="190"/>
+      <path class="lb" d="M40 40 C70 110 110 160 320 182"/>
+      <text x="48" y="16" class="small">(max distance − min distance) / min distance</text>
+      <text x="180" y="210" class="small" text-anchor="middle">number of dimensions →</text>
+      <text x="150" y="110" class="bold" style="fill:var(--b)">distances converge</text>
+    </svg>
+    <figcaption>Illustration of the simulation in the notes (500 random points, up to 1,100 dimensions). The contrast between near and far disappears, so "nearest neighbour" means less and less. Shape only, not exact values.</figcaption>
+  </figure>
+  <p>Fewer features gives better performance (less noise), simpler and more explainable models, easy visualisation, and lower time and memory cost.</p>
+
+  <h3>Two ways to reduce dimensions</h3>
+  <div class="flow">
+    <div class="step"><b>Feature selection</b>Keep a <u>subset</u> of the original columns and drop the rest. Result stays easy to explain.</div>
+    <div class="step"><b>Feature extraction</b>Build <u>new</u> columns by combining the old ones (PCA, LDA). Result is harder to explain.</div>
+  </div>
+</section>
+
+<section>
+  <h2>2. Feature selection: filter, wrapper, embedded</h2>
+  <div class="scroll"><table>
+    <tr><th></th><th>Filter</th><th>Wrapper</th><th>Embedded</th></tr>
+    <tr><td><b>Idea</b></td><td>Score each feature with a statistic <u>before</u> any model. Independent of the model.</td><td>Try feature subsets with a real model, keep the subset that scores best.</td><td>The model picks features while it trains.</td></tr>
+    <tr><td><b>Examples</b></td><td>Pearson correlation (drop one of a pair with r &gt; 0.9), variance threshold (drop near-constant), mutual information, ANOVA F-test (p &lt; 0.05), chi-square</td><td>Forward selection, backward elimination, recursive feature elimination (RFE)</td><td>Lasso (L1), Ridge (L2), decision trees, random forest and boosting importances, logistic regression coefficients</td></tr>
+    <tr><td><b>Speed</b></td><td>Fastest</td><td>Slowest (a model per subset)</td><td>In between</td></tr>
+    <tr><td><b>Accuracy</b></td><td>May miss the best features</td><td>Often best, but can overfit</td><td>Between the two</td></tr>
+    <tr><td><b>Sees feature interactions?</b></td><td>No (one feature at a time)</td><td>Yes</td><td>Yes</td></tr>
+  </table></div>
+  <h3>Wrapper methods in more detail</h3>
+  <div class="flow">
+    <div class="step"><b>Forward</b>Start with no features. Add the one that improves the cross-validated score most. Repeat until you reach the target number.</div>
+    <div class="step"><b>Backward</b>Start with all features. Remove the weakest each round. Faster when you keep most of them (keep 7 of 10: forward needs 7 rounds, backward only 3).</div>
+    <div class="step"><b>RFE</b>Train, rank features by coefficient or importance, drop the least important, retrain, repeat. Cheaper than plain backward because it uses the model's own ranking.</div>
+  </div>
+  <p><b>Lasso vs Ridge:</b> both add a penalty on coefficient size. <b>Lasso (L1)</b> penalises the absolute value and shrinks some coefficients to exactly <b>zero</b>, which removes those features (selection). <b>Ridge (L2)</b> penalises the square, shrinks coefficients but keeps all of them.</p>
+  <div class="exam"><b>Exam angle</b>"Many features, which approach?" Name the family, say why: filter first because it is cheap and removes redundant features (correlated pairs, constant columns), then embedded or wrapper if accuracy matters, and always evaluate on held-out data. If explainability matters, use selection rather than PCA, because selected features keep their meaning.</div>
+</section>
+
+<section>
+  <h2>3. Principal Component Analysis (PCA)</h2>
+  <div class="say"><b>One line</b>PCA builds new, uncorrelated features (components) that are weighted mixes of the old ones, ordered so the first keeps the most variance, the second the most of what is left, and so on.</div>
+  <figure>
+    <svg viewBox="0 0 340 230" width="420" role="img" aria-label="Scatter of points stretched along a diagonal, with PC1 drawn along the long direction and PC2 across it at a right angle">
+      <rect class="box" x="4" y="4" width="332" height="222" rx="8"/>
+      <g class="ca"><circle cx="70" cy="170" r="4.5"/><circle cx="95" cy="150" r="4.5"/><circle cx="110" cy="165" r="4.5"/><circle cx="130" cy="130" r="4.5"/><circle cx="150" cy="140" r="4.5"/><circle cx="165" cy="115" r="4.5"/><circle cx="185" cy="125" r="4.5"/><circle cx="200" cy="95" r="4.5"/><circle cx="220" cy="105" r="4.5"/><circle cx="240" cy="80" r="4.5"/><circle cx="262" cy="70" r="4.5"/></g>
+      <line class="lb" x1="55" y1="185" x2="285" y2="55"/>
+      <line class="lk" x1="215" y1="170" x2="125" y2="60" style="stroke-dasharray:6 4"/>
+      <text x="262" y="48" class="bold" style="fill:var(--b)">PC1 (most variance)</text>
+      <text x="128" y="52" class="bold" style="fill:var(--ok)">PC2 (what is left)</text>
+      <text x="14" y="24" class="small">Original axes: feature 1 and feature 2</text>
+    </svg>
+    <figcaption>Two correlated features become one dominant direction (PC1) and a small leftover direction (PC2), at right angles. Keeping only PC1 loses little.</figcaption>
+  </figure>
+  <h3>Key properties (write these in the exam)</h3>
+  <ul>
+    <li><b>Linear combinations:</b> PC1 = 0.314·Income + 0.237·Education + 0.484·Age + ... (the weights are the <b>loadings</b> or eigenvector coefficients).</li>
+    <li><b>Uncorrelated and orthogonal:</b> no overlap between components, so no multicollinearity.</li>
+    <li><b>Ordered:</b> PC1 explains the most variance, PC2 the next, etc.</li>
+    <li><b>Unsupervised:</b> ignores class labels.</li>
+    <li><b>Eigenvalue</b> = the variance a component explains. <b>Eigenvector</b> = its weights.</li>
+  </ul>
+  <h3>The workflow from the notes</h3>
+  <ol>
+    <li><b>Understand the data:</b> summary statistics, correlation matrix (are features related?).</li>
+    <li><b>Check suitability:</b> KMO and Bartlett's test (below).</li>
+    <li><b>Standardise</b> the features (PCA is about variance, so scale matters) and <b>run PCA</b>.</li>
+    <li><b>Decide how many components</b> to keep (Section 4).</li>
+    <li><b>Interpret</b> each kept component from its loadings and name it.</li>
+    <li><b>Use</b> the component scores as new features in a model, or in a score plot to see clusters and outliers.</li>
+  </ol>
+  <h3>Is the data suitable for PCA?</h3>
+  <div class="scroll"><table>
+    <tr><th>Test</th><th>Question</th><th>Pass condition</th></tr>
+    <tr><td><b>KMO</b> (Kaiser-Meyer-Olkin)</td><td>Are the variables correlated enough to form components?</td><td>0 to 1. At least 0.5 is acceptable. Near 1 is good.</td></tr>
+    <tr><td><b>Bartlett's sphericity</b></td><td>H0: the correlation matrix is the identity (variables unrelated).</td><td>We <u>want</u> to reject H0, so p &lt; 0.05.</td></tr>
+  </table></div>
+  <div class="trap"><b>Limits to remember</b>PCA assumes linear relationships, is sensitive to outliers (remove or cap values beyond 3 standard deviations), needs continuous variables (poor for one-hot categoricals), and needs enough rows (150+ and about 5 per variable). The new components are harder to explain than original features.</div>
+</section>
+
+<section>
+  <h2>4. How many components should you keep?</h2>
+  <p>Three rules, usually used together. Always say which rule you used.</p>
+  <div class="scroll"><table>
+    <tr><th>Rule</th><th>How</th></tr>
+    <tr><td><b>Kaiser rule</b></td><td>Keep components with eigenvalue <b>greater than 1</b> (they beat a single original standardised feature, which carries 1 unit of variance).</td></tr>
+    <tr><td><b>Cumulative variance</b></td><td>Keep enough to reach a target such as 80% or 90% of total variance.</td></tr>
+    <tr><td><b>Scree plot</b></td><td>Plot eigenvalues in decreasing order. Keep the components before the <b>elbow</b>, where a steep drop turns into a flat plateau.</td></tr>
+    <tr><td>Communalities</td><td>Check each original variable keeps a communality above 0.5, so no feature is poorly represented by the kept components.</td></tr>
+  </table></div>
+
+  <h3>Worked example: sample paper Q1e(i)</h3>
+  <p>The table in the sample paper gives "% var_expl" for ten components: 20.7, 12.3, 10, 9.3, 7.5, 7.2, 6.9, 6.7, 6.2, 5.4. There are 18 standardised features, so total variance is 18 and <b>eigenvalue = % × 18 / 100</b>.</p>
+  <div class="scroll"><table>
+    <tr><th>PC</th><th class="n">1</th><th class="n">2</th><th class="n">3</th><th class="n">4</th><th class="n">5</th><th class="n">6</th><th class="n">7</th><th class="n">8</th><th class="n">9</th><th class="n">10</th></tr>
+    <tr><td>% variance</td><td class="n">20.7</td><td class="n">12.3</td><td class="n">10.0</td><td class="n">9.3</td><td class="n">7.5</td><td class="n">7.2</td><td class="n">6.9</td><td class="n">6.7</td><td class="n">6.2</td><td class="n">5.4</td></tr>
+    <tr><td>Cumulative %</td><td class="n">20.7</td><td class="n">33.0</td><td class="n">43.0</td><td class="n">52.3</td><td class="n">59.8</td><td class="n">67.0</td><td class="n">73.9</td><td class="n">80.6</td><td class="n">86.8</td><td class="n">92.2</td></tr>
+    <tr><td>Eigenvalue</td><td class="n">3.73</td><td class="n">2.21</td><td class="n">1.80</td><td class="n">1.67</td><td class="n">1.35</td><td class="n">1.30</td><td class="n">1.24</td><td class="n">1.21</td><td class="n">1.12</td><td class="n">0.97</td></tr>
+  </table></div>
+  <div class="figs">
+    <figure>
+      <svg viewBox="0 0 340 220" role="img" aria-label="Scree plot of the ten eigenvalues; the line drops steeply over the first three components then flattens; a dashed horizontal line at eigenvalue 1 marks the Kaiser threshold, which only the tenth component falls under">
+        <line class="ax" x1="40" y1="20" x2="40" y2="190"/><line class="ax" x1="40" y1="190" x2="325" y2="190"/>
+        <line class="dash" x1="40" y1="150" x2="325" y2="150"/><text x="268" y="144" class="small">Kaiser threshold = 1</text>
+        <polyline class="la" points="50,40.8 80,101.6 110,118 140,123.2 170,136 200,138 230,140.4 260,141.6 290,145.2 320,151.2"/>
+        <g class="ca"><circle cx="50" cy="40.8" r="3.5"/><circle cx="80" cy="101.6" r="3.5"/><circle cx="110" cy="118" r="3.5"/><circle cx="140" cy="123.2" r="3.5"/><circle cx="170" cy="136" r="3.5"/><circle cx="200" cy="138" r="3.5"/><circle cx="230" cy="140.4" r="3.5"/><circle cx="260" cy="141.6" r="3.5"/><circle cx="290" cy="145.2" r="3.5"/><circle cx="320" cy="151.2" r="3.5"/></g>
+        <text x="54" y="36" class="small">3.73</text><text x="88" y="98" class="small">2.21</text><text x="318" y="168" class="small" text-anchor="end">0.97</text>
+        <text x="180" y="210" class="small" text-anchor="middle">component number →</text><text x="44" y="14" class="small">eigenvalue</text>
+        <text x="110" y="82" class="bold" style="fill:var(--b)">gentle elbow near PC3</text>
+      </svg>
+      <figcaption>Scree plot. There is no sharp elbow. PC1 and PC2 stand out, then the line slowly declines.</figcaption>
+    </figure>
+    <figure>
+      <svg viewBox="0 0 340 220" role="img" aria-label="Cumulative variance explained rises from 20.7 percent to 92.2 percent over ten components and crosses 80 percent at the eighth component">
+        <line class="ax" x1="40" y1="20" x2="40" y2="190"/><line class="ax" x1="40" y1="190" x2="325" y2="190"/>
+        <line class="dash" x1="40" y1="62" x2="325" y2="62"/><text x="44" y="56" class="small">80%</text>
+        <polyline class="lk" points="50,156.9 80,137.2 110,121.2 140,106.3 170,94.3 200,82.8 230,71.8 260,61 290,51.1 320,42.5"/>
+        <text x="236" y="86" class="bold" style="fill:var(--ok)">80.6% at PC8</text>
+        <text x="180" y="210" class="small" text-anchor="middle">components kept →</text><text x="44" y="14" class="small">cumulative % of variance</text>
+      </svg>
+      <figcaption>Cumulative variance. You need 8 components for 80%, and 10 for 92%.</figcaption>
+    </figure>
+  </div>
+  <p><b>What each rule says:</b> Kaiser keeps <b>9</b> (PC10 is 0.97, just under 1). The 80% rule keeps <b>8</b>. A scree reading gives about <b>3</b> (the steep part ends there). So the Chief AI Scientist's idea of "a handful of underlying factors" is only weakly supported: 18 features do not collapse to 3 or 4 factors without losing over 40% of the variance, but they can be compressed to roughly 8 or 9 components with little loss.</p>
+  <div class="exam"><b>Exam angle (Q1e(i))</b>Pick a number, name the rule, show the figure that supports it, and acknowledge a competing rule. A good answer: "About 8 (80.6% cumulative variance); Kaiser would allow 9 and the scree plot is gradual, so there is no sharp cut. The postulate of only a handful of factors is only partly true."</div>
+  <details><summary>No-calculator trick: which components pass Kaiser?</summary>
+    <p>Eigenvalue 1 corresponds to 100 / p percent of the variance. With p = 18 that is 5.56%. Any component explaining more than 5.56% passes (6.2% passes, 5.4% fails). No multiplication needed.</p></details>
+
+  <h3>Interpreting the components (Q1e(ii))</h3>
+  <p>A component is named by the features with large loadings (near +1 or −1). Reading the sample table:</p>
+  <div class="scroll"><table>
+    <tr><th>Component</th><th>Large loadings</th><th>Plausible meaning</th></tr>
+    <tr><td><b>PC1</b> (20.7%)</td><td>ProductRelated 0.45, ProductRelated_Duration 0.45, Informational 0.36, Informational_Duration 0.32</td><td><b>Browsing intensity</b>: how many pages and how long.</td></tr>
+    <tr><td><b>PC2</b> (12.3%)</td><td>BounceRates 0.47, ExitRates 0.45; PageValues −0.31, Revenue −0.27</td><td><b>Disengagement</b>: leaves quickly and does not buy.</td></tr>
+    <tr><td><b>PC3</b> (10.0%)</td><td>OperatingSystems 0.52, Browser 0.49, TrafficType 0.45</td><td><b>Visitor technology and source</b>: device and traffic channel.</td></tr>
+    <tr><td><b>PC4</b> (9.3%)</td><td>PageValues 0.54, Revenue 0.53</td><td><b>Purchase value</b>: pages that lead to money and the purchase itself.</td></tr>
+  </table></div>
+  <p><b>Can the factors be used as predictors in a regression?</b> Yes, with caveats:</p>
+  <ul>
+    <li><b>Good:</b> components are uncorrelated, so no multicollinearity, and there are fewer variables, which reduces overfitting.</li>
+    <li><b>Caution 1:</b> a component can mix several ideas, and you lose the meaning of individual features, so it is harder to explain to the business.</li>
+    <li><b>Caution 2, leakage:</b> in the sample table the target <b>Revenue</b> is itself included in the PCA, and PC4 loads on it. Using such components to predict Revenue leaks the answer. Run the PCA on the input features only.</li>
+    <li><b>Caution 3:</b> PCA ignores the target, so the top variance components are not guaranteed to be the most predictive. Check by modelling.</li>
+    <li><b>Caution 4:</b> fit PCA (and the scaling) on training data only, then apply to the test data.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>5. Information loss and component scores</h2>
+  <p>Keeping fewer components loses information. You can see how much by reconstructing the data from the kept components (<code>pca.inverse_transform</code>). In the notes' example one PC reconstructs 77% of the variation, two give 95.4%, and three give 99.97%. In image compression, 60 components may retain 95% of the picture.</p>
+  <p><b>Component scores</b> are the values of the new features for each row (mean 0, standard deviation 1). A score of +2 on "Financial Stability" means two standard deviations above average. A <b>score plot</b> (PC1 vs PC2) shows clusters, separation between groups, and outliers. A <b>loading plot</b> shows which original variables push each component.</p>
+</section>
+
+<section>
+  <h2>6. Linear Discriminant Analysis (LDA)</h2>
+  <p>LDA also builds new axes but <b>uses the class labels</b>: it looks for directions that push class averages <u>far apart</u> while keeping each class <u>tight</u>.</p>
+  <div class="scroll"><table>
+    <tr><th></th><th>PCA</th><th>LDA</th></tr>
+    <tr><td>Uses labels?</td><td>No (unsupervised)</td><td>Yes (supervised)</td></tr>
+    <tr><td>Maximises</td><td>total variance</td><td>between-class separation relative to within-class spread</td></tr>
+    <tr><td>Number of new axes</td><td>up to p</td><td>at most <b>c − 1</b> (c = number of classes)</td></tr>
+    <tr><td>Best for</td><td>exploration, compression, finding latent factors</td><td>classification preparation</td></tr>
+    <tr><td>Assumptions and weaknesses</td><td>linear, outlier-sensitive</td><td>assumes each class is roughly Gaussian; fails if the difference is in the variance not the mean; unstable with small samples</td></tr>
+  </table></div>
+  <figure>
+    <svg viewBox="0 0 340 200" width="420" role="img" aria-label="Two elongated classes side by side; the PCA axis runs along the long spread where the classes overlap, while the LDA axis runs across them where they separate">
+      <rect class="box" x="4" y="4" width="332" height="192" rx="8"/>
+      <g class="ca"><circle cx="80" cy="100" r="5"/><circle cx="115" cy="82" r="5"/><circle cx="150" cy="66" r="5"/><circle cx="185" cy="48" r="5"/><circle cx="220" cy="32" r="5"/></g>
+      <g class="cb"><rect x="115" y="145" width="10" height="10"/><rect x="150" y="127" width="10" height="10"/><rect x="185" y="111" width="10" height="10"/><rect x="220" y="93" width="10" height="10"/><rect x="255" y="75" width="10" height="10"/></g>
+      <line class="la" x1="50" y1="154" x2="290" y2="29"/><line class="lb" x1="130" y1="14" x2="212" y2="172"/>
+      <text x="262" y="26" class="bold" style="fill:var(--a)">PCA axis</text><text x="216" y="180" class="bold" style="fill:var(--b)">LDA axis</text>
+    </svg>
+    <figcaption>Same data, two different best axes. PCA follows the long spread (classes overlap when projected). LDA follows the gap between the classes.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>7. Practice questions (exam style)</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Question A: choose components</h3>
+    <p>A PCA on 5 standardised features gives eigenvalues 2.5, 1.2, 0.8, 0.3 and 0.2. (a) Calculate the % of variance each component explains. (b) How many components do the Kaiser rule and a 90% rule keep? (c) A manager says "PC1 mostly loads on weight and height, so we can call it body size". Is that a valid way to interpret it? (4 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> Total variance = 5 (number of standardised features, and 2.5 + 1.2 + 0.8 + 0.3 + 0.2 = 5.0). So the percentages are 2.5/5 = 50%, 1.2/5 = 24%, 0.8/5 = 16%, 0.3/5 = 6%, 0.2/5 = 4%.</p>
+    <p><b>(b)</b> Kaiser keeps eigenvalues above 1: PC1 and PC2, so 2 components (74% of variance). A 90% rule needs 50 + 24 + 16 = 90%, so 3 components.</p>
+    <p><b>(c)</b> Yes. A component is named from its features with large loadings, so if weight and height both load strongly with the same sign, "body size" is a sensible name. Back it up with the loading values and check the sign, and note the name is a human judgement.</p>
+  </details>
+  <div class="card">
+    <h3 style="margin-top:0">Question B: PCA or LDA?</h3>
+    <p>A hospital has 40 lab measurements per patient and a label (healthy, mild, severe). (a) Which of PCA and LDA suits preparing features for a classifier, and how many new features can it give? (b) Name one risk if you run the dimension reduction on all the data before splitting into train and test. (3 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> LDA, because it uses the class labels to find directions that separate the classes. With 3 classes it gives at most 3 − 1 = 2 new features.</p>
+    <p><b>(b)</b> Data leakage. The test patients influence the learned axes (and scaling), so the test score is optimistic. Fit on the training data only, then apply the same transformation to the test data.</p>
+  </details>
+  <details><summary>Quick recall questions</summary>
+    <ol>
+      <li>Filter, wrapper, embedded: which is fastest and which tends to be most accurate?</li>
+      <li>Which regularisation can set coefficients exactly to zero?</li>
+      <li>What does a significant Bartlett's test (p &lt; 0.05) tell you?</li>
+      <li>Eigenvalue of a component is 0.8 on standardised data. Does it pass Kaiser?</li>
+      <li>How many discriminant axes can LDA give with 4 classes?</li>
+    </ol>
+    <p><b>Answers:</b> (1) Filter is fastest, wrapper tends to be most accurate. (2) Lasso (L1). (3) The variables are correlated enough that PCA can compress them. (4) No, it is below 1. (5) 3.</p>
+  </details>
+</section>
+
+<section>
+  <h2>8. Day 3 cheat sheet</h2>
+  <div class="sheet">
+    <table>
+      <tr><th>If the question says</th><th>Write</th></tr>
+      <tr><td>How many components?</td><td>State the rule: Kaiser (eigenvalue &gt; 1, i.e. % variance &gt; 100/p), cumulative variance (80 to 90%), scree elbow. Quote numbers. Mention that rules can disagree.</td></tr>
+      <tr><td>What does a factor mean?</td><td>List the features with large loadings (near ±1), same sign vs opposite sign, then name it in business terms.</td></tr>
+      <tr><td>Use PCs in regression?</td><td>Pros: uncorrelated, fewer variables. Cons: harder to explain, may not be most predictive, do not include the target in the PCA, fit on training data only.</td></tr>
+      <tr><td>PCA vs LDA</td><td>PCA: unsupervised, max variance. LDA: supervised, max class separation, at most c − 1 axes.</td></tr>
+      <tr><td>Is PCA suitable?</td><td>KMO at least 0.5, Bartlett p &lt; 0.05, continuous variables, linear relationships, few outliers, enough rows.</td></tr>
+      <tr><td>Reduce features but keep meaning</td><td>Feature selection (filter, wrapper, embedded) instead of extraction.</td></tr>
+    </table>
+    <div class="formula" style="margin-top:10px">eigenvalue = % variance x p / 100        Kaiser threshold in % = 100 / p
+PC = a1·x1 + a2·x2 + ...   (loadings a)     LDA axes ≤ c − 1</div>
+  </div>
+</section>
+
+</main>
