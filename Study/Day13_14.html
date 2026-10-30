@@ -1,0 +1,307 @@
+<title>PRS Days 13 and 14 Study Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column, one diagram per concept, plain-language text first, exam angle last in each section */
+:root {
+  --bg: #f6f8fa; --fg: #1b2430; --muted: #5b6776; --card: #ffffff; --line: #d7dee6;
+  --a: #1f6feb; --a-soft: #e3eefc; --b: #d9660b; --b-soft: #fdeede;
+  --ok: #1a7f4b; --ok-soft: #e2f4ea; --warn: #b42318; --warn-soft: #fdecea;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; }
+
+body { background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body);
+  padding-block: 24px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: 2rem; } h2 { font-size: 1.45rem; padding-top: 12px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.1rem; margin-top: 8px; }
+p { margin: 0; } ul, ol { margin: 0; padding-left: 1.2em; } li { margin: 4px 0; }
+code, .mono { font-family: var(--f-mono); font-size: .9em; }
+code { background: var(--a-soft); padding: 1px 5px; border-radius: 4px; }
+section { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+.eyebrow { font: 500 .75rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+figcaption { color: var(--muted); font-size: .9rem; }
+svg { max-width: 100%; height: auto; color: var(--fg); }
+svg text { fill: currentColor; font: 12px var(--f-body); }
+svg .small { font-size: 11px; fill: var(--muted); }
+svg .bold { font-weight: 600; }
+svg .ax { stroke: currentColor; stroke-width: 1.2; fill: none; }
+svg .dash { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 5 4; fill: none; }
+svg .ca { fill: var(--a); } svg .cb { fill: var(--b); }
+svg .la { stroke: var(--a); stroke-width: 2.4; fill: none; } svg .lb { stroke: var(--b); stroke-width: 2.4; fill: none; }
+svg .box { fill: var(--card); stroke: currentColor; stroke-width: 1.2; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+.say { background: var(--a-soft); border-radius: 8px; padding: 12px 16px; }
+.say b, .exam b, .trap b { font-family: var(--f-mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.exam { background: var(--ok-soft); border-radius: 8px; padding: 12px 16px; }
+.trap { background: var(--warn-soft); border-radius: 8px; padding: 12px 16px; }
+.flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.flow .step { flex: 1 1 130px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .9rem; min-width: 0; }
+.flow .step b { display: block; font-family: var(--f-display); }
+.flow .arr { align-self: center; color: var(--muted); }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--a-soft); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.cm { display: grid; grid-template-columns: auto 1fr 1fr; gap: 4px; max-width: 520px; font-size: .9rem; }
+.cm div { padding: 10px; border-radius: 6px; min-width: 0; }
+.cm .h { color: var(--muted); font-size: .8rem; display: flex; align-items: center; }
+.cm .tp, .cm .tn { background: var(--ok-soft); } .cm .fp, .cm .fn { background: var(--warn-soft); }
+.cm strong { display: block; font-family: var(--f-display); }
+.formula { font-family: var(--f-mono); font-size: .9rem; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; overflow-x: auto; white-space: pre; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+summary { cursor: pointer; font-weight: 600; }
+summary:focus-visible { outline: 2px solid var(--a); outline-offset: 2px; }
+details[open] summary { margin-bottom: 8px; }
+.sheet { border: 2px solid var(--a); border-radius: 8px; padding: 14px 16px; background: var(--card); }
+svg .lk { stroke: var(--ok); stroke-width: 2.4; fill: none; }
+svg .leafy { fill: var(--ok-soft); stroke: var(--ok); stroke-width: 1.2; }
+svg .leafn { fill: var(--warn-soft); stroke: var(--warn); stroke-width: 1.2; }
+svg .cg { fill: var(--ok); }
+.tag { display:inline-block; font:500 .72rem var(--f-mono); letter-spacing:.05em; text-transform:uppercase; background:var(--b-soft); color:var(--b); border-radius:4px; padding:1px 6px; }
+</style>
+
+<main>
+<header>
+  <div class="eyebrow">ISY5002 Pattern Recognition Systems · Days 13 and 14</div>
+  <h1>Days 13 and 14: Representation learning, anomaly detection and sensor fusion</h1>
+  <p class="lede">Autoencoders, anomaly detection and multimodal sensing. Sample question 2c is answered in full, including what Figure 1 shows and two challenges with solutions.</p>
+</header>
+<section>
+  <h2>1. Representing a signal with a basis (Day 13)</h2>
+  <p>A signal is a vector of numbers, written in terms of <b>basis vectors</b>. Change the basis and the same signal gets different numbers (coefficients), some of which may be more useful. The idea behind Fourier, wavelets and PCA is the same: <b>choose a good basis</b>.</p>
+  <figure>
+    <svg viewBox="0 0 320 210" width="400" role="img" aria-label="The point x equals 1 comma 2 shown against the standard axes v1 and v2 and against rotated axes u1 and u2 at 45 degrees; its coordinates in the rotated axes are about 2.12 and 0.71">
+      <rect class="box" x="4" y="4" width="312" height="202" rx="8"/>
+      <line class="ax" x1="130" y1="170" x2="270" y2="170"/><line class="ax" x1="130" y1="170" x2="130" y2="26"/>
+      <text x="272" y="174" class="small">v1</text><text x="124" y="22" class="small">v2</text>
+      <line class="lb" x1="130" y1="170" x2="235" y2="65"/><line class="lb" x1="130" y1="170" x2="25" y2="65"/>
+      <text x="238" y="62" class="bold" style="fill:var(--b)">u1</text><text x="6" y="62" class="bold" style="fill:var(--b)">u2</text>
+      <circle cx="190" cy="50" r="5" fill="var(--a)"/><text x="198" y="48" class="bold" style="fill:var(--a)">x = (1, 2)</text>
+      <text x="14" y="196" class="small">In (u1, u2): w = ( 3/√2, 1/√2 ) ≈ (2.12, 0.71)</text>
+    </svg>
+    <figcaption>Same point, two coordinate systems. In the rotated one, most of the signal's size sits in the first coefficient.</figcaption>
+  </figure>
+  <div class="formula">Decompose:   wi = ⟨x, ui⟩ = xᵀ ui = Σj x(j)·ui(j)          (dot product with each basis vector)
+Reconstruct: x̂ = Σ wi · ui
+Example: x = (1, 2), u1 = (1/√2, 1/√2), u2 = (−1/√2, 1/√2)
+  w1 = (1 + 2)/√2 = 3/√2,   w2 = (−1 + 2)/√2 = 1/√2
+  x̂ = (3/√2)·u1 + (1/√2)·u2 = (1.5 − 0.5, 1.5 + 0.5) = (1, 2)   ✓</div>
+  <p><b>Energy compaction:</b> a good basis puts most of the signal's energy into a few coefficients, so you can keep the big ones and drop the rest with small error. <b>Learning the basis from data</b> (find the direction u that minimises the total projection error) leads to the <b>eigenvector with the largest eigenvalue</b> of the data's covariance (PCA). Then subtract that component, treat the residual as the new signal and repeat to get the second basis vector, and so on. A learned basis can be viewed as a <b>linear neural network</b> whose weights are the basis vectors.</p>
+</section>
+
+<section>
+  <h2>2. Representation learning</h2>
+  <p>Instead of hand-designing features, <b>learn a mapping from raw data to a useful abstract representation</b>. Good representations are smooth (close inputs map to close outputs), have a suitable dimension (lower to compress, sometimes higher to separate), and become more abstract in deeper layers (raw input → low-level features → high-level concepts → predicted target).</p>
+  <div class="scroll"><table>
+    <tr><th>Approach</th><th>Idea</th><th>When</th></tr>
+    <tr><td><b>Supervised</b> (human labels)</td><td>Train on labelled data. To reuse for a new task: <b>linear adaptation</b> (freeze the pretrained network f, train only a new linear layer on the new data) or <b>fine-tuning</b> (start from f and continue training on the new data).</td><td>Plenty of labels. Small target data: use the pretrained network.</td></tr>
+    <tr><td><b>Self-supervised</b></td><td>The data itself provides the training signal through a <b>pretext task</b> (reconstruct the input, match augmented views). The learned features are then used for the <b>target (downstream) task</b>, which usually needs a few labels.</td><td>Lots of unlabelled data, few labels.</td></tr>
+  </table></div>
+  <p>Two self-supervised styles: <b>generative</b> (encoder compresses, decoder reconstructs the input, minimise reconstruction error: the autoencoder) and <b>contrastive</b> (pull together two augmented views of the same item, push apart different items).</p>
+</section>
+
+<section>
+  <h2>3. Autoencoders</h2>
+  <figure>
+    <svg viewBox="0 0 440 180" width="520" role="img" aria-label="Autoencoder: input x goes through an encoder to a narrow code w, then a decoder reconstructs x hat; the loss is the squared difference between x and x hat">
+      <defs><marker id="ar13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+      <polygon points="30,30 130,60 130,120 30,150" fill="var(--a-soft)" stroke="var(--a)" stroke-width="1.5"/><text x="80" y="95" class="bold" text-anchor="middle">Encoder</text>
+      <rect x="165" y="70" width="40" height="40" rx="6" fill="var(--ok-soft)" stroke="var(--ok)" stroke-width="1.5"/><text x="185" y="94" class="bold" text-anchor="middle">w</text>
+      <polygon points="240,60 340,30 340,150 240,120" fill="var(--b-soft)" stroke="var(--b)" stroke-width="1.5"/><text x="290" y="95" class="bold" text-anchor="middle">Decoder</text>
+      <path class="ax" d="M130 90 H163" marker-end="url(#ar13)"/><path class="ax" d="M205 90 H238" marker-end="url(#ar13)"/>
+      <text x="30" y="20" class="bold">input x</text><text x="344" y="20" class="bold">output x̂</text>
+      <text x="165" y="130" class="small">code (bottleneck)</text>
+      <text x="14" y="172" class="small">Train to minimise the loss ‖x − x̂‖², with no labels needed.</text>
+    </svg>
+    <figcaption>The network is forced to squeeze the signal through a narrow code and rebuild it, so the code keeps the most important structure.</figcaption>
+  </figure>
+  <div class="scroll"><table>
+    <tr><th>Type</th><th>Detail</th></tr>
+    <tr><td><b>Under-complete</b></td><td>Code has fewer dimensions than the input. Compresses and learns useful features.</td></tr>
+    <tr><td><b>Over-complete</b></td><td>Code has more dimensions. No compression, can model a more complex distribution, but needs a constraint (noise, sparsity) or it just copies the input.</td></tr>
+    <tr><td><b>Fully connected</b> vs <b>convolutional</b></td><td>Convolutional encoder and decoder suit images and signals (for example 6 conv layers and a 128-dimensional bottleneck on images).</td></tr>
+    <tr><td><b>Denoising</b></td><td>Corrupt the input with noise (x̃), train to reconstruct the clean x. Learns robust features.</td></tr>
+    <tr><td><b>Contrastive</b></td><td>Supervise what to keep or throw away by pulling positives together and pushing negatives apart.</td></tr>
+  </table></div>
+  <p>Uses: compression, features for classifiers, denoising, interpolating between examples in the code space, and <b>anomaly detection</b>.</p>
+</section>
+
+<section>
+  <h2>4. Anomaly detection</h2>
+  <p>An <b>anomaly (outlier)</b> is an observation so different from the rest that it looks as if it was produced by a different mechanism. Typical uses: medical diagnosis, fraud, manufacturing defects, machine health.</p>
+  <div class="scroll"><table>
+    <tr><th>Type of anomaly</th><th>Meaning</th><th>Example</th></tr>
+    <tr><td><b>Point</b></td><td>One value far from all others</td><td>A spike of 10x normal vibration</td></tr>
+    <tr><td><b>Contextual</b></td><td>Normal in general, abnormal in its context</td><td>30 °C in winter</td></tr>
+    <tr><td><b>Collective</b></td><td>Each point looks fine, but together they are unusual</td><td>Flat signal for 1 second</td></tr>
+  </table></div>
+  <p><b>Output:</b> a binary label (normal or anomaly) or a <b>score</b> (ranks cases but needs a threshold).</p>
+  <div class="scroll"><table>
+    <tr><th>Approach</th><th>Assumption</th><th>Score</th><th>Labels needed</th></tr>
+    <tr><td><b>Geometric</b> (clustering)</td><td>Normal points sit in clusters, anomalies do not</td><td>Distance from the nearest cluster centre</td><td>No</td></tr>
+    <tr><td><b>Statistical</b></td><td>Normal data lies in high-probability regions of a fitted model</td><td>Low probability, or beyond mean ± 4σ; change in the distribution over a sliding window</td><td>No</td></tr>
+    <tr><td><b>Classification</b></td><td>A classifier can separate normal from abnormal</td><td>Classifier score</td><td><b>Yes</b>, normal and abnormal</td></tr>
+    <tr><td><b>Autoencoder</b></td><td>Anomalies are rare, so a model trained on normal data reconstructs them badly</td><td><b>Reconstruction error</b></td><td>No (train on normal data)</td></tr>
+  </table></div>
+  <figure>
+    <svg viewBox="0 0 380 200" width="470" role="img" aria-label="Histogram of reconstruction errors: most normal samples have small error, a few anomalies sit far to the right beyond a dashed threshold line">
+      <line class="ax" x1="30" y1="160" x2="360" y2="160"/>
+      <g fill="var(--a)"><rect x="40" y="60" width="26" height="100"/><rect x="66" y="30" width="26" height="130"/><rect x="92" y="55" width="26" height="105"/><rect x="118" y="100" width="26" height="60"/><rect x="144" y="130" width="26" height="30"/><rect x="170" y="148" width="26" height="12"/></g>
+      <g fill="var(--warn)"><rect x="262" y="150" width="20" height="10"/><rect x="300" y="154" width="20" height="6"/><rect x="330" y="150" width="20" height="10"/></g>
+      <line class="dash" x1="215" y1="30" x2="215" y2="160"/><text x="221" y="44" class="bold" style="fill:var(--ok)">threshold</text>
+      <text x="40" y="180" class="small">small reconstruction error (normal)</text><text x="260" y="140" class="small" style="fill:var(--warn)">large error: anomaly</text>
+      <text x="14" y="16" class="small">Count of samples</text><text x="300" y="196" class="small">error →</text>
+    </svg>
+    <figcaption>Workflow: (1) train the autoencoder on normal data only, (2) compute the reconstruction error on validation data, (3) choose a threshold (for example mean + 3 standard deviations of the normal errors, or the value that gives acceptable false alarms), (4) flag any new sample above it.</figcaption>
+  </figure>
+  <p><b>Judging a detector:</b> because anomalies are rare, accuracy is useless (always saying "normal" scores 99.9%). Use recall of anomalies, precision, F1, and the ROC or precision-recall curve, and choose the threshold from the cost of a missed anomaly against a false alarm.</p>
+  <div class="trap"><b>Detection vs diagnosis</b>Detection says <u>something is wrong</u>. Diagnosis says <u>what is wrong</u>, which needs labelled causes (sample Q2d uses Bayesian classification on maintenance records).</div>
+</section>
+
+<section>
+  <h2>5. Sample Q2c worked through: conveyor anomaly detection</h2>
+  <p>Data: 3,000 normal sequences and <b>2</b> abnormal ones. Each sequence is 4 s at 50 Hz (<b>200 samples</b>). Features: a 10-bin histogram of the signal values plus 20 wavelet statistics (4 statistics × 5 subbands), concatenated to <b>30 dimensions</b>. The colleague proposes a multilayer perceptron for two-class classification. <b>Do you agree?</b></p>
+  <p><b>Answer: not as proposed.</b> Supervised classification needs enough examples of every class, and here the abnormal class has 2 out of 3,002 (about 1 in 1,500).</p>
+  <h3>Challenge 1: extreme class imbalance and almost no abnormal examples</h3>
+  <ul>
+    <li><b>Problem:</b> the network can score 99.93% by always predicting "normal" and never learn what abnormal looks like. Two samples cannot be split into train, validation and test, and cannot represent the many ways a machine may fail (future anomalies may differ from these two).</li>
+    <li><b>Solutions:</b> switch to <b>anomaly detection trained on normal data only</b>: an autoencoder on the 30-dimensional features (or on the raw signal) with a reconstruction-error threshold, or a one-class method, a Gaussian model or a clustering distance. Use the 2 abnormal sequences only to <b>test</b> the detector and to sanity-check the threshold. If a classifier is still wanted, create more abnormal examples (time-warping, jittering and scaling augmentation, or synthetic anomalies) and use recall, precision and F1, not accuracy.</li>
+  </ul>
+  <h3>Challenge 2: the chosen features lose information (justify from Figure 1)</h3>
+  <ul>
+    <li><b>Histogram:</b> bin 1 shows a clear difference (abnormal about 63 against normal about 19), which matches the raw signal: the abnormal trace sits flat at about 0 between about 2.0 and 2.7 s. But a histogram ignores <b>time order</b>, so two very different waveforms can give the same histogram, and most other bins overlap heavily.</li>
+    <li><b>Frequency features:</b> the two curves are almost the same except around features 3 and 4 (about 1.45 and 2.1 for abnormal against about 0.95 and 0.9 for normal), and most of the 20 values are near zero, so the discriminating information is concentrated in very few dimensions. With only two abnormal cases it is impossible to know which differences are reliable.</li>
+    <li><b>Solutions:</b> keep the temporal structure by using a <b>1D convolutional or LSTM autoencoder</b> on the raw sequence, add time-frequency features that keep location (wavelet coefficients over time) and a feature for run lengths, and use <b>DTW</b> or other shift-tolerant similarity because normal sequences also differ in phase. Select the features that vary most between normal and abnormal using the available examples and domain knowledge.</li>
+  </ul>
+  <h3>Challenge 3 (optional): per-sequence normalisation</h3>
+  <p>The plotted amplitude is normalised to 0 to 1, which removes absolute amplitude. If a failure changes the overall level (for example a loose part vibrating harder), that is hidden. Keep the absolute level as a separate feature.</p>
+  <div class="exam"><b>Exam angle</b>"Do you agree?" needs a clear yes or no, then reasons tied to the numbers (3,000 against 2) and the figure (name a feature and its values). Give each challenge with a matching solution, and mention evaluation (recall, precision, F1, threshold chosen from the cost of a miss against a false alarm).</div>
+</section>
+
+<section>
+  <h2>6. Multimodal sensing and sensor fusion (Day 14)</h2>
+  <p>A <b>modality</b> is a way something is expressed or perceived: audio, image, inertial motion, text, temperature. Raw modalities (closest to the sensor) can be turned into <b>abstract</b> ones (detected objects, sentiment, event statistics).</p>
+  <div class="scroll"><table>
+    <tr><th>Single modality</th><th>Typical tasks</th></tr>
+    <tr><td><b>Inertial</b> (accelerometer, gyroscope)</td><td>Gesture recognition, activity recognition, screen orientation</td></tr>
+    <tr><td><b>Audio</b></td><td>Sound classification, speaker recognition, keyword detection, command and control, machine anomaly detection (e.g. SMD assembly machine sound at 192 kHz)</td></tr>
+    <tr><td><b>Vision</b></td><td>Scene and object recognition, gesture, anomaly (defects), video summarisation, flood monitoring (210 water-level sensors and 49 CCTV cameras)</td></tr>
+  </table></div>
+  <p><b>Data augmentation for sensor windows:</b> <b>scaling</b> (multiply by a random factor), <b>magnitude filtering</b> (smooth random curve around 1), <b>jittering</b> (add noise to mimic sensor noise), <b>time-warping</b> (smoothly stretch the time axis). They make models more robust to multiplicative noise, additive noise and timing changes.</p>
+  <h3>Why fuse sensors?</h3>
+  <ul>
+    <li><b>Representation:</b> the fused information is at a higher level of abstraction.</li>
+    <li><b>Accuracy:</b> the spread of the fused estimate is usually smaller than from any single source.</li>
+    <li><b>Completeness:</b> new information gives a more complete view.</li>
+  </ul>
+  <p>Kinds of fusion: <b>across sensors</b> (several temperature sensors on one object), <b>across domains</b> (same attribute, different ranges), <b>across attributes</b> (temperature, pressure and humidity together give air refractive index), <b>across time</b> (current plus historical readings).</p>
+  <h3>When to combine: three architectures</h3>
+  <div class="scroll"><table>
+    <tr><th>Fusion</th><th>Where the modalities meet</th><th>Pros</th><th>Cons</th></tr>
+    <tr><td><b>Early</b> (tightly coupled)</td><td>Raw data or features are joined, then one recogniser decides</td><td>Learns cross-modal interactions, acts like one complex sensor</td><td>Needs synchronised, compatible data; one noisy modality hurts everything</td></tr>
+    <tr><td><b>Intermediate / restricted</b> (loosely coupled)</td><td>One modality's result narrows the other's search</td><td>Saves computation, higher accuracy through context</td><td>Pipeline order and errors propagate</td></tr>
+    <tr><td><b>Late</b> (uncoupled)</td><td>Each modality gets its own full recogniser; decisions are combined at the end</td><td>Simple, reuses existing pipelines, tolerates a missing modality</td><td>Cannot exploit low-level cross-modal interactions</td></tr>
+  </table></div>
+  <div class="flow">
+    <div class="step"><b>Early</b>Data A + Data B → join features → one model → decision.</div>
+    <div class="step"><b>Restricted</b>Data A → recogniser A → context → Data B recogniser → decision.</div>
+    <div class="step"><b>Late</b>Data A → model A, Data B → model B → combine outputs → decision.</div>
+  </div>
+  <h3>Multimodal learning challenges</h3>
+  <ul>
+    <li><b>Representation:</b> summarise heterogeneous data (each modality differs in noise, structure and format).</li>
+    <li><b>Alignment:</b> find the connections between elements. <b>Spatial</b> alignment puts positions in a common coordinate system. <b>Temporal</b> alignment puts times on a common axis (use DTW). In feature space, <b>CLIP</b> trains an image encoder and a text encoder to give matching pairs high cosine similarity and mismatched pairs low similarity (400 million image-text pairs).</li>
+    <li><b>Reasoning, generation, transference:</b> compose knowledge from several modalities, produce one modality from another, transfer knowledge between modalities.</li>
+    <li>Practical problems: synchronisation, missing or noisy data, scale, computational cost.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>7. The sense-making pipeline</h2>
+  <p><b>Pipeline A (what the system does):</b> sensor data → <b>representation</b> (manual, adaptive or learned) → <b>machine learning</b> model → <b>reasoning</b> on the results → <b>decision (planning) and action (effector)</b>.</p>
+  <p><b>Pipeline B (what the system understands):</b></p>
+  <div class="flow">
+    <div class="step"><b>Raw sensor data</b>pixels, audio, acceleration</div><span class="arr">→</span>
+    <div class="step"><b>Recognised entities</b>features then classes: objects, words, activities</div><span class="arr">→</span>
+    <div class="step"><b>Semantic relationships</b>how entities connect: key opens lock, "I like coffee"</div><span class="arr">→</span>
+    <div class="step"><b>Contextual relationships</b>meaning given time, place, history</div><span class="arr">→</span>
+    <div class="step"><b>Knowledge</b>stored, queryable, updatable</div>
+  </div>
+  <div class="scroll"><table>
+    <tr><th>Feature category</th><th>Examples</th></tr>
+    <tr><td>Geometrical</td><td>Edges, lines, circles, shapes, area</td></tr>
+    <tr><td>Structural</td><td>Surface area, orientation</td></tr>
+    <tr><td>Statistical</td><td>Mean, variance, skewness, kurtosis, entropy</td></tr>
+    <tr><td>Spectral</td><td>Colour coefficients, spectral peaks</td></tr>
+    <tr><td>Time domain</td><td>Pulse rise and fall times, amplitude, width</td></tr>
+    <tr><td>Frequency domain</td><td>Fourier and wavelet coefficients</td></tr>
+  </table></div>
+  <p><b>Example, driver assistance (ADAS):</b> cameras and motion sensors capture data, algorithms recognise lane position and drift, and the application warns the driver (lane departure warning). It follows the same sense, recognise, act pattern.</p>
+  <p><b>Context example:</b> the same face recognised at 2 pm and at 2 am can mean normal operation or an intrusion. Context from time, other sensors or history changes the decision.</p>
+</section>
+
+<section>
+  <h2>8. Practice questions (exam style)</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Question A: autoencoder threshold</h3>
+    <p>An autoencoder is trained on normal motor current signals. Reconstruction errors on five normal validation signals are 0.02, 0.03, 0.025, 0.04 and 0.03. (a) Choose a threshold using mean + 3 standard deviations. (b) A new signal has error 0.12. What do you decide? (c) Why is the autoencoder trained on normal data only? (4 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> Mean = (0.02 + 0.03 + 0.025 + 0.04 + 0.03) / 5 = 0.145 / 5 = 0.029. Deviations: −0.009, 0.001, −0.004, 0.011, 0.001. Squares (×10⁻⁶): 81, 1, 16, 121, 1, sum 220 so variance 44 × 10⁻⁶ and standard deviation ≈ 0.0066. Threshold ≈ 0.029 + 3 × 0.0066 ≈ <b>0.049</b>. (In the exam an estimate such as "about 0.05" with the working shown is fine.)</p>
+    <p><b>(b)</b> 0.12 is far above 0.049, so flag it as an <b>anomaly</b>.</p>
+    <p><b>(c)</b> Anomalies are rare and varied, so there are not enough labelled examples. Training on normal data teaches the network to reconstruct normal patterns well. Anything unfamiliar reconstructs badly and gives a large error.</p>
+  </details>
+  <div class="card">
+    <h3 style="margin-top:0">Question B: choose a fusion style</h3>
+    <p>A smart factory combines a microphone and a vibration sensor to detect a machine fault. The microphone sometimes fails. (a) Which fusion architecture would you use and why? (b) Name two practical problems of combining the two sensors. (3 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> Late fusion: each sensor has its own model and the decisions are combined, so the system still works when the microphone fails and each pipeline can be built with existing tools. (Early fusion would be better if the sensors are well synchronised and the interaction between them is informative.)</p>
+    <p><b>(b)</b> Synchronisation and alignment (different sampling rates such as 192 kHz audio against 50 Hz vibration, handled by resampling or DTW), and different noise levels or missing data from one sensor.</p>
+  </details>
+  <details><summary>Quick recall questions</summary>
+    <ol>
+      <li>What is the difference between linear adaptation and fine-tuning?</li>
+      <li>What score does an autoencoder anomaly detector use?</li>
+      <li>Name the three anomaly types.</li>
+      <li>Which fusion type joins data at the very last stage?</li>
+      <li>Why is accuracy a poor metric for anomaly detection?</li>
+    </ol>
+    <p><b>Answers:</b> (1) Linear adaptation freezes the pretrained network and trains only a new linear layer; fine-tuning continues training the whole network. (2) Reconstruction error. (3) Point, contextual, collective. (4) Late (uncoupled) fusion. (5) Anomalies are so rare that predicting "normal" always gives very high accuracy.</p>
+  </details>
+</section>
+
+<section>
+  <h2>9. Days 13 and 14 cheat sheet</h2>
+  <div class="sheet">
+    <div class="formula">Coefficient: wi = ⟨x, ui⟩      Reconstruction: x̂ = Σ wi·ui      Autoencoder loss: ‖x − x̂‖²
+Threshold: mean + 3σ of normal reconstruction errors       Samples = fs × duration</div>
+    <table style="margin-top:10px">
+      <tr><th>If the question says</th><th>Write</th></tr>
+      <tr><td>Very few abnormal examples</td><td>Do not train a two-class classifier. Anomaly detection on normal data (autoencoder, one-class, statistical). Use abnormal cases only to test. Augment if a classifier is needed. Report recall, precision and F1.</td></tr>
+      <tr><td>Critique features</td><td>Name what each loses (histogram loses time order; frequency features can be near zero; per-sequence normalisation hides amplitude). Propose sequence-aware or time-frequency features.</td></tr>
+      <tr><td>Unlabelled data and few labels</td><td>Self-supervised pretraining (autoencoder, contrastive), then fine-tune.</td></tr>
+      <tr><td>Combine sensors</td><td>Early, restricted or late fusion. Mention alignment (spatial, temporal with DTW), missing data and noise.</td></tr>
+      <tr><td>Design a sensing system</td><td>Sensor → pre-process (denoise, baseline) → features (Fourier or wavelet or learned) → model → reasoning and action. Give the metric and the action taken.</td></tr>
+    </table>
+  </div>
+</section>
+
+</main>
