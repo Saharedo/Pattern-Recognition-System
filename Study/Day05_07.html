@@ -1,0 +1,385 @@
+<title>PRS Days 5 to 7 Study Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column, one diagram per concept, plain-language text first, exam angle last in each section */
+:root {
+  --bg: #f6f8fa; --fg: #1b2430; --muted: #5b6776; --card: #ffffff; --line: #d7dee6;
+  --a: #1f6feb; --a-soft: #e3eefc; --b: #d9660b; --b-soft: #fdeede;
+  --ok: #1a7f4b; --ok-soft: #e2f4ea; --warn: #b42318; --warn-soft: #fdecea;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; }
+
+body { background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body);
+  padding-block: 24px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: 2rem; } h2 { font-size: 1.45rem; padding-top: 12px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.1rem; margin-top: 8px; }
+p { margin: 0; } ul, ol { margin: 0; padding-left: 1.2em; } li { margin: 4px 0; }
+code, .mono { font-family: var(--f-mono); font-size: .9em; }
+code { background: var(--a-soft); padding: 1px 5px; border-radius: 4px; }
+section { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+.eyebrow { font: 500 .75rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+figcaption { color: var(--muted); font-size: .9rem; }
+svg { max-width: 100%; height: auto; color: var(--fg); }
+svg text { fill: currentColor; font: 12px var(--f-body); }
+svg .small { font-size: 11px; fill: var(--muted); }
+svg .bold { font-weight: 600; }
+svg .ax { stroke: currentColor; stroke-width: 1.2; fill: none; }
+svg .dash { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 5 4; fill: none; }
+svg .ca { fill: var(--a); } svg .cb { fill: var(--b); }
+svg .la { stroke: var(--a); stroke-width: 2.4; fill: none; } svg .lb { stroke: var(--b); stroke-width: 2.4; fill: none; }
+svg .box { fill: var(--card); stroke: currentColor; stroke-width: 1.2; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+.say { background: var(--a-soft); border-radius: 8px; padding: 12px 16px; }
+.say b, .exam b, .trap b { font-family: var(--f-mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.exam { background: var(--ok-soft); border-radius: 8px; padding: 12px 16px; }
+.trap { background: var(--warn-soft); border-radius: 8px; padding: 12px 16px; }
+.flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.flow .step { flex: 1 1 130px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .9rem; min-width: 0; }
+.flow .step b { display: block; font-family: var(--f-display); }
+.flow .arr { align-self: center; color: var(--muted); }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--a-soft); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.cm { display: grid; grid-template-columns: auto 1fr 1fr; gap: 4px; max-width: 520px; font-size: .9rem; }
+.cm div { padding: 10px; border-radius: 6px; min-width: 0; }
+.cm .h { color: var(--muted); font-size: .8rem; display: flex; align-items: center; }
+.cm .tp, .cm .tn { background: var(--ok-soft); } .cm .fp, .cm .fn { background: var(--warn-soft); }
+.cm strong { display: block; font-family: var(--f-display); }
+.formula { font-family: var(--f-mono); font-size: .9rem; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; overflow-x: auto; white-space: pre; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+summary { cursor: pointer; font-weight: 600; }
+summary:focus-visible { outline: 2px solid var(--a); outline-offset: 2px; }
+details[open] summary { margin-bottom: 8px; }
+.sheet { border: 2px solid var(--a); border-radius: 8px; padding: 14px 16px; background: var(--card); }
+svg .lk { stroke: var(--ok); stroke-width: 2.4; fill: none; }
+svg .leafy { fill: var(--ok-soft); stroke: var(--ok); stroke-width: 1.2; }
+svg .leafn { fill: var(--warn-soft); stroke: var(--warn); stroke-width: 1.2; }
+svg .cg { fill: var(--ok); }
+.tag { display:inline-block; font:500 .72rem var(--f-mono); letter-spacing:.05em; text-transform:uppercase; background:var(--b-soft); color:var(--b); border-radius:4px; padding:1px 6px; }
+</style>
+
+<main>
+<header>
+  <div class="eyebrow">ISY5002 Pattern Recognition Systems · Days 5, 6 and 7</div>
+  <h1>Days 5 to 7: Neural networks and CNNs</h1>
+  <p class="lede">From the perceptron to convolutional networks. This covers the layer-by-layer shape and parameter counting you need for sample question 2a, with that question worked through in full.</p>
+</header>
+<section>
+  <h2>1. The story of deep learning (and why it matters for the exam)</h2>
+  <div class="flow">
+    <div class="step"><b>1943</b>McCulloch-Pitts neuron. 0/1 inputs, fixed weights, <u>no learning</u>.</div>
+    <div class="step"><b>1958</b>Perceptron (Rosenblatt). Real inputs, <u>learns weights</u> from data.</div>
+    <div class="step"><b>1969</b>Minsky and Papert show one perceptron cannot do XOR. <b>First AI winter.</b></div>
+    <div class="step"><b>1986</b>Backpropagation (Rumelhart, Hinton, Williams) trains multilayer networks.</div>
+    <div class="step"><b>Late 80s</b>Deep nets will not train. SVMs and random forests take over. <b>Second winter.</b></div>
+    <div class="step"><b>2012</b>AlexNet wins ImageNet: 15.3% top-5 error against 26.2% for the runner-up.</div>
+  </div>
+  <p><b>Why backpropagation failed before 2012:</b> labelled datasets were thousands of times too small, computers were millions of times slower, weights were initialised badly (all 0 or all 1), and the wrong activation function was used (sigmoid and tanh squash gradients to zero).</p>
+  <p><b>What AlexNet changed:</b> <b>ReLU</b> activation, <b>dropout</b>, <b>GPU</b> training (about 20x faster), and a huge labelled dataset (ImageNet: 1.2 million images, 1,000 classes). Its structure was similar to the 1989 LeNet. The recipe is lots of data + deep convolutional network + backprop on GPU.</p>
+  <div class="scroll"><table>
+    <tr><th></th><th>Classical machine learning</th><th>Deep learning</th></tr>
+    <tr><td>Data needed</td><td>Works on small or medium data</td><td>Needs big data</td></tr>
+    <tr><td>Hardware</td><td>Low-end machine is fine</td><td>Powerful GPU</td></tr>
+    <tr><td>Features</td><td>Designed by hand (HOG, SIFT, statistics)</td><td>Learned automatically</td></tr>
+    <tr><td>Training time</td><td>Minutes to hours</td><td>Hours to weeks</td></tr>
+    <tr><td>Explainability</td><td>Some models are explainable (trees, logistic)</td><td>Hard to impossible</td></tr>
+  </table></div>
+  <p>The notes' three problem types for deep learning: <b>Identify</b> (classify, detect, segment), <b>Create</b> (generative AI: text, images, audio, video), <b>Act</b> (deep reinforcement learning: robots, games, vehicles).</p>
+</section>
+
+<section>
+  <h2>2. One neuron and the perceptron</h2>
+  <div class="formula">net = w0 + w1·x1 + w2·x2 + ... + wn·xn          (w0 is the bias weight, with input +1)
+output = f(net)                                   f = activation function
+hard-limit: f = 0 if net ≤ 0, else 1        sigmoid: f = 1 / (1 + e^(−net))</div>
+  <p><b>Worked example (from the notes).</b> Inputs x1 = 1, x2 = 0. With w0 = −3, w1 = 2, w2 = 6: net = −3 + 2 + 0 = −1, so y = 0. With w0 = −2, w1 = 3, w2 = 5: net = −2 + 3 = 1, so y = 1. <b>Same inputs, different weights, different output.</b> That is exactly why a network can learn: change the weights to reduce the gap between target and output.</p>
+  <h3>Perceptron learning rule</h3>
+  <div class="formula">Δwi = η · (T − O) · xi          wi(new) = wi(old) + Δwi
+T = target, O = output, η = learning rate (0 to 1)</div>
+  <ul>
+    <li>Output right: no change.</li>
+    <li>Output 0 but should be 1: <b>increase</b> weights on active inputs.</li>
+    <li>Output 1 but should be 0: <b>decrease</b> weights on active inputs.</li>
+  </ul>
+  <p><b>Worked example.</b> Start with w0 = −0.5, w1 = −1, w2 = 1.5, η = 0.5. The pattern (x1, x2) = (0, 1), class B (target 0), gives net = −0.5 + 0 + 1.5 = 1.0 &gt; 0, so output is 1: an error. Update (inputs are x0 = 1, x1 = 0, x2 = 1):</p>
+  <div class="formula">Δw0 = 0.5 × (0 − 1) × 1 = −0.5     → w0 = −1
+Δw1 = 0.5 × (0 − 1) × 0 =  0       → w1 = −1   (input was 0, so no change)
+Δw2 = 0.5 × (0 − 1) × 1 = −0.5     → w2 = 1
+New net for (0, 1) = −1 + 0 + 1 = 0 → output 0. Correct.</div>
+  <h3>Linear separability and XOR</h3>
+  <p>A single perceptron draws <b>one straight line</b> (in 2D; a hyperplane in general): w0 + w1·x1 + w2·x2 = 0, which is x2 = −(w1/w2)·x1 − (w0/w2). It can only solve problems where one line separates the classes (linearly separable). The convergence theorem says it learns a solution if and only if one exists.</p>
+  <figure>
+    <svg viewBox="0 0 340 200" width="420" role="img" aria-label="XOR data: the points (0,0) and (1,1) are class B, the points (0,1) and (1,0) are class A; no single straight line separates them but two lines do">
+      <rect class="box" x="4" y="4" width="332" height="192" rx="8"/>
+      <line class="ax" x1="60" y1="160" x2="300" y2="160"/><line class="ax" x1="60" y1="160" x2="60" y2="24"/>
+      <circle cx="90" cy="150" r="9" fill="var(--b)"/><circle cx="260" cy="40" r="9" fill="var(--b)"/>
+      <circle cx="90" cy="40" r="9" fill="var(--a)"/><circle cx="260" cy="150" r="9" fill="var(--a)"/>
+      <text x="90" y="178" class="small" text-anchor="middle">(0,0)</text><text x="260" y="178" class="small" text-anchor="middle">(1,0)</text>
+      <text x="100" y="32" class="small">(0,1)</text><text x="228" y="32" class="small">(1,1)</text>
+      <line class="dash" x1="60" y1="95" x2="300" y2="95"/>
+      <text x="14" y="22" class="small">A = output 1, B = output 0</text>
+      <text x="150" y="120" class="bold" style="fill:var(--warn)">no single line works</text>
+    </svg>
+    <figcaption>XOR: the blue (A) points sit on one diagonal and the orange (B) points on the other. A <b>hidden layer</b> with two nodes, each drawing one line, solves it.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>3. The multilayer perceptron and backpropagation</h2>
+  <p>An MLP has an input layer, one or more hidden layers and an output layer, with every node connected to every node in the next layer (<b>fully connected, feedforward</b>). The hidden layers give the <b>non-linearity</b>: nodes in the first hidden layer each draw a line (hyperplane), the next layer combines lines into convex regions, and a further layer can build concave regions.</p>
+  <h3>Training loop</h3>
+  <ol>
+    <li>Initialise weights to small random values (never all zero).</li>
+    <li><b>Forward pass:</b> compute the output.</li>
+    <li>Compute the <b>error</b> against the target with a loss function.</li>
+    <li><b>Backward pass (backpropagation):</b> pass the error back through the layers to see how each weight contributed.</li>
+    <li>Update each weight by gradient descent. Repeat until the error is small enough or you hit a stopping rule.</li>
+  </ol>
+  <div class="formula">Sigmoid units, error term δ, learning rate η:
+output unit j:   δj = Oj · (1 − Oj) · (Tj − Oj)
+hidden unit j:   δj = Oj · (1 − Oj) · Σk δk · wkj        (k = units j feeds into)
+weight change:   Δwji = η · δj · Oi</div>
+  <p><b>Worked numbers from the XOR example in the notes</b> (learning rate 0.3, output O1 = 0.508, target 0):</p>
+  <div class="formula">δ1 = 0.508 × (1 − 0.508) × (0 − 0.508) = −0.127
+Δw13 = 0.3 × (−0.127) × 1 = −0.038       (weight is pushed down, which lowers the output)</div>
+  <figure>
+    <svg viewBox="0 0 340 230" width="400" role="img" aria-label="Error plotted against one weight as a bowl-shaped curve with three numbered steps moving down to the minimum, and a second shallow dip marked as a local minimum">
+      <line class="ax" x1="40" y1="20" x2="40" y2="195"/><line class="ax" x1="40" y1="195" x2="320" y2="195"/>
+      <polyline class="lb" points="40,40 63,95 87,130 110,150 133,165 157,175 180,178 203,170 227,150 250,128 273,126 297,140 320,170"/>
+      <circle class="ca" cx="63" cy="95" r="5"/><circle class="ca" cx="115" cy="154" r="5"/><circle class="ca" cx="165" cy="176" r="5"/>
+      <text x="70" y="92" class="small">1</text><text x="122" y="150" class="small">2</text><text x="170" y="172" class="small">3</text>
+      <text x="108" y="212" class="bold" style="fill:var(--ok)">global minimum</text>
+      <text x="238" y="120" class="bold" style="fill:var(--warn)">local minimum</text>
+      <text x="44" y="14" class="small">error</text><text x="250" y="212" class="small">weight →</text>
+    </svg>
+    <figcaption>Gradient descent moves the weight downhill. A learning rate that is too big overshoots, too small is slow. Backpropagation is never guaranteed to find the global minimum.</figcaption>
+  </figure>
+  <h3>Training choices to know</h3>
+  <div class="scroll"><table>
+    <tr><th>Topic</th><th>What to say</th></tr>
+    <tr><td>Loss function</td><td>MSE for numeric targets. <b>Cross-entropy</b> for classification (preferred).</td></tr>
+    <tr><td>Gradient descent types</td><td><b>Batch</b>: all examples then update. <b>Stochastic</b>: one example at a time (noisy). <b>Mini-batch</b>: n at a time (the usual choice).</td></tr>
+    <tr><td>Learning rate</td><td>Step size. Not constant for best results (decay or schedule).</td></tr>
+    <tr><td>Momentum</td><td>Adds a fraction of the previous weight change: smooths the descent and helps skip shallow dips.</td></tr>
+    <tr><td>Hidden nodes</td><td>Roughly sqrt(inputs × outputs) as a starting point. Too many overfit.</td></tr>
+    <tr><td>Overtraining</td><td>Validation error rises while training error keeps falling. Stop early at the validation minimum.</td></tr>
+    <tr><td>Ways to prevent it</td><td>More data, random order of examples, early stopping, noise injection, prune nodes, L2 regularisation (weight decay), dropout.</td></tr>
+  </table></div>
+  <h3>Activation functions</h3>
+  <div class="scroll"><table>
+    <tr><th></th><th>Sigmoid</th><th>Tanh</th><th>ReLU</th><th>Softmax</th></tr>
+    <tr><td>Range</td><td>0 to 1</td><td>−1 to 1</td><td>0 to ∞</td><td>0 to 1, all outputs sum to 1</td></tr>
+    <tr><td>Cost</td><td>High (exponential)</td><td>High</td><td>Low (max(0, x))</td><td>-</td></tr>
+    <tr><td>Vanishing gradient</td><td>Yes</td><td>Yes</td><td>No (for positive inputs)</td><td>-</td></tr>
+    <tr><td>Use</td><td>Output of a two-class problem</td><td>Older hidden layers</td><td><b>Hidden layers (default)</b></td><td><b>Output of a many-class problem</b></td></tr>
+  </table></div>
+  <p>Why we need a non-linear activation: without it, a stack of layers collapses to one linear model. ReLU also gives <b>sparse</b> outputs (many exact zeros), so only important neurons contribute.</p>
+</section>
+
+<section>
+  <h2>4. Other network types from Day 7 (shorter)</h2>
+  <div class="scroll"><table>
+    <tr><th>Network</th><th>Key idea</th><th>Training</th><th>Good for</th></tr>
+    <tr><td><b>RBF network</b></td><td>Hidden nodes are Gaussian "kernels" around centres: O = exp(−‖x − c‖² / 2σ²). Output is a linear mix.</td><td><b>Two stages</b>: (1) find centres and widths by clustering (unsupervised), (2) learn output weights (supervised). Needs few labels.</td><td>Function approximation, classification</td></tr>
+    <tr><td><b>GRNN</b> (general regression NN)</td><td>Memory-based: one pattern node per training example (or cluster centre). Output = weighted average of training targets, weights from distance. σ is a smoothing constant.</td><td><b>One pass</b>, very fast. Small σ: spiky, fits sample points. Large σ: smooth, flatter.</td><td>Regression, forecasting, control. Weakness: grows with data, heavy at run time.</td></tr>
+    <tr><td><b>SOM</b> (Kohonen)</td><td>Output nodes on a 1D or 2D lattice. <b>Winner takes all</b>: the node closest to the input wins and also pulls its neighbours closer: w(new) = w(old) + α · h · (x − w(old)).</td><td>Unsupervised, competitive. Shrink the neighbourhood and α over time.</td><td>Clustering without choosing k, data visualisation, compression</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>5. Convolutional neural networks (CNN)</h2>
+  <p>A dense network on a 128 x 128 x 3 image has 49,152 inputs per neuron, which is far too many weights. A <b>convolution</b> slides a small filter (kernel) over the image and reuses the <u>same</u> few weights everywhere. That gives fewer parameters and detects a pattern wherever it appears.</p>
+  <div class="flow">
+    <div class="step"><b>Conv</b>Extract features with learned filters</div><span class="arr">→</span>
+    <div class="step"><b>ReLU</b>Add non-linearity</div><span class="arr">→</span>
+    <div class="step"><b>Pool</b>Shrink, keep strongest</div><span class="arr">→ repeat →</span>
+    <div class="step"><b>Flatten</b>Unroll to a vector</div><span class="arr">→</span>
+    <div class="step"><b>Dense</b>Classify</div><span class="arr">→</span>
+    <div class="step"><b>Softmax</b>Class probabilities</div>
+  </div>
+  <p>Early layers find simple things (edges, brightness changes). Deeper layers combine them into shapes, parts and objects. You do <b>not</b> choose the filter values (training does). You choose only the size and number of filters.</p>
+
+  <h3>5.1 What a convolution does (worked example)</h3>
+  <p>Slide a 3 x 3 kernel over a 4 x 4 input. At each position multiply element by element and add up.</p>
+  <div class="figs">
+    <div><b>Input (4 x 4)</b><div class="scroll"><table><tr><td>1</td><td>2</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>3</td><td>1</td></tr><tr><td>2</td><td>1</td><td>0</td><td>2</td></tr><tr><td>1</td><td>0</td><td>1</td><td>3</td></tr></table></div></div>
+    <div><b>Kernel (3 x 3)</b><div class="scroll"><table><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td></tr></table></div></div>
+    <div><b>Output (2 x 2, no padding)</b><div class="scroll"><table><tr><td>4</td><td>9</td></tr><tr><td>6</td><td>5</td></tr></table></div></div>
+  </div>
+  <p>First output cell: top-left 3 x 3 window is [1 2 0; 0 1 3; 2 1 0]. Only the kernel's 1-positions count (the four corners and the centre): top-left 1, top-right 0, centre 1, bottom-left 2, bottom-right 0, so 1 + 0 + 1 + 2 + 0 = <b>4</b>. Move the window one step right for 9, one step down for 6, and both for 5.</p>
+  <h3>Size formulas (learn these)</h3>
+  <div class="formula">Output size (rows) = floor( (W − F + 2P) / S ) + 1
+   W = input size, F = filter size, P = padding, S = stride
+
+Conv parameters = ( Fr × Fc × Cin + 1 ) × Cout       (the +1 is the bias, one per filter)
+Dense parameters = inputs × outputs + outputs
+Pooling and Flatten parameters = 0</div>
+  <ul>
+    <li><b>Padding "same":</b> output size = input size (stride 1). <b>"valid":</b> no padding, output shrinks.</li>
+    <li><b>Stride:</b> how far the window moves. Stride 2 roughly halves the size.</li>
+    <li><b>Multi-channel input:</b> each filter spans all input channels, products are summed across channels into one output channel. <b>Number of filters = number of output channels.</b></li>
+    <li><b>Max pooling</b> 2 x 2, stride 2: halves height and width, keeps the largest value in each window, channels unchanged, no parameters. It reduces size and overfitting and makes the network tolerant to small shifts.</li>
+    <li><b>Dropout:</b> randomly switches off a fraction (rate p, often 0.2 to 0.5) of units during <u>training only</u> to regularise.</li>
+  </ul>
+  <h3>Worked examples from the notes</h3>
+  <div class="scroll"><table>
+    <tr><th>Calculation</th><th>Working</th><th>Answer</th></tr>
+    <tr><td>128 x 128 input, 7 x 7 filter, stride 2, no padding</td><td>floor((128 − 7) / 2) + 1 = floor(60.5) + 1</td><td class="n">61 x 61</td></tr>
+    <tr><td>61 x 61 input, 4 x 4 pool, stride 2</td><td>floor((61 − 4) / 2) + 1 = floor(28.5) + 1</td><td class="n">29 x 29</td></tr>
+    <tr><td>Conv 7 x 7, 3 input channels, 18 filters</td><td>(7 x 7 x 3 + 1) x 18 = 148 x 18</td><td class="n">2,664 params</td></tr>
+  </table></div>
+  <h4>A full small network (32 x 32 x 3 input, no padding)</h4>
+  <div class="scroll"><table>
+    <tr><th>Layer</th><th>Settings</th><th>Output shape</th><th class="n">Parameters</th></tr>
+    <tr><td>1 Conv</td><td>3x3, 16 filters</td><td>30 x 30 x 16</td><td class="n">(9·3 + 1)·16 = 448</td></tr>
+    <tr><td>2 MaxPool</td><td>2x2, stride 2</td><td>15 x 15 x 16</td><td class="n">0</td></tr>
+    <tr><td>3 Conv</td><td>5x5, 32 filters</td><td>11 x 11 x 32</td><td class="n">(25·16 + 1)·32 = 12,832</td></tr>
+    <tr><td>4 MaxPool</td><td>2x2, stride 2</td><td>5 x 5 x 32</td><td class="n">0</td></tr>
+    <tr><td>5 Conv</td><td>3x3, 64 filters</td><td>3 x 3 x 64</td><td class="n">(9·32 + 1)·64 = 18,496</td></tr>
+    <tr><td>6 Flatten + Dense</td><td>3·3·64 = 576 inputs, 128 units</td><td>128</td><td class="n">576·128 + 128 = 73,856</td></tr>
+    <tr><td>7 Dense</td><td>2 outputs</td><td>2</td><td class="n">128·2 + 2 = 258</td></tr>
+  </table></div>
+  <div class="say"><b>No-calculator tips</b>Do the small conv-layer numbers exactly (they are modest) and round the big dense layer: 9,408 x 256 is about 9,400 x 256, which is about 2.4 million. Spot the pattern: the first Dense layer after Flatten usually dominates the parameter count. When asked to compare models, quote "about 2.4 million of 2.6 million" instead of exact digits, but show the formula.</div>
+  <p><b>Digit-recognition example in the notes</b> (28 x 28 x 1, kernel 5 x 5, no padding): Conv(20) gives 24 x 24 x 20 with (25 + 1) x 20 = 520 parameters, pool gives 12 x 12 x 20, Conv(40) gives 8 x 8 x 40 with (25·20 + 1) x 40 = 20,040, pool gives 4 x 4 x 40, flatten 640, Dense 128 has 640·128 + 128 = 82,048, output Dense 10 has 1,290. Total 103,898.</p>
+</section>
+
+<section>
+  <h2>6. Sample paper Q2a, worked through</h2>
+  <p>The team's model takes a 128 x 128 x 3 image and must output one of <b>918</b> bins (brand x type x value = 18 x 17 x 3). There are only about 5,000 training images, so roughly <b>5.4 images per class</b>, and the spread is uneven.</p>
+  <h3>Check the given table</h3>
+  <div class="scroll"><table>
+    <tr><th>Layer</th><th>Output shape</th><th class="n">Parameters</th><th>Check</th></tr>
+    <tr><td>Conv 3x3, 16</td><td>126 x 126 x 16</td><td class="n">448</td><td>(9·3 + 1)·16</td></tr>
+    <tr><td>MaxPool 2x2</td><td>63 x 63 x 16</td><td class="n">0</td><td></td></tr>
+    <tr><td>Conv 3x3, 32</td><td>61 x 61 x 32</td><td class="n">4,640</td><td>(9·16 + 1)·32</td></tr>
+    <tr><td>MaxPool 2x2</td><td>30 x 30 x 32</td><td class="n">0</td><td>floor(61/2) = 30</td></tr>
+    <tr><td>Conv 3x3, 48</td><td>28 x 28 x 48</td><td class="n">13,872</td><td>(9·32 + 1)·48</td></tr>
+    <tr><td>MaxPool 2x2</td><td>14 x 14 x 48</td><td class="n">0</td><td></td></tr>
+    <tr><td>Flatten</td><td>9,408</td><td class="n">0</td><td>14·14·48</td></tr>
+    <tr><td>Dense 256</td><td>256</td><td class="n"><b>2,408,704</b></td><td>9,408·256 + 256</td></tr>
+    <tr><td>Dense 128</td><td>128</td><td class="n">32,896</td><td>256·128 + 128</td></tr>
+    <tr><td>Dense 918</td><td>918</td><td class="n">118,422</td><td>128·918 + 918</td></tr>
+    <tr><td><b>Total</b></td><td></td><td class="n"><b>2,578,982</b></td><td></td></tr>
+  </table></div>
+  <p>The first Dense layer alone holds <b>2.41 million of 2.58 million parameters, about 93%</b>.</p>
+  <h3>(i) Do you agree that the last layers are poorly designed? Yes, for these reasons</h3>
+  <ul>
+    <li><b>Parameter explosion:</b> Flatten (9,408) into Dense 256 creates 93% of all weights, far more than 5,000 images can support. This invites <b>overfitting</b>.</li>
+    <li><b>One 918-way softmax:</b> it treats "Samsung-kettle-high" and "Samsung-kettle-low" as unrelated classes, so evidence about "Samsung" or "kettle" is not shared. With about 5 images per class the classifier is badly under-supplied, and uneven categories make it worse.</li>
+    <li>No regularisation (no dropout, batch normalisation or augmentation) and the activation and loss functions are not stated.</li>
+  </ul>
+  <h3>(ii) and (iii) A better model, and why</h3>
+  <figure>
+    <svg viewBox="0 0 420 230" width="520" role="img" aria-label="Proposed network: image goes through a shared convolutional backbone, then global average pooling, then dense layers, then splits into three softmax heads for brand, type and value">
+      <defs><marker id="ar5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+      <rect class="box" x="8" y="80" width="62" height="56" rx="6"/><text x="39" y="104" class="bold" text-anchor="middle">Image</text><text x="39" y="120" class="small" text-anchor="middle">128x128x3</text>
+      <path class="ax" d="M70 108 H90" marker-end="url(#ar5)"/>
+      <rect class="box" x="92" y="64" width="92" height="88" rx="6"/><text x="138" y="92" class="bold" text-anchor="middle">Shared conv</text><text x="138" y="108" class="bold" text-anchor="middle">backbone</text><text x="138" y="128" class="small" text-anchor="middle">3 conv + pool</text><text x="138" y="142" class="small" text-anchor="middle">BN, dropout</text>
+      <path class="ax" d="M184 108 H202" marker-end="url(#ar5)"/>
+      <rect class="box" x="204" y="80" width="62" height="56" rx="6"/><text x="235" y="104" class="bold" text-anchor="middle">Global avg</text><text x="235" y="120" class="bold" text-anchor="middle">pool 48</text>
+      <path class="ax" d="M266 108 H282" marker-end="url(#ar5)"/>
+      <rect class="box" x="284" y="80" width="50" height="56" rx="6"/><text x="309" y="104" class="bold" text-anchor="middle">Dense</text><text x="309" y="120" class="small" text-anchor="middle">256, 128</text>
+      <path class="ax" d="M334 94 L356 40" marker-end="url(#ar5)"/><path class="ax" d="M334 108 L356 108" marker-end="url(#ar5)"/><path class="ax" d="M334 122 L356 176" marker-end="url(#ar5)"/>
+      <rect class="leafy" x="358" y="20" width="56" height="40" rx="6"/><text x="386" y="38" class="bold" text-anchor="middle">Brand</text><text x="386" y="52" class="small" text-anchor="middle">softmax 18</text>
+      <rect class="leafy" x="358" y="88" width="56" height="40" rx="6"/><text x="386" y="106" class="bold" text-anchor="middle">Type</text><text x="386" y="120" class="small" text-anchor="middle">softmax 17</text>
+      <rect class="leafy" x="358" y="156" width="56" height="40" rx="6"/><text x="386" y="174" class="bold" text-anchor="middle">Value</text><text x="386" y="188" class="small" text-anchor="middle">softmax 3</text>
+      <text x="8" y="222" class="small">Bin = (brand, type, value) from the three heads. Loss = sum of three categorical cross-entropies.</text>
+    </svg>
+    <figcaption>One shared feature extractor, three small classifiers. The robot's bin is the combination of the three predictions.</figcaption>
+  </figure>
+  <div class="scroll"><table>
+    <tr><th>Change</th><th>Reason and advantage</th></tr>
+    <tr><td><b>Three softmax heads</b> (18, 17, 3) instead of one 918-way head</td><td>Each head sees far more examples per class: about 5,000/18 = 280 per brand, 5,000/17 = 290 per type, 5,000/3 = 1,670 per value, against about 5 per combination. Knowledge about a brand is shared across all its types. Can still recover all 918 bins.</td></tr>
+    <tr><td><b>Global average pooling</b> instead of Flatten</td><td>Cuts the 9,408 inputs of the first dense layer to 48, removing the parameter explosion, and makes the model less sensitive to where an object sits.</td></tr>
+    <tr><td><b>Dropout and batch normalisation</b></td><td>Regularise and speed training.</td></tr>
+    <tr><td><b>Data augmentation</b> (flips, rotations, crops, brightness) and class weights</td><td>Create variety from 5,000 images and offset the uneven category counts.</td></tr>
+    <tr><td><b>Transfer learning</b> (optional)</td><td>Start from a pretrained backbone and fine-tune, which works well with little data.</td></tr>
+  </table></div>
+  <h3>(iv) Parameter count, activations and loss</h3>
+  <div class="scroll"><table>
+    <tr><th>Layer</th><th class="n">Original</th><th class="n">New</th></tr>
+    <tr><td>Three conv layers</td><td class="n">448 + 4,640 + 13,872 = 18,960</td><td class="n">18,960 (unchanged)</td></tr>
+    <tr><td>First dense (256)</td><td class="n">9,408·256 + 256 = 2,408,704</td><td class="n">48·256 + 256 = 12,544</td></tr>
+    <tr><td>Second dense (128)</td><td class="n">32,896</td><td class="n">32,896</td></tr>
+    <tr><td>Output</td><td class="n">918 units: 118,422</td><td class="n">(128·18 + 18) + (128·17 + 17) + (128·3 + 3) = 2,322 + 2,193 + 387 = 4,902</td></tr>
+    <tr><td><b>Total</b></td><td class="n"><b>2,578,982</b></td><td class="n"><b>69,302</b> (about 97% fewer)</td></tr>
+  </table></div>
+  <p>If you keep Flatten and only split the output into three heads, the total becomes 2,578,982 − 118,422 + 4,902 = 2,465,462 (only 4% fewer). That is why the global-pooling change is the important one. State your architecture so the number is traceable.</p>
+  <ul>
+    <li><b>Activations:</b> ReLU in all hidden layers (conv and dense). <b>Softmax</b> at each of the three outputs, because each head picks one class out of several.</li>
+    <li><b>Loss:</b> categorical cross-entropy for each head, summed (optionally weighted). If one image could have several labels at once, use sigmoid outputs and binary cross-entropy instead.</li>
+  </ul>
+  <div class="exam"><b>Exam angle</b>For a network-critique question: (1) compute shapes and parameters and point at where the weights sit, (2) relate to data size (5,000 images against 918 classes), (3) propose specific changes with a reason each, (4) recompute parameters, (5) give activation and loss. Showing the parameter table is where many marks come from.</div>
+</section>
+
+<section>
+  <h2>7. Practice questions (exam style)</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Question A: shapes and parameters</h3>
+    <p>Input 64 x 64 x 1. Conv 5 x 5, 8 filters, no padding; MaxPool 2 x 2; Conv 3 x 3, 16 filters, no padding; MaxPool 2 x 2; Flatten; Dense 64 (ReLU); Dense 5 (softmax). (a) Give the output shape after each layer. (b) Give the number of parameters in each layer and the total. (c) Which layer has most parameters and what is the risk? (5 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> Conv1: (64 − 5) + 1 = 60, so 60 x 60 x 8. Pool: 30 x 30 x 8. Conv2: 30 − 3 + 1 = 28, so 28 x 28 x 16. Pool: 14 x 14 x 16. Flatten: 14·14·16 = 3,136. Dense: 64. Output: 5.</p>
+    <p><b>(b)</b> Conv1: (5·5·1 + 1)·8 = 208. Conv2: (3·3·8 + 1)·16 = 73·16 = 1,168. Dense 64: 3,136·64 + 64 = 200,768. Output: 64·5 + 5 = 325. Pooling and Flatten: 0. <b>Total 202,469.</b></p>
+    <p><b>(c)</b> The Dense 64 layer (about 200,000 of 202,000, roughly 99%). With limited data it can overfit. Reduce it with global average pooling, fewer units, dropout or L2.</p>
+  </details>
+  <div class="card">
+    <h3 style="margin-top:0">Question B: perceptron update</h3>
+    <p>A perceptron has w0 = 0, w1 = 1, w2 = −1, learning rate 0.5, and outputs 1 if net &gt; 0, else 0. The pattern (x1, x2) = (1, 1) has target 1. (a) What is the output? (b) Apply one update. (c) Is the pattern now correct? (3 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> net = 0 + 1·1 + (−1)·1 = 0, which is not greater than 0, so the output is 0. Target is 1, so there is an error.</p>
+    <p><b>(b)</b> T − O = 1. Δw0 = 0.5·1·1 = 0.5, Δw1 = 0.5·1·1 = 0.5, Δw2 = 0.5·1·1 = 0.5. New weights: w0 = 0.5, w1 = 1.5, w2 = −0.5.</p>
+    <p><b>(c)</b> net = 0.5 + 1.5 − 0.5 = 1.5 &gt; 0, so the output is 1. Correct.</p>
+  </details>
+  <details><summary>Quick recall questions</summary>
+    <ol>
+      <li>Why can a single perceptron not solve XOR?</li>
+      <li>Give the output size for a 28 x 28 input, 5 x 5 filter, stride 1, no padding.</li>
+      <li>How many parameters in a conv layer with 3 x 3 filters, 16 input channels and 32 filters?</li>
+      <li>Which activation do you use in the output layer for a 10-class problem?</li>
+      <li>Name three ways to reduce overfitting in a neural network.</li>
+    </ol>
+    <p><b>Answers:</b> (1) XOR is not linearly separable and one perceptron draws one line. (2) 24 x 24. (3) (3·3·16 + 1)·32 = 145·32 = 4,640. (4) Softmax. (5) Dropout, early stopping, L2 regularisation, more data or augmentation, fewer nodes.</p>
+  </details>
+</section>
+
+<section>
+  <h2>8. Days 5 to 7 cheat sheet</h2>
+  <div class="sheet">
+    <div class="formula">Conv output = floor((W − F + 2P)/S) + 1        Conv params = (Fr·Fc·Cin + 1)·Cout
+Dense params = in·out + out                      Pool, Flatten, Dropout params = 0
+Perceptron: Δw = η(T − O)x                       Backprop: δout = O(1−O)(T−O),  Δw = η·δ·Oin
+Neuron: out = f(Σ w·x + b)    Sigmoid 1/(1+e^−x)    ReLU max(0,x)    Softmax e^xi / Σ e^xj</div>
+    <table style="margin-top:10px">
+      <tr><th>If the question says</th><th>Write</th></tr>
+      <tr><td>Critique a CNN summary</td><td>Compute parameter table. Point at the Flatten-to-Dense layer. Link to data size. Fix: global average pooling, dropout, BN, augmentation, transfer learning.</td></tr>
+      <tr><td>Many related labels (brand, type, value)</td><td>Multi-output network: shared backbone, one softmax head per attribute, summed categorical cross-entropy.</td></tr>
+      <tr><td>Output layer and loss</td><td>2 classes: sigmoid + binary cross-entropy. Many classes (one label): softmax + categorical cross-entropy. Number: linear + MSE.</td></tr>
+      <tr><td>Training error low, validation high</td><td>Overfitting. Early stopping, dropout, L2, fewer parameters, more or augmented data.</td></tr>
+      <tr><td>Why ReLU over sigmoid</td><td>No vanishing gradient for positive inputs, cheap, sparse, faster convergence.</td></tr>
+      <tr><td>Why deep learning rather than classical ML</td><td>Learns features automatically from raw images or signals; scales with data. Cost: data, compute, explainability.</td></tr>
+    </table>
+  </div>
+</section>
+
+</main>
