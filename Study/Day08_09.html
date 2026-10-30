@@ -1,0 +1,313 @@
+<title>PRS Days 8 and 9 Study Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column, one diagram per concept, plain-language text first, exam angle last in each section */
+:root {
+  --bg: #f6f8fa; --fg: #1b2430; --muted: #5b6776; --card: #ffffff; --line: #d7dee6;
+  --a: #1f6feb; --a-soft: #e3eefc; --b: #d9660b; --b-soft: #fdeede;
+  --ok: #1a7f4b; --ok-soft: #e2f4ea; --warn: #b42318; --warn-soft: #fdecea;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; }
+
+body { background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body);
+  padding-block: 24px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: 2rem; } h2 { font-size: 1.45rem; padding-top: 12px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.1rem; margin-top: 8px; }
+p { margin: 0; } ul, ol { margin: 0; padding-left: 1.2em; } li { margin: 4px 0; }
+code, .mono { font-family: var(--f-mono); font-size: .9em; }
+code { background: var(--a-soft); padding: 1px 5px; border-radius: 4px; }
+section { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+.eyebrow { font: 500 .75rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+figcaption { color: var(--muted); font-size: .9rem; }
+svg { max-width: 100%; height: auto; color: var(--fg); }
+svg text { fill: currentColor; font: 12px var(--f-body); }
+svg .small { font-size: 11px; fill: var(--muted); }
+svg .bold { font-weight: 600; }
+svg .ax { stroke: currentColor; stroke-width: 1.2; fill: none; }
+svg .dash { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 5 4; fill: none; }
+svg .ca { fill: var(--a); } svg .cb { fill: var(--b); }
+svg .la { stroke: var(--a); stroke-width: 2.4; fill: none; } svg .lb { stroke: var(--b); stroke-width: 2.4; fill: none; }
+svg .box { fill: var(--card); stroke: currentColor; stroke-width: 1.2; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+.say { background: var(--a-soft); border-radius: 8px; padding: 12px 16px; }
+.say b, .exam b, .trap b { font-family: var(--f-mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.exam { background: var(--ok-soft); border-radius: 8px; padding: 12px 16px; }
+.trap { background: var(--warn-soft); border-radius: 8px; padding: 12px 16px; }
+.flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.flow .step { flex: 1 1 130px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .9rem; min-width: 0; }
+.flow .step b { display: block; font-family: var(--f-display); }
+.flow .arr { align-self: center; color: var(--muted); }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--a-soft); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.cm { display: grid; grid-template-columns: auto 1fr 1fr; gap: 4px; max-width: 520px; font-size: .9rem; }
+.cm div { padding: 10px; border-radius: 6px; min-width: 0; }
+.cm .h { color: var(--muted); font-size: .8rem; display: flex; align-items: center; }
+.cm .tp, .cm .tn { background: var(--ok-soft); } .cm .fp, .cm .fn { background: var(--warn-soft); }
+.cm strong { display: block; font-family: var(--f-display); }
+.formula { font-family: var(--f-mono); font-size: .9rem; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; overflow-x: auto; white-space: pre; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+summary { cursor: pointer; font-weight: 600; }
+summary:focus-visible { outline: 2px solid var(--a); outline-offset: 2px; }
+details[open] summary { margin-bottom: 8px; }
+.sheet { border: 2px solid var(--a); border-radius: 8px; padding: 14px 16px; background: var(--card); }
+svg .lk { stroke: var(--ok); stroke-width: 2.4; fill: none; }
+svg .leafy { fill: var(--ok-soft); stroke: var(--ok); stroke-width: 1.2; }
+svg .leafn { fill: var(--warn-soft); stroke: var(--warn); stroke-width: 1.2; }
+svg .cg { fill: var(--ok); }
+.tag { display:inline-block; font:500 .72rem var(--f-mono); letter-spacing:.05em; text-transform:uppercase; background:var(--b-soft); color:var(--b); border-radius:4px; padding:1px 6px; }
+</style>
+
+<main>
+<header>
+  <div class="eyebrow">ISY5002 Pattern Recognition Systems · Days 8 and 9</div>
+  <h1>Days 8 and 9: Training deep networks, sequences and transformers</h1>
+  <p class="lede">Why depth matters, how to make very deep networks train, and how RNNs and LSTMs handle sequences. The clickstream part of sample question 1d is answered at the end of the sequence section.</p>
+</header>
+<section>
+  <h2>1. Why depth matters</h2>
+  <p>The <b>universal approximation theorem</b> says a network with one hidden layer can, in principle, approximate any continuous function. But it gives no practical way to <u>find</u> those weights, and in practice <b>depth, not width</b>, is what made image recognition work.</p>
+  <p>The notes show an experiment on AlexNet (8 layers, 60 million parameters, 650,000 neurons). Top-5 accuracy is the share of images where the true class is among the model's 5 highest guesses (original: 81.9%).</p>
+  <div class="scroll"><table>
+    <tr><th>What was removed</th><th>Parameters left</th><th>Accuracy change</th><th>Lesson</th></tr>
+    <tr><td>Dense layer 7</td><td>60M to 44M</td><td>−1.1 points</td><td>Millions of parameters bought very little</td></tr>
+    <tr><td>Dense layers 6 and 7</td><td>60M to 10M (83% gone)</td><td>−5.7 points</td><td>Big dense layers are mostly redundant</td></tr>
+    <tr><td>Conv layers 3 and 4</td><td>60M to 59M</td><td>−3.0 points</td><td>Tiny parameter saving, but accuracy still falls: the feature extractor matters</td></tr>
+    <tr><td>Conv 3, 4 and dense 6, 7 (half the layers)</td><td>9M</td><td><b>−33.5 points</b></td><td>The power of a deep network comes from its depth</td></tr>
+  </table></div>
+  <div class="say"><b>Takeaway for the exam</b>More parameters does not mean a better network. Convolutional (feature extractor) depth matters more than a giant dense layer. This supports the Day 5 to 7 advice to shrink the first dense layer.</div>
+</section>
+
+<section>
+  <h2>2. Building models in Keras (what the code means)</h2>
+  <div class="scroll"><table>
+    <tr><th>Style</th><th>Use when</th><th>Limits</th></tr>
+    <tr><td><b>Sequential</b>: add layers one by one</td><td>Single input, single output, straight line of layers. Suits most simple models.</td><td>No branching, merging, shared layers, multiple inputs or outputs</td></tr>
+    <tr><td><b>Functional API</b>: <code>x = Layer(...)(x)</code> then <code>Model(inputs, outputs)</code></td><td><b>Multiple inputs or outputs</b>, branches, shared layers, skip connections (ResNet)</td><td>More ways to make a wiring mistake</td></tr>
+  </table></div>
+  <ul>
+    <li><b>Multiple inputs</b> example: a video plus a question ("What is the person doing?"). Each input has its own feature extractor and the features are merged (<code>concatenate</code>).</li>
+    <li><b>Multiple outputs</b> example: a retinal image, one network produces both an enhanced image and a segmentation map from a shared encoder.</li>
+    <li><b>Shared layers</b>: the same weights process two inputs (for example person re-identification: both photos go through the same conv layers so they are mapped to the same feature space, then compared).</li>
+  </ul>
+  <p>Loss and output rule: <b>regression</b> linear output + MSE. <b>Binary</b> sigmoid + binary cross-entropy. <b>Multi-class</b> softmax + categorical cross-entropy (labels one-hot encoded). Image data must be shaped (samples, rows, columns, channels) and scaled to 0 to 1.</p>
+  <p><b>Reading <code>model.summary()</code>:</b> check output shapes and the Param # column. Example: Conv2D 3x3, 32 filters on a 3-channel image = (3·3·3 + 1)·32 = <b>896</b>. The "Trainable params" total tells you how complex the model is.</p>
+</section>
+
+<section>
+  <h2>3. Training very deep networks: the problems and the fixes</h2>
+  <h3>3.1 Vanishing gradients</h3>
+  <p>Backpropagation multiplies many <b>derivatives of the activation function</b> together as the error travels back. If each is small, the product shrinks towards zero, so the <b>early layers</b> (the feature extractors) barely learn.</p>
+  <figure>
+    <svg viewBox="0 0 400 190" width="500" role="img" aria-label="Error signal shrinking as it passes backwards through four sigmoid layers: 1 then 0.25 then 0.06 then 0.016 then 0.004, shown as bars of falling height">
+      <line class="ax" x1="30" y1="150" x2="380" y2="150"/>
+      <rect x="50" y="30" width="44" height="120" fill="var(--a)"/><rect x="127" y="120" width="44" height="30" fill="var(--a)"/><rect x="204" y="143" width="44" height="7" fill="var(--a)"/><rect x="281" y="148" width="44" height="2" fill="var(--a)"/>
+      <text x="72" y="170" class="small" text-anchor="middle">output layer</text><text x="149" y="170" class="small" text-anchor="middle">after ×0.25</text><text x="226" y="170" class="small" text-anchor="middle">after ×0.25²</text><text x="303" y="170" class="small" text-anchor="middle">after ×0.25³</text>
+      <text x="72" y="24" class="bold" text-anchor="middle">1</text><text x="149" y="114" class="bold" text-anchor="middle">0.25</text><text x="226" y="137" class="bold" text-anchor="middle">0.06</text><text x="303" y="142" class="bold" text-anchor="middle">0.016</text>
+      <text x="330" y="40" class="small">Sigmoid's largest derivative is 0.25.</text><text x="330" y="54" class="small">0.25⁴ = 1/256, about 0.004.</text>
+      <text x="14" y="184" class="small">← going backwards through the layers: the early layers receive almost no learning signal</text>
+    </svg>
+    <figcaption>Relative size of the gradient reaching earlier layers when every layer uses sigmoid.</figcaption>
+  </figure>
+  <p><b>Fix 1, activation:</b> use <b>ReLU</b>. For active units its derivative is exactly 1, so it adds no shrinking factor. (Sigmoid and tanh saturate near their ends where the derivative is almost zero.)</p>
+
+  <h3>3.2 Weight initialisation</h3>
+  <ul>
+    <li><b>Never</b> start all weights at 0 (all units learn identically and nothing breaks symmetry).</li>
+    <li>Too small: the signal shrinks layer by layer, neurons go "dead". Too large: signals blow up, neurons saturate.</li>
+    <li><b>Xavier (Glorot)</b>: designed for sigmoid and tanh. Variance scaled by the number of inputs (about 1/n). <b>Keras default</b> for weights, with zero biases.</li>
+    <li><b>He</b>: designed for <b>ReLU</b>. Normal distribution with mean 0 and variance 2/n (n = inputs to the neuron, the "fan-in"). Use <code>kernel_initializer='he_normal'</code>.</li>
+  </ul>
+
+  <h3>3.3 Controlling overfitting</h3>
+  <div class="scroll"><table>
+    <tr><th>Technique</th><th>What it does</th><th>Key facts</th></tr>
+    <tr><td><b>L2 regularisation</b> (weight decay)</td><td>Adds a penalty proportional to the squared weights to the loss, so big weights are discouraged and the model is simpler.</td><td>Update: w ← (1 − αη)·w − η·∂J/∂w. In Keras: <code>kernel_regularizer=regularizers.l2(0.001)</code>. Larger value = stronger penalty.</td></tr>
+    <tr><td><b>Dropout</b></td><td>Randomly zero a fraction p of neuron outputs <u>during training</u>, a different set each step. Like training many thinner networks and averaging them.</td><td>Not applied at test time. Typical p = 0.2 to 0.5. Placed between layers.</td></tr>
+    <tr><td><b>Batch normalisation</b></td><td>Re-centres and re-scales each layer's outputs per mini-batch, so later layers see a stable distribution (reduces "internal covariate shift"). Speeds up training and regularises a little.</td><td>Normalise: v̂ = (v − μB) / sqrt(σB² + ε). Then u = γ·v̂ + β. γ and β are learned. For conv layers it works channel by channel. Common order: Conv → BatchNorm → ReLU.</td></tr>
+    <tr><td><b>Data augmentation</b></td><td>Random flips, rotations, shifts, crops create new variants every epoch so the net never sees the exact same image twice.</td><td>Great for small datasets and imbalanced classes.</td></tr>
+    <tr><td><b>Early stopping</b></td><td>Stop when validation loss stops improving.</td><td>Keep the best checkpoint.</td></tr>
+  </table></div>
+  <div class="say"><b>Parameter count for batch norm</b>Per channel: γ and β are trainable, the running mean and variance are not. So a BN layer on 32 channels shows 4 x 32 = 128 parameters, of which 64 are trainable.</div>
+
+  <h3>3.4 Optimiser, learning rate and batch size</h3>
+  <ul>
+    <li><b>Optimiser</b> = rule for updating weights. Plain SGD; <b>Adam</b> and RMSprop adapt the step per weight (they keep running averages of the gradient and squared gradient). Adam with learning rate 0.001 is a common start.</li>
+    <li><b>Learning rate</b>: too big converges to a poor point or diverges, too small is slow. Use a <b>scheduler</b> to lower it as training proceeds.</li>
+    <li><b>Batch size</b>: large = faster but accuracy may suffer and needs GPU memory. Small = noisier, with a mild regularising effect.</li>
+  </ul>
+
+  <h3>3.5 Very deep networks: degradation and ResNet</h3>
+  <p>Even with ReLU, good initialisation and batch norm, a <b>much deeper</b> plain network can show <b>higher training error</b> than a shallower one. This is <b>degradation</b>, not overfitting (in overfitting, training error is low and test error is high). In theory extra layers could just copy their input (identity mapping), but plain layers find that hard to learn.</p>
+  <p><b>ResNet fix:</b> let a block learn only the <b>residual</b> F(x) and add the input back with a skip connection: <b>H(x) = F(x) + x</b>. If the best thing is to do nothing, F(x) just has to go to 0, which is much easier than learning the identity. The skip connection also gives the gradient a short path back, helping early layers learn.</p>
+  <figure>
+    <svg viewBox="0 0 360 230" width="420" role="img" aria-label="Residual block: input x goes through convolution, batch norm, ReLU, convolution, batch norm to give F of x, and also skips around them to be added, then ReLU gives H of x equals F of x plus x">
+      <defs><marker id="ar8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+      <text x="120" y="16" class="bold" text-anchor="middle">x</text>
+      <path class="ax" d="M120 22 V40" marker-end="url(#ar8)"/>
+      <rect class="box" x="70" y="42" width="100" height="26" rx="5"/><text x="120" y="60" class="small" text-anchor="middle" style="fill:currentColor">Conv + BN + ReLU</text>
+      <path class="ax" d="M120 68 V86" marker-end="url(#ar8)"/>
+      <rect class="box" x="70" y="88" width="100" height="26" rx="5"/><text x="120" y="106" class="small" text-anchor="middle" style="fill:currentColor">Conv + BN</text>
+      <path class="ax" d="M120 114 V150" marker-end="url(#ar8)"/><text x="130" y="136" class="bold" style="fill:var(--b)">F(x)</text>
+      <circle class="box" cx="120" cy="162" r="12"/><text x="120" y="167" class="bold" text-anchor="middle">+</text>
+      <path class="lk" d="M120 24 H230 V162 H132" marker-end="url(#ar8)"/><text x="238" y="100" class="bold" style="fill:var(--ok)">skip connection</text><text x="238" y="116" class="small">carries x unchanged</text>
+      <path class="ax" d="M120 174 V190" marker-end="url(#ar8)"/>
+      <rect class="box" x="90" y="192" width="60" height="24" rx="5"/><text x="120" y="208" class="small" text-anchor="middle" style="fill:currentColor">ReLU</text>
+      <text x="20" y="226" class="bold">H(x) = F(x) + x</text>
+    </svg>
+    <figcaption>Learning F(x) = 0 gives an identity mapping, so adding blocks cannot make the network worse than a shallower one. A "down" block uses stride 2 on its first convolution and a 1 x 1 convolution on the shortcut to match the new shape.</figcaption>
+  </figure>
+  <div class="scroll"><table>
+    <tr><th>Problem seen</th><th>Cause</th><th>Remedy</th></tr>
+    <tr><td>Early layers not learning, loss stuck</td><td>Vanishing gradients (sigmoid, tanh, deep)</td><td>ReLU, He initialisation, batch norm, skip connections</td></tr>
+    <tr><td>Train accuracy high, validation low</td><td>Overfitting</td><td>Dropout, L2, augmentation, early stopping, fewer parameters</td></tr>
+    <tr><td>Very deep net worse than shallower, even on training data</td><td>Degradation</td><td>Residual (skip) connections</td></tr>
+    <tr><td>Unstable or very slow training</td><td>Learning rate or batch size</td><td>Lower rate, scheduler, Adam, batch norm</td></tr>
+    <tr><td>Small or imbalanced image set</td><td>Too little variety</td><td>Augmentation, transfer learning</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>4. Sequences: RNN and LSTM (sample Q1d)</h2>
+  <p>Normal networks treat inputs as independent. In sequences (words, sensor readings, clickstreams) what came <u>before</u> matters. A <b>recurrent neural network (RNN)</b> reads one element at a time and carries a <b>hidden state</b> forward, so the output at a step depends on the earlier steps.</p>
+  <div class="scroll"><table>
+    <tr><th></th><th>CNN</th><th>RNN</th></tr>
+    <tr><td>Data</td><td>Spatial (images, video frames)</td><td>Sequential or temporal (text, time series)</td></tr>
+    <tr><td>Input size</td><td>Fixed</td><td>Can vary in length</td></tr>
+    <tr><td>Connectivity</td><td>Local patterns through convolution</td><td>Uses earlier time steps through feedback</td></tr>
+  </table></div>
+  <figure>
+    <svg viewBox="0 0 420 220" width="520" role="img" aria-label="An RNN unrolled over three time steps: inputs x1 x2 x3 feed hidden states h1 h2 h3 through weights W, each hidden state passes to the next through weights U, and each produces an output y">
+      <defs><marker id="ar9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+      <g class="bold" text-anchor="middle">
+        <rect class="box" x="45" y="95" width="70" height="40" rx="6"/><text x="80" y="120">h1</text>
+        <rect class="box" x="175" y="95" width="70" height="40" rx="6"/><text x="210" y="120">h2</text>
+        <rect class="box" x="305" y="95" width="70" height="40" rx="6"/><text x="340" y="120">h3</text>
+        <text x="80" y="195">x1</text><text x="210" y="195">x2</text><text x="340" y="195">x3</text>
+        <text x="80" y="30">y1</text><text x="210" y="30">y2</text><text x="340" y="30">y3</text>
+      </g>
+      <path class="ax" d="M80 180 V137" marker-end="url(#ar9)"/><path class="ax" d="M210 180 V137" marker-end="url(#ar9)"/><path class="ax" d="M340 180 V137" marker-end="url(#ar9)"/>
+      <path class="ax" d="M80 93 V40" marker-end="url(#ar9)"/><path class="ax" d="M210 93 V40" marker-end="url(#ar9)"/><path class="ax" d="M340 93 V40" marker-end="url(#ar9)"/>
+      <path class="lk" d="M115 115 H173" marker-end="url(#ar9)"/><path class="lk" d="M245 115 H303" marker-end="url(#ar9)"/>
+      <text x="144" y="108" class="bold" style="fill:var(--ok)" text-anchor="middle">U</text><text x="274" y="108" class="bold" style="fill:var(--ok)" text-anchor="middle">U</text>
+      <text x="88" y="162" class="small">W</text><text x="218" y="162" class="small">W</text><text x="348" y="162" class="small">W</text><text x="88" y="66" class="small">V</text><text x="218" y="66" class="small">V</text><text x="348" y="66" class="small">V</text>
+      <text x="14" y="214" class="small">h_t = tanh( W·x_t + U·h_(t−1) + b ).  The SAME W, U, V are reused at every step.</text>
+    </svg>
+    <figcaption>One cell, unrolled in time. The green arrows carry the memory from one step to the next.</figcaption>
+  </figure>
+  <h3>Preparing sequence data: "make steps"</h3>
+  <p>You do not feed the whole series. You cut it into fixed-length <b>windows</b> (each window = time steps), moving forward by a chosen <b>distance</b> (stride). For the series 0, 1, 1, 3, 2, 2, 4, 5, 4, 7, 8, 8, 9, window length 4 and distance 3 gives:</p>
+  <div class="formula">[0, 1, 1, 3]
+[3, 2, 2, 4]
+[4, 5, 4, 7]
+[7, 8, 8, 9]</div>
+  <p>Each window is one sample of shape (time steps, features). For prediction you also pair each window with a <b>target</b>: the next value, or a label for the window. Splitting into train and test must respect <b>time order</b>, not random rows.</p>
+  <h3>Sizes and parameters</h3>
+  <div class="formula">Input D features per step, hidden size H:
+W is H x D,  U is H x H,  b has H values
+SimpleRNN parameters = H·(D + H) + H         e.g. D=64, H=32: 32·96 + 32 = 3,104
+Output layer: Dense(1) on 32 hidden = 32 + 1 = 33</div>
+  <h3>The problem: long memory, and the LSTM</h3>
+  <p>Unrolled over many steps, an RNN is like a very deep network, so it has the <b>vanishing gradient</b> problem and forgets distant context. The <b>LSTM (long short-term memory)</b> adds a <b>cell state</b> (a "conveyor belt" of memory) controlled by <b>gates</b>:</p>
+  <ul>
+    <li><b>Forget gate:</b> how much of the old memory to keep.</li>
+    <li><b>Input gate:</b> how much new information to write.</li>
+    <li><b>Output gate:</b> how much of the memory to expose as the output.</li>
+  </ul>
+  <p>Each gate and the candidate memory has its own weights, so an LSTM has <b>four times</b> the parameters of a simple RNN of the same size:</p>
+  <div class="formula">LSTM parameters = 4 × ( H·(D + H) + H )
+e.g. D=64, H=32: 4 × 3,104 = 12,416
+Stacked LSTM: use return_sequences=True on all but the last LSTM so the next layer gets the whole sequence.
+  (3 steps, 5 features) → LSTM 7: 4·(7·12 + 7) = 364, output (3, 7)
+                       → LSTM 9: 4·(9·16 + 9) = 612, output (9)  → Dense 1: 10</div>
+  <p><b>Output layer decides the task:</b> regression = Dense(1) linear + MSE. Binary class = Dense(1) sigmoid + binary cross-entropy. Multi-class = Dense(k) softmax + categorical cross-entropy.</p>
+  <h3>Sample Q1d model answer (clickstream)</h3>
+  <ul>
+    <li><b>Technique:</b> an LSTM (or GRU), because the order of pages, the time on each and the path matter.</li>
+    <li><b>Training data structure:</b> each visitor session is one sequence of events. Each step has features such as page category, time spent, how the user arrived, and where they went next (one-hot or embedding for categories, scaled numbers for times). The label is whether the session ended in a purchase (many-to-one). Alternatively predict the next page.</li>
+    <li><b>Pre-processing:</b> sort events by time, cut or pad sessions to a fixed length (with masking) or use windows, scale numeric inputs, handle class imbalance (class weights, oversampling), and split train and test by session (and ideally by time).</li>
+    <li><b>Combining with earlier models:</b> feed the LSTM's purchase probability (or its final hidden state) as an extra feature into the tabular model from part (b), or average and stack the predictions of the LSTM and the tabular models. This is a <b>hybrid</b> or ensemble: the sequence model adds browsing behaviour that the aggregated page-view features miss.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>5. Transformers (Day 9, short)</h2>
+  <p>Transformers replace recurrence with <b>self-attention</b>: every token looks at every other token directly, so long-range links are easy and training runs in parallel.</p>
+  <ul>
+    <li><b>Query, key, value:</b> each token makes a query (what I look for), a key (what I offer) and a value (the information). Attention weights = softmax(Q·Kᵀ / √d_k), and the output is the weighted sum of the values.</li>
+    <li><b>Multi-head attention:</b> several attention heads with different weights capture different relationships (for example subject, phrase structure).</li>
+    <li><b>Positional encoding:</b> attention has no built-in order, so position information is added to the token embeddings.</li>
+    <li><b>Encoder block:</b> self-attention, Add and Norm, feed-forward layer, Add and Norm. <b>Decoder block:</b> <b>masked</b> self-attention (a token cannot see the future), <b>cross-attention</b> to the encoder output, feed-forward.</li>
+    <li><b>Variants:</b> encoder-only (BERT) for understanding, decoder-only (GPT) for generation, encoder-decoder for translation.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>6. Practice questions (exam style)</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Question A: sequence windows and parameters</h3>
+    <p>A sensor gives 2, 4, 6, 8, 10, 12, 14. (a) Make windows of length 3 with distance 2. (b) An LSTM with 10 hidden units reads inputs with 2 features per step. How many parameters does it have? (c) Why would a plain RNN struggle on a sequence of 500 steps? (4 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> [2, 4, 6], [6, 8, 10], [10, 12, 14].</p>
+    <p><b>(b)</b> 4 × (H·(D + H) + H) = 4 × (10·12 + 10) = 4 × 130 = <b>520</b>.</p>
+    <p><b>(c)</b> Over 500 steps the gradient is multiplied by many small factors (vanishing gradient), so the network cannot link far-apart events. An LSTM's gated cell state, or a transformer, handles long dependencies better.</p>
+  </details>
+  <div class="card">
+    <h3 style="margin-top:0">Question B: diagnose a deep network</h3>
+    <p>A 40-layer plain CNN with sigmoid activations has training accuracy 55% and validation accuracy 54%. A 10-layer version reaches 75% on training data. (a) What is wrong and is it overfitting? (b) Give three fixes. (4 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> Not overfitting, because training accuracy is low and the validation score is about the same. The deeper net is trained worse than the shallow one, which points to vanishing gradients (sigmoid, 40 layers) and degradation.</p>
+    <p><b>(b)</b> Switch to ReLU with He initialisation; add batch normalisation; add residual (skip) connections (ResNet). Also tune the learning rate or use Adam.</p>
+  </details>
+  <details><summary>Quick recall questions</summary>
+    <ol>
+      <li>What is the largest derivative of a sigmoid?</li>
+      <li>In dropout, is anything dropped at test time?</li>
+      <li>What does a ResNet block learn?</li>
+      <li>Which Keras style do you need for two inputs?</li>
+      <li>How many times more parameters does an LSTM have than a SimpleRNN of the same size?</li>
+    </ol>
+    <p><b>Answers:</b> (1) 0.25. (2) No, only during training. (3) The residual F(x) = H(x) − x, output is F(x) + x. (4) The Functional API. (5) Four times.</p>
+  </details>
+</section>
+
+<section>
+  <h2>7. Days 8 and 9 cheat sheet</h2>
+  <div class="sheet">
+    <div class="formula">RNN params = H(D+H)+H     LSTM params = 4·[H(D+H)+H]     Conv BN: 4 params per channel (2 trainable)
+Attention = softmax(QKᵀ/√dk)·V      ResNet: H(x) = F(x) + x
+L2: loss + λΣw²   → w ← (1 − αη)w − η·grad       Sigmoid derivative ≤ 0.25</div>
+    <table style="margin-top:10px">
+      <tr><th>If the question says</th><th>Write</th></tr>
+      <tr><td>Sequential data, order matters</td><td>LSTM or GRU. Window the data (length, distance), keep time order in the split, choose the output layer by task.</td></tr>
+      <tr><td>Combine sequence model with other models</td><td>Feed the LSTM's probability or hidden state as a feature to the tabular model, or stack or average the models (hybrid).</td></tr>
+      <tr><td>Very deep network will not train</td><td>ReLU, He init, batch norm, residual connections, lower learning rate.</td></tr>
+      <tr><td>Overfitting in a deep network</td><td>Dropout, L2, augmentation, early stopping, simpler model, transfer learning.</td></tr>
+      <tr><td>Two inputs or two outputs</td><td>Keras Functional API (concatenate branches, one head per output).</td></tr>
+      <tr><td>Why attention over RNN</td><td>Direct links between any two positions, parallel training, handles long context.</td></tr>
+    </table>
+  </div>
+</section>
+
+</main>
