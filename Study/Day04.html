@@ -1,0 +1,335 @@
+<title>PRS Day 4 Study Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column, one diagram per concept, plain-language text first, exam angle last in each section */
+:root {
+  --bg: #f6f8fa; --fg: #1b2430; --muted: #5b6776; --card: #ffffff; --line: #d7dee6;
+  --a: #1f6feb; --a-soft: #e3eefc; --b: #d9660b; --b-soft: #fdeede;
+  --ok: #1a7f4b; --ok-soft: #e2f4ea; --warn: #b42318; --warn-soft: #fdecea;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; }
+
+body { background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body);
+  padding-block: 24px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: 2rem; } h2 { font-size: 1.45rem; padding-top: 12px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.1rem; margin-top: 8px; }
+p { margin: 0; } ul, ol { margin: 0; padding-left: 1.2em; } li { margin: 4px 0; }
+code, .mono { font-family: var(--f-mono); font-size: .9em; }
+code { background: var(--a-soft); padding: 1px 5px; border-radius: 4px; }
+section { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+.eyebrow { font: 500 .75rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+figcaption { color: var(--muted); font-size: .9rem; }
+svg { max-width: 100%; height: auto; color: var(--fg); }
+svg text { fill: currentColor; font: 12px var(--f-body); }
+svg .small { font-size: 11px; fill: var(--muted); }
+svg .bold { font-weight: 600; }
+svg .ax { stroke: currentColor; stroke-width: 1.2; fill: none; }
+svg .dash { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 5 4; fill: none; }
+svg .ca { fill: var(--a); } svg .cb { fill: var(--b); }
+svg .la { stroke: var(--a); stroke-width: 2.4; fill: none; } svg .lb { stroke: var(--b); stroke-width: 2.4; fill: none; }
+svg .box { fill: var(--card); stroke: currentColor; stroke-width: 1.2; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+.say { background: var(--a-soft); border-radius: 8px; padding: 12px 16px; }
+.say b, .exam b, .trap b { font-family: var(--f-mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.exam { background: var(--ok-soft); border-radius: 8px; padding: 12px 16px; }
+.trap { background: var(--warn-soft); border-radius: 8px; padding: 12px 16px; }
+.flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.flow .step { flex: 1 1 130px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .9rem; min-width: 0; }
+.flow .step b { display: block; font-family: var(--f-display); }
+.flow .arr { align-self: center; color: var(--muted); }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--a-soft); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.cm { display: grid; grid-template-columns: auto 1fr 1fr; gap: 4px; max-width: 520px; font-size: .9rem; }
+.cm div { padding: 10px; border-radius: 6px; min-width: 0; }
+.cm .h { color: var(--muted); font-size: .8rem; display: flex; align-items: center; }
+.cm .tp, .cm .tn { background: var(--ok-soft); } .cm .fp, .cm .fn { background: var(--warn-soft); }
+.cm strong { display: block; font-family: var(--f-display); }
+.formula { font-family: var(--f-mono); font-size: .9rem; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; overflow-x: auto; white-space: pre; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+summary { cursor: pointer; font-weight: 600; }
+summary:focus-visible { outline: 2px solid var(--a); outline-offset: 2px; }
+details[open] summary { margin-bottom: 8px; }
+.sheet { border: 2px solid var(--a); border-radius: 8px; padding: 14px 16px; background: var(--card); }
+svg .lk { stroke: var(--ok); stroke-width: 2.4; fill: none; }
+svg .leafy { fill: var(--ok-soft); stroke: var(--ok); stroke-width: 1.2; }
+svg .leafn { fill: var(--warn-soft); stroke: var(--warn); stroke-width: 1.2; }
+svg .cg { fill: var(--ok); }
+.tag { display:inline-block; font:500 .72rem var(--f-mono); letter-spacing:.05em; text-transform:uppercase; background:var(--b-soft); color:var(--b); border-radius:4px; padding:1px 6px; }
+</style>
+
+<main>
+<header>
+  <div class="eyebrow">ISY5002 Pattern Recognition Systems · Day 4</div>
+  <h1>Day 4: Finding groups with clustering</h1>
+  <p class="lede">K-means, hierarchical clustering and DBSCAN, how to check that clusters are valid, and how to turn them into business segments. Includes hand calculations you can repeat in the exam.</p>
+</header>
+<section>
+  <h2>1. What clustering is</h2>
+  <p>Clustering is <b>unsupervised</b>: there are no labels. The algorithm groups rows so that rows <b>inside</b> a cluster are similar and rows in <b>different</b> clusters are dissimilar. Goal in one line: <b>minimise intra-cluster distance, maximise inter-cluster distance</b>.</p>
+  <div class="scroll"><table>
+    <tr><th></th><th>Classification</th><th>Clustering</th></tr>
+    <tr><td>Labels given?</td><td>Yes, the categories are known up front (for example fraud / not fraud)</td><td>No, the categories are discovered</td></tr>
+    <tr><td>Goal</td><td>Learn a boundary between known classes</td><td>Find natural structure from similarity</td></tr>
+    <tr><td>Result</td><td>Predicted class</td><td>Groups you must then name and interpret</td></tr>
+  </table></div>
+  <p><b>Business uses (from the notes):</b> customer segmentation (targeted marketing), market research (lifestyle segments), fraud detection (outliers flagged for review), recommendation (group similar users or products).</p>
+  <p><b>Running example, WHO:</b> 24 countries described by literacy, baby mortality, birth rate and death rate. Cluster them into groups (advanced, moderate, borderline, poor) so aid funding can be set per group.</p>
+</section>
+
+<section>
+  <h2>2. Similarity: how "close" is measured</h2>
+  <p>Everything in clustering depends on a <b>distance</b>. Small distance means similar.</p>
+  <div class="formula">Euclidean distance between rows i and j (default for K-means):
+d(i, j) = sqrt( (x1i − x1j)² + (x2i − x2j)² + ... + (xpi − xpj)² )</div>
+  <h3>Worked example (WHO data)</h3>
+  <div class="scroll"><table>
+    <tr><th>Country</th><th class="n">Literacy</th><th class="n">Baby mortality</th><th class="n">Birth rate</th><th class="n">Death rate</th></tr>
+    <tr><td>Australia</td><td class="n">100</td><td class="n">7.3</td><td class="n">15</td><td class="n">8</td></tr>
+    <tr><td>Italy</td><td class="n">97</td><td class="n">7.6</td><td class="n">11</td><td class="n">10</td></tr>
+    <tr><td>Somalia</td><td class="n">24</td><td class="n">126</td><td class="n">46</td><td class="n">13</td></tr>
+  </table></div>
+  <p>Australia to Italy: (100−97)² + (7.3−7.6)² + (15−11)² + (8−10)² = 9 + 0.09 + 16 + 4 = 29.09, so the distance is about <b>5.39</b>. Australia to Somalia: 76² + 118.7² + 31² + 5² = 5776 + 14090 + 961 + 25 = 20,852, so about <b>144.4</b>. Australia and Italy are clearly alike, Somalia is far away.</p>
+  <div class="say"><b>No-calculator trick</b>To compare distances, compare the <u>sums of squares</u> and skip the square root. 29 is far smaller than 20,852, so Italy is the closer country, with no need to compute either root.</div>
+  <div class="trap"><b>Scaling matters</b>A feature with big numbers (baby mortality up to 126) swamps one with small numbers (death rate around 10). <b>Standardise</b> features before clustering (z-score or min-max). The notes show the closest pair changes after standardising.</div>
+  <h3>Categorical data</h3>
+  <ul>
+    <li><b>Ordinal</b> (Poor, Fair, Good, Excellent): map to 1, 2, 3, 4 and use the absolute difference (Manhattan). Poor to Excellent = |1 − 4| = 3.</li>
+    <li><b>Nominal</b> (lawyer, doctor, teacher): <b>Hamming</b>, match = 0, mismatch = 1.</li>
+  </ul>
+  <p>A <b>centroid</b> is the cluster's centre. It can be the mean (K-means), the median (K-medians), the most central real point (<b>medoid</b>, K-medoids) or the mode (K-modes for categorical data).</p>
+</section>
+
+<section>
+  <h2>3. Types of clustering methods</h2>
+  <div class="scroll"><table>
+    <tr><th>Family</th><th>Examples</th><th>Idea</th></tr>
+    <tr><td>Partition</td><td>K-means, K-modes, K-prototypes</td><td>Split data into k groups around centres</td></tr>
+    <tr><td>Hierarchical</td><td>Agglomerative, divisive</td><td>Build a tree of merges or splits</td></tr>
+    <tr><td>Density-based</td><td>DBSCAN, HDBSCAN, mean-shift</td><td>Clusters are dense regions separated by sparse ones</td></tr>
+    <tr><td>Model-based</td><td>Gaussian mixture (EM)</td><td>Each cluster is a statistical distribution</td></tr>
+  </table></div>
+
+  <h3>3.1 K-means</h3>
+  <p>You choose <b>k</b> (the number of clusters) in advance. Then:</p>
+  <ol>
+    <li>Pick k starting centres (seeds).</li>
+    <li><b>Assign</b> every point to its nearest centre.</li>
+    <li><b>Update</b> each centre to the mean of the points assigned to it.</li>
+    <li>Repeat 2 and 3 until nothing changes, the centres barely move, or a maximum number of iterations is reached.</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 420 190" width="520" role="img" aria-label="Three snapshots of K-means: points with two starting centres, then points coloured by nearest centre, then centres moved to the middle of their groups">
+      <g transform="translate(0,0)">
+        <rect class="box" x="4" y="4" width="132" height="150" rx="6"/>
+        <g fill="currentColor"><circle cx="30" cy="50" r="4"/><circle cx="48" cy="65" r="4"/><circle cx="36" cy="82" r="4"/><circle cx="100" cy="90" r="4"/><circle cx="115" cy="110" r="4"/><circle cx="95" cy="125" r="4"/><circle cx="60" cy="100" r="4"/></g>
+        <path d="M32 62 l8 8 m0 -8 l-8 8" stroke="var(--a)" stroke-width="3"/><path d="M96 98 l8 8 m0 -8 l-8 8" stroke="var(--b)" stroke-width="3"/>
+        <text x="70" y="172" text-anchor="middle" class="bold">1. Start: 2 seeds</text>
+      </g>
+      <g transform="translate(142,0)">
+        <rect class="box" x="4" y="4" width="132" height="150" rx="6"/>
+        <g class="ca"><circle cx="30" cy="50" r="4"/><circle cx="48" cy="65" r="4"/><circle cx="36" cy="82" r="4"/><circle cx="60" cy="100" r="4"/></g>
+        <g class="cb"><circle cx="100" cy="90" r="4"/><circle cx="115" cy="110" r="4"/><circle cx="95" cy="125" r="4"/></g>
+        <path d="M32 62 l8 8 m0 -8 l-8 8" stroke="var(--a)" stroke-width="3"/><path d="M96 98 l8 8 m0 -8 l-8 8" stroke="var(--b)" stroke-width="3"/>
+        <text x="70" y="172" text-anchor="middle" class="bold">2. Assign to nearest</text>
+      </g>
+      <g transform="translate(284,0)">
+        <rect class="box" x="4" y="4" width="132" height="150" rx="6"/>
+        <g class="ca"><circle cx="30" cy="50" r="4"/><circle cx="48" cy="65" r="4"/><circle cx="36" cy="82" r="4"/><circle cx="60" cy="100" r="4"/></g>
+        <g class="cb"><circle cx="100" cy="90" r="4"/><circle cx="115" cy="110" r="4"/><circle cx="95" cy="125" r="4"/></g>
+        <path d="M38 69 l8 8 m0 -8 l-8 8" stroke="var(--a)" stroke-width="3"/><path d="M99 104 l8 8 m0 -8 l-8 8" stroke="var(--b)" stroke-width="3"/>
+        <text x="70" y="172" text-anchor="middle" class="bold">3. Move centres to means</text>
+      </g>
+    </svg>
+    <figcaption>Steps 2 and 3 repeat until the groups stop changing. The cross marks are centres.</figcaption>
+  </figure>
+  <h3>Worked example by hand (one dimension, k = 2)</h3>
+  <p>Points: 1, 2, 9, 10, 12. Start with centres 1 and 10.</p>
+  <ul>
+    <li><b>Assign:</b> 1 and 2 are nearer to 1; 9, 10 and 12 are nearer to 10. Clusters {1, 2} and {9, 10, 12}.</li>
+    <li><b>Update:</b> new centres = means = 1.5 and (9 + 10 + 12) / 3 = 10.33.</li>
+    <li><b>Re-assign:</b> nothing changes (9 is 1.33 from 10.33 and 7.5 from 1.5), so the algorithm has <b>converged</b>.</li>
+    <li><b>SSE</b> (sum of squared distances to centres) = (1−1.5)² + (2−1.5)² + (9−10.33)² + (10−10.33)² + (12−10.33)² = 0.25 + 0.25 + 1.78 + 0.11 + 2.78 = <b>5.17</b>.</li>
+  </ul>
+  <p><b>Objective:</b> K-means minimises the within-cluster sum of squared error (SSE, also called WCSS). The SSE never gets worse from one iteration to the next, so the algorithm always converges, but possibly to a <b>local</b> minimum.</p>
+  <div class="trap"><b>Weaknesses</b>You must choose k. Result depends on the starting centres. It is sensitive to outliers (a far point drags a mean). It prefers round, similar-sized clusters. It needs numeric data.</div>
+  <ul>
+    <li><b>Fix for bad seeds:</b> run several random restarts and keep the lowest SSE, or use <b>K-means++</b>, which spreads the seeds apart (each new seed is picked with probability proportional to its squared distance from the nearest existing seed).</li>
+    <li><b>Variants:</b> K-medoids (centre is a real point, robust to outliers), K-medians (median per feature, Manhattan distance), K-modes (categorical data, counts mismatches), K-prototypes (mixed numeric and categorical).</li>
+  </ul>
+
+  <h3>3.2 Hierarchical (agglomerative) clustering</h3>
+  <ol>
+    <li>Start with every point as its own cluster.</li>
+    <li>Compute distances between all pairs of clusters.</li>
+    <li>Merge the two closest clusters.</li>
+    <li>Repeat until one cluster is left. Record the order in a <b>dendrogram</b>.</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 360 220" width="440" role="img" aria-label="Dendrogram of five items: A and B merge first, D and E merge next, C joins A and B, then the two groups join; a dashed horizontal line shows a cut that gives two clusters">
+      <line class="ax" x1="40" y1="20" x2="40" y2="190"/>
+      <text x="14" y="16" class="small">distance</text>
+      <path class="ax" d="M70 190 V150 H110 V190"/><path class="ax" d="M90 150 V110 H150 V190"/>
+      <path class="ax" d="M230 190 V160 H270 V190"/>
+      <path class="ax" d="M120 110 V60 H250 V160"/>
+      <text x="70" y="206" class="bold" text-anchor="middle">A</text><text x="110" y="206" class="bold" text-anchor="middle">B</text><text x="150" y="206" class="bold" text-anchor="middle">C</text><text x="230" y="206" class="bold" text-anchor="middle">D</text><text x="270" y="206" class="bold" text-anchor="middle">E</text>
+      <line class="dash" x1="45" y1="85" x2="340" y2="85"/><text x="290" y="80" class="small">cut here → 2 clusters</text>
+      <text x="170" y="52" class="small">last merge (big distance)</text>
+    </svg>
+    <figcaption>Read from the bottom: A and B merge first (closest), then D and E, then C joins AB, and the two groups join last. Cutting the tree at a height gives that many clusters.</figcaption>
+  </figure>
+  <p>Distance between <b>clusters</b> needs a rule, the <b>linkage</b>:</p>
+  <div class="scroll"><table>
+    <tr><th>Linkage</th><th>Distance between clusters</th><th>Sensitivity to outliers</th><th>Typical shape</th></tr>
+    <tr><td>Single</td><td>closest pair of points</td><td>High (chaining)</td><td>Long, stringy</td></tr>
+    <tr><td>Complete</td><td>farthest pair of points</td><td>High</td><td>Tight, compact</td></tr>
+    <tr><td>Average</td><td>mean of all pairwise distances</td><td>Moderate</td><td>Balanced</td></tr>
+    <tr><td>Centroid</td><td>distance between the centres</td><td>Moderate</td><td>-</td></tr>
+    <tr><td>Ward</td><td>increase in SSE if merged</td><td>Low</td><td>Uniform, round</td></tr>
+  </table></div>
+  <p><b>Pros:</b> no need to fix k in advance, the dendrogram shows structure. <b>Cons:</b> a merge can never be undone, outliers distort it, deciding where to cut is subjective, and it does not scale to large or very high-dimensional data.</p>
+
+  <h3>3.3 DBSCAN (density-based)</h3>
+  <p>No centroids and no k. Clusters are <b>dense regions</b>; points in sparse regions are labelled <b>noise</b>. Two settings:</p>
+  <ul>
+    <li><b>Eps (ε):</b> the neighbourhood radius.</li>
+    <li><b>MinPts:</b> the minimum number of points within ε to count as dense.</li>
+  </ul>
+  <figure>
+    <svg viewBox="0 0 340 230" width="420" role="img" aria-label="DBSCAN: a core point A whose epsilon circle contains many points, a border point B inside A's circle but with few neighbours of its own, and an isolated noise point C">
+      <rect class="box" x="4" y="4" width="332" height="222" rx="8"/>
+      <circle cx="110" cy="110" r="40" fill="var(--a-soft)" stroke="var(--a)" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <g class="ca"><circle cx="95" cy="100" r="4"/><circle cx="120" cy="90" r="4"/><circle cx="100" cy="125" r="4"/><circle cx="125" cy="125" r="4"/><circle cx="85" cy="115" r="4"/><circle cx="110" cy="95" r="4"/><circle cx="130" cy="110" r="4"/></g>
+      <circle cx="110" cy="110" r="6" fill="var(--ok)"/><text x="116" y="108" class="bold">A</text>
+      <circle cx="145" cy="100" r="5" fill="var(--b)"/><text x="152" y="98" class="bold">B</text>
+      <circle cx="265" cy="170" r="5" fill="var(--warn)"/><text x="273" y="168" class="bold">C</text>
+      <text x="14" y="26" class="bold">MinPts = 7</text>
+      <text x="14" y="200" class="small">A core: at least 7 points within ε. B border: inside A's ε, but few neighbours.</text>
+      <text x="14" y="216" class="small">C noise: not within ε of any core point.</text>
+      <text x="62" y="62" class="small">ε</text>
+    </svg>
+    <figcaption>Three point types: core (dense neighbourhood), border (in a core's neighbourhood but not dense itself), noise (neither).</figcaption>
+  </figure>
+  <ol>
+    <li>Pick an unvisited point. If it has at least MinPts neighbours within ε, it is a <b>core</b> point and starts a cluster.</li>
+    <li>Expand: add every point reachable from it (other core points keep growing the cluster, border points join but do not grow it).</li>
+    <li>A point that is not reachable from any core point is <b>noise</b>.</li>
+  </ol>
+  <p><b>Choosing the parameters:</b> MinPts is at least the number of dimensions (2D default 4; more than 2D use 2 × dimensions; more for bigger or noisier data). For ε, plot each point's distance to its k-th nearest neighbour (k = MinPts), sort ascending, and take the <b>elbow</b> as ε.</p>
+  <div class="scroll"><table>
+    <tr><th></th><th>K-means</th><th>Hierarchical</th><th>DBSCAN</th></tr>
+    <tr><td>Need to set k?</td><td>Yes</td><td>No (cut the tree)</td><td>No (set ε, MinPts)</td></tr>
+    <tr><td>Cluster shape</td><td>Round, similar size</td><td>Depends on linkage</td><td>Any shape</td></tr>
+    <tr><td>Outliers</td><td>Pull centres, no noise label</td><td>Can distort</td><td>Detected as noise</td></tr>
+    <tr><td>Large data</td><td>Fast, scales well</td><td>Poor</td><td>Fine, needs dense areas</td></tr>
+    <tr><td>Typical use</td><td>Customer segments</td><td>Taxonomy, product categories</td><td>Fraud, anomalies</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>4. Are the clusters any good? (validation)</h2>
+  <p>Clustering always returns an answer, so you must check it. Two lenses, used together: <b>technical</b> and <b>business</b>.</p>
+  <h3>Technical measures</h3>
+  <div class="scroll"><table>
+    <tr><th>Measure</th><th>What it checks</th><th>Good value</th></tr>
+    <tr><td><b>Silhouette</b></td><td>For each point: a = how close it is to its own cluster, b = how close it is to the nearest other cluster. s = (b − a) / max(a, b).</td><td>−1 (bad) to +1 (good). Near 0 = between clusters. Above 0.3 is usually acceptable.</td></tr>
+    <tr><td><b>Davies-Bouldin (DBI)</b></td><td>Average of each cluster's worst-case ratio of spread to separation from its most similar cluster</td><td><b>Lower</b> is better</td></tr>
+    <tr><td><b>Calinski-Harabasz (CH)</b></td><td>Between-cluster spread over within-cluster spread (variance ratio)</td><td><b>Higher</b> is better</td></tr>
+    <tr><td><b>WCSS elbow</b></td><td>Total within-cluster SSE for k = 2, 3, 4...</td><td>Pick k at the elbow where improvement flattens</td></tr>
+    <tr><td>Box plots per cluster</td><td>Do clusters differ clearly on most variables?</td><td>Distributions should separate</td></tr>
+    <tr><td>Cluster size</td><td>One giant cluster may need splitting. Tiny clusters may be outliers.</td><td>Judgement</td></tr>
+    <tr><td>Stability</td><td>Split-half (cluster each half and compare) or development/validation split (cluster one half, assign the other half)</td><td>Same number of clusters and similar profiles</td></tr>
+  </table></div>
+  <figure>
+    <svg viewBox="0 0 340 220" width="400" role="img" aria-label="Elbow plot of within-cluster sum of squares for k from 1 to 8; steep fall until k equals 3 then a flat tail; the elbow is marked at k equals 3">
+      <line class="ax" x1="40" y1="20" x2="40" y2="190"/><line class="ax" x1="40" y1="190" x2="325" y2="190"/>
+      <polyline class="lb" points="50,30 88.6,102 127.1,145.2 165.7,154.8 204.3,159.6 242.9,162.8 281.4,165.2 320,166.8"/>
+      <g class="cb"><circle cx="50" cy="30" r="3.5"/><circle cx="88.6" cy="102" r="3.5"/><circle cx="127.1" cy="145.2" r="5.5" style="fill:var(--ok)"/><circle cx="165.7" cy="154.8" r="3.5"/><circle cx="204.3" cy="159.6" r="3.5"/><circle cx="242.9" cy="162.8" r="3.5"/><circle cx="281.4" cy="165.2" r="3.5"/><circle cx="320" cy="166.8" r="3.5"/></g>
+      <text x="136" y="140" class="bold" style="fill:var(--ok)">elbow: k = 3</text>
+      <text x="180" y="210" class="small" text-anchor="middle">number of clusters k →</text><text x="44" y="14" class="small">WCSS (illustrative values)</text>
+    </svg>
+    <figcaption>WCSS always falls as k rises (at k = number of points it is zero), so you look for the bend, not the minimum.</figcaption>
+  </figure>
+  <h3>Silhouette by hand (using the K-means example above)</h3>
+  <p>Take point 2 in cluster {1, 2}. a = average distance to the other point in its cluster = |2 − 1| = 1. b = average distance to the nearest other cluster {9, 10, 12} = (7 + 8 + 10) / 3 = 8.33. s = (8.33 − 1) / 8.33 = <b>0.88</b>, a very well-placed point. (The notes also describe a(i) and b(i) using centroid distances. Either way the idea is the same.)</p>
+  <h3>Business lens: profiling the clusters</h3>
+  <p>Numbers are not enough. A cluster is only useful if you can <b>explain it, name it and act on it</b>. Criteria from the notes: distinguishing characteristics, explainable, intuitive label, leads to an action, potential business value, ease of use (fewer clusters are easier).</p>
+  <div class="scroll"><table>
+    <tr><th>Cluster</th><th class="n">Literacy</th><th class="n">Baby mortality</th><th class="n">Birth rate</th><th class="n">Death rate</th><th>Label</th><th>Action</th></tr>
+    <tr><td>C1</td><td class="n">96.4</td><td class="n">11.4</td><td class="n">14.2</td><td class="n">9.2</td><td>Advanced</td><td>No funding</td></tr>
+    <tr><td>C2</td><td class="n">85.8</td><td class="n">36.3</td><td class="n">24.8</td><td class="n">6.0</td><td>Moderate</td><td>Small funding</td></tr>
+    <tr><td>C3</td><td class="n">58.4</td><td class="n">72.7</td><td class="n">36.3</td><td class="n">10.0</td><td>Borderline</td><td>Moderate funding</td></tr>
+    <tr><td>C4</td><td class="n">43.5</td><td class="n">107.5</td><td class="n">44.3</td><td class="n">16.0</td><td>Poor</td><td>Large funding</td></tr>
+  </table></div>
+  <p>Look for extreme high and low values per cluster (C1 has the highest literacy and lowest mortality, C4 the reverse), name them, and attach an action.</p>
+  <div class="exam"><b>Exam angle</b>For any clustering scenario answer in four moves: (1) choose a method and justify it (outliers, shape, need for k, size of data), (2) preprocess (scale, handle categorical features), (3) validate technically (silhouette, elbow, stability), (4) profile for the business (name clusters, tie to actions). For anomaly or fraud detection, DBSCAN's noise points are the anomalies.</div>
+</section>
+
+<section>
+  <h2>5. Practice questions (exam style)</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Question A: one K-means round</h3>
+    <p>Six customers have monthly spend (in hundreds): 1, 2, 3, 11, 12, 13. K-means with k = 2 starts with centres 2 and 11. (a) Show the first assignment and the new centres. (b) Has it converged? (c) One new customer spends 100. What does that do to K-means, and what would you change? (4 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> Distances to centre 2 vs 11: 1 is nearer 2, 2 is at the centre of the first group, 3 is nearer 2 (1 vs 8), 11 is at the second centre, 12 and 13 are nearer 11. Clusters {1, 2, 3} and {11, 12, 13}. New centres: (1 + 2 + 3) / 3 = <b>2</b> and (11 + 12 + 13) / 3 = <b>12</b>.</p>
+    <p><b>(b)</b> Re-assigning with centres 2 and 12 gives the same clusters, so yes, it has converged.</p>
+    <p><b>(c)</b> The outlier would be assigned to the nearer cluster and drag that centre far to the right (for example from 12 to (11 + 12 + 13 + 100) / 4 = 34), spoiling the cluster. Fix it by removing or capping outliers, using K-medoids or K-medians, or using DBSCAN, which labels it as noise.</p>
+  </details>
+  <div class="card">
+    <h3 style="margin-top:0">Question B: choose and validate</h3>
+    <p>A bank wants to detect unusual card transactions with no labelled fraud cases. (a) Suggest a clustering method and say why. (b) Name two ways to judge whether the result is sensible. (3 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> DBSCAN. It needs no k, finds dense groups of normal behaviour of any shape, and labels transactions that sit in no dense region as noise, which are the suspicious ones. Scale features first (amount, frequency, location, device).</p>
+    <p><b>(b)</b> Technical: a silhouette check (or k-distance plot for choosing ε) and stability across a split-half. Business: review a sample of the flagged transactions with fraud analysts and measure how many are truly suspicious (precision), plus how many known frauds appear (recall) once labels are available.</p>
+  </details>
+  <details><summary>Quick recall questions</summary>
+    <ol>
+      <li>Which clustering method gives noise points and needs no k?</li>
+      <li>Does a lower or higher Davies-Bouldin value mean better clusters? And Calinski-Harabasz?</li>
+      <li>Why standardise before clustering?</li>
+      <li>What does a silhouette near 0 mean? Near −1?</li>
+      <li>Name one fix for K-means' dependence on starting centres.</li>
+    </ol>
+    <p><b>Answers:</b> (1) DBSCAN. (2) DBI lower is better, CH higher is better. (3) Large-valued features would dominate the distance. (4) Near 0: the point lies between two clusters. Near −1: probably in the wrong cluster. (5) Several random restarts keeping the lowest SSE, or K-means++.</p>
+  </details>
+</section>
+
+<section>
+  <h2>6. Day 4 cheat sheet</h2>
+  <div class="sheet">
+    <table>
+      <tr><th>If the question says</th><th>Write</th></tr>
+      <tr><td>Segment customers</td><td>K-means (fast, interpretable). Standardise features. Choose k with elbow and silhouette. Profile and name clusters, link each to an action.</td></tr>
+      <tr><td>Outliers or fraud</td><td>DBSCAN (noise = anomalies), or K-medoids for robustness.</td></tr>
+      <tr><td>Unknown number of clusters</td><td>Hierarchical (dendrogram) or DBSCAN.</td></tr>
+      <tr><td>Mixed data types</td><td>K-prototypes (numeric + categorical), K-modes (categorical), Hamming or Gower-style distance.</td></tr>
+      <tr><td>How good is the clustering?</td><td>Silhouette (higher), DBI (lower), CH (higher), WCSS elbow, stability, then business profiling.</td></tr>
+      <tr><td>K-means gives different results each run</td><td>Local minimum from random seeds. Use K-means++ or multiple restarts, keep lowest SSE.</td></tr>
+    </table>
+    <div class="formula" style="margin-top:10px">Euclidean: sqrt( Σ (xi − yi)² )      K-means objective: SSE = Σ ‖x − centroid‖²
+Silhouette s = (b − a) / max(a, b)     DBSCAN: core if neighbours within ε ≥ MinPts</div>
+  </div>
+</section>
+
+</main>
