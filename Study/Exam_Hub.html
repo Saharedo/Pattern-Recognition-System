@@ -1,0 +1,291 @@
+<title>PRS Exam Prep Hub</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column, one diagram per concept, plain-language text first, exam angle last in each section */
+:root {
+  --bg: #f6f8fa; --fg: #1b2430; --muted: #5b6776; --card: #ffffff; --line: #d7dee6;
+  --a: #1f6feb; --a-soft: #e3eefc; --b: #d9660b; --b-soft: #fdeede;
+  --ok: #1a7f4b; --ok-soft: #e2f4ea; --warn: #b42318; --warn-soft: #fdecea;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; }
+
+body { background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body);
+  padding-block: 24px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: 2rem; } h2 { font-size: 1.45rem; padding-top: 12px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.1rem; margin-top: 8px; }
+p { margin: 0; } ul, ol { margin: 0; padding-left: 1.2em; } li { margin: 4px 0; }
+code, .mono { font-family: var(--f-mono); font-size: .9em; }
+code { background: var(--a-soft); padding: 1px 5px; border-radius: 4px; }
+section { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+.eyebrow { font: 500 .75rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+figcaption { color: var(--muted); font-size: .9rem; }
+svg { max-width: 100%; height: auto; color: var(--fg); }
+svg text { fill: currentColor; font: 12px var(--f-body); }
+svg .small { font-size: 11px; fill: var(--muted); }
+svg .bold { font-weight: 600; }
+svg .ax { stroke: currentColor; stroke-width: 1.2; fill: none; }
+svg .dash { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 5 4; fill: none; }
+svg .ca { fill: var(--a); } svg .cb { fill: var(--b); }
+svg .la { stroke: var(--a); stroke-width: 2.4; fill: none; } svg .lb { stroke: var(--b); stroke-width: 2.4; fill: none; }
+svg .box { fill: var(--card); stroke: currentColor; stroke-width: 1.2; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+.say { background: var(--a-soft); border-radius: 8px; padding: 12px 16px; }
+.say b, .exam b, .trap b { font-family: var(--f-mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.exam { background: var(--ok-soft); border-radius: 8px; padding: 12px 16px; }
+.trap { background: var(--warn-soft); border-radius: 8px; padding: 12px 16px; }
+.flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.flow .step { flex: 1 1 130px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .9rem; min-width: 0; }
+.flow .step b { display: block; font-family: var(--f-display); }
+.flow .arr { align-self: center; color: var(--muted); }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--a-soft); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.cm { display: grid; grid-template-columns: auto 1fr 1fr; gap: 4px; max-width: 520px; font-size: .9rem; }
+.cm div { padding: 10px; border-radius: 6px; min-width: 0; }
+.cm .h { color: var(--muted); font-size: .8rem; display: flex; align-items: center; }
+.cm .tp, .cm .tn { background: var(--ok-soft); } .cm .fp, .cm .fn { background: var(--warn-soft); }
+.cm strong { display: block; font-family: var(--f-display); }
+.formula { font-family: var(--f-mono); font-size: .9rem; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; overflow-x: auto; white-space: pre; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+summary { cursor: pointer; font-weight: 600; }
+summary:focus-visible { outline: 2px solid var(--a); outline-offset: 2px; }
+details[open] summary { margin-bottom: 8px; }
+.sheet { border: 2px solid var(--a); border-radius: 8px; padding: 14px 16px; background: var(--card); }
+svg .lk { stroke: var(--ok); stroke-width: 2.4; fill: none; }
+svg .leafy { fill: var(--ok-soft); stroke: var(--ok); stroke-width: 1.2; }
+svg .leafn { fill: var(--warn-soft); stroke: var(--warn); stroke-width: 1.2; }
+svg .cg { fill: var(--ok); }
+.tag { display:inline-block; font:500 .72rem var(--f-mono); letter-spacing:.05em; text-transform:uppercase; background:var(--b-soft); color:var(--b); border-radius:4px; padding:1px 6px; }
+</style>
+
+<main>
+<header>
+  <div class="eyebrow">ISY5002 Pattern Recognition Systems · Exam on 4 November</div>
+  <h1>Exam prep hub: study plan, mock exam and master cheat sheet</h1>
+  <p class="lede">A day-by-day plan to Wednesday morning, a map from each sample question to the guide that covers it, a full mock exam in the same style, and one consolidated cheat sheet for the open-book paper.</p>
+</header>
+<section>
+  <h2>1. Study plan: now to Wednesday morning</h2>
+  <p>Order matters: the later topics lean on the earlier ones. Each guide ends with practice questions and a cheat sheet. Try the questions on paper before opening the answers.</p>
+  <div class="scroll"><table>
+    <tr><th>When</th><th>Read</th><th>Sample paper parts it unlocks</th></tr>
+    <tr><td><b>Saturday</b></td><td><a href="https://claude.ai/artifact/QGtGHWRSRuvxYBvgW4fWBM">Day 1</a> and <a href="https://claude.ai/artifact/F3YwEZBK5X1RXGWgTfRSyT">Day 2</a> (redo the practice questions), then <a href="https://claude.ai/artifact/CJDVHsJb7ZQuoShTq1feWE">Day 3</a></td><td>Q1a, Q1b, Q1e</td></tr>
+    <tr><td><b>Sunday</b></td><td><a href="https://claude.ai/artifact/QNBK1v6SK1H3JacGY8tswd">Day 4</a>, <a href="https://claude.ai/artifact/2HyHMYc5FyacykHsnTWtdc">Days 5 to 7</a></td><td>Q2a (the 8-mark question)</td></tr>
+    <tr><td><b>Monday</b></td><td><a href="https://claude.ai/artifact/89Cb4W5gkV2LQT81pndZVn">Days 8 and 9</a>, <a href="https://claude.ai/artifact/Wva4mhRtMnQRMjVBR56HCM">Day 10 and deep RL</a></td><td>Q1c, Q1d, Q2b</td></tr>
+    <tr><td><b>Tuesday</b></td><td><a href="https://claude.ai/artifact/LRpmeAUWAstPSHu2vqFL8L">Days 11 and 12</a>, <a href="https://claude.ai/artifact/VtrsRbMjVYtfJygLZ5nX2s">Days 13 and 14</a>, then the mock exam below (timed)</td><td>Q2c, Q2d</td></tr>
+    <tr><td><b>Wednesday morning</b></td><td>Only the cheat sheets and the master sheet in section 4. Do not start new topics.</td><td>-</td></tr>
+  </table></div>
+  <div class="trap"><b>Honest limits</b>I built these from the slide text and the sample paper. If your lecturer emphasised something in class that is not on the slides, trust your lecture notes. The questions marked as "model answers" are my suggested answers, not an official marking scheme.</div>
+</section>
+
+<section>
+  <h2>2. Where each sample question comes from</h2>
+  <div class="scroll"><table>
+    <tr><th>Part</th><th>Asks you to...</th><th>Study</th></tr>
+    <tr><td>Q1a (4)</td><td>Read a decision tree, link to business, name a flaw, say how you would measure improvement</td><td>Day 2 (trees), Day 1 (imbalance, SMOTE)</td></tr>
+    <tr><td>Q1b (3)</td><td>Compare SVM and NN from confusion matrices against a business goal</td><td>Day 1 (metrics), Day 2 (SVM, NN). Check which class is "positive"</td></tr>
+    <tr><td>Q1c (3)</td><td>Compare AdaBoost variable importance with the tree and use it</td><td>Day 10 guide, section 5</td></tr>
+    <tr><td>Q1d (4)</td><td>Propose a sequential model for clickstream data</td><td>Days 8 and 9 guide, sections 4 and "model answer"</td></tr>
+    <tr><td>Q1e (3+3)</td><td>PCA: how many factors, what they mean, use in regression</td><td>Day 3 guide, section 4</td></tr>
+    <tr><td>Q2a (8)</td><td>Critique a CNN summary, redesign, count parameters, choose activation and loss</td><td>Days 5 to 7 guide, section 6</td></tr>
+    <tr><td>Q2b (4)</td><td>Reward factors, DRL architecture, safe training</td><td>Day 10 and RL guide, Part B</td></tr>
+    <tr><td>Q2c (4)</td><td>Anomaly detection with 2 abnormal examples: agree or not, two challenges</td><td>Days 13 and 14 guide, section 5</td></tr>
+    <tr><td>Q2d (4)</td><td>Bayesian diagnosis from a table, by hand</td><td>Day 1 (Naive Bayes), Days 11 and 12 (section 6)</td></tr>
+  </table></div>
+  <p><b>Pattern to notice:</b> almost every part is "apply a method to a scenario", then "justify against a business goal". The marks come from (1) naming the right technique, (2) using the numbers in the question, (3) giving a reason, and (4) a trade-off or a way to measure success.</p>
+</section>
+
+<section>
+  <h2>3. Mock exam (same style and difficulty as the sample)</h2>
+  <p>No calculator. Try to keep to roughly the time you would give the real paper. Answers are folded under each part.</p>
+
+  <h3>Question 1 (20 marks): telecom churn</h3>
+  <p>A mobile operator wants to predict which customers will cancel (churn) so it can send a retention offer. A history of customers has 10% who churned. Features include contract type, tenure in months, monthly charge, data usage, streaming hours, number of support calls and a few more. 70% of the history trains the model and the rest (1,000 customers) tests it.</p>
+
+  <div class="card">
+    <p><b>(a)</b> A decision tree is built. It is described below. What does it tell you about customers likely to churn, how does it relate to the business aim, name one problem with the model and how to improve it, and how would you decide the improved model is more valuable? <i>(4 marks)</i></p>
+    <div class="scroll"><table>
+      <tr><th>Node</th><th class="n">Customers</th><th>Churn rate</th></tr>
+      <tr><td>All customers</td><td class="n">1,000</td><td>10%</td></tr>
+      <tr><td>Contract = month-to-month</td><td class="n">400</td><td>22%</td></tr>
+      <tr><td>Contract = month-to-month and tenure under 6 months</td><td class="n">100</td><td>50%</td></tr>
+      <tr><td>Contract = month-to-month and tenure 6 months or more</td><td class="n">300</td><td>13%</td></tr>
+      <tr><td>Contract longer than month-to-month</td><td class="n">600</td><td>2%</td></tr>
+    </table></div>
+  </div>
+  <details><summary>Model answer (a)</summary>
+    <p><b>Reading it:</b> churn is concentrated in month-to-month customers in their first six months: 50 of the 100 churn. That group is only 10% of customers but holds half of all churners (50 of 100). Customers on longer contracts rarely leave (2%).</p>
+    <p><b>Business link:</b> the retention budget can target new month-to-month customers first, for example with a discount for moving to a longer contract.</p>
+    <p><b>Problem:</b> the data is imbalanced (10% churn), and the tree has only two splits, so even the riskiest leaf is only 50% pure and the 300 month-to-month customers with 13% churn are not separated. Fix: balance the training data (oversample or SMOTE, class weights), allow more features and depth with pruning, or use a boosted or forest model.</p>
+    <p><b>Value:</b> compare on the 30% test set using recall and precision for the churn class and, better, the money: saved revenue from retained churners minus the cost of the offers to all flagged customers.</p>
+  </details>
+
+  <div class="card">
+    <p><b>(b)</b> Two models are tested on the 1,000 test customers. A missed churner costs the company 200 dollars. Contacting a flagged customer with an offer costs 20 dollars. Compare the models and say which you would use. <i>(3 marks)</i></p>
+    <div class="scroll"><table>
+      <tr><th></th><th>Predicted churn</th><th>Predicted stay</th></tr>
+      <tr><th>Model X: actual churn</th><td>80</td><td>20</td></tr>
+      <tr><th>Model X: actual stay</th><td>40</td><td>860</td></tr>
+      <tr><th>Model Y: actual churn</th><td>60</td><td>40</td></tr>
+      <tr><th>Model Y: actual stay</th><td>10</td><td>890</td></tr>
+    </table></div>
+  </div>
+  <details><summary>Model answer (b)</summary>
+    <p>Accuracy is almost the same: X = (80 + 860) / 1000 = 94%, Y = (60 + 890) / 1000 = 95%, so accuracy cannot separate them (and a model that says "stay" for everyone scores 90%).</p>
+    <p>Recall: X = 80 / 100 = 80%, Y = 60 / 100 = 60%. Precision: X = 80 / 120 = 67%, Y = 60 / 70 = 86%.</p>
+    <p>Cost: X = 120 flagged × 20 + 20 missed × 200 = 2,400 + 4,000 = <b>6,400</b>. Y = 70 × 20 + 40 × 200 = 1,400 + 8,000 = <b>9,400</b>. Model X is cheaper because a missed churner is ten times more expensive than a wasted offer. <b>Use Model X.</b> (If offers were far more costly, Y's higher precision could win. The business costs decide.)</p>
+  </details>
+
+  <div class="card">
+    <p><b>(c)</b> A PCA on 6 standardised features gives eigenvalues 2.4, 1.5, 0.9, 0.6, 0.4 and 0.2. PC1 has large loadings on data usage (0.55), monthly charge (0.52) and streaming hours (0.50), and small loadings (below 0.2) on the rest. How many components would you keep and what does PC1 represent? <i>(3 marks)</i></p>
+  </div>
+  <details><summary>Model answer (c)</summary>
+    <p>Total variance = 6 (sum of the eigenvalues, equal to the number of features). Variance explained: 40%, 25%, 15%, 10%, 6.7%, 3.3%. Kaiser (eigenvalue above 1) keeps <b>2</b> components (65% of the variance). A cumulative 80% target needs <b>3</b> (40 + 25 + 15 = 80%). Say which rule you choose and that the choice depends on how much information loss is acceptable; I would keep 3.</p>
+    <p>PC1: data usage, monthly charge and streaming hours rise together, so it measures <b>heavy digital service use</b> (or "premium usage").</p>
+  </details>
+
+  <div class="card">
+    <p><b>(d)</b> The operator also has each customer's call-centre log (a time-ordered list of contacts with the issue type and call duration). Propose a sequential model to predict churn, describe how to build it, and say how it can work with the model in (a) or (b). <i>(4 marks)</i></p>
+  </div>
+  <details><summary>Model answer (d)</summary>
+    <p>An <b>LSTM</b> (or GRU). Each customer is one sequence of contacts; each step has issue type (one-hot or embedding), call duration (scaled) and days since the previous contact. The label is whether the customer churned within a set period after the sequence. Pre-process: sort by time, pad or truncate to a fixed length (with masking) or cut windows, scale numbers, handle the 10% imbalance (class weights), and split train and test by customer and by time.</p>
+    <p>Combine: pass the LSTM's churn probability (or final hidden state) as an additional input feature to the tabular model, or average or stack the LSTM and the tabular model. The sequence model adds behaviour over time that the static features miss.</p>
+  </details>
+
+  <div class="card">
+    <p><b>(e)</b> A boosted-tree model gives roughly equal importance to most of the 20 features, while the single tree in (a) used only contract and tenure. Give two reasons for the difference and one way to use the boosted importances. <i>(3 marks)</i></p>
+  </div>
+  <details><summary>Model answer (e)</summary>
+    <p>(1) A single tree is greedy: once contract and tenure give the best splits, correlated features (monthly charge, data usage) add little and are never used, so their importance is masked. (2) Boosting trains many trees on re-weighted data, so later trees use other features to fix earlier errors, and the importance is summed over all of them. (Also: impurity importance is biased towards variables with many distinct values.)</p>
+    <p>Use: feature selection. Drop the lowest-ranked features, retrain a faster SVM, neural network or logistic regression on the rest, and confirm with cross-validation. Cross-check with permutation importance.</p>
+  </details>
+
+  <div class="card">
+    <p><b>(f)</b> You cluster customers on standardised usage and charge features using K-means. How do you choose k and how do you make the clusters useful for the marketing team? <i>(3 marks)</i></p>
+  </div>
+  <details><summary>Model answer (f)</summary>
+    <p>Run k = 2 to 10, plot within-cluster sum of squares (elbow) and compute the silhouette (above 0.3 is acceptable) and check stability on a split-half. Standardise first and remove or cap outliers. To make them useful: profile each cluster on the original variables (box plots, means), give each a business label (for example "heavy streamers", "light users on short contracts"), check size (no tiny or giant clusters) and attach an action (offer type) to each.</p>
+  </details>
+
+  <h3>Question 2 (20 marks): smart warehouse</h3>
+  <p>A warehouse robot system must identify 40 product types from a camera image of 64 x 64 x 3 pixels and sort them. About 4,000 labelled images exist. The team's CNN is below.</p>
+  <div class="card">
+    <div class="scroll"><table>
+      <tr><th>Layer</th><th>Settings</th><th>Output shape</th></tr>
+      <tr><td>Input</td><td></td><td>64 x 64 x 3</td></tr>
+      <tr><td>Conv2D</td><td>3 x 3, 8 filters, no padding</td><td>62 x 62 x 8</td></tr>
+      <tr><td>MaxPool</td><td>2 x 2, stride 2</td><td>31 x 31 x 8</td></tr>
+      <tr><td>Conv2D</td><td>3 x 3, 16 filters, no padding</td><td>29 x 29 x 16</td></tr>
+      <tr><td>MaxPool</td><td>2 x 2, stride 2</td><td>14 x 14 x 16</td></tr>
+      <tr><td>Flatten</td><td></td><td>3,136</td></tr>
+      <tr><td>Dense</td><td>512, ReLU</td><td>512</td></tr>
+      <tr><td>Dense</td><td>40, softmax</td><td>40</td></tr>
+    </table></div>
+    <p style="margin-top:10px"><b>(a)</b> Work out the number of parameters in each layer and the total. The product owner says the model overfits. Do you agree, why, and how would you change it? Give the new parameter count, the activation functions and the loss. <i>(8 marks)</i></p>
+  </div>
+  <details><summary>Model answer (a)</summary>
+    <p><b>Parameters:</b> Conv1: (3·3·3 + 1)·8 = 224. Conv2: (3·3·8 + 1)·16 = 73·16 = 1,168. Dense 512: 3,136·512 + 512 = 1,606,144 (3,136 × 512 is about 1.6 million). Dense 40: 512·40 + 40 = 20,520. Pooling and Flatten: 0. <b>Total 1,628,056</b>.</p>
+    <p><b>Agree:</b> the Flatten to Dense 512 layer holds about 1.61 million of 1.63 million parameters (99%), while only 4,000 images exist (about 100 per class). This invites memorisation. There is no dropout, batch normalisation or augmentation.</p>
+    <p><b>Changes:</b> replace Flatten by <b>global average pooling</b> (16 values), use a smaller dense layer (for example 64), add dropout (0.3 to 0.5) and batch normalisation, augment the images (flips, shifts, rotations, brightness), add one more conv-and-pool block for features, use early stopping, and consider transfer learning from a pretrained backbone.</p>
+    <p><b>New count (example):</b> conv layers as before 224 + 1,168 = 1,392; GAP gives 16; Dense 64: 16·64 + 64 = 1,088; output Dense 40: 64·40 + 40 = 2,600. Total <b>5,080</b>, about 99.7% fewer.</p>
+    <p><b>Activations and loss:</b> ReLU in hidden layers, softmax at the 40-class output, categorical cross-entropy (one-hot labels). Use class weights if products are unevenly represented.</p>
+  </details>
+
+  <div class="card">
+    <p><b>(b)</b> Conveyor motor current is monitored for faults. There are 5,000 normal 10-second recordings and 3 faulty ones. A colleague suggests training a two-class neural network. Do you agree? Give two challenges and solutions. <i>(4 marks)</i></p>
+  </div>
+  <details><summary>Model answer (b)</summary>
+    <p>Not as proposed. (1) <b>Extreme imbalance:</b> 3 faults in 5,003 recordings, so the network learns to say "normal" and cannot learn the variety of faults. Solution: anomaly detection trained on normal data only, for example an autoencoder with a reconstruction-error threshold (mean + 3 standard deviations of validation errors on normal data) and test it on the 3 faults. Augment faults (jitter, time-warp) only if a classifier is needed, and judge with recall, precision and F1. (2) <b>Signals differ in timing and speed:</b> comparing fixed points fails when events shift. Solution: use time-frequency features (wavelet subband statistics) or a 1D convolutional or LSTM autoencoder, and DTW for shift-tolerant comparison.</p>
+  </details>
+
+  <div class="card">
+    <p><b>(c)</b> When a fault is detected, its cause must be diagnosed. The maintenance log is below. Use a Bayesian method to decide the cause when the noise is Loud and the temperature is Normal. Show the calculation. <i>(4 marks)</i></p>
+    <div class="scroll"><table>
+      <tr><th>No.</th><th>Noise</th><th>Temperature</th><th>Cause</th></tr>
+      <tr><td>1</td><td>Loud</td><td>High</td><td>Bearing</td></tr>
+      <tr><td>2</td><td>Loud</td><td>Normal</td><td>Bearing</td></tr>
+      <tr><td>3</td><td>Normal</td><td>High</td><td>Bearing</td></tr>
+      <tr><td>4</td><td>Loud</td><td>High</td><td>Bearing</td></tr>
+      <tr><td>5</td><td>Normal</td><td>Normal</td><td>Belt</td></tr>
+      <tr><td>6</td><td>Loud</td><td>Normal</td><td>Belt</td></tr>
+      <tr><td>7</td><td>Normal</td><td>Normal</td><td>Belt</td></tr>
+      <tr><td>8</td><td>Normal</td><td>High</td><td>Belt</td></tr>
+      <tr><td>9</td><td>Normal</td><td>Normal</td><td>Belt</td></tr>
+    </table></div>
+  </div>
+  <details><summary>Model answer (c)</summary>
+    <p>Priors: Bearing 4/9, Belt 5/9.</p>
+    <p>Bearing (rows 1 to 4): P(Loud | Bearing) = 3/4, P(Normal temp | Bearing) = 1/4. Score = 4/9 × 3/4 × 1/4 = 12/144 = 1/12 ≈ 0.083.</p>
+    <p>Belt (rows 5 to 9): P(Loud | Belt) = 1/5, P(Normal temp | Belt) = 4/5. Score = 5/9 × 1/5 × 4/5 = 20/225 = 4/45 ≈ 0.089.</p>
+    <p>Belt is slightly larger (1/12 : 4/45 = 45 : 48), so the decision is <b>Belt</b>, with probability about 48/93 ≈ 52%. It is a close call and a human check is wise. Note the naive assumption (noise and temperature independent given the cause) is questionable since a failing part usually raises both. No count is zero, so Laplace smoothing is not needed.</p>
+  </details>
+
+  <div class="card">
+    <p><b>(d)</b> A vibration sensor is sampled at 400 Hz and the useful content goes up to 150 Hz. (i) Is the rate adequate? (ii) Apply a two-level Haar transform (low-pass [1/√2, 1/√2], high-pass [−1/√2, 1/√2]) to the four values [6, 2, 4, 8] and check the energy. (iii) Why use wavelet statistics rather than only the Fourier transform? <i>(4 marks)</i></p>
+  </div>
+  <details><summary>Model answer (d)</summary>
+    <p><b>(i)</b> Needs at least 2 × 150 = 300 Hz, so 400 Hz is adequate (it can represent up to 200 Hz).</p>
+    <p><b>(ii)</b> Level 1: (6, 2): approx 8/√2 = 4√2, detail (2 − 6)/√2 = −2√2. (4, 8): approx 12/√2 = 6√2, detail (8 − 4)/√2 = 2√2. Level 2: approx (4√2 + 6√2)/√2 = 10, detail (6√2 − 4√2)/√2 = 2. Coefficients <b>[10, 2, −2√2, 2√2]</b>. Energy: 36 + 4 + 16 + 64 = 120 and 100 + 4 + 8 + 8 = 120. Equal.</p>
+    <p><b>(iii)</b> Fourier says which frequencies are present but not when. Faults often appear briefly or change over time, so wavelets, which localise in time and frequency, give features (subband mean and variance) that show when the unusual event occurs.</p>
+  </details>
+</section>
+
+<section>
+  <h2>4. Master cheat sheet for the open-book exam</h2>
+  <p>Print or copy this, then add your own annotations from the guides. It collects the formulas and the answer templates. Each guide has a longer sheet.</p>
+  <div class="sheet">
+    <h3 style="margin-top:0">Formulas</h3>
+    <div class="formula">Recall = TP/(TP+FN)    Precision = TP/(TP+FP)    Specificity = TN/(TN+FP)    Accuracy = (TP+TN)/all    F1 = 2PR/(P+R)
+Naive Bayes score(c) = P(c)·ΠP(xi|c)      Laplace: (count+1)/(n+k)
+Entropy = −Σ p·log2 p   (pure 0, 50/50 = 1, 1/4 → 0.81, 1/3 → 0.92)     Gini = 1 − Σp²     Gain = E(S) − Σ (|Sv|/|S|)·E(Sv)
+Eigenvalue = %var × p/100      Kaiser: keep eigenvalue &gt; 1      LDA axes ≤ c − 1
+K-means SSE = Σ‖x − centroid‖²      Silhouette = (b − a)/max(a, b)      DBSCAN core: ≥ MinPts within ε
+Conv out = floor((W − F + 2P)/S) + 1      Conv params = (Fr·Fc·Cin + 1)·Cout      Dense params = in·out + out
+RNN params = H(D+H)+H      LSTM params = 4·[H(D+H)+H]      Sigmoid derivative ≤ 0.25      ResNet: H(x) = F(x) + x
+Perceptron: Δw = η(T−O)x      Backprop: δout = O(1−O)(T−O), Δw = η·δ·Oin      L2: w ← (1 − αη)w − η·grad
+Nyquist fs ≥ 2·fmax      Haar: approx = (a+b)/√2, detail = (b−a)/√2      DTW: A = D + min(A↑, A←, A↖)
+Majority vote of 3 (accuracy p) = 3p²(1−p) + p³      Autoencoder anomaly threshold = mean + 3σ of normal errors</div>
+    <h3>Answer templates</h3>
+    <div class="scroll"><table>
+      <tr><th>Type of question</th><th>Structure</th></tr>
+      <tr><td>Compare two models</td><td>Compute the metrics from each matrix (check which class is positive). Link each type of error to its business cost. Name the winner and the condition under which the other would win.</td></tr>
+      <tr><td>Imbalanced data</td><td>Accuracy is misleading. Use recall, precision, F1, AUC. Fix with SMOTE or class weights, or switch to anomaly detection if almost no minority examples exist.</td></tr>
+      <tr><td>Overfitting</td><td>Gap between training and test. Simpler model, regularisation (L2, dropout), early stopping, more or augmented data, fewer features, ensembles, cross-validation.</td></tr>
+      <tr><td>Critique a neural network</td><td>Compute shapes and parameters. Say where the weights sit (Flatten to Dense). Relate to the data size. Propose specific changes (global pooling, dropout, batch norm, augmentation, transfer learning, multi-head outputs). Recompute parameters. State activations and loss.</td></tr>
+      <tr><td>Choose a model type</td><td>Tabular, explainable: tree or logistic. Tabular, accuracy: boosting or forest. Images: CNN. Sequences: LSTM. Few labels: self-supervised or transfer. Few anomalies: autoencoder.</td></tr>
+      <tr><td>Unsupervised segmentation</td><td>Standardise, choose method (K-means, DBSCAN for outliers), choose k (elbow, silhouette), validate (stability), profile and label clusters, attach an action.</td></tr>
+      <tr><td>Dimension reduction</td><td>PCA (unsupervised) vs LDA (supervised) vs feature selection (keeps meaning). Number of components by Kaiser, cumulative variance and scree. Name components from loadings. Fit on training data only.</td></tr>
+      <tr><td>Signals</td><td>Sampling at least 2 × fmax. Denoise and correct baseline. Features: statistics, histogram, Fourier, wavelet. Compare shapes with DTW. Detect anomalies with autoencoders or statistics.</td></tr>
+      <tr><td>Robot or RL</td><td>Reward factors with signs linked to criteria. Architecture with labelled arrows (state, action, reward). Safe training: simulation, safety layer, proximity penalties, demonstrations, curriculum.</td></tr>
+      <tr><td>"Is the assumption realistic?"</td><td>State it precisely (naive Bayes: conditional independence given the class). Usually not realistic, give the specific link, say the probabilities are overconfident but the ranking is often fine.</td></tr>
+    </table></div>
+    <h3>No-calculator reminders</h3>
+    <ul>
+      <li>Keep fractions, cancel the common prior, compare ratios (for example 9 : 1). Normalise only if asked.</li>
+      <li>Round big numbers when comparing (about 2.4 million of 2.6 million) but show the formula and substitution.</li>
+      <li>Compare squared distances without the square root. Use landmark entropies instead of logs.</li>
+      <li>Always write the formula, then the numbers, then the answer with units and a one-line meaning.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
