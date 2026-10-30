@@ -83,11 +83,11 @@ details[open] summary { margin-bottom: 8px; }
     <tr><td>Leaf</td><td>the predicted class</td></tr>
   </table></div>
   <figure>
-    <svg viewBox="0 0 380 250" width="460" role="img" aria-label="Decision tree for the Play Tennis data: Outlook at the root; sunny goes to a Humidity test, overcast is Yes, rainy goes to a Windy test">
+    <svg viewBox="-40 0 440 256" width="500" role="img" aria-label="Decision tree for the Play Tennis data with row counts: Outlook at the root; sunny (5 rows) goes to a Humidity test, overcast (4 rows) is Yes, rainy (5 rows) goes to a Windy test">
       <rect class="box" x="140" y="10" width="100" height="32" rx="6"/><text x="190" y="31" text-anchor="middle" class="bold">Outlook?</text>
-      <path class="ax" d="M165 42 L70 92"/><text x="85" y="62" class="small">sunny</text>
-      <path class="ax" d="M190 42 L190 180"/><text x="196" y="130" class="small">overcast</text>
-      <path class="ax" d="M215 42 L310 92"/><text x="278" y="62" class="small">rainy</text>
+      <path class="ax" d="M165 42 L70 92"/><text x="85" y="62" class="small">sunny</text><text x="92" y="77" class="small" text-anchor="end">5 rows: 2 Yes, 3 No</text>
+      <path class="ax" d="M190 42 L190 180"/><text x="196" y="130" class="small">overcast</text><text x="196" y="145" class="small">4 rows: 4 Yes, 0 No</text>
+      <path class="ax" d="M215 42 L310 92"/><text x="278" y="62" class="small">rainy</text><text x="292" y="77" class="small">5 rows: 3 Yes, 2 No</text>
       <rect class="box" x="20" y="92" width="100" height="32" rx="6"/><text x="70" y="113" text-anchor="middle" class="bold">Humidity?</text>
       <rect class="box" x="260" y="92" width="100" height="32" rx="6"/><text x="310" y="113" text-anchor="middle" class="bold">Windy?</text>
       <path class="ax" d="M45 124 L25 180"/><text x="2" y="150" class="small">high</text>
@@ -99,10 +99,32 @@ details[open] summary { margin-bottom: 8px; }
       <rect class="leafy" x="165" y="180" width="50" height="30" rx="6"/><text x="190" y="199" text-anchor="middle" class="bold">Yes</text>
       <rect class="leafy" x="240" y="180" width="50" height="30" rx="6"/><text x="265" y="199" text-anchor="middle" class="bold">Yes</text>
       <rect class="leafn" x="330" y="180" width="50" height="30" rx="6"/><text x="355" y="199" text-anchor="middle" class="bold">No</text>
-      <text x="8" y="236" class="small">Sunny + high humidity → No. Overcast → always Yes. Rainy + windy → No.</text>
+      <g class="small" text-anchor="middle"><text x="35" y="226">3 rows</text><text x="115" y="226">2 rows</text><text x="190" y="226">4 rows</text><text x="265" y="226">3 rows</text><text x="355" y="226">2 rows</text></g>
+      <text x="-34" y="248" class="small">Sunny + high humidity → No. Overcast → always Yes. Rainy + windy → No.</text>
     </svg>
-    <figcaption>The finished tree for the 14-day "play tennis?" data in the notes. A new day is classified by following the matching branches to a leaf.</figcaption>
+    <figcaption>The finished tree for the 14-day "play tennis?" data in the notes. The row counts on the branches come from the table below, and the five leaf counts add up to 14. A new day is classified by following the matching branches to a leaf.</figcaption>
   </figure>
+
+  <details open><summary>The 14-day weather data behind this tree</summary>
+    <div class="scroll"><table>
+      <tr><th class="n">Day</th><th>Outlook</th><th>Temperature</th><th>Humidity</th><th>Windy</th><th>Play?</th></tr>
+      <tr><td class="n">1</td><td>sunny</td><td>hot</td><td>high</td><td>false</td><td>No</td></tr>
+      <tr><td class="n">2</td><td>sunny</td><td>hot</td><td>high</td><td>true</td><td>No</td></tr>
+      <tr><td class="n">3</td><td>overcast</td><td>hot</td><td>high</td><td>false</td><td>Yes</td></tr>
+      <tr><td class="n">4</td><td>rainy</td><td>mild</td><td>high</td><td>false</td><td>Yes</td></tr>
+      <tr><td class="n">5</td><td>rainy</td><td>cool</td><td>normal</td><td>false</td><td>Yes</td></tr>
+      <tr><td class="n">6</td><td>rainy</td><td>cool</td><td>normal</td><td>true</td><td>No</td></tr>
+      <tr><td class="n">7</td><td>overcast</td><td>cool</td><td>normal</td><td>true</td><td>Yes</td></tr>
+      <tr><td class="n">8</td><td>sunny</td><td>mild</td><td>high</td><td>false</td><td>No</td></tr>
+      <tr><td class="n">9</td><td>sunny</td><td>cool</td><td>normal</td><td>false</td><td>Yes</td></tr>
+      <tr><td class="n">10</td><td>rainy</td><td>mild</td><td>normal</td><td>false</td><td>Yes</td></tr>
+      <tr><td class="n">11</td><td>sunny</td><td>mild</td><td>normal</td><td>true</td><td>Yes</td></tr>
+      <tr><td class="n">12</td><td>overcast</td><td>mild</td><td>high</td><td>true</td><td>Yes</td></tr>
+      <tr><td class="n">13</td><td>overcast</td><td>hot</td><td>normal</td><td>false</td><td>Yes</td></tr>
+      <tr><td class="n">14</td><td>rainy</td><td>mild</td><td>high</td><td>true</td><td>No</td></tr>
+    </table></div>
+    <p>Count by Outlook: sunny = days 1, 2, 8, 9, 11 (5 rows: 2 Yes, 3 No). Overcast = days 3, 7, 12, 13 (4 rows: all Yes). Rainy = days 4, 5, 6, 10, 14 (5 rows: 3 Yes, 2 No). Overall 9 Yes and 5 No.</p>
+  </details>
 
   <h3>1.1 How the tree decides which question to ask first</h3>
   <p>Good questions split the data into groups that are as <b>pure</b> as possible (mostly one class). The tree is built top-down: pick the best question, split, then repeat inside each group. The notes use three ways to score a question.</p>
