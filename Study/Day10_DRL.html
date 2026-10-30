@@ -1,0 +1,287 @@
+<title>PRS Day 10 and RL Study Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column, one diagram per concept, plain-language text first, exam angle last in each section */
+:root {
+  --bg: #f6f8fa; --fg: #1b2430; --muted: #5b6776; --card: #ffffff; --line: #d7dee6;
+  --a: #1f6feb; --a-soft: #e3eefc; --b: #d9660b; --b-soft: #fdeede;
+  --ok: #1a7f4b; --ok-soft: #e2f4ea; --warn: #b42318; --warn-soft: #fdecea;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f151c; --fg: #e4eaf0; --muted: #9aa7b6; --card: #17202a; --line: #2b3745;
+  --a: #5aa2ff; --a-soft: #15283f; --b: #ff9a4d; --b-soft: #3a2616;
+  --ok: #4cc38a; --ok-soft: #14301f; --warn: #ff7b72; --warn-soft: #3a1b19; color-scheme: dark; }
+
+body { background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body);
+  padding-block: 24px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: 2rem; } h2 { font-size: 1.45rem; padding-top: 12px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.1rem; margin-top: 8px; }
+p { margin: 0; } ul, ol { margin: 0; padding-left: 1.2em; } li { margin: 4px 0; }
+code, .mono { font-family: var(--f-mono); font-size: .9em; }
+code { background: var(--a-soft); padding: 1px 5px; border-radius: 4px; }
+section { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+.eyebrow { font: 500 .75rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+figcaption { color: var(--muted); font-size: .9rem; }
+svg { max-width: 100%; height: auto; color: var(--fg); }
+svg text { fill: currentColor; font: 12px var(--f-body); }
+svg .small { font-size: 11px; fill: var(--muted); }
+svg .bold { font-weight: 600; }
+svg .ax { stroke: currentColor; stroke-width: 1.2; fill: none; }
+svg .dash { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 5 4; fill: none; }
+svg .ca { fill: var(--a); } svg .cb { fill: var(--b); }
+svg .la { stroke: var(--a); stroke-width: 2.4; fill: none; } svg .lb { stroke: var(--b); stroke-width: 2.4; fill: none; }
+svg .box { fill: var(--card); stroke: currentColor; stroke-width: 1.2; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+.say { background: var(--a-soft); border-radius: 8px; padding: 12px 16px; }
+.say b, .exam b, .trap b { font-family: var(--f-mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.exam { background: var(--ok-soft); border-radius: 8px; padding: 12px 16px; }
+.trap { background: var(--warn-soft); border-radius: 8px; padding: 12px 16px; }
+.flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.flow .step { flex: 1 1 130px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .9rem; min-width: 0; }
+.flow .step b { display: block; font-family: var(--f-display); }
+.flow .arr { align-self: center; color: var(--muted); }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--a-soft); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.cm { display: grid; grid-template-columns: auto 1fr 1fr; gap: 4px; max-width: 520px; font-size: .9rem; }
+.cm div { padding: 10px; border-radius: 6px; min-width: 0; }
+.cm .h { color: var(--muted); font-size: .8rem; display: flex; align-items: center; }
+.cm .tp, .cm .tn { background: var(--ok-soft); } .cm .fp, .cm .fn { background: var(--warn-soft); }
+.cm strong { display: block; font-family: var(--f-display); }
+.formula { font-family: var(--f-mono); font-size: .9rem; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; overflow-x: auto; white-space: pre; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+summary { cursor: pointer; font-weight: 600; }
+summary:focus-visible { outline: 2px solid var(--a); outline-offset: 2px; }
+details[open] summary { margin-bottom: 8px; }
+.sheet { border: 2px solid var(--a); border-radius: 8px; padding: 14px 16px; background: var(--card); }
+svg .lk { stroke: var(--ok); stroke-width: 2.4; fill: none; }
+svg .leafy { fill: var(--ok-soft); stroke: var(--ok); stroke-width: 1.2; }
+svg .leafn { fill: var(--warn-soft); stroke: var(--warn); stroke-width: 1.2; }
+svg .cg { fill: var(--ok); }
+.tag { display:inline-block; font:500 .72rem var(--f-mono); letter-spacing:.05em; text-transform:uppercase; background:var(--b-soft); color:var(--b); border-radius:4px; padding:1px 6px; }
+</style>
+
+<main>
+<header>
+  <div class="eyebrow">ISY5002 Pattern Recognition Systems · Day 10 and Day 5 applications</div>
+  <h1>Ensembles, hybrids and deep reinforcement learning</h1>
+  <p class="lede">Part A covers bagging, random forests, boosting and variable importance, which is sample question 1c. Part B covers deep reinforcement learning for the robotic arm in sample question 2b.</p>
+</header>
+<section>
+  <h2>Part A. Ensembles and hybrid models (Day 10, sample Q1c)</h2>
+  <h3>1. The idea</h3>
+  <p>An <b>ensemble</b> is a committee of models. Each makes a prediction and the group decides: <b>majority vote</b> for classes, <b>average</b> for numbers. A committee is usually more accurate and more reliable than any one member.</p>
+  <div class="say"><b>Dietterich's condition</b>An ensemble beats its members if and only if the members are <b>accurate</b> and <b>diverse</b> (they make different mistakes). Identical models add nothing.</div>
+  <p><b>Why voting helps (worked example).</b> Three independent classifiers, each 70% accurate. The majority is right when at least 2 of 3 are right:</p>
+  <div class="formula">P = 3 · 0.7² · 0.3 + 0.7³ = 3 · 0.49 · 0.3 + 0.343 = 0.441 + 0.343 = 0.784</div>
+  <p>The committee scores 78.4%, better than any single 70% model. The gain shrinks if the models make the same mistakes, which is why diversity matters.</p>
+
+  <h3>2. Bias and variance: why averaging works</h3>
+  <div class="scroll"><table>
+    <tr><th></th><th>High bias (underfit)</th><th>High variance (overfit)</th></tr>
+    <tr><td>Training fit</td><td>Poor</td><td>Very good</td></tr>
+    <tr><td>Sensitivity to the training sample</td><td>Low: changing a few points changes little</td><td>High: the model changes a lot</td></tr>
+    <tr><td>Typical model</td><td>Too simple (shallow tree, line)</td><td>Too complex (deep unpruned tree)</td></tr>
+  </table></div>
+  <p>Expected error = bias² + variance + irreducible noise. <b>Averaging many models reduces variance without raising bias</b>. So you take flexible, low-bias models (deep trees) and average away the variance. The reduction is smaller than 1/N because the models are correlated.</p>
+
+  <h3>3. Ways to build an ensemble</h3>
+  <div class="scroll"><table>
+    <tr><th></th><th>Bagging</th><th>Random forest</th><th>Boosting (AdaBoost, gradient boosting)</th></tr>
+    <tr><td><b>How the data is used</b></td><td>Each model trains on a <b>bootstrap sample</b>: draw rows <u>with replacement</u>, about two thirds (63%) unique rows</td><td>Bagging <b>plus</b> a random subset of features at every split (about sqrt of the number of features)</td><td>Models are trained <b>one after another</b>. Rows the last model got wrong get <b>higher weight</b></td></tr>
+    <tr><td><b>Combination</b></td><td>Unweighted vote or average</td><td>Unweighted vote</td><td>Weighted vote (better models count more)</td></tr>
+    <tr><td><b>Reduces</b></td><td>Variance</td><td>Variance (more diversity than bagging)</td><td>Bias and variance</td></tr>
+    <tr><td><b>Base model</b></td><td>Any, usually trees</td><td>Decision trees only, unpruned, hundreds or thousands</td><td>Weak learners (shallow trees)</td></tr>
+    <tr><td><b>Parallel?</b></td><td>Yes</td><td>Yes</td><td>No (sequential)</td></tr>
+    <tr><td><b>Noisy data</b></td><td>Robust</td><td>Robust</td><td>Can <b>hurt</b> (chases noisy rows)</td></tr>
+    <tr><td><b>Explainable?</b></td><td>No</td><td>No (black box)</td><td>No</td></tr>
+  </table></div>
+  <div class="flow">
+    <div class="step"><b>Bagging</b>Resample the data N times → train N models side by side → vote.</div>
+    <div class="step"><b>Boosting</b>Train model 1 → raise the weight of its errors → train model 2 on the weighted data → repeat → weighted vote.</div>
+    <div class="step"><b>Stacking</b>Train different model types, then train a <u>meta-model</u> to learn how best to combine their outputs.</div>
+  </div>
+  <ul>
+    <li><b>Bagging</b> helps unstable models (deep trees, neural nets). It does little for stable ones (linear models, KNN). Usually under 50 models is enough.</li>
+    <li><b>Boosting</b> in short: <i>weight all rows equally → train → increase weights on the rows it got wrong → train a new model on the reweighted data → repeat → combine with weights.</i> Gradient boosting (for example XGBoost) instead fits each new model to the remaining error using gradient descent on a loss function.</li>
+    <li><b>Random forest out-of-bag (OOB) error:</b> each tree leaves out about a third of the rows. Test each tree on its own left-out rows and combine. You get an error estimate with <u>no separate test set</u>.</li>
+  </ul>
+  <h3>4. Variable importance in a forest or boosted model</h3>
+  <ul>
+    <li><b>Impurity-based:</b> add up how much each variable reduced Gini impurity (or entropy) across all splits and trees. Better than just counting how often it appears.</li>
+    <li><b>Permutation:</b> shuffle one variable in the out-of-bag data and measure how much accuracy drops. A big drop means the variable matters. Works for any model.</li>
+  </ul>
+
+  <h3>5. Sample Q1c, worked through</h3>
+  <p>The AdaBoost importance plot (higher = more important) reads roughly: ProductRelated 0.10, Informational_Duration 0.09, Browser 0.09, SpecialDay 0.09, Informational 0.09, ProductRelated_Duration 0.08, BounceRates 0.08, PageValues 0.08, Administrative 0.08, ExitRates 0.07, OperatingSystems 0.07, VisitorType 0.07, Administrative_Duration 0.07, then TrafficType 0.05, Month 0.04, Region 0.03, Weekend 0.00.</p>
+  <div class="scroll"><table>
+    <tr><th></th><th>Single tree (part a)</th><th>AdaBoost</th></tr>
+    <tr><td>Variables used</td><td>Only two: <b>PageValue</b> (root) and <b>BounceRate</b></td><td>Almost all variables contribute</td></tr>
+    <tr><td>Top variable</td><td>PageValue</td><td>ProductRelated (PageValues is only mid-table)</td></tr>
+    <tr><td>Spread of importance</td><td>Very concentrated</td><td>Flat: most scores between 0.07 and 0.10</td></tr>
+  </table></div>
+  <p><b>Difference:</b> the tree says buying is about PageValue and BounceRate and ignores ProductRelated entirely, while AdaBoost spreads credit widely and ranks ProductRelated first.</p>
+  <p><b>Possible reasons:</b></p>
+  <ul>
+    <li>A single tree is <b>greedy</b>: once PageValue takes the first split, correlated features (ProductRelated and its duration, BounceRate and ExitRate) add little and never get used. Importance is <b>masked</b>.</li>
+    <li>AdaBoost trains many trees on <b>re-weighted</b> data, so later trees must fix the earlier mistakes and use other variables. Its importance is summed over all those trees.</li>
+    <li>Impurity-based importance favours variables with many distinct values or levels (Browser, OperatingSystems look surprisingly important), so part of the score may be a bias, not real signal.</li>
+    <li>The flat scores suggest no variable dominates once all the trees are combined, so the ensemble uses many weak signals.</li>
+  </ul>
+  <p><b>How to use the information in further modelling:</b></p>
+  <ul>
+    <li><b>Feature selection:</b> drop the lowest-ranked (Weekend, Region, Month, TrafficType) to get a leaner, faster model and then compare accuracy with cross-validation.</li>
+    <li>Train the SVM, neural network or logistic regression on the top variables to cut noise and overfitting.</li>
+    <li>Cross-check with permutation importance before trusting the ranking, and keep variables that the business knows matter (PageValue).</li>
+  </ul>
+  <div class="exam"><b>Exam angle</b>For "compare and explain a difference": state the difference with numbers from both outputs, give two or three reasons (greedy single tree and masking; boosting re-weights and aggregates; correlated variables share importance; bias towards high-cardinality variables), then give one concrete use (feature selection followed by retraining and validation).</div>
+
+  <h3>6. Hybrid models (shorter)</h3>
+  <ul>
+    <li><b>Ensemble:</b> many models of the <u>same</u> kind (weak, homogeneous). <b>Hybrid:</b> <u>different</u> kinds of technique combined (heterogeneous).</li>
+    <li><b>Multiple classifier systems and stacking:</b> several expert models, then a controller or learner combines their outputs. <b>Mixture of experts:</b> a gating network picks or weights specialist sub-networks for each input (used in large language models).</li>
+    <li><b>Self-tuning:</b> one technique tunes another, for example a genetic algorithm choosing network layers and weights, or a neural net that learns fuzzy rules (neuro-fuzzy).</li>
+    <li><b>Cooperating experts:</b> the output of one feeds another (a neural net recognises a pile shape that a fuzzy controller uses).</li>
+    <li><b>Generative + discriminative:</b> discriminative models (logistic regression, SVM, deep classifiers) learn P(y | x) and give strong accuracy but need lots of labels. Generative models (Naive Bayes, Gaussian mixtures, VAEs, GANs) learn P(x, y), cope with small, imbalanced or missing data and can make synthetic samples. Combine them, for example GAN images to boost a rare class for a classifier.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Part B. Deep learning applications and deep reinforcement learning (Day 5, sample Q2b)</h2>
+  <h3>7. Three jobs for deep learning</h3>
+  <div class="scroll"><table>
+    <tr><th>Job</th><th>What it does</th><th>Examples</th></tr>
+    <tr><td><b>Identify</b></td><td>Classify, detect (bounding boxes), segment</td><td>Amazon Go shops, face recognition, plant disease, traffic offences, document review</td></tr>
+    <tr><td><b>Create</b></td><td>Generative AI makes text, images, audio, video</td><td>ChatGPT-style models, GauGAN, deepfakes, music and speech generation</td></tr>
+    <tr><td><b>Act</b></td><td>Learn what to do from feedback</td><td>Robot grasping and throwing, game agents, autonomous driving, forecasting that triggers decisions</td></tr>
+  </table></div>
+  <p><b>GAN idea:</b> a generator makes fakes, a discriminator tries to tell fake from real, and each improves by competing. Uses: synthetic training images, but also deepfakes (an ethics risk). A classification model alone gets confused by other objects in the image, so you add <b>localisation</b> (bounding boxes) or segmentation.</p>
+
+  <h3>8. Reinforcement learning in one picture</h3>
+  <figure>
+    <svg viewBox="0 0 420 170" width="500" role="img" aria-label="Agent chooses an action, environment returns a new state and a reward, and the agent uses the reward to improve its policy">
+      <defs><marker id="ar10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+      <rect class="box" x="20" y="20" width="130" height="60" rx="8"/><text x="85" y="46" class="bold" text-anchor="middle">Agent</text><text x="85" y="64" class="small" text-anchor="middle">deep neural network</text>
+      <rect class="box" x="270" y="20" width="130" height="60" rx="8"/><text x="335" y="46" class="bold" text-anchor="middle">Environment</text><text x="335" y="64" class="small" text-anchor="middle">robot, objects, humans</text>
+      <path class="ax" d="M150 40 H268" marker-end="url(#ar10)"/><text x="210" y="34" class="small" text-anchor="middle">action a</text>
+      <path class="ax" d="M270 66 H152" marker-end="url(#ar10)"/><text x="210" y="82" class="small" text-anchor="middle">new state s</text>
+      <path class="lk" d="M335 80 V130 H85 V82" marker-end="url(#ar10)"/><text x="210" y="124" class="bold" text-anchor="middle" style="fill:var(--ok)">reward r (good or bad feedback)</text>
+      <text x="20" y="160" class="small">Goal: learn a policy (state → action) that maximises total future reward.</text>
+    </svg>
+    <figcaption>No labelled right answers, only a reward after each action. Deep reinforcement learning uses a deep network to represent the policy (or the value Q(s, a) of each action).</figcaption>
+  </figure>
+  <ul>
+    <li><b>State:</b> what the agent observes. <b>Action:</b> what it can do. <b>Reward:</b> the score for the result. <b>Policy:</b> the rule it learns for choosing actions.</li>
+    <li><b>Explore vs exploit:</b> try new actions to discover better ones, or repeat the best known one.</li>
+    <li><b>Deep Q-learning</b> uses a neural network to estimate the expected reward of each action in each state. Continuous control (joint movements) often uses actor-critic methods such as DDPG.</li>
+    <li>Examples from the notes: FIFA free kicks (deep Q-learning), game agents that taught themselves, robots learning to throw and grasp (and <b>sharing experience</b> across robots to learn faster), a mobile robot learning collision avoidance (with <b>human feedback</b>), humanoids learning football, Wayve's self-driving car (learns from safety-driver interventions).</li>
+  </ul>
+
+  <h3>9. Sample Q2b: the robotic sorting arm</h3>
+  <p><b>(i) Three factors for the reward function</b> (from the stated criteria):</p>
+  <div class="scroll"><table>
+    <tr><th>Factor</th><th>Reward design</th><th>Criterion it serves</th></tr>
+    <tr><td><b>1. Task success and efficiency</b></td><td>Large positive reward for placing the correct object in the correct bin. Small shaping rewards for moving closer to the object, a good grip point and matching the belt speed. Small negative per time step so it prefers fast picks.</td><td>Effective and efficient pick and place, odd positions and orientations</td></tr>
+    <tr><td><b>2. Collision avoidance and safety</b></td><td>Large negative reward for contact with non-target objects, other robots or humans. Graded penalty for getting within a safe distance (from the external cameras' tracked positions and trajectories).</td><td>Safe, avoids collision</td></tr>
+    <tr><td><b>3. Hardware protection</b></td><td>Penalty for joint angles near limits, awkward arm configurations, bad grip points, high torque or jerky motion.</td><td>The arm cannot be put in odd positions that damage it</td></tr>
+  </table></div>
+  <p><b>(ii) Architecture</b> (required parts: physical robot, target object, other objects, identification system, decision-making system, others):</p>
+  <figure>
+    <svg viewBox="0 0 530 310" width="560" role="img" aria-label="Architecture: cameras and robot feed a perception stage with the identification classifier and tracker, which builds a state; the state and a reward module feed the deep reinforcement learning agent; the agent's action passes through a safety layer to the robot arm">
+      <defs><marker id="ar11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+      <rect class="box" x="10" y="20" width="130" height="62" rx="6"/><text x="75" y="42" class="bold" text-anchor="middle">Sensors</text><text x="75" y="58" class="small" text-anchor="middle">arm RGB-D camera,</text><text x="75" y="72" class="small" text-anchor="middle">external RGB-D cameras</text>
+      <rect class="box" x="165" y="20" width="150" height="62" rx="6"/><text x="240" y="42" class="bold" text-anchor="middle">Perception</text><text x="240" y="58" class="small" text-anchor="middle">identification CNN (Q2a)</text><text x="240" y="72" class="small" text-anchor="middle">+ position / trajectory tracker</text>
+      <rect class="box" x="340" y="20" width="180" height="62" rx="6"/><text x="430" y="42" class="bold" text-anchor="middle">State s</text><text x="430" y="58" class="small" text-anchor="middle">object class, pose, motion,</text><text x="430" y="72" class="small" text-anchor="middle">obstacles, joint angles, gripper</text>
+      <rect class="box" x="165" y="130" width="150" height="62" rx="6"/><text x="240" y="152" class="bold" text-anchor="middle">Reward module</text><text x="240" y="168" class="small" text-anchor="middle">success, collision,</text><text x="240" y="182" class="small" text-anchor="middle">joint-limit, time</text>
+      <rect class="leafy" x="340" y="130" width="180" height="62" rx="6"/><text x="430" y="152" class="bold" text-anchor="middle">DRL agent</text><text x="430" y="168" class="small" text-anchor="middle">deep neural network policy,</text><text x="430" y="182" class="small" text-anchor="middle">learns from reward</text>
+      <rect class="box" x="340" y="235" width="180" height="56" rx="6"/><text x="430" y="257" class="bold" text-anchor="middle">Safety layer + controller</text><text x="430" y="273" class="small" text-anchor="middle">limits, speed cap, e-stop</text>
+      <rect class="box" x="10" y="235" width="130" height="56" rx="6"/><text x="75" y="257" class="bold" text-anchor="middle">Robot arm + gripper</text><text x="75" y="273" class="small" text-anchor="middle">picks target, avoids others</text>
+      <path class="ax" d="M140 51 H163" marker-end="url(#ar11)"/><path class="ax" d="M315 51 H338" marker-end="url(#ar11)"/>
+      <path class="ax" d="M430 82 V128" marker-end="url(#ar11)"/><text x="436" y="108" class="small">state</text>
+      <path class="ax" d="M345 84 L300 128" marker-end="url(#ar11)"/><text x="296" y="106" class="small">events</text>
+      <path class="lk" d="M315 161 H338" marker-end="url(#ar11)"/>
+      <path class="ax" d="M430 192 V233" marker-end="url(#ar11)"/><text x="436" y="216" class="small">action a</text>
+      <path class="ax" d="M338 263 H142" marker-end="url(#ar11)"/><text x="240" y="256" class="small" text-anchor="middle">safe command</text>
+      <path class="ax" d="M75 233 V84" marker-end="url(#ar11)"/><text x="82" y="160" class="small">world changes</text>
+      <text x="165" y="305" class="small">Target object on the belt and other objects / humans are what the cameras see.</text>
+    </svg>
+    <figcaption>Loop: cameras observe, perception turns the pictures into a state, the agent chooses an action, the safety layer checks it, the arm moves, and the reward module scores the result.</figcaption>
+  </figure>
+  <p>The agent's network is multi-layer, as required: for example a CNN encoder for the image part of the state followed by dense layers producing joint commands (and a critic network in an actor-critic design). The identification classifier is the model from part (a).</p>
+  <p><b>(iii) Reducing the danger of real physical training:</b></p>
+  <ul>
+    <li><b>Train in simulation first</b> (a digital twin of the arm, belt and obstacles). Collisions cost nothing there. Use <b>domain randomisation</b> (vary lighting, textures, object positions) so the policy transfers to the real robot (sim-to-real), then fine-tune on the real arm at low speed.</li>
+    <li><b>Safety layer and constraints:</b> hard limits on joint angles, speed and force, protected zones around humans, emergency stop. The agent can never send an unsafe command, so it can explore without damage.</li>
+    <li><b>Penalise proximity, not only impact</b> using the cameras' tracked distances, so it learns to keep clear before any collision happens.</li>
+    <li><b>Learn from demonstrations or human feedback</b> (imitation learning, DRL with human feedback) to start with a sensible policy and avoid random flailing.</li>
+    <li><b>Curriculum:</b> start with one slow object and no obstacles, add difficulty gradually. Share experience across several robots or use logged data (offline RL) to cut real-world trials.</li>
+  </ul>
+  <div class="exam"><b>Exam angle</b>Reward factors should each tie to a stated criterion and say whether the sign is positive or negative. In the architecture diagram, label every arrow (state, action, reward). For the training-risk part, give at least two measures and explain <u>why</u> each reduces risk.</div>
+</section>
+
+<section>
+  <h2>Practice questions (exam style)</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Question A: bagging or boosting?</h3>
+    <p>A bank has a noisy dataset with many mislabelled records and needs a robust fraud model. (a) Would you pick bagging or boosting, and why? (b) A random forest has 300 trees. Explain how you can estimate its error without a test set. (c) Three independent classifiers have accuracy 80% each. What is the majority-vote accuracy? (5 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> Bagging or a random forest. Boosting keeps raising the weight of rows it gets wrong, so it chases the mislabelled rows and can overfit the noise. Bagging averages independent models and is robust to noise.</p>
+    <p><b>(b)</b> Out-of-bag error: each tree was trained on a bootstrap sample (about two thirds of the data). Each row was left out of about a third of the trees. Predict each row using only the trees that did not see it, take the majority vote, and compare to the true label. The fraction wrong is the OOB error.</p>
+    <p><b>(c)</b> P(at least 2 of 3 right) = 3·0.8²·0.2 + 0.8³ = 3·0.64·0.2 + 0.512 = 0.384 + 0.512 = <b>0.896</b>, about 89.6%.</p>
+  </details>
+  <div class="card">
+    <h3 style="margin-top:0">Question B: reward design</h3>
+    <p>A warehouse robot learns with deep reinforcement learning to carry boxes along a corridor shared with people. (a) Give three reward components with their sign. (b) The robot must not be trained by crashing into people. Give two ways to avoid that. (4 marks)</p>
+  </div>
+  <details><summary>Show the worked answer</summary>
+    <p><b>(a)</b> (1) Positive reward for delivering a box to the right place, with a small time penalty each step (efficiency). (2) Large negative for any contact with a person or shelf, and graded negative for coming closer than a safe distance. (3) Small negative for jerky motion, high torque or leaving the battery too low (protects hardware).</p>
+    <p><b>(b)</b> Train in a simulated warehouse with simulated people, then transfer with domain randomisation. Add a safety layer with speed limits and automatic stopping near people, so unsafe actions are blocked. (Also acceptable: learning from human demonstrations, or proximity penalties instead of real contact.)</p>
+  </details>
+  <details><summary>Quick recall questions</summary>
+    <ol>
+      <li>What two things make an ensemble work?</li>
+      <li>What extra randomness does a random forest add over bagging?</li>
+      <li>How does boosting treat rows that were misclassified?</li>
+      <li>Name the three things an RL agent exchanges with its environment.</li>
+      <li>What does sim-to-real mean?</li>
+    </ol>
+    <p><b>Answers:</b> (1) Accurate and diverse members. (2) A random subset of features at each split. (3) It increases their weights so the next model focuses on them. (4) Action, state, reward. (5) Train in simulation, then deploy the learned policy on the physical robot.</p>
+  </details>
+</section>
+
+<section>
+  <h2>Cheat sheet: Day 10 and Day 5</h2>
+  <div class="sheet">
+    <div class="formula">Majority of 3 with accuracy p:  3p²(1−p) + p³            Bias-variance: error = bias² + variance + noise
+Bootstrap sample ≈ 63% unique rows, OOB ≈ 37%      Forest features per split ≈ sqrt(total)
+RL: agent --action--> environment --(state, reward)--> agent</div>
+    <table style="margin-top:10px">
+      <tr><th>If the question says</th><th>Write</th></tr>
+      <tr><td>Reduce overfitting / variance of trees</td><td>Bagging or random forest (average many deep trees).</td></tr>
+      <tr><td>Reduce bias, hard cases</td><td>Boosting (AdaBoost, gradient boosting). Warn: sensitive to noisy labels.</td></tr>
+      <tr><td>Compare variable importance</td><td>Single tree is greedy and masks correlated variables. Ensembles aggregate. Note bias toward many-level variables. Use for feature selection, verify with permutation importance and CV.</td></tr>
+      <tr><td>Combine different model types</td><td>Hybrid or stacking (meta-learner), mixture of experts.</td></tr>
+      <tr><td>Reward function</td><td>Success (+), efficiency (small − per step), collision or proximity (large −), hardware limits (−). Link each to a criterion.</td></tr>
+      <tr><td>Safe robot training</td><td>Simulation and sim-to-real, safety layer, proximity penalties, demonstrations or human feedback, curriculum, shared experience.</td></tr>
+    </table>
+  </div>
+</section>
+
+</main>
