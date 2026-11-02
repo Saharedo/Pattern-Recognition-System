@@ -1,0 +1,548 @@
+<title>PRS Cheat Sheet</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a black-and-white A4 sheet, two text columns, topics as ruled sections. Prints with no colour. */
+:root{
+  --paper:#ffffff;
+  --ink:#000000;
+  --soft:#3a3a3a;
+  --rule:#000000;
+  --shade:#ececec;
+  --sans:"IBM Plex Sans Condensed","Arial Narrow",Arial,Helvetica,sans-serif;
+  --mono:"IBM Plex Mono","Courier New",monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:11px;line-height:1.3;
+  padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));margin:0}
+.sheet{max-width:210mm;margin:0 auto}
+header{border-bottom:3px solid var(--rule);padding-bottom:4px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:2px 12px}
+h1{font-size:17px;margin:0;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
+.sub{font-size:9.5px;color:var(--soft)}
+.index{font-size:9.5px;border:1px solid var(--rule);padding:3px 5px;margin-bottom:6px}
+.index b{font-weight:700}
+.cols{column-count:2;column-gap:14px;column-rule:1px solid var(--rule)}
+section{margin:0 0 6px}
+h2{font-size:11.5px;margin:0 0 3px;padding:1px 0;border-top:2px solid var(--rule);border-bottom:1px solid var(--rule);text-transform:uppercase;letter-spacing:.05em;font-weight:700;break-after:avoid}
+h3{font-size:10.5px;margin:4px 0 1px;font-weight:700;text-decoration:underline;break-after:avoid}
+p{margin:0 0 3px}
+ul{margin:0 0 3px;padding-left:11px}
+li{margin:0 0 1px}
+code,.m{font-family:var(--mono);font-size:9.5px;font-weight:400}
+.f{font-family:var(--mono);font-size:9.5px;font-weight:600}
+table{border-collapse:collapse;width:100%;margin:2px 0 4px;font-size:10px}
+th,td{border:1px solid var(--rule);padding:1px 3px;text-align:left;vertical-align:top}
+th{background:var(--shade);font-weight:700}
+.box{border:1px solid var(--rule);padding:3px 5px;margin:3px 0 5px;break-inside:avoid}
+.box.dbl{border:3px double var(--rule)}
+.box b.t{display:block;text-transform:uppercase;letter-spacing:.05em;font-size:10px}
+.fig{margin:2px 0 4px;break-inside:avoid;text-align:center}
+.fig svg{width:100%;height:auto;max-height:120px}
+.fig .cap{font-size:9px;color:var(--soft)}
+svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
+.cm td{text-align:center}
+@media (max-width:700px){.cols{column-count:1;column-rule:none}body{font-size:12px}}
+@media print{
+  @page{size:A4 portrait;margin:6mm}
+  body{padding:0;font-size:8.2px;line-height:1.22}
+  .sheet{max-width:none}
+  .cols{column-gap:9px}
+  h1{font-size:14px}
+  .sub,.index{font-size:7.6px}
+  h2{font-size:9px}
+  h3{font-size:8.4px}
+  table{font-size:7.8px}
+  code,.m,.f{font-size:7.6px}
+  svg text{font-size:7px}
+  .fig svg{max-height:95px}
+  .fig .cap{font-size:7.2px}
+  section{margin-bottom:4px}
+  * {-webkit-print-color-adjust:economy;print-color-adjust:economy}
+}
+</style>
+
+<div class="sheet">
+<header>
+  <h1>ISY5002 Open-Book Cheat Sheet</h1>
+  <span class="sub">Days 1 to 14, sorted by topic · no calculators: leave logs and fractions, compare, show the formula</span>
+</header>
+<div class="index"><b>Find it fast:</b> A Answer routine · B Data and overfitting · C Metrics · D Regression, KNN, Naive Bayes · E Decision trees · F Neural nets, RBF, GRNN, SOM · G CNN and Q2a · H Deep-net training, Keras · I RNN, LSTM, transformers · J SVM · K Feature selection, PCA, LDA · L Clustering, GMM and EM · M Ensembles · N RL · O Signals, DTW, wavelets · P Autoencoders, anomalies, Q2c · Q Sensor fusion · R Choosing a model · S My traps</div>
+
+<div class="cols">
+
+<section>
+<h2>A. Answer routine and quick facts</h2>
+<ul>
+<li><b>Which learning type?</b> Labels given = supervised. No labels = unsupervised (clustering, PCA). Only reward feedback = reinforcement.</li>
+<li><b>Pipeline:</b> Sense, Pre-process, Features, Model, Post-process. Deep learning learns the features itself from raw data.</li>
+<li><b>"What is wrong and how to improve?"</b> (1) quote the numbers, (2) name the problem, (3) fix it with a reason, (4) say which metric proves it improved.</li>
+<li><b>No calculator:</b> write the formula, substitute, then estimate. Compare sizes instead of computing. Keep fractions.</li>
+<li><b>Fraction to decimal:</b> 1/8 = .125 · 1/5 = .2 · 1/4 = .25 · 1/3 = .33 · 3/8 = .375 · 2/5 = .4 · 1/2 = .5 · 5/8 = .625 · 2/3 = .67 · 3/4 = .75 · 4/5 = .8 · 1/20 = .05 · 17/20 = .85</li>
+<li><b>Recommending a model?</b> Your reasons must match your recommendation (needs explaining to patients, regulators or marketing = decision tree; then state its cost).</li>
+</ul>
+</section>
+
+<section>
+<h2>B. Data preparation and overfitting</h2>
+<ul>
+<li><b>Min-max</b> <span class="f">(x−min)/(max−min)</span> gives 0 to 1. <b>Z-score</b> <span class="f">(x−mean)/std</span> gives mean 0, std 1.</li>
+<li><b>Scaling parameters come from the TRAINING set only.</b> Reuse the same numbers on validation, test and new data. Using test data leaks information.</li>
+<li><b>Scale for:</b> KNN, SVM, neural nets, PCA, K-means, DBSCAN, Lasso. <b>Not for:</b> decision trees (a split only moves its threshold).</li>
+<li><b>Split:</b> training (about 70%) learns. Validation tunes. Test is used once at the end. Cross-validation (k folds, average the k scores) is done inside the training data.</li>
+<li><b>Order of steps:</b> split, fit scaler on train, fit PCA or LDA on scaled train, apply the same scaler and PCA to test.</li>
+<li><b>Overfitting:</b> train score high, validation or test score low. Fix: more data, simpler model, fewer features, regularise (L2, dropout), early stopping, prune the tree, lower C or gamma, cross-validate.</li>
+<li><b>Curse of dimensionality:</b> data becomes sparse and near and far distances look alike, so KNN and clustering weaken. Cures: feature selection, PCA or LDA.</li>
+<li><b>Imbalance</b> (always saying "no" scores 84.5% or 98%): accuracy hides it. Fix with class weights or a custom loss, SMOTE or oversampling the rare class, undersampling the common class, augmentation. Judge by recall, precision, F1, AUC.</li>
+<li><b>Hyperparameters</b> are set before training and tuned on validation data (grid, random, Bayesian search): k, C, gamma, kernel, learning rate, dropout, batch size, max_depth.</li>
+</ul>
+</section>
+
+<section>
+<h2>C. Metrics</h2>
+<table class="cm" data-w="1100,2100,2240">
+<tr><th></th><th>Predicted +</th><th>Predicted −</th></tr>
+<tr><th>Actual +</th><td>TP</td><td>FN (Type II, missed)</td></tr>
+<tr><th>Actual −</th><td>FP (Type I, false alarm)</td><td>TN</td></tr>
+</table>
+<p><b>Recall</b> = TP/(TP+FN): of the real positives, how many caught (top row). <b>Precision</b> = TP/(TP+FP): of those flagged, how many real (left column). <b>Specificity</b> = TN/(TN+FP). <b>Accuracy</b> = (TP+TN)/all. <b>F1</b> = 2PR/(P+R).</p>
+<ul>
+<li>Always write TP, FN, FP, TN first. Example: TP 15, FN 5 gives recall 15/20 = 3/4 = <b>0.75</b>.</li>
+<li><b>Which to favour:</b> a miss is costly (disease, fraud, lost sale) = recall. A false alarm is costly (coupons, investigations) = precision.</li>
+<li><b>Compare two models without dividing:</b> same actual positives, so fewer FN = higher recall. Write a rate as 1 − small fraction. Then state the business trade-off in words.</li>
+<li>A model that predicts all "negative" has high accuracy and <b>recall 0</b>.</li>
+<li><b>ROC/AUC:</b> plots the true positive rate against the false positive rate across cut-offs. AUC 1 = perfect, 0.5 = guessing, independent of the cut-off.</li>
+<li>Check which class the table treats as positive. State your choice.</li>
+</ul>
+</section>
+
+<section>
+<h2>D. Regression, KNN, Naive Bayes</h2>
+<ul>
+<li><b>Linear regression:</b> least squares. <span class="f">R² = SSreg/SStotal</span> = share of the variation in y explained (0 to 1). A coefficient is the change in y for +1 in that x, others held fixed.</li>
+<li><b>Logistic regression</b> (classification): <span class="f">ln(P/(1−P)) = a + b1x1 + …</span> (log-odds). Positive coefficient raises the chance of the positive class. Output is a probability, cut-off 0.5 is movable.</li>
+<li><b>KNN:</b> lazy learner, majority vote of the k nearest points. Small k follows noise, large k blurs the boundary. Use odd k. Scale first. Slow at prediction time.</li>
+<li><b>Naive Bayes:</b> score(C) = P(C) × P(x1|C) × P(x2|C) × … . P(value|C) = rows in class C with that value ÷ rows in class C. Pick the largest. Probability = own score ÷ sum of scores.</li>
+<li><b>Count is 0?</b> One zero wipes out the product. Laplace: add 1 to each count and add the number of possible values to the denominator.</li>
+<li><b>By hand:</b> cancel the shared prior, compare ratios (9/16 vs 1/16 = 9:1 = 90% / 10%).</li>
+<li><b>Independence assumption</b> = features independent <i>given the class</i>. Often unrealistic (a worn bearing raises both heat and noise). Probabilities become overconfident but the ranking is often still right.</li>
+<li><b>Numeric features:</b> model each class with a Gaussian, <span class="f">p(x|class) = 1/√(2πσ²) · exp(−(x−μ)²/(2σ²))</span>, with μ and σ² estimated per class from training data.</li>
+<li><b>Worked (play tennis), x = Sunny, Cool, High, Strong:</b> Yes = 2/9·3/9·3/9·3/9·9/14 ≈ .0053. No = 3/5·1/5·4/5·3/5·5/14 ≈ .0206. No is about 4× bigger, so P(No|x) = .0206/(.0053+.0206) ≈ .80. Estimate fast: .0082×.64 and .0576×.36.</li>
+<li><b>Sensor table (Q2d):</b> count the prior of each cause (records of that cause ÷ all records), count each likelihood inside the cause, multiply, compare, show every fraction. Pump example: Fault 3/8·2/3·1/3 = 1/12, Normal 5/8·1/5·4/5 = 1/10, so Normal (ratio 10:12, P(Normal) = 6/11). Zero count: Laplace, (0+1)/(3+2) = 0.2.</li>
+</ul>
+</section>
+
+<section>
+<h2>E. Decision trees</h2>
+<p>Node = test on one feature, branch = outcome, leaf = class. Readable rules, no scaling needed, boundaries are steps.</p>
+<p><span class="f">Entropy E = −Σ p·log₂p</span>. Pure = 0, 50/50 = 1. <span class="f">Gini = 1 − Σp²</span> (pure 0, 50/50 = 0.5).</p>
+<p><b>Proportion = count in the class ÷ TOTAL in that node.</b> "1 default, 5 repaid" is 1/6 and 5/6, not 1/5.</p>
+<p><span class="f">Gain = E(parent) − Σ (child size ÷ parent size) × E(child)</span>. The weights add to 1. Gain can never exceed E(parent). <span class="f">GainRatio = Gain / IntrinsicInfo</span> (penalises many-valued features such as an ID code, which has top gain but memorises).</p>
+<div class="fig">
+<svg viewBox="0 0 210 100" role="img" aria-label="Entropy against share of one class">
+<line x1="14" y1="85" x2="200" y2="85" stroke="#000" stroke-width="1"/>
+<line x1="14" y1="12" x2="14" y2="85" stroke="#000" stroke-width="1"/>
+<polyline fill="none" stroke="#000" stroke-width="1.6" points="14,85 32.6,52.1 51.2,34.6 60.5,28.3 75.4,20.6 88.4,17.1 107,15 125.6,17.1 138.6,20.6 153.5,28.3 162.8,34.6 181.4,52.1 200,85"/>
+<line x1="60.5" y1="28.3" x2="60.5" y2="85" stroke="#000" stroke-width=".6" stroke-dasharray="2 2"/>
+<line x1="75.4" y1="20.6" x2="75.4" y2="85" stroke="#000" stroke-width=".6" stroke-dasharray="2 2"/>
+<line x1="107" y1="15" x2="107" y2="85" stroke="#000" stroke-width=".6" stroke-dasharray="2 2"/>
+<circle cx="60.5" cy="28.3" r="2.2" fill="#000"/><circle cx="75.4" cy="20.6" r="2.2" fill="#000"/><circle cx="107" cy="15" r="2.2" fill="#000"/>
+<text x="57" y="72" text-anchor="end">1/4: .81</text>
+<text x="79" y="62">1/3: .92</text>
+<text x="111" y="45">1/2: 1</text>
+<text x="14" y="95">0 (pure)</text><text x="200" y="95" text-anchor="end">1 (pure)</text>
+<text x="107" y="95" text-anchor="middle">share of one class p</text>
+<text x="18" y="20">E</text>
+</svg>
+<div class="cap">Entropy is symmetric: E(p) = E(1−p), so 3/4 = 1/4 and 2/3 = 1/3. Farther from 50/50 = purer = lower entropy.</div>
+</div>
+<table data-w="440,500,500,500,500,500,500,500,500,500,500">
+<tr><th>p</th><th>0</th><th>1/10</th><th>1/8</th><th>1/6</th><th>1/5</th><th>1/4</th><th>1/3</th><th>3/8</th><th>2/5</th><th>1/2</th></tr>
+<tr><th>E</th><td>0</td><td>.47</td><td>.54</td><td>.65</td><td>.72</td><td>.81</td><td>.92</td><td>.95</td><td>.97</td><td>1</td></tr>
+</table>
+<ul>
+<li><b>Best split = lowest weighted child entropy.</b> Check how far each child is from 50/50. A perfectly pure child contributes 0, so it often wins even if small. Mirror-image splits tie. If each child has the same mix as the parent, gain = 0.</li>
+<li><b>Estimate:</b> compute each child's E from the table, multiply by its weight, add, subtract from E(parent). Example: parent 5/5 (E 1), children (4/5, 1/5) twice gives 1 − .72 = <b>.28</b>. Children (pure 4 of 10) and (1/6 for 6 of 10) gives 1 − .6×.65 = <b>.61</b>, so the second wins.</li>
+<li><b>Logs left as expressions:</b> E(1/6) = log₂6 − (5/6)log₂5. Useful: log₂3 ≈ 1.58, log₂5 ≈ 2.32, log₂7 ≈ 2.81, log₂(3/4) = log₂3 − 2. Bounds: 3² = 9 &gt; 8 so log₂3 &gt; 1.5; 5² = 25 &lt; 32 so log₂5 &lt; 2.5.</li>
+<li><b>Continuous feature:</b> sort the values; candidate cuts are the midpoints of adjacent distinct values (20, 30, 45, 60 gives 25, 37.5, 52.5). Pick the cut with the highest gain. A cut that gives the same partition as another is redundant.</li>
+<li><b>Overfit tree</b> (100% train, much lower test): pre-prune (max_depth, min_samples_leaf) or grow fully then post-prune on validation data.</li>
+<li><b>Reading a tree:</b> follow the path, quote the leaf's share and purity, give the business meaning, name one flaw (imbalance, depth, overfitting) and the metric to judge the fix.</li>
+</ul>
+</section>
+
+<section>
+<h2>F. Neural networks</h2>
+<ul>
+<li><b>Neuron:</b> <span class="f">net = Σ w·x + b</span>, <span class="f">out = f(net)</span>. The activation is applied to the net input, not to the raw inputs.</li>
+<li><b>Activations:</b> hard-limit (0 if net ≤ 0, else 1) · sigmoid 0 to 1 (net 0 gives .5, negative net gives below .5) · tanh −1 to 1 (same sign as net) · ReLU max(0, net) (cheap, no vanishing gradient, sparse) · softmax (outputs sum to 1).</li>
+<li><b>Linear activations collapse:</b> h = 4x then y = 0.5h means y = 2x, one neuron. Non-linearity lets extra layers draw curved boundaries.</li>
+<li><b>Output and loss:</b> 2 classes = sigmoid + binary cross-entropy. Many classes, one label = softmax + categorical cross-entropy. Number = linear + MSE. Several labels at once = sigmoid + binary cross-entropy. Hidden layers: ReLU.</li>
+<li><b>Perceptron rule:</b> <span class="f">Δwi = η(T−O)xi</span>, with x0 = 1 for the bias. Correct output means no change. One perceptron draws one line, so XOR (opposite diagonals) fails. Two hidden nodes draw two lines and the output combines them.</li>
+<li><b>Backprop (sigmoid):</b> <span class="f">δout = O(1−O)(T−O)</span>, <span class="f">Δw = η·δ·Oin</span>, hidden <span class="f">δj = Oj(1−Oj)Σδk·wkj</span>. <b>Sign check:</b> target above output gives δ &gt; 0, weight up, output up.</li>
+<li><b>Loop:</b> small random init, forward pass, loss, backward pass, update, repeat. Batch, stochastic or mini-batch (usual).</li>
+<li><b>Learning rate:</b> too big overshoots, oscillates or diverges. Too small is slow or stuck. Bigger is not always faster. <b>Momentum:</b> adds a fraction of the previous update, smooths the path and carries over shallow dips.</li>
+<li><b>Never start with all-zero or identical weights:</b> neurons stay identical (symmetry). Use small random values (Xavier or He).</li>
+<li><b>Overtraining:</b> train loss falls, validation loss rises. Stop at the validation minimum and keep those weights. Also: dropout (training only, off at test), L2, fewer nodes or layers, more or augmented data.</li>
+<li><b>Scaling inputs:</b> a feature in the thousands swamps one in the ones. Parameters from the training set only.</li>
+<li><b>Why deep learning took off (2012 AlexNet):</b> ReLU, dropout, GPUs, ImageNet (1.2M images). Not backprop (1986). Earlier failures: tiny data, slow computers, bad init, sigmoid vanishing gradients.</li>
+<li><b>History:</b> 1943 McCulloch-Pitts (0/1, fixed weights, no learning). 1958 perceptron (learns weights). 1969 XOR problem, first winter. 1986 backpropagation. Late 80s deep nets fail, SVMs and forests take over. 2012 AlexNet (15.3% top-5 error vs 26.2%).</li>
+<li><b>Layer capability:</b> first hidden layer draws lines (hyperplanes), the next combines them into convex regions, a further layer builds concave regions. Start with about √(inputs × outputs) hidden nodes; too many overfit.</li>
+<li><b>Loss and gradient descent:</b> MSE for numbers, cross-entropy for classes. Batch (all rows), stochastic (one row, noisy), mini-batch (n rows, the usual). Hand example: O = 0.508, T = 0, η = 0.3: δ = 0.508·0.492·(−0.508) = −0.127, Δw = 0.3·(−0.127)·1 = −0.038 (weight pushed down).</li>
+<li><b>Classical vs deep learning:</b> classical = works on small or medium data, hand-made features (HOG, SIFT), minutes to hours, some models explainable. Deep = needs big data and a GPU, learns features, hours to weeks, hard to explain.</li>
+</ul>
+<h3>RBF network</h3>
+<ul>
+<li>Three layers: input, hidden (kernel) nodes, linear output. Gaussian kernel <span class="f">Oi = exp(−(x−ci)ᵀ(x−ci) / (2σi²))</span>. Output <span class="f">Oj = Σ Wji·Oi</span>.</li>
+<li><b>Two-stage training:</b> (1) centres and widths from unsupervised clustering (hard C-means): cj = mean of cluster j, σj² = (1/mj) Σ (x−cj)ᵀ(x−cj) = average squared distance to the centre. Few samples: use each sample as a centre. (2) Output weights by the supervised delta rule <span class="f">Wji(t+1) = Wji(t) + η·δj·Oi</span>, δj = Tj − Oj, repeated until convergence.</li>
+<li>Needs few labels (stage 1 is unlabelled) and converges in a few epochs. XOR example: 4 hidden units centred on the 4 patterns, output weights start at 0.5, η = 0.5: for P1 only C1 fires, Out = 0.5, Wo1 = 0.5 + 0.5·(0−0.5)·1 = 0.25; for P2 Wo2 = 0.5 + 0.5·(1−0.5)·1 = 0.75.</li>
+</ul>
+<h3>GRNN (general regression neural network)</h3>
+<ul>
+<li>Memory-based, one-pass, self-growing. Layers: input, <b>pattern</b> (one node per training pattern or cluster centre, weights = the stored exemplar or centroid), <b>summation</b> (two kinds, A and B), <b>output</b> (a division).</li>
+<li>Pattern node <span class="f">oi = exp(−Di² / 2σ²)</span>, Di² = (x−wi)ᵀ(x−wi). Output <span class="f">ẑ = Σ Ai·exp(−Di²/2σ²) / Σ Bi·exp(−Di²/2σ²)</span>, a weighted average of the stored targets; the nearest patterns count most.</li>
+<li>Learning: each time a training target zj is seen for pattern i: <span class="f">Ai ← Ai + zj</span> (running sum of targets) and <span class="f">Bi ← Bi + 1</span> (count), starting from 0.</li>
+<li><b>σ (smoothing constant)</b> is found experimentally. Small σ: narrow peaked surface that fits the sample points (overfits). Large σ: flatter, smoother surface. Aim for a trade-off. Aircraft example: any σ from 0.1 to 5.0 was satisfactory.</li>
+<li><b>Pros:</b> converges to the true regression surface as samples grow, works with sparse data and in real time, fast single-pass training, can start after one sample. <b>Cons:</b> grows large (one node per pattern unless clustering is used), heavy computation. Used for forecasting and control.</li>
+<li>Aircraft comparison: the MLP needed 50 nodes per hidden layer and over 50 epochs, the RBF used 18 basis nodes and a few epochs, the GRNN used one pass (1,600 or 200 nodes) and had the lowest errors.</li>
+</ul>
+<h3>SOM (Kohonen map)</h3>
+<ul>
+<li>Unsupervised competitive learning, <b>winner takes all</b>. Output nodes sit on a 1D row or 2D lattice. The input is fully connected to every node.</li>
+<li><b>Algorithm:</b> initialise weights randomly in (0,1); present x; the winner r is the node with the smallest ‖x − wr‖; update the winner and its neighbours <span class="f">wr' ← wr' + α·hrr'·(x − wr')</span>; repeat until the weights stabilise; shrink the neighbourhood and α over time. h is largest at the winner and falls to 0 with distance (square, hexagonal or Gaussian neighbourhood), so nearer nodes move more.</li>
+<li><b>Pros:</b> alternative to K-means with no preset k, compression, visualisation, can classify if labelled. <b>Uses:</b> travelling salesman, robot-arm control (data fusion), signature authentication (SOM + MLP hybrid).</li>
+</ul>
+</section>
+
+<section>
+<h2>G. CNN</h2>
+<ul>
+<li><span class="f">Output = floor((W − F + 2P)/S) + 1</span>. "Same" padding: P = (F−1)/2 keeps size at stride 1. Pool 2×2 stride 2 gives floor(W/2) (11 gives 5).</li>
+<li><b>Conv params</b> <span class="f">(Fr·Fc·Cin + 1)·Cout</span> · <b>Dense</b> <span class="f">in·out + out</span> · Pool, Flatten, Dropout = 0.</li>
+<li>Examples: 128, 7×7, stride 2 gives 61. 64×64×3 with 5×5 and 10 filters gives 60×60×10 and (75+1)·10 = 760 params. Conv 7×7, 3 channels, 18 filters = 2,664.</li>
+<li><b>Convolution by hand:</b> multiply the kernel with each window element by element, add up, slide. Kernel [1 0; 0 1] just adds the main diagonal. Early layers find edges, deeper layers shapes and objects.</li>
+<li><b>Max pool:</b> halves height and width, keeps the strongest value, no parameters, tolerates small shifts. Filters are learned by training; you only choose size and number.</li>
+<li><b>Why CNN for images:</b> local connections plus shared weights (far fewer parameters) and tolerance to position.</li>
+<li><b>Critique a CNN (Q2a):</b> table of shapes and params. The <b>first Dense after Flatten dominates</b> (9,408 × 256 = 2.4M of 2.58M, 93%). With about 5,000 images and 918 classes (about 5 per class) this overfits.</li>
+<li><b>Fixes:</b> Global Average Pooling (9,408 inputs down to 48), dropout, batch norm, augmentation, class weights, transfer learning.</li>
+<li><b>Several attributes (brand 18, type 17, value 3):</b> shared backbone, one softmax head per attribute, summed cross-entropy. About 280, 290, 1,670 images per class instead of 5. New total 69,302 params (GAP + three heads), not 2,465,462 (heads only).</li>
+<li><b>Flatten:</b> length = H × W × C of the last feature map, 0 parameters. 4×4×6 gives 96. 4×4×64 gives 1,024. 14×14×48 gives 9,408. <b>First Dense after Flatten</b> = (H·W·C)·units + units (96·36 + 36 = 3,492).</li>
+<li><b>Keras pattern:</b> <code>Conv2D(32,(3,3),padding='same',activation='relu')</code>, <code>MaxPooling2D((2,2))</code>, repeat, <code>Flatten()</code>, <code>Dense(256,'relu')</code>, <code>Dense(10,'softmax')</code>, <code>compile(loss='categorical_crossentropy', optimizer=…, metrics=['accuracy'])</code>. Input shape (samples, rows, columns, channels), scaled to 0 to 1. A batch of 32 has shape (32,16,16,1): forward pass, loss, backprop (automatic differentiation), optimiser updates the weights.</li>
+<li><b>Small net, 16×16×1:</b> Conv 3×3, 3 filters, same (30 params) → pool 8×8×3 → Conv 3×3, 6 filters (28·6 = 168) → pool 4×4×6 → Flatten 96 → Dense 36 (3,492) → Dense 5 (185). Total 3,875.</li>
+<li><b>Digit net, 28×28×1, 5×5, no padding:</b> Conv 20 gives 24×24×20 (520 params), pool 12×12×20, Conv 40 gives 8×8×40 (20,040), pool 4×4×40, Flatten 640, Dense 128 (82,048), Dense 10 (1,290). Total 103,898.</li>
+</ul>
+<table data-w="2200,1500,1740">
+<tr><th>CIFAR-10 net (32×32×3)</th><th>Output</th><th>Params</th></tr>
+<tr><td>Conv 3×3, 32, same</td><td>32×32×32</td><td>(27+1)·32 = 896</td></tr>
+<tr><td>Pool 2×2</td><td>16×16×32</td><td>0</td></tr>
+<tr><td>Conv 3×3, 48, same</td><td>16×16×48</td><td>(9·32+1)·48 = 13,872</td></tr>
+<tr><td>Pool 2×2</td><td>8×8×48</td><td>0</td></tr>
+<tr><td>Conv 3×3, 64, same</td><td>8×8×64</td><td>(9·48+1)·64 = 27,712</td></tr>
+<tr><td>Pool 2×2</td><td>4×4×64</td><td>0</td></tr>
+<tr><td>Flatten</td><td>1,024</td><td>0</td></tr>
+<tr><td>Dense 256</td><td>256</td><td>1,024·256+256 = 262,400</td></tr>
+<tr><td>Dense 10, softmax</td><td>10</td><td>256·10+10 = 2,570</td></tr>
+<tr><th>Total</th><td></td><td>307,450 (Dense 256 = 85%)</td></tr>
+</table>
+<h3>Q2a: sorting robot, 918 bins (brand 18 × type 17 × value 3)</h3>
+<table data-w="2200,1500,1740">
+<tr><th>Given network, input 128×128×3</th><th>Output</th><th>Params</th></tr>
+<tr><td>Conv 3×3, 16</td><td>126×126×16</td><td>448</td></tr>
+<tr><td>MaxPool 2×2</td><td>63×63×16</td><td>0</td></tr>
+<tr><td>Conv 3×3, 32</td><td>61×61×32</td><td>4,640</td></tr>
+<tr><td>MaxPool 2×2</td><td>30×30×32</td><td>0</td></tr>
+<tr><td>Conv 3×3, 48</td><td>28×28×48</td><td>13,872</td></tr>
+<tr><td>MaxPool 2×2</td><td>14×14×48</td><td>0</td></tr>
+<tr><td>Flatten</td><td>9,408</td><td>0</td></tr>
+<tr><td>Dense 256</td><td>256</td><td>2,408,704</td></tr>
+<tr><td>Dense 128</td><td>128</td><td>32,896</td></tr>
+<tr><td>Dense 918</td><td>918</td><td>118,422</td></tr>
+<tr><th>Total</th><td></td><td>2,578,982</td></tr>
+</table>
+<ul>
+<li><b>Critique (i):</b> parameter explosion (Flatten 9,408 into Dense 256 holds 93% of all weights, far more than 5,000 images support, so it overfits). One 918-way softmax treats "Samsung-kettle-high" and "Samsung-kettle-low" as unrelated and gives about 5 images per class (5,000/918), unevenly. No dropout, batch norm or augmentation, and activations and loss not stated.</li>
+<li><b>Multi-output design:</b> shared convolutional backbone, then Global Average Pooling, then three softmax heads Dense(18), Dense(17), Dense(3). The bin is the combination of the three predictions, so all 918 bins are recoverable. Each head sees far more examples per class: about 280 (5,000/18), 290 (5,000/17), 1,670 (5,000/3) instead of 5. Knowledge about a brand is shared across all its types. Needs the Keras Functional API (multiple outputs).</li>
+<li><b>New parameter count:</b> conv layers 18,960 (448+4,640+13,872), Dense 256 on 48 GAP inputs 12,544 (48·256+256), Dense 128 32,896, heads (128·18+18) + (128·17+17) + (128·3+3) = 2,322 + 2,193 + 387 = 4,902. Total <b>69,302</b>, about 97% fewer. Keeping Flatten and only splitting the heads gives 2,578,982 − 118,422 + 4,902 = 2,465,462 (only 4% fewer), so GAP is the change that matters.</li>
+<li><b>Activations and loss:</b> ReLU in all hidden layers, softmax on each head (one class out of several), categorical cross-entropy per head summed (optionally weighted). If one item can carry several labels at once, use sigmoid + binary cross-entropy.</li>
+<li><b>More fixes:</b> dropout, batch norm, augmentation (flip, rotate, crop, brightness), class weights for uneven categories, transfer learning from a pretrained backbone.</li>
+<li><b>Exam steps:</b> (1) shapes and params table, point at where the weights sit, (2) relate to data size (5,000 images vs 918 classes), (3) specific changes with a reason each, (4) recompute params, (5) activation and loss. The parameter table is where many marks come from.</li>
+</ul>
+</section>
+
+<section>
+<h2>H. Training deep networks and Keras (Days 8 and 9)</h2>
+<ul>
+<li><b>Depth over width:</b> one hidden layer can approximate any function in theory (universal approximation) but gives no way to find the weights. AlexNet test (8 layers, 60M params, top-5 accuracy 81.9%): remove dense 7 (60M to 44M) −1.1 points; dense 6 and 7 (to 10M) −5.7; conv 3 and 4 (60M to 59M) −3.0; conv 3, 4 and dense 6, 7 (9M left) −33.5. More parameters is not better; convolutional depth matters more than a giant dense layer.</li>
+<li><b>Keras Sequential:</b> one input, one output, straight stack. <b>Functional API:</b> multiple inputs or outputs, branches, shared layers, skip connections (ResNet). Two inputs (video + question): separate extractors then concatenate. Two outputs (enhanced image + segmentation map): shared encoder, one head each. Shared layers: same weights on two inputs (re-identification).</li>
+<li><b>Output and loss:</b> regression linear + MSE. Binary sigmoid + binary cross-entropy. Multi-class softmax + categorical cross-entropy (one-hot labels). <code>model.summary()</code>: check output shapes and Param #; Conv2D 3×3, 32 filters on 3 channels = (27+1)·32 = 896.</li>
+<li><b>Vanishing gradient:</b> backprop multiplies many activation derivatives. Sigmoid derivative is at most 0.25 (tanh also saturates), so the product shrinks and early layers barely learn. ReLU derivative is exactly 1 for active units. Fix: ReLU, good initialisation, batch norm, skip connections.</li>
+<li><b>Initialisation:</b> never all zeros (identical units). Too small: signal dies, dead neurons. Too large: saturation. <b>Xavier/Glorot</b> for sigmoid and tanh (variance about 1/n, Keras default). <b>He</b> for ReLU (normal, mean 0, variance 2/n, n = fan-in; <code>he_normal</code>).</li>
+<li><b>L2 (weight decay):</b> loss + λΣw². Update <span class="f">w ← (1 − αη)·w − η·∂J/∂w</span>. Keras <code>l2(0.001)</code>; larger value = stronger penalty and a simpler model.</li>
+<li><b>Dropout:</b> zero a fraction p (0.2 to 0.5) of outputs during training only, a different set each step; like averaging many thin networks. Off at test time.</li>
+<li><b>Batch normalisation:</b> per mini-batch <span class="f">v̂ = (v − μB) / √(σB² + ε)</span>, then <span class="f">u = γ·v̂ + β</span> (γ and β learned). Stabilises later layers, speeds training, slightly regularises. Order: Conv → BN → ReLU. Params: 4 per channel (γ and β trainable; running mean and variance not), so 32 channels = 128 params, 64 trainable.</li>
+<li><b>Data augmentation</b> (flips, rotations, shifts, crops, brightness): new variants each epoch, good for small or imbalanced sets. <b>Early stopping:</b> stop when validation loss stops improving and keep the best checkpoint.</li>
+<li><b>Optimiser:</b> SGD, or Adam and RMSprop (adapt the step per weight using running averages of gradient and squared gradient); Adam with learning rate 0.001 is a common start. Lower the rate with a schedule. Large batch: faster, needs GPU memory, may generalise worse. Small batch: noisier, mild regularising effect.</li>
+<li><b>Degradation is not overfitting:</b> a much deeper plain network can have <i>higher training error</i> than a shallow one. Overfitting = low training error, high test error. Example: 40-layer sigmoid CNN 55% train and 54% validation vs a 10-layer one at 75% train: vanishing gradients and degradation. Fix: ReLU, He init, batch norm, residual connections, Adam or a tuned rate.</li>
+<li><b>ResNet:</b> a block learns the residual F(x) and outputs <span class="f">H(x) = F(x) + x</span> (skip connection). If identity is best, F(x) goes to 0, which is easy, so extra blocks cannot make it worse. The skip also gives gradients a short path back. A "down" block uses stride 2 on its first conv and a 1×1 conv on the shortcut to match shapes.</li>
+</ul>
+<table data-w="1700,1300,2440">
+<tr><th>Problem seen</th><th>Cause</th><th>Remedy</th></tr>
+<tr><td>Early layers not learning, loss stuck</td><td>Vanishing gradient</td><td>ReLU, He init, batch norm, skips</td></tr>
+<tr><td>Train high, validation low</td><td>Overfitting</td><td>Dropout, L2, augmentation, early stop, fewer params</td></tr>
+<tr><td>Deeper net worse even on train</td><td>Degradation</td><td>Residual connections</td></tr>
+<tr><td>Unstable or very slow</td><td>Learning rate or batch size</td><td>Lower rate, scheduler, Adam, batch norm</td></tr>
+<tr><td>Small or imbalanced image set</td><td>Too little variety</td><td>Augmentation, transfer learning</td></tr>
+</table>
+</section>
+
+<section>
+<h2>I. Sequences: RNN, LSTM, transformers (Days 8 and 9)</h2>
+<ul>
+<li><b>RNN:</b> reads one element at a time and carries a hidden state forward, so input length can vary and earlier steps matter. CNN = spatial data, RNN = sequential or temporal data.</li>
+<li><b>Make windows:</b> cut the series into fixed-length windows (time steps), moving by a chosen distance. 0,1,1,3,2,2,4,5,4,7,8,8,9 with length 4 and distance 3 gives [0,1,1,3] [3,2,2,4] [4,5,4,7] [7,8,8,9]. 2,4,…,14 with length 3 and distance 2 gives [2,4,6] [6,8,10] [10,12,14]. Each sample has shape (time steps, features); pair it with a target (next value or a window label). <b>Split by time order</b> (or by session), never random rows.</li>
+<li><b>Parameters:</b> SimpleRNN <span class="f">H(D+H) + H</span> (D inputs per step, H hidden). D = 64, H = 32: 32·96 + 32 = 3,104. Dense(1) on 32 = 33. <b>LSTM is 4×</b> that: <span class="f">4[H(D+H) + H]</span>. D = 64, H = 32 gives 12,416. D = 2, H = 10 gives 4·(10·12 + 10) = 520.</li>
+<li><b>Stacked LSTM:</b> <code>return_sequences=True</code> on every LSTM except the last. (3 steps, 5 features) → LSTM 7: 4·(7·12+7) = 364, output (3,7) → LSTM 9: 4·(9·16+9) = 612, output (9) → Dense 1: 10.</li>
+<li><b>Why LSTM:</b> a plain RNN over 500 steps is a very deep net, so gradients vanish and distant context is forgotten. The LSTM has a cell state (conveyor belt) with gates: <b>forget</b> (how much old memory to keep), <b>input</b> (how much new to write), <b>output</b> (how much to expose). GRU is a lighter variant.</li>
+<li><b>Output layer decides the task:</b> regression Dense(1) linear + MSE. Binary Dense(1) sigmoid + binary cross-entropy. Multi-class Dense(k) softmax + categorical cross-entropy.</li>
+<li><b>Q1d clickstream answer:</b> LSTM or GRU, because the order of pages, time on each and the path matter. Each session is one sequence; each step has page category (one-hot or embedding), time spent, how the user arrived, next page; label = purchase or not (many-to-one). Pre-process: sort by time, pad or cut to a fixed length (masking) or window, scale numbers, handle imbalance (class weights, oversampling), split by session (and time). <b>Combine with earlier models:</b> feed the LSTM's purchase probability or final hidden state as an extra feature into the tabular model, or stack or average the predictions (hybrid). It adds browsing behaviour that aggregated page counts miss.</li>
+<li><b>Transformer:</b> self-attention replaces recurrence: every token looks at every other directly, long-range links are easy, training is parallel. Each token makes a query (what I look for), key (what I offer) and value (the information). <span class="f">Attention = softmax(QKᵀ/√dk)·V</span>. Multi-head attention captures different relationships. Positional encoding adds order. Encoder block: self-attention, Add &amp; Norm, feed-forward, Add &amp; Norm. Decoder: masked self-attention (cannot see the future), cross-attention to the encoder, feed-forward. Encoder-only (BERT) = understanding, decoder-only (GPT) = generation, encoder-decoder = translation. Why attention over RNN: direct links between any positions, parallel training, long context.</li>
+</ul>
+</section>
+
+<section>
+<h2>J. Support vector machines</h2>
+<div class="fig">
+<svg viewBox="0 0 200 105" role="img" aria-label="SVM margin">
+<line x1="30" y1="85" x2="170" y2="15" stroke="#000" stroke-width="1.6"/>
+<line x1="30" y1="75" x2="170" y2="5" stroke="#000" stroke-width="1" stroke-dasharray="4 3"/>
+<line x1="30" y1="95" x2="170" y2="25" stroke="#000" stroke-width="1" stroke-dasharray="4 3"/>
+<circle cx="60" cy="42" r="3" fill="#000"/><circle cx="100" cy="22" r="3" fill="#000"/>
+<circle cx="130" cy="25" r="3" fill="#000"/><circle cx="130" cy="25" r="6" fill="none" stroke="#000"/>
+<circle cx="70" cy="92" r="3" fill="#fff" stroke="#000"/><circle cx="115" cy="78" r="3" fill="#fff" stroke="#000"/><circle cx="160" cy="60" r="3" fill="#fff" stroke="#000"/>
+<circle cx="90" cy="65" r="3" fill="#fff" stroke="#000"/><circle cx="90" cy="65" r="6" fill="none" stroke="#000"/>
+<text x="26" y="74" text-anchor="end">+1</text><text x="26" y="84" text-anchor="end">0</text><text x="26" y="94" text-anchor="end">−1</text>
+</svg>
+<div class="cap">Score w·x + b. Dashed lines are the margin edges (±1). Ringed points are support vectors.</div>
+</div>
+<ul>
+<li><b>Class = sign of the score.</b> |score| ≥ 1: beyond the margin. = 1: on the edge, a support vector. Between −1 and 1: inside the margin, still takes the sign's class (soft margin only). = 0: on the boundary.</li>
+<li><b>Margin = 2/‖w‖.</b> w = (3,4): ‖w‖ = 5, margin 0.4. w = (2,0): margin 1.</li>
+<li><b>Minimise ½wᵀw</b> (= ½‖w‖²) to make the margin as wide as possible, subject to <span class="f">yᵢ(w·xᵢ+b) ≥ 1</span>. Without the constraint, w = 0 wins: every point scores the same and nothing is classified.</li>
+<li><b>Support vectors</b> alone define the boundary. Delete any other point and nothing changes. Hard margin: only the points exactly on the edges (at least 2, one per class). Adding far-away points changes nothing; points near or inside the margin can.</li>
+<li><b>C small:</b> wide margin, tolerant, <b>more</b> support vectors, smoother, risk of underfitting. <b>C large:</b> narrow margin, <b>fewer</b> support vectors, bends to fit noise or an outlier, risk of overfitting.</li>
+<li><b>Kernel trick:</b> a kernel gives dot products as if the data were in a higher dimension, without building the new coordinates. A ring becomes separable by a flat boundary. Linear, polynomial, RBF.</li>
+<li><b>Gamma (RBF):</b> large = tight blobs around points, 100% train but poor test (overfit). Small = smooth. Overfit RBF-SVM: lower C and gamma.</li>
+<li><b>Multi-class:</b> one-vs-rest = c SVMs, take the highest score. One-vs-one = c(c−1)/2 SVMs (5 classes = 10), majority vote.</li>
+<li>Scale inputs (distance-based). No direct probabilities. Hard to interpret. Slow on very large data. Imbalance: use class weights.</li>
+</ul>
+</section>
+
+<section>
+<h2>K. Feature selection, PCA, LDA</h2>
+<h3>Selection vs extraction</h3>
+<p>Selection keeps original columns (still explainable). Extraction (PCA, LDA) builds new ones (harder to explain).</p>
+<table data-w="800,1500,1600,1540">
+<tr><th></th><th>Filter</th><th>Wrapper</th><th>Embedded</th></tr>
+<tr><th>Idea</th><td>Score features before any model</td><td>Train a model per subset, keep the best</td><td>Model selects while training</td></tr>
+<tr><th>Examples</th><td>r &gt; 0.9 drop one, variance threshold, mutual info, ANOVA, chi-square</td><td>Forward, backward, RFE</td><td>Lasso, trees, random forest importance</td></tr>
+<tr><th>Speed</th><td>Fastest</td><td>Slowest, often best, can overfit</td><td>In between</td></tr>
+</table>
+<ul>
+<li><b>Rounds:</b> keep m of p features. Forward needs m rounds, backward needs p − m. (Keep 10 of 12: 10 vs 2. Keep 2: 2 vs 10.) Choose the cheaper.</li>
+<li><b>Lasso (L1)</b> sets some coefficients exactly to 0 (selection). <b>Ridge (L2)</b> shrinks but keeps all.</li>
+</ul>
+<h3>PCA</h3>
+<ul>
+<li>Unsupervised. New components are weighted mixes of the features: uncorrelated, orthogonal, ordered by variance explained. Eigenvalue = variance of a component, eigenvector = its weights (loadings).</li>
+<li><b>Standardise first</b>: PCA maximises variance and variance depends on units (grams would dominate cm). Standardised total variance = p, each feature 1.</li>
+<li><span class="f">eigenvalue = %var × p / 100</span>. <b>Kaiser:</b> keep eigenvalue &gt; 1, i.e. %var &gt; 100/p (8 features: 12.5%). Other rules: cumulative 80 or 90% (reaching it counts), scree elbow, communality &gt; 0.5 for each variable.</li>
+<li><b>Rules can disagree</b> (eigenvalues 2.4, 1.5, .9, .6, .3, .3: Kaiser keeps 2, 80% keeps 3, 90% keeps 4). Name the rule, quote the numbers, mention the other.</li>
+<li><b>Suitable?</b> KMO ≥ 0.5 (below = too little correlation). Bartlett p &lt; 0.05 (rejects "variables unrelated"). KMO .35 and p .40: unsuitable. Do not force PCA; keep original features or add related variables. PCA needs correlation, so do not remove correlated features first.</li>
+<li><b>Reading loadings:</b> large |loading| (near ±1) defines the component. Same sign = move together, opposite sign = opposite. Near 0 = no role. Name it in business terms (Salary +, Bonus +, Rent − = "financial comfort").</li>
+<li><b>Limits:</b> linear, outlier-sensitive, continuous variables, enough rows (150+, about 5 per variable), components harder to explain. PCA ignores the target, so a top-variance component is not guaranteed to predict well, and a small one can be the useful one.</li>
+<li><b>Using PCs in a model:</b> uncorrelated and fewer inputs. Leave the target out of the PCA (leakage). Fit on training data only.</li>
+</ul>
+<h3>LDA</h3>
+<ul>
+<li>Supervised. Finds directions that push class means apart relative to the spread inside each class. Axes ≤ <span class="f">min(p, c−1)</span> (30 features, 5 classes: 4. 4 features, 7 classes: 4).</li>
+<li><b>PCA vs LDA:</b> no labels, explore, compress = PCA. Labelled, prepare for classification = LDA. If classes overlap along the biggest-spread direction and differ along a small-spread one, PC1 puts them on top of each other (classifier near chance) while LDA finds the separating direction.</li>
+<li>LDA assumes roughly Gaussian classes, fails if the classes differ in variance not mean, unstable with small samples. Fit on training data only.</li>
+</ul>
+</section>
+
+<section>
+<h2>L. Clustering and mixture models</h2>
+<ul>
+<li>Unsupervised. Minimise intra-cluster distance, maximise inter-cluster distance. Scale first.</li>
+<li><b>Distances:</b> Euclidean √Σ(diff)². To compare, compare the <b>squared</b> distances and skip the root. Manhattan Σ|diff|. Nominal: Hamming (match 0, mismatch 1, add up). Ordinal: map to ranks, then |difference|.</li>
+</ul>
+<h3>K-means</h3>
+<ul>
+<li>Choose k. Seeds, then assign <b>each point to exactly one</b> nearest centre, set each centre to the <b>mean</b> of its points, repeat until nothing changes. <span class="f">SSE = Σ (distance to own centre)²</span>.</li>
+<li>Check each iteration: every point appears in exactly one cluster, and each centre is the average of its cluster (mean of 2, 4, 6 is 4).</li>
+<li>Reaches a local minimum, so results depend on the seeds: restarts (keep the lowest SSE) or K-means++. Weak: must choose k, outliers drag centres, prefers round equal-size clusters, numeric only. Variants: K-medoids (robust), K-medians, K-modes, K-prototypes.</li>
+</ul>
+<h3>Hierarchical</h3>
+<ul>
+<li>Merge the two closest clusters repeatedly; the dendrogram records it. Merges cannot be undone. <b>Cut with a horizontal line</b> in the largest gap between merge heights; the number of branches crossed is the number of clusters.</li>
+<li><b>Linkage:</b> single = closest pair (chaining), complete = farthest pair (compact), average = mean of all pairs, Ward = smallest SSE increase. Pair distances 2, 6, 5, 8: single 2, complete 8, average 21/4 = 5.25.</li>
+</ul>
+<h3>DBSCAN</h3>
+<ul>
+<li>Settings ε and MinPts; no k. <b>Core:</b> at least MinPts points within ε. <b>Border:</b> inside a core's ε but not dense itself. <b>Noise:</b> neither, which makes the anomalies.</li>
+<li>ε: plot each point's distance to its k-th neighbour (k = MinPts), sort, take the elbow. MinPts ≥ dimensions (2D: 4; above 2D: 2 × dimensions).</li>
+<li><b>Choose:</b> big data, round clusters = K-means. Any shape, outliers or fraud = DBSCAN. Small data or nested groups = hierarchical.</li>
+</ul>
+<h3>Is the clustering any good?</h3>
+<ul>
+<li><b>Silhouette</b> <span class="f">s = (b − a)/max(a, b)</span>. a = average distance from the point to the others in its own cluster. b = average <i>distance</i> from the point to the points of the nearest other cluster. Example: point 4 in {2, 4}, other cluster {10, 12, 14}: a = 2, b = (6+8+10)/3 = 8, s = 6/8 = 0.75. Above 0.3 acceptable, near 0 on a border, negative probably misplaced.</li>
+<li><b>Davies-Bouldin:</b> lower is better. <b>Calinski-Harabasz:</b> higher is better. <b>Elbow (WCSS):</b> choose the k where the improvement flattens (500, 200, 120, 110, 105 gives k = 3). WCSS always falls and hits 0 at k = n, so never pick the minimum.</li>
+<li><b>Stability:</b> split-half, same clusters and profiles. Tiny clusters may be outliers.</li>
+<li><b>Business lens:</b> profile each cluster on its variables (means, box plots), give an intuitive name and an action. A good silhouette alone is not enough.</li>
+<li><b>Fraud with no labels:</b> DBSCAN, scale numeric features, encode categories. Judge by analysts reviewing a sample of the flagged cases (precision), stability and the k-distance plot; later recall when labels exist.</li>
+<li><b>Gaussian mixture and EM:</b> use when data forms several blobs and the group of each point is hidden. GMM = several Gaussians with weights. <b>EM:</b> (1) initialise parameters, (2) E-step: for each point, soft membership <span class="f">P(component|x) ∝ P(x|component)·P(component)</span>, (3) M-step: re-estimate each component's parameters and weight using those soft labels, repeat until stable. K-means is the hard-label cousin; GMM gives soft memberships and elliptical clusters. Points with very low probability under the mixture are anomalies.</li>
+<li><b>Dice example:</b> start P(6|Yellow) = .4, P(6|Blue) = .1, priors .5 each. For a roll of 6: Yellow .4·.5 = .2, Blue .1·.5 = .05, so P(Yellow|6) = .8, P(Blue|6) = .2. After all 18 rolls the M-step adds the soft counts (yellow 7.31 of 18) so P(Yellow) = .41, P(Blue) = .59, and P(1|Yellow) = 1.71/7.31 = .234.</li>
+</ul>
+</section>
+
+<section>
+<h2>M. Ensembles and hybrid models (Day 10)</h2>
+<ul>
+<li><b>Ensemble</b> = committee (vote for classes, average for numbers). It beats its members if and only if they are <b>accurate and diverse</b> (Dietterich). Majority of 3 independent models with accuracy p: <span class="f">3p²(1−p) + p³</span>. p = .7: 3·.49·.3 + .343 = .784. p = .8: 3·.64·.2 + .512 = .896.</li>
+<li><b>Bias and variance:</b> error = bias² + variance + noise. High bias = underfit (shallow tree). High variance = overfit (deep unpruned tree). Averaging many flexible models cuts variance without raising bias (by less than 1/N because the models are correlated).</li>
+</ul>
+<table data-w="900,1500,1500,1540">
+<tr><th></th><th>Bagging</th><th>Random forest</th><th>Boosting</th></tr>
+<tr><th>Data</th><td>Each model on a bootstrap sample (draw with replacement, about 63% unique rows)</td><td>Bagging + random subset of features at each split (about √features)</td><td>Models one after another; rows the last model got wrong get a higher weight</td></tr>
+<tr><th>Combine</th><td>Unweighted vote or average</td><td>Unweighted vote</td><td>Weighted vote (better models count more)</td></tr>
+<tr><th>Reduces</th><td>Variance</td><td>Variance (more diversity)</td><td>Bias (and variance)</td></tr>
+<tr><th>Base</th><td>Any, usually trees</td><td>Unpruned trees, hundreds</td><td>Weak learners (shallow trees)</td></tr>
+<tr><th>Parallel</th><td>Yes</td><td>Yes</td><td>No, sequential</td></tr>
+<tr><th>Noisy labels</th><td>Robust</td><td>Robust</td><td>Can hurt (chases noisy rows)</td></tr>
+</table>
+<ul>
+<li><b>Boosting steps:</b> equal weights, train, raise weights of wrong rows, train a new model on the reweighted data, repeat, combine with weights. Gradient boosting (XGBoost) fits each new model to the remaining error. <b>Stacking:</b> different model types, then a meta-model learns how to combine them. Bagging helps unstable models (deep trees, nets), not stable ones (linear, KNN). Under 50 models is usually enough.</li>
+<li><b>OOB error:</b> each tree leaves out about 37% of rows. Predict each row using only the trees that did not see it, vote, compare to the label. Gives an error estimate with no separate test set.</li>
+<li><b>Variable importance:</b> impurity-based (sum of Gini or entropy reduction over all splits and trees; biased towards variables with many levels) and permutation (shuffle one variable in the OOB data and measure the accuracy drop; works for any model).</li>
+<li><b>Q1c answer:</b> the single tree used only PageValue (root) and BounceRate. AdaBoost spreads importance (most 0.07 to 0.10, ProductRelated top at 0.10, Weekend 0.00). Reasons: a single tree is greedy and masks correlated features (ProductRelated and its duration, BounceRate and ExitRate); boosting reweights and sums over many trees so later trees use other variables; impurity importance favours many-level variables (Browser, OperatingSystems); flat scores mean many weak signals. Use: drop the lowest (Weekend, Region, Month, TrafficType), retrain SVM, NN or logistic on the top variables, compare by cross-validation, cross-check with permutation importance, keep business-critical variables.</li>
+<li><b>Pick:</b> noisy or mislabelled data, robust fraud model = bagging or random forest, not boosting. Lower variance of trees = bagging. Hard cases, lower bias = boosting.</li>
+<li><b>Hybrid vs ensemble:</b> ensemble = many models of the same kind, hybrid = different techniques combined. Multiple classifier systems and stacking; mixture of experts (a gating network weights specialist sub-networks); self-tuning (a genetic algorithm tunes a network; neuro-fuzzy); cooperating experts (one output feeds another).</li>
+<li><b>Discriminative</b> models (logistic, SVM, deep classifiers) learn P(y|x): accurate, need many labels. <b>Generative</b> models (Naive Bayes, GMM, VAE, GAN) learn P(x,y): cope with small, imbalanced or missing data and can create synthetic samples (GAN images to boost a rare class).</li>
+</ul>
+</section>
+
+<section>
+<h2>N. Deep learning jobs and reinforcement learning (Day 10, Q2b)</h2>
+<ul>
+<li><b>Three jobs:</b> Identify (classify, detect with bounding boxes, segment), Create (generative AI; GAN = generator vs discriminator, deepfake risk), Act (learn what to do from feedback).</li>
+<li><b>RL:</b> agent → action → environment → (state, reward) → agent. No labelled answers, only a reward after actions. State, action, reward, policy. Explore vs exploit. Deep RL uses a deep network for the policy or for Q(s,a). Deep Q-learning estimates the expected reward of each action in each state. Continuous control (joint movements) often uses actor-critic (DDPG).</li>
+<li><b>Q2b, reward factors</b> (each tied to a criterion, with a sign): (1) task success and efficiency: large + for the right object in the right bin, small shaping + for approaching, a good grip and matching belt speed, small − each time step. (2) collision avoidance and safety: large − for contact with other objects, robots or humans; graded − inside a safe distance (from the cameras' tracked positions). (3) hardware protection: − for joint limits, awkward configurations, bad grip points, high torque or jerk.</li>
+<li><b>Architecture:</b> physical robot, target object, other objects, cameras, identification system (the classifier from part a), decision-making system (agent network: CNN encoder for the image state then dense layers to joint commands, plus a critic network). Loop: cameras observe, perception makes the state, agent chooses an action, safety layer checks it, arm moves, reward module scores. Label every arrow (state, action, reward).</li>
+<li><b>Reduce real training danger</b> (give at least two with reasons): simulate first (digital twin), with domain randomisation (lighting, textures, positions) for sim-to-real, then fine-tune slowly on the real arm. Safety layer with hard limits (joint angles, speed, force), protected zones, emergency stop. Penalise proximity, not only impact. Demonstrations or human feedback (imitation learning). Curriculum (one slow object, no obstacles first). Share experience across robots or use offline RL.</li>
+<li><b>Warehouse robot example:</b> + delivering a box, − per time step; large − for touching a person or shelf, graded − for coming closer than a safe distance; small − for jerk, high torque or low battery.</li>
+</ul>
+</section>
+
+<section>
+<h2>O. Signals: sampling, peaks, DTW, Fourier, wavelets (Days 11 and 12)</h2>
+<ul>
+<li><b>Signal:</b> sampled at set time steps and quantised. Periodic f(t+T) = f(t). Even f(t) = f(−t). Odd f(t) = −f(−t). Sensors: temperature, proximity, infrared, LiDAR, pressure, water quality, accelerometer, gyroscope, microphone, camera, EEG.</li>
+<li><b>Nyquist:</b> <span class="f">fs ≥ 2·fmax</span>; below it, high frequencies alias as low ones. Telephone 4 kHz needs 8 kHz. Bandwidth 10 kHz needs 20 kHz. Content to 120 Hz needs 240 Hz. Sampling at 50 Hz shows only up to 25 Hz. <b>Samples = fs × duration</b> (4 s at 50 Hz = 200; 2 s at 100 Hz = 200).</li>
+<li><b>Peaks:</b> slope 0 and changing + to −. Discrete signal: finite differences (forward f(x+Δ)−f(x), backward f(x)−f(x−Δ), central). [1,2,5,7,4,2] gives [1,3,2,−3,−2]; sign flips + to − at the value 7, the peak. Noise makes many wiggles, so use <code>find_peaks</code> filters: <b>height</b> (misses normal peaks if the level varies), <b>distance</b> (may drop a smaller real peak), <b>prominence</b> (usually best: how far a peak rises above the higher of its two bases), <b>width</b> (at half prominence; rejects sharp spikes). Prominence: extend a line left and right until a higher peak or the edge, take the lowest point each side (the bases), use the higher base, prominence = peak height − that base.</li>
+<li><b>Baseline drift:</b> estimate the baseline z and subtract, y corrected = y − z. <b>ALS</b> minimises <span class="f">S = Σ wi(yi − zi)² + λ Σ (Δ²zi)²</span> (fit + roughness penalty). Asymmetric weights: points above the baseline (peaks) get a small weight p, points below get 1 − p. Suggested 0.001 ≤ p ≤ 0.1, 10² ≤ λ ≤ 10⁹, 5 to 10 iterations.</li>
+<li><b>DTW</b> (shifted or different-speed signals, different lengths; Euclidean needs equal length): D(i,j) = (yi − xj)²; <span class="f">A(i,j) = D(i,j) + min(A(i−1,j), A(i,j−1), A(i−1,j−1))</span>; the path starts at (1,1), ends at (n,m), is monotonic and continuous; DTW distance = A(n,m). Cost grows as n × m. Example x = [0,2,3], y = [0,0,2,3] gives distance 0. Used in speech, signatures, temporal alignment.</li>
+<li><b>Fourier:</b> <span class="f">F(u) = Σ f(x)·e^(−i2πux/N)</span>, e^(ix) = cos x + i sin x. Gives which frequencies, not when. Example [2,3,4,4]: F(0) = 13 (the sum), F(1) = −2 + i, F(2) = −1, F(3) = −2 − i, |F(1)| = √5 ≈ 2.24. Not enough for signals whose frequency changes.</li>
+<li><b>Wavelet</b> (frequency and time, for non-stationary signals): a short localised wave. Low-pass (averaging) gives approximation, high-pass (differencing) gives detail, downsample by 2, repeat on the approximation. <b>Haar:</b> approx = (a+b)/√2, detail = (b−a)/√2. [9,7,3,5]: level 1 approx 8√2, 4√2, details −√2, √2; level 2 approx 12, detail −4. Coefficients <b>[12, −4, −√2, √2]</b>, energy 164 = 144+16+2+2 (preserved, mostly in the first: compaction). [4,2,6,8] gives [10, 4, −√2, √2], energy 120.</li>
+<li><b>Wavelet uses:</b> features (mean, median, variance, std of each subband: <b>5 subbands × 4 statistics = 20 features</b>), denoising (shrink small details), augmentation.</li>
+<li><b>Signal pipeline:</b> capture → process (denoise, filter, augment) → transmit (code, compress) → transform and features (Fourier, wavelet, adaptive or learned) → model.</li>
+<li><b>Features from a vibration or ECG signal:</b> time-domain statistics or histogram, frequency features (Fourier) or wavelet subband statistics.</li>
+</ul>
+</section>
+
+<section>
+<h2>P. Representation learning, autoencoders, anomaly detection (Day 13)</h2>
+<ul>
+<li><b>Basis:</b> x in basis ui: <span class="f">wi = ⟨x, ui⟩ = xᵀui</span>, reconstruct <span class="f">x̂ = Σ wi·ui</span>. Example x = (1,2), u1 = (1,1)/√2, u2 = (−1,1)/√2: w1 = 3/√2, w2 = 1/√2, x̂ = (1,2). A good basis compacts the energy into a few coefficients (keep the big ones). Fourier, wavelets and PCA all choose a good basis. PCA learns it: the eigenvector with the largest eigenvalue of the covariance, subtract it, repeat.</li>
+<li><b>Representation learning:</b> learn a smooth, suitably sized representation that gets more abstract in deeper layers. <b>Supervised:</b> reuse with <b>linear adaptation</b> (freeze the pretrained net, train only a new linear layer) or <b>fine-tuning</b> (continue training the whole net). <b>Self-supervised:</b> the data supplies the target (reconstruct the input, match augmented views), then use the features for the downstream task with few labels. Generative (autoencoder) vs contrastive (pull two views of one item together, push different items apart). CLIP: image and text encoders trained so matching pairs have high cosine similarity (400M pairs).</li>
+<li><b>Autoencoder:</b> encoder squeezes to a narrow code, decoder rebuilds, loss <span class="f">‖x − x̂‖²</span>. Under-complete (code smaller, compresses) vs over-complete (needs noise or sparsity or it just copies). Convolutional for images and signals. Denoising: corrupt the input, reconstruct the clean one. Uses: compression, features, denoising, interpolation, anomaly detection.</li>
+<li><b>Anomaly types:</b> point (a spike), contextual (30 °C in winter), collective (a flat signal for 1 s). Output a label or a score (needs a threshold).</li>
+<li><b>Approaches:</b> geometric (distance from the nearest cluster centre; no labels), statistical (low probability, or beyond mean ± 4σ; sliding window; no labels), classification (needs labelled normal and abnormal), autoencoder (reconstruction error; train on normal only).</li>
+<li><b>Autoencoder workflow:</b> train on normal data only → reconstruction errors on validation → threshold (mean + 3σ of the normal errors, or by acceptable false alarms) → flag new samples above it. Example errors .02, .03, .025, .04, .03: mean .029, σ ≈ .0066, threshold ≈ .049; a new error of .12 is an anomaly.</li>
+<li><b>Judge a detector:</b> accuracy is useless (always "normal" scores 99.9%). Use recall of anomalies, precision, F1, ROC or precision-recall curve; set the threshold from the cost of a miss against a false alarm. Detection says something is wrong; diagnosis says what (needs labelled causes, e.g. Bayes in Q2d).</li>
+<li><b>Q2c answer (conveyor, 3,000 normal and 2 abnormal; 4 s at 50 Hz = 200 samples; 10-bin histogram + 20 wavelet statistics = 30 dimensions):</b> do not agree with a two-class MLP.</li>
+<li><b>Challenge 1, imbalance:</b> 2 of 3,002 abnormal, so 99.93% by always saying "normal"; two samples cannot be split into train, validation and test; future failures may differ. <b>Solution:</b> anomaly detection trained on normal data (autoencoder on the 30-D features or raw signal, one-class, Gaussian, cluster distance); use the 2 abnormal only to test and set the threshold. If a classifier is wanted: augment (time-warp, jitter, scale), synthetic anomalies, report recall, precision, F1.</li>
+<li><b>Challenge 2, features lose information:</b> the histogram ignores time order (bin 1 shows about 63 abnormal vs 19 normal, matching a flat trace near 0 from about 2.0 to 2.7 s, but other bins overlap and two different waveforms can share a histogram). Frequency features are nearly identical except features 3 and 4 (about 1.45 and 2.1 abnormal vs 0.95 and 0.9 normal) and most of the 20 values are near zero; with 2 abnormal cases we cannot tell which differences are reliable. <b>Solution:</b> 1D conv or LSTM autoencoder on the raw sequence, wavelet coefficients over time, a run-length feature, DTW for phase differences, choose features with domain knowledge.</li>
+<li><b>Challenge 3 (optional):</b> normalising each sequence to 0 to 1 hides absolute amplitude (a loose part vibrating harder). Keep the level as a separate feature.</li>
+<li><b>"Do you agree?"</b> Give a clear yes or no, reasons tied to numbers (3,000 vs 2) and the figure, each challenge with a matching solution, and the evaluation (recall, precision, F1, threshold from cost).</li>
+</ul>
+</section>
+
+<section>
+<h2>Q. Multimodal sensing and sensor fusion (Day 14)</h2>
+<ul>
+<li><b>Modality:</b> a way something is expressed or perceived (audio, image, inertial, text, temperature). Raw modalities can become abstract ones (detected objects, sentiment). Inertial: gesture and activity recognition. Audio: sound classification, speaker recognition, machine anomaly detection (SMD assembly machine sound at 192 kHz). Vision: objects, defects, flood monitoring (210 water-level sensors and 49 CCTV cameras).</li>
+<li><b>Augmentation for sensor windows:</b> scaling (multiply by a random factor), magnitude filtering (smooth random curve near 1), jittering (add noise), time-warping (stretch the time axis). Makes models robust to multiplicative noise, additive noise and timing changes.</li>
+<li><b>Why fuse:</b> higher-level representation, better accuracy (smaller spread), completeness. Kinds: across sensors, across domains, across attributes (temperature, pressure and humidity give air refractive index), across time.</li>
+</ul>
+<table data-w="1000,1500,1500,1440">
+<tr><th>Fusion</th><th>Where they meet</th><th>Pros</th><th>Cons</th></tr>
+<tr><td>Early (tightly coupled)</td><td>Raw data or features joined, one recogniser</td><td>Learns cross-modal interactions</td><td>Needs synchronised, compatible data; one noisy modality hurts all</td></tr>
+<tr><td>Restricted (loosely coupled)</td><td>One modality's result narrows the other's search</td><td>Saves computation, context raises accuracy</td><td>Order matters, errors propagate</td></tr>
+<tr><td>Late (uncoupled)</td><td>Separate recognisers, decisions combined at the end</td><td>Simple, reuses pipelines, tolerates a missing sensor</td><td>Misses low-level interactions</td></tr>
+</table>
+<ul>
+<li><b>Challenges:</b> representation (different noise, structure, format); alignment (spatial: common coordinates; temporal: common time axis, use DTW; feature space: CLIP-style); reasoning, generation, transference; practical: synchronisation, missing or noisy data, scale, compute.</li>
+<li><b>Sense-making pipeline A:</b> sensor data → representation (manual, adaptive, learned) → ML model → reasoning → decision (planning) and action (effector). <b>Pipeline B:</b> raw data → recognised entities → semantic relationships → contextual relationships → knowledge.</li>
+<li><b>Feature categories:</b> geometrical (edges, shapes, area), structural (surface area, orientation), statistical (mean, variance, skewness, kurtosis, entropy), spectral (colour coefficients, spectral peaks), time domain (rise and fall time, amplitude, width), frequency domain (Fourier and wavelet coefficients).</li>
+<li><b>Context example:</b> the same face at 2 pm or 2 am can mean normal operation or an intrusion. ADAS: cameras and motion sensors, recognise lane drift, warn the driver (sense, recognise, act).</li>
+<li><b>Factory mic + vibration sensor, mic sometimes fails:</b> late fusion (still works without the mic, uses existing pipelines). Problems: synchronisation and alignment (192 kHz audio vs 50 Hz vibration, resample or DTW), different noise levels or missing data.</li>
+<li><b>Design a sensing system:</b> sensor → pre-process (denoise, baseline) → features (Fourier, wavelet or learned) → model → reasoning and action. Name the metric and the action taken.</li>
+</ul>
+</section>
+
+<section>
+<h2>R. Choosing a model</h2>
+<table data-w="1100,1250,1600,1490">
+<tr><th></th><th>Tree</th><th>Neural net</th><th>SVM</th></tr>
+<tr><th>Explainable</th><td>Yes</td><td>No</td><td>Little</td></tr>
+<tr><th>Scale inputs</th><td>No</td><td>Yes</td><td>Yes</td></tr>
+<tr><th>Data needed</th><td>Moderate</td><td>Lots</td><td>Moderate</td></tr>
+<tr><th>Overfit guard</th><td>Prune, limit depth</td><td>Early stop, dropout, fewer nodes</td><td>Lower C, gamma</td></tr>
+<tr><th>Settings</th><td>max_depth, min_samples</td><td>layers, nodes, lr</td><td>C, kernel, gamma</td></tr>
+</table>
+<p>If explanations are required, pick the tree and state its cost (may be less accurate on ring-like or complex patterns; a deep tree overfits). Why a neural net: flexible, learns features; cost is data, tuning, scaling and being a black box.</p>
+<ul>
+<li><b>Match the problem:</b> images = CNN. Sequences = LSTM. Tabular and explainable = tree. Small labelled data, high-dimensional = SVM. Unlabelled groups = clustering (K-means, DBSCAN, GMM). Rare failures = anomaly detection (autoencoder). Few labels, much unlabelled data = self-supervised pretraining then fine-tune. Reward feedback = RL. Many sensors = fusion. Noisy labels = bagging. Hard cases = boosting. Two inputs or outputs = Keras Functional API.</li>
+</ul>
+</section>
+
+<section class="box dbl">
+<b class="t">S. My traps (mistakes made in the rounds)</b>
+<ul>
+<li>Proportion = count ÷ TOTAL in the node. "1 and 5" is 1/6, 5/6.</li>
+<li>Child weight = child size ÷ node size, and the weights add to 1.</li>
+<li>High gain = children are <i>pure</i>, not sizes split 50/50. Pure child contributes 0.</li>
+<li>Backprop δ uses (T − O). Target above output gives a positive δ.</li>
+<li>K-means centre is the <b>mean</b>. Every point in one cluster only.</li>
+<li>Silhouette b = average <i>distance</i> to the other cluster's points, not their positions.</li>
+<li>Elbow is where gains flatten, not the lowest WCSS.</li>
+<li>Recall ≠ accuracy. Recall = TP/(TP+FN).</li>
+<li>KMO under 0.5 or Bartlett p over 0.05 = PCA unsuitable. Do not remove correlation.</li>
+<li>Kaiser is eigenvalue strictly over 1. LDA axes = min(p, c−1).</li>
+<li>More support vectors means smaller C. Large C: fewer SVs, narrow margin.</li>
+<li>SVM class = sign of the score. A score of 0.5 is still class +1, inside the margin.</li>
+<li>Imbalance fixes are class weights, SMOTE, over or undersampling. One-vs-rest is for many classes.</li>
+<li>Scaler and PCA are fitted after the split, on training data only.</li>
+<li>Dropout is off at test time. Never zero-initialise. Higher learning rate is not always faster.</li>
+<li>A leaked target (in PCA or features) inflates accuracy. Exclude it.</li>
+<li>Nyquist is a <i>sampling rate</i> of at least 2 × fmax. A 50 Hz sampler shows up to 25 Hz.</li>
+<li>LSTM params are 4× a SimpleRNN (not 2×). Flatten has 0 parameters; the first Dense after it dominates.</li>
+<li>Split time series by time order or session, never randomly.</li>
+<li>Haar detail = (second − first)/√2, approximation = (sum)/√2. Check energy is preserved.</li>
+<li>Noisy labels: bagging or random forest, not boosting. Degradation (deep net worse on train) is not overfitting.</li>
+<li>Autoencoder anomaly detector: train on normal only; threshold = mean + 3σ of normal errors; judge by recall, precision, F1, not accuracy.</li>
+<li>Dropout and batch-norm statistics: dropout off at test; BN has 4 params per channel (2 trainable).</li>
+</ul>
+</section>
+
+</div>
+</div>
