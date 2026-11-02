@@ -79,7 +79,6 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <li><b>"What is wrong and how to improve?"</b> (1) quote the numbers, (2) name the problem, (3) fix it with a reason, (4) say which metric proves it improved.</li>
 <li><b>No calculator:</b> write the formula, substitute, then estimate. Compare sizes instead of computing. Keep fractions.</li>
 <li><b>Fraction to decimal:</b> 1/8 = .125 · 1/5 = .2 · 1/4 = .25 · 1/3 = .33 · 3/8 = .375 · 2/5 = .4 · 1/2 = .5 · 5/8 = .625 · 2/3 = .67 · 3/4 = .75 · 4/5 = .8 · 1/20 = .05 · 17/20 = .85</li>
-<li><b>Recommending a model?</b> Your reasons must match your recommendation (needs explaining to patients, regulators or marketing = decision tree; then state its cost).</li>
 </ul>
 </section>
 
@@ -121,7 +120,7 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <ul>
 <li><b>Linear regression:</b> least squares. <span class="f">R² = SSreg/SStotal</span> = share of the variation in y explained (0 to 1). A coefficient is the change in y for +1 in that x, others held fixed.</li>
 <li><b>Logistic regression</b> (classification): <span class="f">ln(P/(1−P)) = a + b1x1 + …</span> (log-odds). Positive coefficient raises the chance of the positive class. Output is a probability, cut-off 0.5 is movable.</li>
-<li><b>KNN:</b> lazy learner, majority vote of the k nearest points. Small k follows noise, large k blurs the boundary. Use odd k. Scale first. Slow at prediction time.</li>
+<li><b>KNN:</b> lazy learner, majority vote of the k nearest points. Small k follows noise, large k blurs the boundary. Use odd k. Slow at prediction time.</li>
 <li><b>Naive Bayes:</b> score(C) = P(C) × P(x1|C) × P(x2|C) × … . P(value|C) = rows in class C with that value ÷ rows in class C. Pick the largest. Probability = own score ÷ sum of scores.</li>
 <li><b>Count is 0?</b> One zero wipes out the product. Laplace: add 1 to each count and add the number of possible values to the denominator.</li>
 <li><b>By hand:</b> cancel the shared prior, compare ratios (9/16 vs 1/16 = 9:1 = 90% / 10%).</li>
@@ -181,13 +180,10 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <li><b>Backprop (sigmoid):</b> <span class="f">δout = O(1−O)(T−O)</span>, <span class="f">Δw = η·δ·Oin</span>, hidden <span class="f">δj = Oj(1−Oj)Σδk·wkj</span>. <b>Sign check:</b> target above output gives δ &gt; 0, weight up, output up.</li>
 <li><b>Loop:</b> small random init, forward pass, loss, backward pass, update, repeat. Batch, stochastic or mini-batch (usual).</li>
 <li><b>Learning rate:</b> too big overshoots, oscillates or diverges. Too small is slow or stuck. Bigger is not always faster. <b>Momentum:</b> adds a fraction of the previous update, smooths the path and carries over shallow dips.</li>
-<li><b>Never start with all-zero or identical weights:</b> neurons stay identical (symmetry). Use small random values (Xavier or He).</li>
-<li><b>Overtraining:</b> train loss falls, validation loss rises. Stop at the validation minimum and keep those weights. Also: dropout (training only, off at test), L2, fewer nodes or layers, more or augmented data.</li>
-<li><b>Scaling inputs:</b> a feature in the thousands swamps one in the ones. Parameters from the training set only.</li>
-<li><b>Why deep learning took off (2012 AlexNet):</b> ReLU, dropout, GPUs, ImageNet (1.2M images). Not backprop (1986). Earlier failures: tiny data, slow computers, bad init, sigmoid vanishing gradients.</li>
-<li><b>History:</b> 1943 McCulloch-Pitts (0/1, fixed weights, no learning). 1958 perceptron (learns weights). 1969 XOR problem, first winter. 1986 backpropagation. Late 80s deep nets fail, SVMs and forests take over. 2012 AlexNet (15.3% top-5 error vs 26.2%).</li>
+<li><b>Overtraining (early stopping):</b> train loss falls, validation loss rises. Stop at the validation minimum and keep those weights. Other remedies (dropout, L2, augmentation) are in H. Dropout is off at test time.</li>
+<li><b>History:</b> 1943 McCulloch-Pitts (0/1, fixed weights, no learning). 1958 perceptron (learns weights). 1969 XOR problem, first winter. 1986 backpropagation. Late 80s deep nets fail, SVMs and forests take over. 2012 AlexNet (15.3% top-5 error vs 26.2%). What changed in 2012: ReLU, dropout, GPUs, ImageNet (1.2M images), not backprop (1986). Earlier failures: tiny data, slow computers, bad init, sigmoid vanishing gradients.</li>
 <li><b>Layer capability:</b> first hidden layer draws lines (hyperplanes), the next combines them into convex regions, a further layer builds concave regions. Start with about √(inputs × outputs) hidden nodes; too many overfit.</li>
-<li><b>Loss and gradient descent:</b> MSE for numbers, cross-entropy for classes. Batch (all rows), stochastic (one row, noisy), mini-batch (n rows, the usual). Hand example: O = 0.508, T = 0, η = 0.3: δ = 0.508·0.492·(−0.508) = −0.127, Δw = 0.3·(−0.127)·1 = −0.038 (weight pushed down).</li>
+<li><b>Loss and gradient descent:</b> Batch (all rows), stochastic (one row, noisy), mini-batch (n rows, the usual). Hand example: O = 0.508, T = 0, η = 0.3: δ = 0.508·0.492·(−0.508) = −0.127, Δw = 0.3·(−0.127)·1 = −0.038 (weight pushed down).</li>
 <li><b>Classical vs deep learning:</b> classical = works on small or medium data, hand-made features (HOG, SIFT), minutes to hours, some models explainable. Deep = needs big data and a GPU, learns features, hours to weeks, hard to explain.</li>
 </ul>
 <h3>RBF network</h3>
@@ -222,11 +218,8 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <li><b>Convolution by hand:</b> multiply the kernel with each window element by element, add up, slide. Kernel [1 0; 0 1] just adds the main diagonal. Early layers find edges, deeper layers shapes and objects.</li>
 <li><b>Max pool:</b> halves height and width, keeps the strongest value, no parameters, tolerates small shifts. Filters are learned by training; you only choose size and number.</li>
 <li><b>Why CNN for images:</b> local connections plus shared weights (far fewer parameters) and tolerance to position.</li>
-<li><b>Critique a CNN (Q2a):</b> table of shapes and params. The <b>first Dense after Flatten dominates</b> (9,408 × 256 = 2.4M of 2.58M, 93%). With about 5,000 images and 918 classes (about 5 per class) this overfits.</li>
-<li><b>Fixes:</b> Global Average Pooling (9,408 inputs down to 48), dropout, batch norm, augmentation, class weights, transfer learning.</li>
-<li><b>Several attributes (brand 18, type 17, value 3):</b> shared backbone, one softmax head per attribute, summed cross-entropy. About 280, 290, 1,670 images per class instead of 5. New total 69,302 params (GAP + three heads), not 2,465,462 (heads only).</li>
 <li><b>Flatten:</b> length = H × W × C of the last feature map, 0 parameters. 4×4×6 gives 96. 4×4×64 gives 1,024. 14×14×48 gives 9,408. <b>First Dense after Flatten</b> = (H·W·C)·units + units (96·36 + 36 = 3,492).</li>
-<li><b>Keras pattern:</b> <code>Conv2D(32,(3,3),padding='same',activation='relu')</code>, <code>MaxPooling2D((2,2))</code>, repeat, <code>Flatten()</code>, <code>Dense(256,'relu')</code>, <code>Dense(10,'softmax')</code>, <code>compile(loss='categorical_crossentropy', optimizer=…, metrics=['accuracy'])</code>. Input shape (samples, rows, columns, channels), scaled to 0 to 1. A batch of 32 has shape (32,16,16,1): forward pass, loss, backprop (automatic differentiation), optimiser updates the weights.</li>
+<li><b>Keras pattern:</b> <code>Conv2D(32,(3,3),padding='same',activation='relu')</code>, <code>MaxPooling2D((2,2))</code>, repeat, <code>Flatten()</code>, <code>Dense(256,'relu')</code>, <code>Dense(10,'softmax')</code>, <code>compile(loss='categorical_crossentropy', optimizer=…, metrics=['accuracy'])</code>. Input shape (samples, rows, columns, channels), scaled to 0 to 1. A batch of 32 has shape (32,16,16,1): forward pass, loss, backprop (automatic differentiation), optimiser updates the weights. <code>model.summary()</code> shows output shapes and Param #.</li>
 <li><b>Small net, 16×16×1:</b> Conv 3×3, 3 filters, same (30 params) → pool 8×8×3 → Conv 3×3, 6 filters (28·6 = 168) → pool 4×4×6 → Flatten 96 → Dense 36 (3,492) → Dense 5 (185). Total 3,875.</li>
 <li><b>Digit net, 28×28×1, 5×5, no padding:</b> Conv 20 gives 24×24×20 (520 params), pool 12×12×20, Conv 40 gives 8×8×40 (20,040), pool 4×4×40, Flatten 640, Dense 128 (82,048), Dense 10 (1,290). Total 103,898.</li>
 </ul>
@@ -273,15 +266,14 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <ul>
 <li><b>Depth over width:</b> one hidden layer can approximate any function in theory (universal approximation) but gives no way to find the weights. AlexNet test (8 layers, 60M params, top-5 accuracy 81.9%): remove dense 7 (60M to 44M) −1.1 points; dense 6 and 7 (to 10M) −5.7; conv 3 and 4 (60M to 59M) −3.0; conv 3, 4 and dense 6, 7 (9M left) −33.5. More parameters is not better; convolutional depth matters more than a giant dense layer.</li>
 <li><b>Keras Sequential:</b> one input, one output, straight stack. <b>Functional API:</b> multiple inputs or outputs, branches, shared layers, skip connections (ResNet). Two inputs (video + question): separate extractors then concatenate. Two outputs (enhanced image + segmentation map): shared encoder, one head each. Shared layers: same weights on two inputs (re-identification).</li>
-<li><b>Output and loss:</b> regression linear + MSE. Binary sigmoid + binary cross-entropy. Multi-class softmax + categorical cross-entropy (one-hot labels). <code>model.summary()</code>: check output shapes and Param #; Conv2D 3×3, 32 filters on 3 channels = (27+1)·32 = 896.</li>
-<li><b>Vanishing gradient:</b> backprop multiplies many activation derivatives. Sigmoid derivative is at most 0.25 (tanh also saturates), so the product shrinks and early layers barely learn. ReLU derivative is exactly 1 for active units. Fix: ReLU, good initialisation, batch norm, skip connections.</li>
-<li><b>Initialisation:</b> never all zeros (identical units). Too small: signal dies, dead neurons. Too large: saturation. <b>Xavier/Glorot</b> for sigmoid and tanh (variance about 1/n, Keras default). <b>He</b> for ReLU (normal, mean 0, variance 2/n, n = fan-in; <code>he_normal</code>).</li>
+<li><b>Vanishing gradient:</b> backprop multiplies many activation derivatives. Sigmoid derivative is at most 0.25 (tanh also saturates), so the product shrinks and early layers barely learn. ReLU derivative is exactly 1 for active units.</li>
+<li><b>Initialisation:</b> never all zeros or all identical (every neuron computes the same output and gets the same gradient, so they never differ). Too small: signal dies, dead neurons. Too large: saturation. <b>Xavier/Glorot</b> for sigmoid and tanh (variance about 1/n, Keras default). <b>He</b> for ReLU (normal, mean 0, variance 2/n, n = fan-in; <code>he_normal</code>).</li>
 <li><b>L2 (weight decay):</b> loss + λΣw². Update <span class="f">w ← (1 − αη)·w − η·∂J/∂w</span>. Keras <code>l2(0.001)</code>; larger value = stronger penalty and a simpler model.</li>
 <li><b>Dropout:</b> zero a fraction p (0.2 to 0.5) of outputs during training only, a different set each step; like averaging many thin networks. Off at test time.</li>
 <li><b>Batch normalisation:</b> per mini-batch <span class="f">v̂ = (v − μB) / √(σB² + ε)</span>, then <span class="f">u = γ·v̂ + β</span> (γ and β learned). Stabilises later layers, speeds training, slightly regularises. Order: Conv → BN → ReLU. Params: 4 per channel (γ and β trainable; running mean and variance not), so 32 channels = 128 params, 64 trainable.</li>
-<li><b>Data augmentation</b> (flips, rotations, shifts, crops, brightness): new variants each epoch, good for small or imbalanced sets. <b>Early stopping:</b> stop when validation loss stops improving and keep the best checkpoint.</li>
+<li><b>Data augmentation</b> (flips, rotations, shifts, crops, brightness): new variants each epoch, good for small or imbalanced sets.</li>
 <li><b>Optimiser:</b> SGD, or Adam and RMSprop (adapt the step per weight using running averages of gradient and squared gradient); Adam with learning rate 0.001 is a common start. Lower the rate with a schedule. Large batch: faster, needs GPU memory, may generalise worse. Small batch: noisier, mild regularising effect.</li>
-<li><b>Degradation is not overfitting:</b> a much deeper plain network can have <i>higher training error</i> than a shallow one. Overfitting = low training error, high test error. Example: 40-layer sigmoid CNN 55% train and 54% validation vs a 10-layer one at 75% train: vanishing gradients and degradation. Fix: ReLU, He init, batch norm, residual connections, Adam or a tuned rate.</li>
+<li><b>Degradation is not overfitting:</b> a much deeper plain network can have <i>higher training error</i> than a shallow one. Overfitting = low training error, high test error. Example: 40-layer sigmoid CNN 55% train and 54% validation vs a 10-layer one at 75% train: vanishing gradients and degradation.</li>
 <li><b>ResNet:</b> a block learns the residual F(x) and outputs <span class="f">H(x) = F(x) + x</span> (skip connection). If identity is best, F(x) goes to 0, which is easy, so extra blocks cannot make it worse. The skip also gives gradients a short path back. A "down" block uses stride 2 on its first conv and a 1×1 conv on the shortcut to match shapes.</li>
 </ul>
 <table data-w="1700,1300,2440">
@@ -302,7 +294,6 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <li><b>Parameters:</b> SimpleRNN <span class="f">H(D+H) + H</span> (D inputs per step, H hidden). D = 64, H = 32: 32·96 + 32 = 3,104. Dense(1) on 32 = 33. <b>LSTM is 4×</b> that: <span class="f">4[H(D+H) + H]</span>. D = 64, H = 32 gives 12,416. D = 2, H = 10 gives 4·(10·12 + 10) = 520.</li>
 <li><b>Stacked LSTM:</b> <code>return_sequences=True</code> on every LSTM except the last. (3 steps, 5 features) → LSTM 7: 4·(7·12+7) = 364, output (3,7) → LSTM 9: 4·(9·16+9) = 612, output (9) → Dense 1: 10.</li>
 <li><b>Why LSTM:</b> a plain RNN over 500 steps is a very deep net, so gradients vanish and distant context is forgotten. The LSTM has a cell state (conveyor belt) with gates: <b>forget</b> (how much old memory to keep), <b>input</b> (how much new to write), <b>output</b> (how much to expose). GRU is a lighter variant.</li>
-<li><b>Output layer decides the task:</b> regression Dense(1) linear + MSE. Binary Dense(1) sigmoid + binary cross-entropy. Multi-class Dense(k) softmax + categorical cross-entropy.</li>
 <li><b>Q1d clickstream answer:</b> LSTM or GRU, because the order of pages, time on each and the path matter. Each session is one sequence; each step has page category (one-hot or embedding), time spent, how the user arrived, next page; label = purchase or not (many-to-one). Pre-process: sort by time, pad or cut to a fixed length (masking) or window, scale numbers, handle imbalance (class weights, oversampling), split by session (and time). <b>Combine with earlier models:</b> feed the LSTM's purchase probability or final hidden state as an extra feature into the tabular model, or stack or average the predictions (hybrid). It adds browsing behaviour that aggregated page counts miss.</li>
 <li><b>Transformer:</b> self-attention replaces recurrence: every token looks at every other directly, long-range links are easy, training is parallel. Each token makes a query (what I look for), key (what I offer) and value (the information). <span class="f">Attention = softmax(QKᵀ/√dk)·V</span>. Multi-head attention captures different relationships. Positional encoding adds order. Encoder block: self-attention, Add &amp; Norm, feed-forward, Add &amp; Norm. Decoder: masked self-attention (cannot see the future), cross-attention to the encoder, feed-forward. Encoder-only (BERT) = understanding, decoder-only (GPT) = generation, encoder-decoder = translation. Why attention over RNN: direct links between any positions, parallel training, long context.</li>
 </ul>
@@ -332,7 +323,7 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <li><b>Kernel trick:</b> a kernel gives dot products as if the data were in a higher dimension, without building the new coordinates. A ring becomes separable by a flat boundary. Linear, polynomial, RBF.</li>
 <li><b>Gamma (RBF):</b> large = tight blobs around points, 100% train but poor test (overfit). Small = smooth. Overfit RBF-SVM: lower C and gamma.</li>
 <li><b>Multi-class:</b> one-vs-rest = c SVMs, take the highest score. One-vs-one = c(c−1)/2 SVMs (5 classes = 10), majority vote.</li>
-<li>Scale inputs (distance-based). No direct probabilities. Hard to interpret. Slow on very large data. Imbalance: use class weights.</li>
+<li>No direct probabilities. Hard to interpret. Slow on very large data. Imbalance: use class weights.</li>
 </ul>
 </section>
 
@@ -365,14 +356,14 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <ul>
 <li>Supervised. Finds directions that push class means apart relative to the spread inside each class. Axes ≤ <span class="f">min(p, c−1)</span> (30 features, 5 classes: 4. 4 features, 7 classes: 4).</li>
 <li><b>PCA vs LDA:</b> no labels, explore, compress = PCA. Labelled, prepare for classification = LDA. If classes overlap along the biggest-spread direction and differ along a small-spread one, PC1 puts them on top of each other (classifier near chance) while LDA finds the separating direction.</li>
-<li>LDA assumes roughly Gaussian classes, fails if the classes differ in variance not mean, unstable with small samples. Fit on training data only.</li>
+<li>LDA assumes roughly Gaussian classes, fails if the classes differ in variance not mean, unstable with small samples.</li>
 </ul>
 </section>
 
 <section>
 <h2>L. Clustering and mixture models</h2>
 <ul>
-<li>Unsupervised. Minimise intra-cluster distance, maximise inter-cluster distance. Scale first.</li>
+<li>Unsupervised. Minimise intra-cluster distance, maximise inter-cluster distance.</li>
 <li><b>Distances:</b> Euclidean √Σ(diff)². To compare, compare the <b>squared</b> distances and skip the root. Manhattan Σ|diff|. Nominal: Hamming (match 0, mismatch 1, add up). Ordinal: map to ranks, then |difference|.</li>
 </ul>
 <h3>K-means</h3>
@@ -491,11 +482,10 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 </table>
 <ul>
 <li><b>Challenges:</b> representation (different noise, structure, format); alignment (spatial: common coordinates; temporal: common time axis, use DTW; feature space: CLIP-style); reasoning, generation, transference; practical: synchronisation, missing or noisy data, scale, compute.</li>
-<li><b>Sense-making pipeline A:</b> sensor data → representation (manual, adaptive, learned) → ML model → reasoning → decision (planning) and action (effector). <b>Pipeline B:</b> raw data → recognised entities → semantic relationships → contextual relationships → knowledge.</li>
+<li><b>Sense-making pipeline A:</b> sensor data → representation (manual, adaptive, learned) → ML model → reasoning → decision (planning) and action (effector). <b>Pipeline B:</b> raw data → recognised entities → semantic relationships → contextual relationships → knowledge. For a design question, name the metric and the action taken.</li>
 <li><b>Feature categories:</b> geometrical (edges, shapes, area), structural (surface area, orientation), statistical (mean, variance, skewness, kurtosis, entropy), spectral (colour coefficients, spectral peaks), time domain (rise and fall time, amplitude, width), frequency domain (Fourier and wavelet coefficients).</li>
 <li><b>Context example:</b> the same face at 2 pm or 2 am can mean normal operation or an intrusion. ADAS: cameras and motion sensors, recognise lane drift, warn the driver (sense, recognise, act).</li>
 <li><b>Factory mic + vibration sensor, mic sometimes fails:</b> late fusion (still works without the mic, uses existing pipelines). Problems: synchronisation and alignment (192 kHz audio vs 50 Hz vibration, resample or DTW), different noise levels or missing data.</li>
-<li><b>Design a sensing system:</b> sensor → pre-process (denoise, baseline) → features (Fourier, wavelet or learned) → model → reasoning and action. Name the metric and the action taken.</li>
 </ul>
 </section>
 
@@ -509,9 +499,9 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <tr><th>Overfit guard</th><td>Prune, limit depth</td><td>Early stop, dropout, fewer nodes</td><td>Lower C, gamma</td></tr>
 <tr><th>Settings</th><td>max_depth, min_samples</td><td>layers, nodes, lr</td><td>C, kernel, gamma</td></tr>
 </table>
-<p>If explanations are required, pick the tree and state its cost (may be less accurate on ring-like or complex patterns; a deep tree overfits). Why a neural net: flexible, learns features; cost is data, tuning, scaling and being a black box.</p>
+<p>Your reasons must match your recommendation. If explanations are required (patients, regulators, marketing), pick the tree and state its cost (may be less accurate on ring-like or complex patterns; a deep tree overfits). Why a neural net: flexible, learns features; cost is data, tuning, scaling and being a black box.</p>
 <ul>
-<li><b>Match the problem:</b> images = CNN. Sequences = LSTM. Tabular and explainable = tree. Small labelled data, high-dimensional = SVM. Unlabelled groups = clustering (K-means, DBSCAN, GMM). Rare failures = anomaly detection (autoencoder). Few labels, much unlabelled data = self-supervised pretraining then fine-tune. Reward feedback = RL. Many sensors = fusion. Noisy labels = bagging. Hard cases = boosting. Two inputs or outputs = Keras Functional API.</li>
+<li><b>Match the problem:</b> images = CNN. Sequences = LSTM. Tabular and explainable = tree. Small labelled data, high-dimensional = SVM. Unlabelled groups = clustering (K-means, DBSCAN, GMM). Rare failures = anomaly detection (autoencoder). Few labels, much unlabelled data = self-supervised pretraining then fine-tune. Reward feedback = RL. Many sensors = fusion.</li>
 </ul>
 </section>
 
