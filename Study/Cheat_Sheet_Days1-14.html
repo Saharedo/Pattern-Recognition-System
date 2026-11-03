@@ -67,7 +67,7 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
   <h1>ISY5002 Open-Book Cheat Sheet</h1>
   <span class="sub">Days 1 to 14, sorted by topic · no calculators: leave logs and fractions, compare, show the formula</span>
 </header>
-<div class="index"><b>Find it fast:</b> A Answer routine · B Data and overfitting · C Metrics · D Regression, KNN, Naive Bayes · E Decision trees · F Neural nets, RBF, GRNN, SOM · G CNN and Q2a · H Deep-net training, Keras · I RNN, LSTM, transformers · J SVM · K Feature selection, PCA, LDA · L Clustering, GMM and EM · M Ensembles · N RL · O Signals, DTW, wavelets · P Autoencoders, anomalies, Q2c · Q Sensor fusion · R Choosing a model · S My traps</div>
+<div class="index"><b>Find it fast:</b> A Answer routine · B Data and overfitting · C Metrics · D Regression, KNN, Naive Bayes · E Decision trees · F Neural nets, RBF, GRNN, SOM · G CNN and Q2a · H Deep-net training, Keras · I RNN, LSTM, transformers · J SVM · K Feature selection, PCA, LDA · L Clustering, GMM and EM · M Ensembles · N RL · O Signals, DTW, wavelets · P Autoencoders, anomalies, Q2c · Q Sensor fusion · R Choosing a model · S My traps · T Short forms and symbols</div>
 
 <div class="cols">
 
@@ -532,6 +532,53 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <li>Autoencoder anomaly detector: train on normal only; threshold = mean + 3σ of normal errors; judge by recall, precision, F1, not accuracy.</li>
 <li>Dropout and batch-norm statistics: dropout off at test; BN has 4 params per channel (2 trainable).</li>
 </ul>
+</section>
+
+
+<section>
+<h2>T. Short forms and symbols</h2>
+<table data-w="840,1880,840,1880">
+<tr><th>Short form</th><th>Meaning</th><th>Short form</th><th>Meaning</th></tr>
+<tr><td><b>fs</b></td><td>sampling frequency: samples per second (Hz)</td><td><b>Q(s,a)</b></td><td>expected reward of action a in state s</td></tr>
+<tr><td><b>fmax</b></td><td>highest frequency in the signal</td><td><b>ADAS</b></td><td>advanced driver-assistance system</td></tr>
+<tr><td><b>Hz</b></td><td>hertz, cycles (or samples) per second</td><td><b>CLIP</b></td><td>image-text model trained with cosine similarity</td></tr>
+<tr><td><b>N</b></td><td>number of samples (DFT) or items</td><td><b>ReLU</b></td><td>rectified linear unit, max(0, x)</td></tr>
+<tr><td><b>F(u)</b></td><td>Fourier coefficient at frequency u</td><td><b>tanh</b></td><td>hyperbolic tangent activation</td></tr>
+<tr><td><b>Δ</b></td><td>difference between neighbours (Δx, Δ²z)</td><td><b>MSE</b></td><td>mean squared error</td></tr>
+<tr><td><b>DFT</b></td><td>discrete Fourier transform</td><td><b>SGD</b></td><td>stochastic gradient descent</td></tr>
+<tr><td><b>DTW</b></td><td>dynamic time warping</td><td><b>Adam, RMSprop</b></td><td>adaptive-step optimisers</td></tr>
+<tr><td><b>ALS</b></td><td>asymmetric least squares (baseline)</td><td><b>BN</b></td><td>batch normalisation</td></tr>
+<tr><td><b>ECG / EEG</b></td><td>electrocardiogram / electroencephalogram</td><td><b>GAP</b></td><td>global average pooling</td></tr>
+<tr><td><b>LiDAR</b></td><td>light detection and ranging (distance sensor)</td><td><b>L1, L2</b></td><td>absolute / squared weight penalty (Lasso, Ridge)</td></tr>
+<tr><td><b>IMU</b></td><td>inertial measurement unit (accelerometer + gyroscope)</td><td><b>η</b></td><td>learning rate (backprop, perceptron)</td></tr>
+<tr><td><b>TP, FN</b></td><td>true positive, false negative (Type II)</td><td><b>α</b></td><td>learning rate in SOM, and in the L2 update</td></tr>
+<tr><td><b>FP, TN</b></td><td>false positive (Type I), true negative</td><td><b>λ</b></td><td>penalty strength (L2) or smoothness (ALS)</td></tr>
+<tr><td><b>F1</b></td><td>harmonic mean of precision and recall</td><td><b>δ</b></td><td>error term in backpropagation</td></tr>
+<tr><td><b>ROC</b></td><td>receiver operating characteristic curve</td><td><b>Δw</b></td><td>weight change</td></tr>
+<tr><td><b>AUC</b></td><td>area under the ROC curve</td><td><b>T, O</b></td><td>target, output</td></tr>
+<tr><td><b>R²</b></td><td>share of variation explained (SSreg / SStotal)</td><td><b>w, b</b></td><td>weight, bias</td></tr>
+<tr><td><b>SSreg, SStotal</b></td><td>explained sum of squares, total sum of squares</td><td><b>x̂</b></td><td>reconstruction (autoencoder, basis)</td></tr>
+<tr><td><b>CV</b></td><td>cross-validation</td><td><b>‖w‖</b></td><td>length of w; wᵀw = ‖w‖²</td></tr>
+<tr><td><b>SMOTE</b></td><td>synthetic minority oversampling technique</td><td><b>σ, σ²</b></td><td>standard deviation, variance; smoothing constant</td></tr>
+<tr><td><b>OOB</b></td><td>out-of-bag (rows a tree did not see)</td><td><b>μ</b></td><td>mean</td></tr>
+<tr><td><b>KNN</b></td><td>k-nearest neighbours</td><td><b>H, D</b></td><td>hidden size, inputs per step (RNN, LSTM)</td></tr>
+<tr><td><b>SVM</b></td><td>support vector machine</td><td><b>F(x), H(x)</b></td><td>residual function, block output F(x) + x</td></tr>
+<tr><td><b>NN, MLP</b></td><td>neural network, multilayer perceptron</td><td><b>W, F, P, S</b></td><td>input size, filter size, padding, stride (conv)</td></tr>
+<tr><td><b>CNN</b></td><td>convolutional neural network</td><td><b>Cin, Cout</b></td><td>input channels, number of filters</td></tr>
+<tr><td><b>RNN</b></td><td>recurrent neural network</td><td><b>Q, K, V, dk</b></td><td>query, key, value, key size (attention)</td></tr>
+<tr><td><b>LSTM, GRU</b></td><td>long short-term memory, gated recurrent unit</td><td><b>E</b></td><td>entropy</td></tr>
+<tr><td><b>RBF</b></td><td>radial basis function (network)</td><td><b>p</b></td><td>share of a class (trees) or number of features</td></tr>
+<tr><td><b>GRNN</b></td><td>general regression neural network</td><td><b>c, k, n, m</b></td><td>classes; neighbours, clusters or folds; rows; features kept</td></tr>
+<tr><td><b>SOM</b></td><td>self-organising map (Kohonen)</td><td><b>PCA, PC</b></td><td>principal component analysis, principal component</td></tr>
+<tr><td><b>GAN, VAE</b></td><td>generative adversarial network, variational autoencoder</td><td><b>LDA</b></td><td>linear discriminant analysis</td></tr>
+<tr><td><b>BERT, GPT</b></td><td>encoder-only, decoder-only transformers</td><td><b>KMO</b></td><td>Kaiser-Meyer-Olkin test of suitability</td></tr>
+<tr><td><b>ResNet</b></td><td>residual network (skip connections)</td><td><b>RFE</b></td><td>recursive feature elimination</td></tr>
+<tr><td><b>AdaBoost, XGBoost</b></td><td>boosting methods</td><td><b>SSE, WCSS</b></td><td>sum of squared errors, within-cluster sum of squares</td></tr>
+<tr><td><b>GMM</b></td><td>Gaussian mixture model</td><td><b>DBSCAN</b></td><td>density-based clustering with noise</td></tr>
+<tr><td><b>EM</b></td><td>expectation-maximisation</td><td><b>ε, MinPts</b></td><td>DBSCAN radius, minimum points</td></tr>
+<tr><td><b>DRL</b></td><td>deep reinforcement learning</td><td><b>DBI</b></td><td>Davies-Bouldin index (lower is better)</td></tr>
+<tr><td><b>DDPG</b></td><td>deep deterministic policy gradient (actor-critic)</td><td><b>CH</b></td><td>Calinski-Harabasz index (higher is better)</td></tr>
+</table>
 </section>
 
 </div>
