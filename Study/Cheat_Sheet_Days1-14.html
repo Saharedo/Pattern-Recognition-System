@@ -67,7 +67,7 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
   <h1>ISY5002 Open-Book Cheat Sheet</h1>
   <span class="sub">Days 1 to 14, sorted by topic · no calculators: leave logs and fractions, compare, show the formula</span>
 </header>
-<div class="index"><b>Find it fast:</b> A Answer routine · B Data and overfitting · C Metrics · D Regression, KNN, Naive Bayes · E Decision trees · F Neural nets, RBF, GRNN, SOM · G CNN and Q2a · H Deep-net training, Keras · I RNN, LSTM, transformers · J SVM · K Feature selection, PCA, LDA · L Clustering, GMM and EM · M Ensembles · N RL · O Signals, DTW, wavelets · P Autoencoders, anomalies, Q2c · Q Sensor fusion · R Choosing a model · S My traps · T Short forms and symbols</div>
+<div class="index"><b>Find it fast:</b> A Answer routine · A2 How to answer each question type · B Data and overfitting · C Metrics · D Regression, KNN, Naive Bayes · E Decision trees · F Neural nets, RBF, GRNN, SOM · G CNN and Q2a · H Deep-net training, Keras · I RNN, LSTM, transformers · J SVM · K Feature selection, PCA, LDA · L Clustering, GMM and EM · M Ensembles · N RL · O Signals, DTW, wavelets · P Autoencoders, anomalies, Q2c · Q Sensor fusion · R Choosing a model · S My traps · T Short forms and symbols</div>
 
 <div class="cols">
 
@@ -80,6 +80,30 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <li><b>No calculator:</b> write the formula, substitute, then estimate. Compare sizes instead of computing. Keep fractions.</li>
 <li><b>Fraction to decimal:</b> 1/8 = .125 · 1/5 = .2 · 1/4 = .25 · 1/3 = .33 · 3/8 = .375 · 2/5 = .4 · 1/2 = .5 · 5/8 = .625 · 2/3 = .67 · 3/4 = .75 · 4/5 = .8 · 1/20 = .05 · 17/20 = .85</li>
 </ul>
+</section>
+
+<section>
+<h2>A2. How to answer each question type</h2>
+<table data-w="1500,3940">
+<tr><th>If the question says</th><th>Do this, in order</th></tr>
+<tr><td><b>Which learning type or model, and why?</b></td><td>Name the type or model. Tie it to the data (labels? how many rows? sequence? image?). Give one reason and one limit.</td></tr>
+<tr><td><b>Do you agree? Critique this model or network</b></td><td>Say <b>Yes or No</b> first. Point at numbers (parameter count, class counts, accuracy). Name the problem (imbalance, overfitting, parameter explosion, wrong or leaking features). Give a fix with a reason for each. Say which metric shows it improved.</td></tr>
+<tr><td><b>Compare two models from confusion matrices</b></td><td>Write TP, FN, FP, TN for each. Compute recall, precision, specificity, accuracy (fractions). Note that accuracy is similar, then compare the <i>types</i> of mistake. Link to business cost. Name a winner. State which class is positive. Mention explainability and data needs.</td></tr>
+<tr><td><b>How do you know the new model is more valuable?</b></td><td>Use a business metric: recall or precision at the chosen cut-off, then cost-benefit (profit from extra sales minus coupon cost). Compare with the old model on the same untouched test set. In production, run an A/B test.</td></tr>
+<tr><td><b>Calculate by hand (no calculator)</b></td><td>Formula, substitution, result. Keep fractions and logs. Use landmark values and compare instead of computing. Sanity-check: proportions are at most 1, child weights add to 1, probabilities add to 1. Say the answer in words.</td></tr>
+<tr><td><b>How many components or clusters?</b></td><td>Name the rule (Kaiser, cumulative %, scree, elbow). Quote the numbers. Mention that another rule may differ. Then commit to one answer.</td></tr>
+<tr><td><b>What does each factor or cluster mean?</b></td><td>List the variables with the largest |loading| (or extreme means) and their signs. Name it in business terms. Add an action. Add a caveat (mixed meanings, harder to explain, target leakage).</td></tr>
+<tr><td><b>Training curves or a results table</b></td><td>Compare train and validation. Both low = underfitting, vanishing gradients or degradation. Train high and validation low = overfitting. Give remedies with reasons (ReLU, He init, batch norm, skips; dropout, L2, augmentation, early stopping).</td></tr>
+<tr><td><b>Design a deep-learning system</b></td><td>Input and pre-processing, then layers with shapes, then output activation and loss, then training (augmentation, regularisation, class weights), then the metric, then deployment. If asked, add a parameter table and recompute it for your change.</td></tr>
+<tr><td><b>Sequence data (clicks, sensors, demand)</b></td><td>LSTM or GRU. Cut into windows (length, distance) with a target. Split by time order. Output layer from the task (linear + MSE, sigmoid + BCE, softmax + CE). Combine with tabular models by feeding the probability as a feature or stacking.</td></tr>
+<tr><td><b>Very few abnormal examples</b></td><td>Do not train a two-class classifier. Train anomaly detection on normal data (autoencoder, mean + 3σ threshold). Use the abnormal cases only to test. Judge by recall, precision, F1. Refer to the figure's numbers and say what each feature loses.</td></tr>
+<tr><td><b>Reward function or reinforcement learning</b></td><td>Three factors, each tied to a stated criterion, each with a sign. Draw the loop with arrows labelled state, action, reward and include every required component. Give at least two safe-training measures with reasons (simulation, safety layer, proximity penalty, demonstrations, curriculum).</td></tr>
+<tr><td><b>Signals and sensors</b></td><td>Sampling rate (at least 2 × fmax, mention aliasing). Features: statistics, Fourier, wavelet subbands (5 × 4 = 20). Use DTW for shifted signals, prominence for peaks, baseline correction first. Check Haar energy.</td></tr>
+<tr><td><b>Sensor fusion</b></td><td>Choose early, restricted or late and give a reason. Name alignment problems (time and space) and a fix. Say what happens when one sensor fails (late fusion tolerates it).</td></tr>
+<tr><td><b>Compare ensembles or variable importance</b></td><td>State the difference with numbers from both outputs. Give 2 or 3 reasons (greedy tree masks correlated variables, boosting reweights and sums over trees, bias to many-level variables). Give one use: feature selection, retrain, cross-validate.</td></tr>
+<tr><td><b>Recommend a model</b></td><td>State the choice. Give two reasons tied to the data. Name one cost. Say which alternative you rejected and why. Reasons must match the recommendation.</td></tr>
+<tr><td><b>Every answer</b></td><td>Match the (i), (ii), (iii) of the question. Spend about one minute per mark. Show working. State assumptions. Use the scenario's own numbers. Leave logs and fractions as expressions.</td></tr>
+</table>
 </section>
 
 <section>
@@ -112,6 +136,7 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <li>A model that predicts all "negative" has high accuracy and <b>recall 0</b>.</li>
 <li><b>ROC/AUC:</b> plots the true positive rate against the false positive rate across cut-offs. AUC 1 = perfect, 0.5 = guessing, independent of the cut-off.</li>
 <li>Check which class the table treats as positive. State your choice.</li>
+<li><b>Sample Q1b numbers:</b> SVM TP/FN/FP/TN = 3078/72/312/237: recall 97.7%, precision 90.8%, specificity 43.2%, accuracy 89.6%. NN = 3029/121/261/288: recall 96.2%, precision 92.1%, specificity 52.5%, accuracy 89.7%. Accuracy is almost identical; the SVM misses fewer buyers (72 vs 121) but raises more false alarms (312 vs 261). The "True" row totals 3,150 of 3,699 (85%) yet only 15.5% of sessions bought, so the labels may be swapped: say which class you treat as positive.</li>
 </ul>
 </section>
 
@@ -119,7 +144,7 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <h2>D. Regression, KNN, Naive Bayes</h2>
 <ul>
 <li><b>Linear regression:</b> least squares. <span class="f">R² = SSreg/SStotal</span> = share of the variation in y explained (0 to 1). A coefficient is the change in y for +1 in that x, others held fixed.</li>
-<li><b>Logistic regression</b> (classification): <span class="f">ln(P/(1−P)) = a + b1x1 + …</span> (log-odds). Positive coefficient raises the chance of the positive class. Output is a probability, cut-off 0.5 is movable.</li>
+<li><b>Logistic regression</b> (classification): <span class="f">ln(P/(1−P)) = a + b1x1 + …</span> (log-odds). Positive coefficient raises the chance of the positive class. Output is a probability, cut-off 0.5 is movable. <span class="f">e^b</span> = the factor by which the odds multiply for +1 in that feature (b = 0.7 roughly doubles the odds).</li>
 <li><b>KNN:</b> lazy learner, majority vote of the k nearest points. Small k follows noise, large k blurs the boundary. Use odd k. Slow at prediction time.</li>
 <li><b>Naive Bayes:</b> score(C) = P(C) × P(x1|C) × P(x2|C) × … . P(value|C) = rows in class C with that value ÷ rows in class C. Pick the largest. Probability = own score ÷ sum of scores.</li>
 <li><b>Count is 0?</b> One zero wipes out the product. Laplace: add 1 to each count and add the number of possible values to the denominator.</li>
@@ -127,7 +152,7 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <li><b>Independence assumption</b> = features independent <i>given the class</i>. Often unrealistic (a worn bearing raises both heat and noise). Probabilities become overconfident but the ranking is often still right.</li>
 <li><b>Numeric features:</b> model each class with a Gaussian, <span class="f">p(x|class) = 1/√(2πσ²) · exp(−(x−μ)²/(2σ²))</span>, with μ and σ² estimated per class from training data.</li>
 <li><b>Worked (play tennis), x = Sunny, Cool, High, Strong:</b> Yes = 2/9·3/9·3/9·3/9·9/14 ≈ .0053. No = 3/5·1/5·4/5·3/5·5/14 ≈ .0206. No is about 4× bigger, so P(No|x) = .0206/(.0053+.0206) ≈ .80. Estimate fast: .0082×.64 and .0576×.36.</li>
-<li><b>Sensor table (Q2d):</b> count the prior of each cause (records of that cause ÷ all records), count each likelihood inside the cause, multiply, compare, show every fraction. Pump example: Fault 3/8·2/3·1/3 = 1/12, Normal 5/8·1/5·4/5 = 1/10, so Normal (ratio 10:12, P(Normal) = 6/11). Zero count: Laplace, (0+1)/(3+2) = 0.2.</li>
+<li><b>Sensor table (Q2d):</b> count the prior of each cause (records of that cause ÷ all records), count each likelihood inside the cause, multiply, compare, show every fraction. Pump example: Fault 3/8·2/3·1/3 = 1/12, Normal 5/8·1/5·4/5 = 1/10, so Normal (ratio 10:12, P(Normal) = 6/11). Zero count: Laplace, (0+1)/(3+2) = 0.2. <b>Sample Q2d</b> (9 records: Carryback 5, Mistracking 4; evidence Fair + Low): Carryback = 5/9·1/5·3/5 = 1/15, Mistracking = 4/9·2/4·2/4 = 1/9. Mistracking is larger (ratio 5 : 3), so P(Mistracking) = 5/8.</li>
 </ul>
 </section>
 
@@ -165,7 +190,7 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <li><b>Logs left as expressions:</b> E(1/6) = log₂6 − (5/6)log₂5. Useful: log₂3 ≈ 1.58, log₂5 ≈ 2.32, log₂7 ≈ 2.81, log₂(3/4) = log₂3 − 2. Bounds: 3² = 9 &gt; 8 so log₂3 &gt; 1.5; 5² = 25 &lt; 32 so log₂5 &lt; 2.5.</li>
 <li><b>Continuous feature:</b> sort the values; candidate cuts are the midpoints of adjacent distinct values (20, 30, 45, 60 gives 25, 37.5, 52.5). Pick the cut with the highest gain. A cut that gives the same partition as another is redundant.</li>
 <li><b>Overfit tree</b> (100% train, much lower test): pre-prune (max_depth, min_samples_leaf) or grow fully then post-prune on validation data.</li>
-<li><b>Reading a tree:</b> follow the path, quote the leaf's share and purity, give the business meaning, name one flaw (imbalance, depth, overfitting) and the metric to judge the fix.</li>
+<li><b>Reading a tree:</b> follow the path, quote the leaf's share and purity, give the business meaning, name one flaw (imbalance, depth, overfitting) and the metric to judge the fix. <b>Sample Q1a:</b> purchasers have a high PageValue and a low BounceRate; data is 84.5% no-purchase, so fix imbalance (class weights, SMOTE) and judge by recall, precision, F1 and business value (value of a won sale against the cost of a coupon). A model is "more valuable" if it wins more extra sales than the coupons cost.</li>
 </ul>
 </section>
 
@@ -173,10 +198,10 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <h2>F. Neural networks</h2>
 <ul>
 <li><b>Neuron:</b> <span class="f">net = Σ w·x + b</span>, <span class="f">out = f(net)</span>. The activation is applied to the net input, not to the raw inputs.</li>
-<li><b>Activations:</b> hard-limit (0 if net ≤ 0, else 1) · sigmoid 0 to 1 (net 0 gives .5, negative net gives below .5) · tanh −1 to 1 (same sign as net) · ReLU max(0, net) (cheap, no vanishing gradient, sparse) · softmax (outputs sum to 1).</li>
+<li><b>Activations:</b> hard-limit (0 if net ≤ 0, else 1) · sigmoid 0 to 1 (net 0 gives .5, negative net gives below .5) · tanh −1 to 1 (same sign as net) · ReLU max(0, net) (cheap, no vanishing gradient, sparse) · softmax (outputs sum to 1). Formulas: sigmoid 1/(1+e^−net); softmax e^xi / Σ e^xj.</li>
 <li><b>Linear activations collapse:</b> h = 4x then y = 0.5h means y = 2x, one neuron. Non-linearity lets extra layers draw curved boundaries.</li>
-<li><b>Output and loss:</b> 2 classes = sigmoid + binary cross-entropy. Many classes, one label = softmax + categorical cross-entropy. Number = linear + MSE. Several labels at once = sigmoid + binary cross-entropy. Hidden layers: ReLU.</li>
-<li><b>Perceptron rule:</b> <span class="f">Δwi = η(T−O)xi</span>, with x0 = 1 for the bias. Correct output means no change. One perceptron draws one line, so XOR (opposite diagonals) fails. Two hidden nodes draw two lines and the output combines them.</li>
+<li><b>Output and loss:</b> 2 classes = sigmoid + binary cross-entropy. Many classes, one label = softmax + categorical cross-entropy. Number = linear + MSE. Several labels at once = sigmoid + binary cross-entropy. Hidden layers: ReLU. Binary cross-entropy = −[y·log p + (1−y)·log(1−p)]; categorical = −Σ y·log p.</li>
+<li><b>Perceptron rule:</b> <span class="f">Δwi = η(T−O)xi</span>, with x0 = 1 for the bias. Correct output means no change. One perceptron draws one line, so XOR (opposite diagonals) fails. Two hidden nodes draw two lines and the output combines them. The boundary is w0 + w1x1 + w2x2 = 0, i.e. x2 = −(w1/w2)·x1 − w0/w2.</li>
 <li><b>Backprop (sigmoid):</b> <span class="f">δout = O(1−O)(T−O)</span>, <span class="f">Δw = η·δ·Oin</span>, hidden <span class="f">δj = Oj(1−Oj)Σδk·wkj</span>. <b>Sign check:</b> target above output gives δ &gt; 0, weight up, output up.</li>
 <li><b>Loop:</b> small random init, forward pass, loss, backward pass, update, repeat. Batch, stochastic or mini-batch (usual).</li>
 <li><b>Learning rate:</b> too big overshoots, oscillates or diverges. Too small is slow or stuck. Bigger is not always faster. <b>Momentum:</b> adds a fraction of the previous update, smooths the path and carries over shallow dips.</li>
@@ -215,9 +240,10 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <li><span class="f">Output = floor((W − F + 2P)/S) + 1</span>. "Same" padding: P = (F−1)/2 keeps size at stride 1. Pool 2×2 stride 2 gives floor(W/2) (11 gives 5).</li>
 <li><b>Conv params</b> <span class="f">(Fr·Fc·Cin + 1)·Cout</span> · <b>Dense</b> <span class="f">in·out + out</span> · Pool, Flatten, Dropout = 0.</li>
 <li>Examples: 128, 7×7, stride 2 gives 61. 64×64×3 with 5×5 and 10 filters gives 60×60×10 and (75+1)·10 = 760 params. Conv 7×7, 3 channels, 18 filters = 2,664.</li>
-<li><b>Convolution by hand:</b> multiply the kernel with each window element by element, add up, slide. Kernel [1 0; 0 1] just adds the main diagonal. Early layers find edges, deeper layers shapes and objects.</li>
+<li><b>Convolution by hand:</b> multiply the kernel with each window element by element, add up, slide. Kernel [1 0; 0 1] just adds the main diagonal. Early layers find edges, deeper layers shapes and objects. Example: input [1 2 0 1; 0 1 3 1; 2 1 0 2; 1 0 1 3] with kernel [1 0 1; 0 1 0; 1 0 1] gives [4 9; 6 5] (first cell: 1+0+1+2+0 = 4).</li>
 <li><b>Max pool:</b> halves height and width, keeps the strongest value, no parameters, tolerates small shifts. Filters are learned by training; you only choose size and number.</li>
 <li><b>Why CNN for images:</b> local connections plus shared weights (far fewer parameters) and tolerance to position.</li>
+<li><b>Transfer learning:</b> reuse a network pretrained on a large dataset: freeze the early layers (generic edges and shapes), replace the final classifier, train it first, then optionally fine-tune with a small learning rate. Best when you have little data.</li>
 <li><b>Flatten:</b> length = H × W × C of the last feature map, 0 parameters. 4×4×6 gives 96. 4×4×64 gives 1,024. 14×14×48 gives 9,408. <b>First Dense after Flatten</b> = (H·W·C)·units + units (96·36 + 36 = 3,492).</li>
 <li><b>Keras pattern:</b> <code>Conv2D(32,(3,3),padding='same',activation='relu')</code>, <code>MaxPooling2D((2,2))</code>, repeat, <code>Flatten()</code>, <code>Dense(256,'relu')</code>, <code>Dense(10,'softmax')</code>, <code>compile(loss='categorical_crossentropy', optimizer=…, metrics=['accuracy'])</code>. Input shape (samples, rows, columns, channels), scaled to 0 to 1. A batch of 32 has shape (32,16,16,1): forward pass, loss, backprop (automatic differentiation), optimiser updates the weights. <code>model.summary()</code> shows output shapes and Param #.</li>
 <li><b>Small net, 16×16×1:</b> Conv 3×3, 3 filters, same (30 params) → pool 8×8×3 → Conv 3×3, 6 filters (28·6 = 168) → pool 4×4×6 → Flatten 96 → Dense 36 (3,492) → Dense 5 (185). Total 3,875.</li>
@@ -320,7 +346,7 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <li><b>Minimise ½wᵀw</b> (= ½‖w‖²) to make the margin as wide as possible, subject to <span class="f">yᵢ(w·xᵢ+b) ≥ 1</span>. Without the constraint, w = 0 wins: every point scores the same and nothing is classified.</li>
 <li><b>Support vectors</b> alone define the boundary. Delete any other point and nothing changes. Hard margin: only the points exactly on the edges (at least 2, one per class). Adding far-away points changes nothing; points near or inside the margin can.</li>
 <li><b>C small:</b> wide margin, tolerant, <b>more</b> support vectors, smoother, risk of underfitting. <b>C large:</b> narrow margin, <b>fewer</b> support vectors, bends to fit noise or an outlier, risk of overfitting.</li>
-<li><b>Kernel trick:</b> a kernel gives dot products as if the data were in a higher dimension, without building the new coordinates. A ring becomes separable by a flat boundary. Linear, polynomial, RBF.</li>
+<li><b>Kernel trick:</b> a kernel gives dot products as if the data were in a higher dimension, without building the new coordinates. A ring becomes separable by a flat boundary. Linear, polynomial, RBF. Linear K = x·x′; polynomial K = (x·x′ + 1)^d; RBF <span class="f">K = exp(−γ‖x−x′‖²)</span>.</li>
 <li><b>Gamma (RBF):</b> large = tight blobs around points, 100% train but poor test (overfit). Small = smooth. Overfit RBF-SVM: lower C and gamma.</li>
 <li><b>Multi-class:</b> one-vs-rest = c SVMs, take the highest score. One-vs-one = c(c−1)/2 SVMs (5 classes = 10), majority vote.</li>
 <li>No direct probabilities. Hard to interpret. Slow on very large data. Imbalance: use class weights.</li>
@@ -351,6 +377,8 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <li><b>Reading loadings:</b> large |loading| (near ±1) defines the component. Same sign = move together, opposite sign = opposite. Near 0 = no role. Name it in business terms (Salary +, Bonus +, Rent − = "financial comfort").</li>
 <li><b>Limits:</b> linear, outlier-sensitive, continuous variables, enough rows (150+, about 5 per variable), components harder to explain. PCA ignores the target, so a top-variance component is not guaranteed to predict well, and a small one can be the useful one.</li>
 <li><b>Using PCs in a model:</b> uncorrelated and fewer inputs. Leave the target out of the PCA (leakage). Fit on training data only.</li>
+<li><b>Scores and information loss:</b> component scores are the new feature values for each row (mean 0, std 1; +2 = two std above average). A score plot (PC1 vs PC2) shows clusters and outliers; a loading plot shows which variables push each component. Reconstructing from fewer components loses information (notes: 1 PC keeps 77%, 2 keep 95.4%, 3 keep 99.97%).</li>
+<li><b>Sample Q1e (18 features):</b> Kaiser threshold = 100/18 = 5.56%, so 9 components pass (PC10 = 5.4% fails). Cumulative variance reaches 80% at 8 components (80.6%) and 92.2% at 10. The scree plot has no sharp elbow (only PC1 and PC2 stand out). Answer: about 8 or 9 components; the "handful of factors" idea is only weakly supported. Factors: PC1 browsing intensity (ProductRelated and its duration, Informational), PC2 disengagement (BounceRates, ExitRates high; PageValues, Revenue low), PC3 visitor technology and source (OperatingSystems, Browser, TrafficType), PC4 purchase value (PageValues, Revenue). Revenue is in the PCA, so using those components to predict Revenue leaks the answer.</li>
 </ul>
 <h3>LDA</h3>
 <ul>
@@ -388,7 +416,7 @@ svg text{font-family:var(--sans);font-size:7.5px;fill:currentColor}
 <li><b>Silhouette</b> <span class="f">s = (b − a)/max(a, b)</span>. a = average distance from the point to the others in its own cluster. b = average <i>distance</i> from the point to the points of the nearest other cluster. Example: point 4 in {2, 4}, other cluster {10, 12, 14}: a = 2, b = (6+8+10)/3 = 8, s = 6/8 = 0.75. Above 0.3 acceptable, near 0 on a border, negative probably misplaced.</li>
 <li><b>Davies-Bouldin:</b> lower is better. <b>Calinski-Harabasz:</b> higher is better. <b>Elbow (WCSS):</b> choose the k where the improvement flattens (500, 200, 120, 110, 105 gives k = 3). WCSS always falls and hits 0 at k = n, so never pick the minimum.</li>
 <li><b>Stability:</b> split-half, same clusters and profiles. Tiny clusters may be outliers.</li>
-<li><b>Business lens:</b> profile each cluster on its variables (means, box plots), give an intuitive name and an action. A good silhouette alone is not enough.</li>
+<li><b>Business lens:</b> profile each cluster on its variables (means, box plots), give an intuitive name and an action. A good silhouette alone is not enough. Example (24 countries): C1 literacy 96%, mortality 11 = "Advanced", no funding; C4 literacy 44%, mortality 108 = "Poor", large funding.</li>
 <li><b>Fraud with no labels:</b> DBSCAN, scale numeric features, encode categories. Judge by analysts reviewing a sample of the flagged cases (precision), stability and the k-distance plot; later recall when labels exist.</li>
 <li><b>Gaussian mixture and EM:</b> use when data forms several blobs and the group of each point is hidden. GMM = several Gaussians with weights. <b>EM:</b> (1) initialise parameters, (2) E-step: for each point, soft membership <span class="f">P(component|x) ∝ P(x|component)·P(component)</span>, (3) M-step: re-estimate each component's parameters and weight using those soft labels, repeat until stable. K-means is the hard-label cousin; GMM gives soft memberships and elliptical clusters. Points with very low probability under the mixture are anomalies.</li>
 <li><b>Dice example:</b> start P(6|Yellow) = .4, P(6|Blue) = .1, priors .5 each. For a roll of 6: Yellow .4·.5 = .2, Blue .1·.5 = .05, so P(Yellow|6) = .8, P(Blue|6) = .2. After all 18 rolls the M-step adds the soft counts (yellow 7.31 of 18) so P(Yellow) = .41, P(Blue) = .59, and P(1|Yellow) = 1.71/7.31 = .234.</li>
